@@ -1,0 +1,5 @@
+/nbproject/
+/target/
+apache-mail.properties
+aws-mail.properties
+java-mail.properties
