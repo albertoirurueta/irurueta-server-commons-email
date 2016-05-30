@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AWSMailSender.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">AWSMailSender.java</span></div><h1>AWSMailSender.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.irurueta.server.commons.email;
+
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClient;
+import com.amazonaws.services.simpleemail.model.Destination;
+import com.amazonaws.services.simpleemail.model.GetSendQuotaResult;
+import com.amazonaws.services.simpleemail.model.Message;
+import com.amazonaws.services.simpleemail.model.RawMessage;
+import com.amazonaws.services.simpleemail.model.SendEmailRequest;
+import com.amazonaws.services.simpleemail.model.SendEmailResult;
+import com.amazonaws.services.simpleemail.model.SendRawEmailRequest;
+import com.amazonaws.services.simpleemail.model.SendRawEmailResult;
+import com.irurueta.server.commons.configuration.ConfigurationException;
+import java.io.ByteArrayOutputStream;
+import java.lang.ref.SoftReference;
+import java.nio.ByteBuffer;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.Session;
+import javax.mail.internet.MimeMessage;
+
+/**
+ * Class to send emails using Amazon Web Services (AWS) SES.
+ */
+public class AWSMailSender extends 
+        EmailSender&lt;Message&gt; {
+    
+    /**
+     * Logger for this class.
+     */
+<span class="fc" id="L47">    public static final Logger LOGGER = Logger.getLogger(</span>
+            AWSMailSender.class.getName());
+    
+    /**
+     * Reference to singleton instance of this class.
+     */
+    private static SoftReference&lt;AWSMailSender&gt; mReference;
+    
+    /**
+     * AWS SES credentials.
+     */
+    private AWSEmailSenderCredentials mCredentials;
+    
+    /**
+     * Email address to be used as sender.
+     */
+    private String mMailFromAddress;
+    
+    /**
+     * Indicates whether email sender is enabled or not.
+     */
+    private boolean mEnabled;
+    
+    /**
+     * Internal client to be used for mail sending.
+     */
+<span class="fc" id="L73">    AmazonSimpleEmailServiceClient mClient = null;</span>
+    
+    /**
+     * Indicates amount of milliseconds to check quota of mail sending returned 
+     * by Amazon. This is used to prevent Amazon SES throttling.
+     */
+    private volatile long mCheckQuotaAfterMillis;
+    
+    /**
+     * Timestamps of last sent email.
+     */
+    private volatile long mLastSentMailTimestamp;   
+    
+    /**
+     * Amount of milliseconds to wait when next email must be sent if quota is
+     * exceeded.
+     */
+    private volatile long mWaitIntervalMillis;
+    
+    /**
+     * Milliseconds to wait to check quota.
+     */
+    public static final long DEFAULT_CHECK_QUOTA_AFTER_MILLIS = 3600000;
+    
+    /**
+     * Number of sent mails to take into account before checking quota.
+     */
+    public static final long MIN_CHECK_QUOTA_AFTER_MILLIS = 0;
+    
+    /**
+     * Constructor.
+     * Loads mail configuration, and if it fails for some reason, mail sending
+     * becomes disabled.
+     */
+<span class="fc" id="L107">    private AWSMailSender() {</span>
+        
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">        if (mEnabled) {</span>
+<span class="nc" id="L110">            LOGGER.log(Level.INFO, &quot;AWS Email Sender enabled.&quot;);            </span>
+        }else{
+<span class="fc" id="L112">            LOGGER.log(Level.INFO, &quot;AWS Email Sender disabled. Any &quot; +</span>
+                    &quot;attempt to send emails using Java mail will be silently &quot; +
+                    &quot;ignored&quot;);            
+        }
+        
+        try {
+<span class="fc" id="L118">            MailConfiguration cfg = MailConfigurationFactory.getInstance().</span>
+                    configure();
+<span class="fc" id="L120">            mCredentials = cfg.getAWSMailCredentials();</span>
+<span class="fc" id="L121">            mMailFromAddress = cfg.getMailFromAddress();</span>
+        
+<span class="pc bpc" id="L123" title="3 of 6 branches missed.">            mEnabled = (mMailFromAddress != null) &amp;&amp; </span>
+                    isValidEmailAddress(mMailFromAddress) &amp;&amp; 
+                    cfg.isMailSendingEnabled();
+<span class="fc" id="L126">            mCheckQuotaAfterMillis = cfg.getAWSMailCheckQuotaAfterMillis();</span>
+<span class="fc" id="L127">            mLastSentMailTimestamp = 0;</span>
+<span class="fc" id="L128">            mWaitIntervalMillis = 0;  </span>
+<span class="pc" id="L129">        } catch (ConfigurationException e) { }</span>
+        
+<span class="pc bpc" id="L131" title="1 of 2 branches missed.">        if (mEnabled) { </span>
+<span class="fc" id="L132">            LOGGER.log(Level.INFO, &quot;AWS Email Sender enabled.&quot;);</span>
+        } else {
+<span class="nc" id="L134">            LOGGER.log(Level.INFO, &quot;AWS Email Sender disabled. Any &quot; +</span>
+                    &quot;attempt to send emails using AWS SES will be &quot; +
+                    &quot;silently ignored&quot;);            
+        }
+<span class="fc" id="L138">    }</span>
+    
+    /**
+     * Returns or creates singleton instance of this class.
+     * @return singleton of this class.
+     */
+    public synchronized static AWSMailSender getInstance() {
+        AWSMailSender sender;
+<span class="pc bpc" id="L146" title="1 of 4 branches missed.">        if(mReference == null || (sender = mReference.get()) == null) {</span>
+<span class="fc" id="L147">            sender = new AWSMailSender();</span>
+<span class="fc" id="L148">            mReference = new SoftReference&lt;&gt;(sender);</span>
+        }
+<span class="fc" id="L150">        return sender;</span>
+    }    
+    
+    /**
+     * Returns AWS SES credentials.
+     * @return Amazon Web Services Simple Email Service credentials.
+     */
+    public AWSEmailSenderCredentials getCredentials() {
+<span class="fc" id="L158">        return mCredentials;</span>
+    }
+    
+    /**
+     * Email address to send emails from.
+     * @return email address to send emails from.
+     */
+    public String getMailFromAddress() {
+<span class="fc" id="L166">        return mMailFromAddress;</span>
+    }
+    
+    /**
+     * Indicates if this mail sender controller is enabled
+     * @return true if enabled, false otherwise
+     */
+    public boolean isEnabled(){
+<span class="fc" id="L174">        return mEnabled;</span>
+    }    
+    
+    /**
+     * Amount of milliseconds to wait before checking sending quota.
+     * @return amount of milliseconds to wait before checking sending quota.
+     */
+    public long getCheckQuotaAfterMillis() {
+<span class="fc" id="L182">        return mCheckQuotaAfterMillis;</span>
+    }
+    
+    /**
+     * Method to send an email.
+     * @param m email message to be sent.
+     * @return id of message that has been sent.
+     * @throws MailNotSentException if mail couldn't be sent.
+     */    
+    @Override
+    public String send(EmailMessage&lt;Message&gt; m) throws MailNotSentException {
+<span class="fc" id="L193">        EmailMessage m2 = m; //to avoid compilation errors regaring to casting</span>
+<span class="fc bfc" id="L194" title="All 2 branches covered.">        if (m2 instanceof AWSTextEmailMessage) {</span>
+<span class="fc" id="L195">            return sendTextEmail((AWSTextEmailMessage)m2);</span>
+<span class="fc bfc" id="L196" title="All 2 branches covered.">        } else if(m2 instanceof AWSTextEmailMessageWithAttachments) { </span>
+<span class="fc" id="L197">            return sendRawEmail((AWSTextEmailMessageWithAttachments)m2);</span>
+<span class="pc bpc" id="L198" title="1 of 2 branches missed.">        } else if(m2 instanceof AWSHtmlEmailMessage) {</span>
+<span class="fc" id="L199">            return sendRawEmail((AWSHtmlEmailMessage)m2);</span>
+        } else {
+<span class="nc" id="L201">            throw new MailNotSentException(&quot;Unsupported email type&quot;);</span>
+        }
+    }
+    
+    /**
+     * Returns provider used by this email sender.
+     * @return email provider.
+     */
+    @Override
+    public EmailProvider getProvider() {
+<span class="fc" id="L211">        return EmailProvider.AWS_MAIL;</span>
+    }    
+    
+    /**
+     * Method to send a text email.
+     * @param m email message to be sent.
+     * @return id of message that has been sent.
+     * @throws MailNotSentException if mail couldn't be sent.
+     */    
+    private String sendTextEmail(AWSTextEmailMessage m) 
+            throws MailNotSentException {
+        String messageId;
+<span class="fc" id="L223">        long currentTimestamp = System.currentTimeMillis();        </span>
+<span class="fc" id="L224">        prepareClient();</span>
+<span class="pc bpc" id="L225" title="1 of 2 branches missed.">        if (!mEnabled) {</span>
+<span class="nc" id="L226">            return null;</span>
+        } //don't send message if not enabled
+        
+        try {
+<span class="fc" id="L230">            synchronized (this) { //prevents throttling</span>
+<span class="fc" id="L231">                checkQuota(currentTimestamp);</span>
+                
+<span class="fc" id="L233">                Destination destination = new Destination(m.getTo());</span>
+<span class="pc bpc" id="L234" title="2 of 4 branches missed.">                if (m.getBCC() != null &amp;&amp; !m.getBCC().isEmpty()) {</span>
+<span class="nc" id="L235">                    destination.setBccAddresses(m.getBCC());</span>
+                }
+<span class="pc bpc" id="L237" title="2 of 4 branches missed.">                if (m.getCC() != null &amp;&amp; !m.getCC().isEmpty()) {</span>
+<span class="nc" id="L238">                    destination.setCcAddresses(m.getCC());</span>
+                }
+                
+                //if no subject, set to empty string to avoid errors
+<span class="pc bpc" id="L242" title="1 of 2 branches missed.">                if (m.getSubject() == null) {</span>
+<span class="nc" id="L243">                    m.setSubject(&quot;&quot;);</span>
+                }
+                
+<span class="fc" id="L246">                Message message = new Message();</span>
+<span class="fc" id="L247">                m.buildContent(message);</span>
+                                
+<span class="fc" id="L249">                SendEmailResult result = mClient.sendEmail(new SendEmailRequest(mMailFromAddress, destination, </span>
+                        message));
+<span class="fc" id="L251">                messageId = result.getMessageId();</span>
+                //update timestamp of last sent email
+<span class="fc" id="L253">                mLastSentMailTimestamp = System.currentTimeMillis();</span>
+                
+                //wait to avoid throwttling exceptions to avoid making any
+                //further requests
+<span class="fc" id="L257">                this.wait(mWaitIntervalMillis);</span>
+<span class="pc" id="L258">            }</span>
+<span class="nc" id="L259">        } catch (Throwable t) {</span>
+<span class="nc" id="L260">            throw new MailNotSentException(t);</span>
+<span class="fc" id="L261">        }      </span>
+<span class="fc" id="L262">        return messageId;</span>
+    }
+    
+    /**
+     * Method to send a text email with attachments or HTML emails with 
+     * attachments (inline or not).
+     * @param m email message to be sent.
+     * @return id of message that has been sent.
+     * @throws MailNotSentException if mail couldn't be sent.
+     */    
+    private String sendRawEmail(EmailMessage&lt;MimeMessage&gt; m) 
+            throws MailNotSentException {
+        
+        String messageId;
+<span class="fc" id="L276">        long currentTimestamp = System.currentTimeMillis();        </span>
+<span class="fc" id="L277">        prepareClient();</span>
+<span class="pc bpc" id="L278" title="1 of 2 branches missed.">        if (!mEnabled) {</span>
+            //don't send message if not enabled
+<span class="nc" id="L280">            return null;</span>
+        }
+        
+        try {
+<span class="fc" id="L284">            synchronized (this) { //prevents throttling and excessive memory usage</span>
+<span class="fc" id="L285">                checkQuota(currentTimestamp);</span>
+                                                
+                //if no subject, set to empty string to avoid errors
+<span class="pc bpc" id="L288" title="1 of 2 branches missed.">                if (m.getSubject() == null) {</span>
+<span class="nc" id="L289">                    m.setSubject(&quot;&quot;);</span>
+                }
+                                
+<span class="fc" id="L292">                ByteArrayOutputStream outputStream = </span>
+                        new ByteArrayOutputStream();
+
+                //convert message into mime multi part and write it to output
+                //stream into memory
+<span class="fc" id="L297">                Session session = Session.getInstance(new Properties());</span>
+<span class="fc" id="L298">                MimeMessage mimeMessage = new MimeMessage(session);</span>
+<span class="pc bpc" id="L299" title="1 of 2 branches missed.">                if (m.getSubject() != null) {</span>
+<span class="fc" id="L300">                    mimeMessage.setSubject(m.getSubject(), &quot;utf-8&quot;);</span>
+                }
+<span class="fc" id="L302">                m.buildContent(mimeMessage);</span>
+<span class="fc" id="L303">                mimeMessage.writeTo(outputStream);</span>
+                //m.buildMultipart().writeTo(outputStream);
+
+<span class="fc" id="L306">                RawMessage rawMessage = new RawMessage(ByteBuffer.wrap(</span>
+                        outputStream.toByteArray()));
+
+<span class="fc" id="L309">                SendRawEmailRequest rawRequest = new SendRawEmailRequest(</span>
+                        rawMessage);
+<span class="fc" id="L311">                rawRequest.setDestinations(m.getTo());</span>
+<span class="fc" id="L312">                rawRequest.setSource(mMailFromAddress);</span>
+<span class="fc" id="L313">                SendRawEmailResult result = mClient.sendRawEmail(rawRequest);</span>
+<span class="fc" id="L314">                messageId = result.getMessageId();</span>
+
+                //update timestamp of last sent email
+<span class="fc" id="L317">                mLastSentMailTimestamp = System.currentTimeMillis();</span>
+                
+                //wait to avoid throwttling exceptions to avoid making any
+                //further requests
+<span class="fc" id="L321">                this.wait(mWaitIntervalMillis);</span>
+<span class="pc" id="L322">            }</span>
+<span class="nc" id="L323">        } catch (Throwable t) {</span>
+<span class="nc" id="L324">            throw new MailNotSentException(t);</span>
+<span class="fc" id="L325">        }        </span>
+        
+<span class="fc" id="L327">        return messageId;</span>
+    }   
+            
+    /**
+     * Checks quota of sent emails to prevent AWS SES throttling.
+     * @param currentTimestamp current timestamp.
+     */
+    private void checkQuota(long currentTimestamp) {
+<span class="fc bfc" id="L335" title="All 2 branches covered.">        if ((currentTimestamp - mLastSentMailTimestamp) &gt; </span>
+                mCheckQuotaAfterMillis) {
+            //check quota to determine the number of messages per second to
+            //avoid throttling exceptions
+<span class="fc" id="L339">            GetSendQuotaResult quota = mClient.getSendQuota();</span>
+            //updateinterval that we must wait between send requests
+<span class="fc" id="L341">            mWaitIntervalMillis = (long)Math.ceil(</span>
+                1000.0 / quota.getMaxSendRate());
+        }        
+<span class="fc" id="L344">    }</span>
+    
+    /**
+     * Prepares client by setting proper credentials.
+     */
+    private void prepareClient() {
+<span class="fc bfc" id="L350" title="All 2 branches covered.">        if (mClient == null) {</span>
+            //instantiate new client if needed
+<span class="pc bpc" id="L352" title="1 of 2 branches missed.">            if (areValidCredentials()) {</span>
+<span class="fc" id="L353">                mClient = new AmazonSimpleEmailServiceClient(</span>
+                    new BasicAWSCredentials(mCredentials.getAccessKey(), 
+                    mCredentials.getSecretKey()));
+            }else{
+                //disabling mail sending
+<span class="nc" id="L358">                mEnabled = false;</span>
+<span class="nc" id="L359">                Logger.getLogger(AWSMailSender.class.getName()).log(</span>
+                    Level.INFO, &quot;AWS Email Sender disabled. &quot; + 
+                        &quot;Invalid credentials&quot;);            
+            }
+        }        
+<span class="fc" id="L364">    }</span>
+    
+    /**
+     * Indicates whether provided credentials are valid.
+     * @return true if credentials are valid, false otherwise.
+     */
+    private boolean areValidCredentials() {
+<span class="pc bpc" id="L371" title="1 of 2 branches missed.">        if (mCredentials != null) {</span>
+<span class="fc" id="L372">            return mCredentials.isReady();</span>
+        } else {
+<span class="nc" id="L374">            return false;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

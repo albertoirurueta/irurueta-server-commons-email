@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>EmailAttachment.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">EmailAttachment.java</span></div><h1>EmailAttachment.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.irurueta.server.commons.email;
+
+import java.io.File;
+
+/**
+ * Contains information related to an email file attachment.
+ */
+public class EmailAttachment extends BaseAttachment {
+    /**
+     * File name shown to the receiver on their clients, this doesn't have to
+     * be the real attachment file name on the server.
+     */
+    private String mName;
+    
+    /**
+     * Constructor with file attachment.
+     * @param attachment file being attached.
+     */
+    public EmailAttachment(File attachment) {
+<span class="fc" id="L35">        super(attachment);</span>
+<span class="fc" id="L36">        mName = attachment.getName();</span>
+<span class="fc" id="L37">    }</span>
+    
+    /**
+     * Constructor with file attachment and content type.
+     * @param attachment file being attached.
+     * @param contentType MIME type of the file being attached.
+     */
+    public EmailAttachment(File attachment, String contentType) {
+<span class="fc" id="L45">        super(attachment, contentType);</span>
+<span class="fc" id="L46">        mName = attachment.getName();</span>
+<span class="fc" id="L47">    }</span>
+    
+    /**
+     * Constructor with file attachment, file name shown to the receiver and
+     * content type.
+     * @param attachment file being attached.
+     * @param name file name shown to the receiver.
+     * @param contentType MIME type of the file being attached.
+     */
+    public EmailAttachment(File attachment, String name, String contentType) {
+<span class="fc" id="L57">        super(attachment, contentType);</span>
+<span class="fc" id="L58">        mName = name;</span>
+<span class="fc" id="L59">    }</span>
+    
+    /**
+     * Returns file name shown to the receiver on their clients, this doesn't 
+     * have to be the real attachment file name on the server.
+     * @return file name shown to the receiver.
+     */
+    public String getName() {
+<span class="fc" id="L67">        return mName;</span>
+    }
+    
+    /**
+     * Sets file name shown to the receiver on their clients. This doesn't have
+     * to be the real attachment file name on the server.
+     * @param name file name shown to the receiver.
+     */
+    public void setName(String name) {
+<span class="fc" id="L76">        this.mName = name;</span>
+<span class="fc" id="L77">    }    </span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AWSTextEmailMessage.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">AWSTextEmailMessage.java</span></div><h1>AWSTextEmailMessage.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.irurueta.server.commons.email;
+
+import com.amazonaws.services.simpleemail.model.Body;
+import com.amazonaws.services.simpleemail.model.Content;
+import com.amazonaws.services.simpleemail.model.Destination;
+import com.amazonaws.services.simpleemail.model.Message;
+
+/**
+ * Class containing a text only email message to be sent using Amazon SES.
+ */
+public class AWSTextEmailMessage extends TextEmailMessage&lt;Message&gt; {
+    
+    /**
+     * Constructor.
+     */
+    public AWSTextEmailMessage() {
+<span class="fc" id="L32">        super();</span>
+<span class="fc" id="L33">    }</span>
+    
+    /**
+     * Constructor with email subject.
+     * @param subject subject to be set on email.
+     */
+    public AWSTextEmailMessage(String subject) {
+<span class="fc" id="L40">        super(subject);</span>
+<span class="fc" id="L41">    }</span>
+    
+    /**
+     * Constructor with email subject and content text.
+     * @param subject subject to be set on email.
+     * @param text textual email content.
+     */
+    public AWSTextEmailMessage(String subject, String text) {
+<span class="fc" id="L49">        super(subject, text);</span>
+<span class="fc" id="L50">    }</span>
+    
+    /**
+     * Builds email content to be sent using an email sender.
+     * @param message instance where content must be set.
+     * @throws EmailException if setting mail content fails.
+     */
+    @Override
+    protected void buildContent(Message message) throws EmailException {
+<span class="fc" id="L59">        Destination destination = new Destination(getTo());</span>
+<span class="pc bpc" id="L60" title="2 of 4 branches missed.">        if (getBCC() != null &amp;&amp; !getBCC().isEmpty()) {</span>
+<span class="nc" id="L61">            destination.setBccAddresses(getBCC());</span>
+        }
+<span class="pc bpc" id="L63" title="2 of 4 branches missed.">        if (getCC() != null &amp;&amp; !getCC().isEmpty()) {</span>
+<span class="nc" id="L64">            destination.setCcAddresses(getCC());</span>
+        }
+                
+<span class="pc bpc" id="L67" title="1 of 2 branches missed.">        if (getSubject() != null) {</span>
+<span class="fc" id="L68">            Content subject = new Content(getSubject());</span>
+<span class="fc" id="L69">            subject.setCharset(&quot;UTF-8&quot;); //set utf-8 enconding to support </span>
+                                         //all languages
+<span class="fc" id="L71">            message.setSubject(subject);</span>
+        }
+                
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">        if (getText() != null) {</span>
+<span class="fc" id="L75">            Body body = new Body();</span>
+<span class="fc" id="L76">            Content content = new Content(getText());</span>
+<span class="fc" id="L77">            content.setCharset(&quot;UTF-8&quot;); //set utf-8 enconding to support all </span>
+                                        //languages
+        
+<span class="fc" id="L80">            body.setText(content);</span>
+<span class="fc" id="L81">            message.setBody(body);</span>
+        }
+<span class="fc" id="L83">    }    </span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

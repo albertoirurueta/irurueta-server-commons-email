@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>TextEmailMessageWithAttachments.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">TextEmailMessageWithAttachments.java</span></div><h1>TextEmailMessageWithAttachments.java</h1><pre class="source lang-java linenums">/**
+ * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.irurueta.server.commons.email;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Base class for text only email messages containing file attachments.
+ * @param &lt;E&gt; internal representation of email using by internal client.
+ */
+public abstract class TextEmailMessageWithAttachments&lt;E&gt; extends 
+        TextEmailMessage&lt;E&gt; {
+
+    /**
+     * List of attachments to be included in email.
+     */
+    private List&lt;EmailAttachment&gt; mAttachments;
+    
+    /**
+     * Constructor.
+     */
+    public TextEmailMessageWithAttachments() {
+<span class="fc" id="L37">        super();</span>
+<span class="fc" id="L38">        mAttachments = new ArrayList&lt;EmailAttachment&gt;();</span>
+<span class="fc" id="L39">    }</span>
+    
+    /**
+     * Constructor with email subject.
+     * @param subject subject to be set.
+     */    
+    public TextEmailMessageWithAttachments(String subject) {
+<span class="fc" id="L46">        super(subject);</span>
+<span class="fc" id="L47">        mAttachments = new ArrayList&lt;EmailAttachment&gt;();</span>
+<span class="fc" id="L48">    }</span>
+    
+    /**
+     * Constructor with email subject and textual content.
+     * @param subject subject to be set.
+     * @param text textual content.
+     */    
+    public TextEmailMessageWithAttachments(String subject, String text) {
+<span class="fc" id="L56">        super(subject, text);</span>
+<span class="fc" id="L57">        mAttachments = new ArrayList&lt;EmailAttachment&gt;();</span>
+<span class="fc" id="L58">    }</span>
+    
+    /**
+     * Constructor with list of files to be attached.
+     * @param attachments list of files to be attached.
+     */
+    public TextEmailMessageWithAttachments(List&lt;EmailAttachment&gt; attachments) {
+<span class="fc" id="L65">        super();</span>
+<span class="fc" id="L66">        mAttachments = attachments;</span>
+<span class="fc" id="L67">    }</span>
+    
+    /**
+     * Constructor with email subject and list of files to be attached.
+     * @param subject subject to be set.
+     * @param attachments list of files to be attached.
+     */
+    public TextEmailMessageWithAttachments(String subject, 
+            List&lt;EmailAttachment&gt; attachments) {
+<span class="fc" id="L76">        super(subject);</span>
+<span class="fc" id="L77">        mAttachments = attachments;</span>
+<span class="fc" id="L78">    }</span>
+    
+    /**
+     * Constructor with email subject, textual content and list of files to be
+     * attached.
+     * @param subject subject to be set.
+     * @param text textual content.
+     * @param attachments list of files to be attached.
+     */
+    public TextEmailMessageWithAttachments(String subject, String text,
+            List&lt;EmailAttachment&gt; attachments) {
+<span class="fc" id="L89">        super(subject, text);</span>
+<span class="fc" id="L90">        mAttachments = attachments;</span>
+<span class="fc" id="L91">    }</span>
+    
+    /**
+     * Get list of files to be attached.
+     * @return list of files to be attached.
+     */
+    public List&lt;EmailAttachment&gt; getAttachments() {
+<span class="fc" id="L98">        return mAttachments;</span>
+    }
+    
+    /**
+     * Sets list of files to be attached.
+     * @param attachments list of files to be attached.
+     */
+    public void setAttachments(List&lt;EmailAttachment&gt; attachments) {
+<span class="nc" id="L106">        mAttachments = attachments;</span>
+<span class="nc" id="L107">    }</span>
+    
+    /**
+     * Creates a textual email message with attachments using provided email 
+     * sender.
+     * @param sender class in charge of sending this email.
+     * @return a textual email message with attachments.
+     */
+    public static TextEmailMessageWithAttachments create(
+            EmailSender sender) {
+<span class="nc" id="L117">        return create(&quot;&quot;, sender);</span>
+    }
+    
+    /**
+     * Creates a textual email message with attachments using given email 
+     * provider.
+     * @param provider email provider.
+     * @return a textual email message with attachments.
+     */    
+    protected static TextEmailMessageWithAttachments create(
+            EmailProvider provider) {
+<span class="nc" id="L128">        return create(&quot;&quot;, provider);</span>
+    }
+    
+    /**
+     * Creates a textual email message with attachments having provided subject 
+     * and using provided email sender.
+     * @param subject email subject to be set.
+     * @param sender class in charge of sending this email.
+     * @return a textual email message with attachments.
+     */    
+    public static TextEmailMessageWithAttachments create(String subject, 
+            EmailSender sender) {
+<span class="nc" id="L140">        return create(subject, &quot;&quot;, sender);</span>
+    }
+    
+    /**
+     * Creates a textual email message with attachments having provided subject 
+     * and given email provider.
+     * @param subject email subject to be set.
+     * @param provider email provider.
+     * @return a textual email message with attachments.
+     */    
+    protected static TextEmailMessageWithAttachments create(String subject,
+            EmailProvider provider) {
+<span class="nc" id="L152">        return create(subject, &quot;&quot;, provider);</span>
+    }
+    
+    /**
+     * Creates a textual email message with attachments having provided subject,
+     * text content and using provided email sender.
+     * @param subject email subject to be set.
+     * @param text text content of email.
+     * @param sender class in charge of sending this email.
+     * @return a textual email message with attachments.
+     */    
+    public static TextEmailMessageWithAttachments create(String subject,
+            String text, EmailSender sender) {
+<span class="fc" id="L165">        return create(subject, text, sender.getProvider());</span>
+    }
+    
+    /**
+     * Creates a textual email message with attachments having provided subject,
+     * text content and using given email provider.
+     * @param subject email subject to be set.
+     * @param text text content of email.
+     * @param provider email provider.
+     * @return a textual email message with attachments.
+     */    
+    protected static TextEmailMessageWithAttachments create(String subject,
+            String text, EmailProvider provider) {
+<span class="fc" id="L178">        return create(subject, text, new ArrayList&lt;EmailAttachment&gt;(), </span>
+                provider);
+    }
+    
+    /**
+     * Creates a textual email message with provided attachments and using 
+     * provided email sender.
+     * @param attachments list of files to be attached.
+     * @param sender class in charge of sending this email.
+     * @return a textual email message with attachments.
+     */
+    public static TextEmailMessageWithAttachments create(
+            List&lt;EmailAttachment&gt; attachments, EmailSender sender) {
+<span class="nc" id="L191">        return create(&quot;&quot;, attachments, sender);</span>
+    }
+    
+    /**
+     * Creates a textual email message with provided attachments and using given
+     * email provider.
+     * @param attachments list of files to be attached.
+     * @param provider email provider.
+     * @return a textual email message with attachments.
+     */
+    protected static TextEmailMessageWithAttachments create(
+            List&lt;EmailAttachment&gt; attachments, EmailProvider provider) {
+<span class="nc" id="L203">        return create(&quot;&quot;, attachments, provider);</span>
+    }
+    
+    /**
+     * Creates a textual email message with provided attachments, subject and
+     * using provided email sender.
+     * @param subject subject to be set.
+     * @param attachments list of files to be attached.
+     * @param sender class in charge of sending this email.
+     * @return a textual email message with attachments.
+     */
+    public static TextEmailMessageWithAttachments create(String subject,
+            List&lt;EmailAttachment&gt; attachments, EmailSender sender) {
+<span class="nc" id="L216">        return create(subject, &quot;&quot;, attachments, sender);</span>
+    }
+    
+    /**
+     * Creates a textual email message with provided attachments, subject and
+     * using given email provider.
+     * @param subject subject to be set.
+     * @param attachments list of files to be attached.
+     * @param provider email provider.
+     * @return a textual email message with attachments.
+     */
+    protected static TextEmailMessageWithAttachments create(String subject,
+            List&lt;EmailAttachment&gt; attachments, EmailProvider provider) {
+<span class="nc" id="L229">        return create(subject, &quot;&quot;, attachments, provider);</span>
+    }    
+    
+    /**
+     * Creates a textual email message with provided attachments, subject,
+     * text content and using provided email sender.
+     * @param subject subject to be set.
+     * @param text email text content.
+     * @param attachments list of files to be attached.
+     * @param sender class in charge of sending this email.
+     * @return a textual email message with attachments.
+     */
+    public static TextEmailMessageWithAttachments create(String subject,
+            String text, List&lt;EmailAttachment&gt; attachments, 
+            EmailSender sender) {
+<span class="nc" id="L244">        return create(subject, text, attachments, sender.getProvider());</span>
+    }
+    
+    /**
+     * Creates a textual email message with provided attachments, subject, text
+     * content and using given email provider.
+     * @param subject subject to be set.
+     * @param text email text content.
+     * @param attachments list of files to be attached.
+     * @param provider email provider.
+     * @return a textual email message with attachments.
+     */
+    protected static TextEmailMessageWithAttachments create(String subject, 
+            String text, List&lt;EmailAttachment&gt; attachments, 
+            EmailProvider provider) {
+        
+<span class="pc bfc" id="L260" title="All 3 branches covered.">        switch(provider){</span>
+            case AWS_MAIL:
+<span class="fc" id="L262">                return new AWSTextEmailMessageWithAttachments(subject, text, </span>
+                        attachments);
+            case APACHE_MAIL:
+<span class="fc" id="L265">                return new ApacheMailTextEmailMessageWithAttachments(subject, </span>
+                        text, attachments);
+            case JAVA_MAIL:
+            default:
+<span class="fc" id="L269">                return new JavaMailTextEmailMessageWithAttachments(subject, </span>
+                        text, attachments);
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
