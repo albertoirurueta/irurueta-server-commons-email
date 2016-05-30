@@ -1,8 +1,5 @@
-openssl aes-256-cbc -K $encrypted_99e0f175f049_key -iv $encrypted_99e0f175f049_iv -in apache-mail.properties.enc -out apache-mail.properties -d
-echo "Apache mail decoded"
+openssl aes-256-cbc -K $encrypted_99e0f175f049_key -iv $encrypted_99e0f175f049_iv -in config.tar.gz.enc -out config.tar.gz -d
 
-openssl aes-256-cbc -K $encrypted_99e0f175f049_key -iv $encrypted_99e0f175f049_iv -in aws-mail.properties.enc -out aws-mail.properties -d
-echo "AWS mail decoded"
-
-openssl aes-256-cbc -K $encrypted_99e0f175f049_key -iv $encrypted_99e0f175f049_iv -in java-mail.properties.enc -out java-mail.properties -d
-echo "Java mail decoded"
+cp config/apache-mail.properties ./apache-mail.properties
+cp config/aws-mail.properties ./aws-mail.properties
+cp config/java-mail.properties ./java-mail.properties
