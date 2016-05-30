@@ -20,8 +20,9 @@ env:
 #script: travis_wait mvn clean jacoco:prepare-agent install jacoco:report site
 
 #add: -Denvironment=test to activate CI profile to publish into gh-pages
-script: ./cd/decode.sh
-script: travis_wait mvn clean jacoco:prepare-agent install jacoco:report coveralls:report site -Denvironment=test -P !build-extras
+script:
+  - ./cd/decode.sh
+  - travis_wait mvn clean jacoco:prepare-agent install jacoco:report coveralls:report site -Denvironment=test -P !build-extras
 
 cache:
   directories:
