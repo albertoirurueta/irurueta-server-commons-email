@@ -152,8 +152,8 @@ public abstract class HtmlEmailMessage&lt;E&gt; extends EmailMessage&lt;E&gt; {
      * @param emailAttachments list of files to be attached.
      */
     public void setEmailAttachments(List&lt;EmailAttachment&gt; emailAttachments) {
-<span class="nc" id="L155">        mEmailAttachments = emailAttachments;</span>
-<span class="nc" id="L156">    }    </span>
+<span class="fc" id="L155">        mEmailAttachments = emailAttachments;</span>
+<span class="fc" id="L156">    }    </span>
     
     /**
      * Returns list of files to be embedded inline within the email so they are 
@@ -188,8 +188,8 @@ public abstract class HtmlEmailMessage&lt;E&gt; extends EmailMessage&lt;E&gt; {
      * @param inlineAttachments list of files to be embedded inline.
      */
     public void setInlineAttachments(List&lt;InlineAttachment&gt; inlineAttachments) {
-<span class="nc" id="L191">        mInlineAttachments = inlineAttachments;</span>
-<span class="nc" id="L192">    }</span>
+<span class="fc" id="L191">        mInlineAttachments = inlineAttachments;</span>
+<span class="fc" id="L192">    }</span>
     
     /**
      * Creates an HTML email message using provided email sender.
@@ -197,7 +197,7 @@ public abstract class HtmlEmailMessage&lt;E&gt; extends EmailMessage&lt;E&gt; {
      * @return an HTML email message.
      */
     public static HtmlEmailMessage create(EmailSender sender) {
-<span class="nc" id="L200">        return create(sender.getProvider());</span>
+<span class="fc" id="L200">        return create(sender.getProvider());</span>
     }
     
     /**
@@ -206,7 +206,7 @@ public abstract class HtmlEmailMessage&lt;E&gt; extends EmailMessage&lt;E&gt; {
      * @return an HTML email message.
      */    
     protected static HtmlEmailMessage create(EmailProvider provider) {
-<span class="nc" id="L209">        return create(&quot;&quot;, provider);</span>
+<span class="fc" id="L209">        return create(&quot;&quot;, provider);</span>
     }
     
     /**
@@ -218,7 +218,7 @@ public abstract class HtmlEmailMessage&lt;E&gt; extends EmailMessage&lt;E&gt; {
      */    
     public static HtmlEmailMessage create(String subject, 
             EmailSender sender) {
-<span class="nc" id="L221">        return create(subject, sender.getProvider());</span>
+<span class="fc" id="L221">        return create(subject, sender.getProvider());</span>
     }
     
     /**
@@ -230,7 +230,7 @@ public abstract class HtmlEmailMessage&lt;E&gt; extends EmailMessage&lt;E&gt; {
      */    
     protected static HtmlEmailMessage create(String subject, 
             EmailProvider provider) {
-<span class="nc" id="L233">        return create(subject, &quot;&quot;, provider);</span>
+<span class="fc" id="L233">        return create(subject, &quot;&quot;, provider);</span>
     }
     
     /**

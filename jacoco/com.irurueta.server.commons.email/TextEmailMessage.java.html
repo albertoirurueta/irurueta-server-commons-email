@@ -75,7 +75,7 @@ public abstract class TextEmailMessage&lt;E&gt; extends EmailMessage&lt;E&gt; {
      * @return a textual email message.
      */
     public static TextEmailMessage create(EmailSender sender) {
-<span class="nc" id="L78">        return create(sender.getProvider());</span>
+<span class="fc" id="L78">        return create(sender.getProvider());</span>
     }
     
     /**
@@ -84,7 +84,7 @@ public abstract class TextEmailMessage&lt;E&gt; extends EmailMessage&lt;E&gt; {
      * @return a textual email message.
      */
     protected static TextEmailMessage create(EmailProvider provider) {
-<span class="nc" id="L87">        return create(&quot;&quot;, provider);</span>
+<span class="fc" id="L87">        return create(&quot;&quot;, provider);</span>
     }
     
     /**
@@ -96,7 +96,7 @@ public abstract class TextEmailMessage&lt;E&gt; extends EmailMessage&lt;E&gt; {
      */
     public static TextEmailMessage create(String subject, 
             EmailSender sender) {
-<span class="nc" id="L99">        return create(subject, sender.getProvider());</span>
+<span class="fc" id="L99">        return create(subject, sender.getProvider());</span>
     }
     
     /**
@@ -108,7 +108,7 @@ public abstract class TextEmailMessage&lt;E&gt; extends EmailMessage&lt;E&gt; {
      */
     protected static TextEmailMessage create(String subject,
             EmailProvider provider) {
-<span class="nc" id="L111">        return create(subject, &quot;&quot;, provider);</span>
+<span class="fc" id="L111">        return create(subject, &quot;&quot;, provider);</span>
     }
     
     /**
