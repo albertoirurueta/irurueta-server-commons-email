@@ -187,7 +187,7 @@ public class JavaMailHtmlEmailMessage extends HtmlEmailMessage<MimeMessage> {
             int counter = 0;
             boolean isGeneratedId;
             String contentId;
-            for (InlineAttachment attachment : attachments ) {
+            for (InlineAttachment attachment : attachments) {
                 isGeneratedId = attachment.getContentId() == null;
                 result[counter] = isGeneratedId;
                 if (isGeneratedId) {
@@ -210,7 +210,7 @@ public class JavaMailHtmlEmailMessage extends HtmlEmailMessage<MimeMessage> {
      * placeholders and correctly inlined into content.
      * @return resulting content.
      */
-    private String process(String htmlContent, boolean[] generated){
+    private String process(String htmlContent, boolean[] generated) {
         //if no information about generated inline ids is available, then simply
         //return input html content
         if (generated == null) {

@@ -223,7 +223,7 @@ public class MailConfigurationImpl implements MailConfiguration {
             String mailPortProperty = properties.getProperty(
                     MailConfigurationFactory.MAIL_PORT_PROPERTY);
             if (mailPortProperty != null) {
-                mMailPort = Integer.valueOf(mailPortProperty);
+                mMailPort = Integer.parseInt(mailPortProperty);
             }
             mailId = properties.getProperty(
                     MailConfigurationFactory.MAIL_ID_PROPERTY);
@@ -244,8 +244,8 @@ public class MailConfigurationImpl implements MailConfiguration {
                     MailConfigurationFactory.AWS_MAIL_ACCESS_KEY_PROPERTY);
             mAwsMailSecretKey = properties.getProperty(
                     MailConfigurationFactory.AWS_MAIL_SECRET_KEY_PROPERTY);
-            mAwsMailCheckQuotaAfterMillis = Long.valueOf(properties.getProperty(
-                    MailConfigurationFactory.
+            mAwsMailCheckQuotaAfterMillis = Long.parseLong(
+                    properties.getProperty(MailConfigurationFactory.
                     AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS_PROPERTY, String.valueOf(
                     MailConfigurationFactory.
                     DEFAULT_AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS)));              
