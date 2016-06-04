@@ -52,7 +52,7 @@ public class ApacheMailSenderTest {
     public void tearDown() {}
     
     @Test
-    public void testGetInstance(){
+    public void testGetInstanceAndReset(){
         ApacheMailSender mailSender = 
                 ApacheMailSender.getInstance();
         assertNotNull(mailSender);
@@ -67,6 +67,24 @@ public class ApacheMailSenderTest {
         assertEquals(mailSender.getMailFromAddress(), cfg.getMailFromAddress());         
         assertTrue(mailSender.isEnabled());
         assertEquals(mailSender.getProvider(), EmailProvider.APACHE_MAIL);
+        
+        ApacheMailSender mailSender2 = ApacheMailSender.getInstance();
+        assertSame(mailSender, mailSender2);
+        
+        //reset
+        ApacheMailSender.reset();
+        
+        ApacheMailSender mailSender3 = ApacheMailSender.getInstance();
+        
+        assertEquals(mailSender3.getMailHost(), cfg.getMailHost());
+        assertEquals(mailSender3.getMailPort(), cfg.getMailPort());
+        assertEquals(mailSender3.getMailId(), cfg.getMailId());
+        assertEquals(mailSender3.getMailPassword(), cfg.getMailPassword());
+        assertEquals(mailSender3.getMailFromAddress(), cfg.getMailFromAddress());         
+        assertTrue(mailSender3.isEnabled());
+        assertEquals(mailSender3.getProvider(), EmailProvider.APACHE_MAIL);
+        
+        assertNotSame(mailSender, mailSender3);
     }
     
     @Test
@@ -238,5 +256,48 @@ public class ApacheMailSenderTest {
         message.getEmailAttachments().add(emailAttachment);        
         
         assertNull(mailSender.send(message));
-    }    
+    }  
+    
+    @Test
+    public void testSendDisabled() throws ConfigurationException, IOException, 
+            NotSupportedException, MailNotSentException {
+        Properties props = new Properties();        
+        MailConfigurationFactory.getInstance().reconfigure(props);
+        
+        ApacheMailSender mailSender = ApacheMailSender.getInstance();
+
+        
+        String text = "Disabled test";
+        String subject = null;
+        
+        TextEmailMessage message = TextEmailMessage.create(subject, text, 
+                mailSender);
+        message.getTo().add("alberto@irurueta.com");
+        message.getTo().add("webmaster@irurueta.com");
+        
+        assertNull(mailSender.send(message));
+        
+        
+        //reset configuration
+        props = new Properties();
+        props.load(new FileInputStream(PROPS_FILE));
+        props.setProperty(MailConfigurationFactory.MAIL_PROVIDER_PROPERTY, 
+                EmailProvider.APACHE_MAIL.toString());                
+        MailConfigurationFactory.getInstance().reconfigure(props);        
+    }
+    
+    @Test
+    public void testSendWithCcBccAndNoSubject() throws NotSupportedException {
+        ApacheMailSender mailSender = ApacheMailSender.getInstance();
+        
+        String text = "No subject test";
+        String subject = null;
+        
+        TextEmailMessage message = TextEmailMessage.create(subject, text, 
+                mailSender);
+        message.getTo().add("alberto@irurueta.com");
+        message.getBCC().add("webmaster@irurueta.com");
+        message.getCC().add("alberto@irurueta.com");        
+    }
+    
 }

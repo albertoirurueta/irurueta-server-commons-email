@@ -129,6 +129,13 @@ public class ApacheMailSender extends EmailSender<Email> {
     }
     
     /**
+     * Resets ApacheMailSender singleton.
+     */
+    public static synchronized void reset() {
+        mReference = null;
+    }
+    
+    /**
      * Indicates if provided configuration is valid by checking that SMTP server
      * and mail from address are not null, and server port is valid.
      * @param mailHost SMTP server host.

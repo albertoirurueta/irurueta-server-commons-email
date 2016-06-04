@@ -147,7 +147,14 @@ public class AWSMailSender extends
             mReference = new SoftReference<>(sender);
         }
         return sender;
-    }    
+    }   
+    
+    /**
+     * Resets AWSMailSender singleton.
+     */
+    public static synchronized void reset() {
+        mReference = null;
+    }
     
     /**
      * Returns AWS SES credentials.

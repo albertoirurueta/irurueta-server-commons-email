@@ -127,6 +127,13 @@ public class JavaMailSender extends EmailSender<MimeMessage> {
     }
     
     /**
+     * Resets JavaMailSingleton.
+     */
+    public static synchronized void reset() {
+        mReference = null;
+    }
+    
+    /**
      * Indicates if provided configuration is valid by checking that SMTP server
      * and mail from address are not null, and server port is valid.
      * @param mailHost SMTP server host.

@@ -58,7 +58,7 @@ public class AWSMailSenderTest {
     public void tearDown() {}
     
     @Test
-    public void testGetInstance(){
+    public void testGetInstanceAndReset(){
         AWSMailSender mailSender = 
                 AWSMailSender.getInstance();
         assertNotNull(mailSender);
@@ -79,6 +79,30 @@ public class AWSMailSenderTest {
         assertEquals(mailSender.getCheckQuotaAfterMillis(), 
                 AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS);
         assertEquals(mailSender.getProvider(), EmailProvider.AWS_MAIL);
+        
+        AWSMailSender mailSender2 = AWSMailSender.getInstance();
+        assertSame(mailSender, mailSender2);
+        
+        //reset
+        AWSMailSender.reset();
+        
+        AWSMailSender mailSender3 = AWSMailSender.getInstance();
+        
+        assertNotNull(mailSender3.getCredentials());
+        assertTrue(mailSender3.getCredentials().isReady());
+        assertNotNull(mailSender3.getCredentials().getAccessKey());
+        assertNotNull(mailSender3.getCredentials().getSecretKey());
+        assertEquals(mailSender3.getCredentials().getAccessKey(), 
+                cfg.getAWSMailAccessKey());
+        assertEquals(mailSender3.getCredentials().getSecretKey(),
+                cfg.getAWSMailSecretKey());
+        assertEquals(mailSender3.getMailFromAddress(), cfg.getMailFromAddress());                 
+        assertTrue(mailSender3.isEnabled());
+        assertEquals(mailSender3.getCheckQuotaAfterMillis(), 
+                AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS);
+        assertEquals(mailSender3.getProvider(), EmailProvider.AWS_MAIL);
+        
+        assertNotSame(mailSender, mailSender3);
     }
     
     @Test
@@ -250,5 +274,49 @@ public class AWSMailSenderTest {
         message.getEmailAttachments().add(emailAttachment);        
         
         assertNotNull(mailSender.send(message));
-    }    
+    }   
+    
+    @Test
+    public void testSendDisabled() throws ConfigurationException, IOException, 
+            NotSupportedException, MailNotSentException {
+        Properties props = new Properties();        
+        MailConfigurationFactory.getInstance().reconfigure(props);
+        
+        AWSMailSender mailSender = AWSMailSender.getInstance();
+        
+        String text = "Disabled test";
+        String subject = null;
+        
+        TextEmailMessage message = TextEmailMessage.create(subject, text, 
+                mailSender);
+        message.getTo().add("alberto@irurueta.com");
+        message.getTo().add("webmaster@irurueta.com");
+        
+        assertNull(mailSender.send(message));
+        
+        
+        //reset configuration
+        props = new Properties();
+        props.load(new FileInputStream(PROPS_FILE));        
+        props.setProperty(MailConfigurationFactory.
+                AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS_PROPERTY, 
+                String.valueOf(AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS));
+        props.setProperty(MailConfigurationFactory.MAIL_PROVIDER_PROPERTY, 
+                EmailProvider.AWS_MAIL.toString());
+        MailConfigurationFactory.getInstance().reconfigure(props);                
+    }
+    
+    @Test
+    public void testSendWithCcBccAndNoSubject() throws NotSupportedException {
+        AWSMailSender mailSender = AWSMailSender.getInstance();
+        
+        String text = "No subject test";
+        String subject = null;
+        
+        TextEmailMessage message = TextEmailMessage.create(subject, text, 
+                mailSender);
+        message.getTo().add("alberto@irurueta.com");
+        message.getBCC().add("webmaster@irurueta.com");
+        message.getCC().add("alberto@irurueta.com");        
+    }
 }
