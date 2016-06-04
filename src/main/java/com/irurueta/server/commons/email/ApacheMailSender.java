@@ -209,6 +209,11 @@ public class ApacheMailSender extends EmailSender<Email> {
      */        
     @Override
     public String send(EmailMessage<Email> m) throws MailNotSentException {
+        if (!mEnabled) {
+            //don't send message if not enabled
+            return null;
+        }
+        
         //to avoid compilation errors regarding to casting
         EmailMessage m2 = m;
         if (m2 instanceof ApacheMailTextEmailMessage) {

@@ -262,6 +262,7 @@ public class JavaMailSenderTest {
         Properties props = new Properties();        
         MailConfigurationFactory.getInstance().reconfigure(props);
         
+        JavaMailSender.reset();
         JavaMailSender mailSender = JavaMailSender.getInstance();
         
         String text = "Disabled test";
@@ -281,6 +282,7 @@ public class JavaMailSenderTest {
         props.setProperty(MailConfigurationFactory.MAIL_PROVIDER_PROPERTY, 
                 EmailProvider.JAVA_MAIL.toString());                
         MailConfigurationFactory.getInstance().reconfigure(props);        
+        JavaMailSender.reset();
     }
     
     @Test

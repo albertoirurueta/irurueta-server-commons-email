@@ -282,6 +282,7 @@ public class AWSMailSenderTest {
         Properties props = new Properties();        
         MailConfigurationFactory.getInstance().reconfigure(props);
         
+        AWSMailSender.reset();
         AWSMailSender mailSender = AWSMailSender.getInstance();
         
         String text = "Disabled test";
@@ -303,7 +304,8 @@ public class AWSMailSenderTest {
                 String.valueOf(AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS));
         props.setProperty(MailConfigurationFactory.MAIL_PROVIDER_PROPERTY, 
                 EmailProvider.AWS_MAIL.toString());
-        MailConfigurationFactory.getInstance().reconfigure(props);                
+        MailConfigurationFactory.getInstance().reconfigure(props); 
+        AWSMailSender.reset();
     }
     
     @Test

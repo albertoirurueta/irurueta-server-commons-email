@@ -264,6 +264,7 @@ public class ApacheMailSenderTest {
         Properties props = new Properties();        
         MailConfigurationFactory.getInstance().reconfigure(props);
         
+        ApacheMailSender.reset();
         ApacheMailSender mailSender = ApacheMailSender.getInstance();
 
         
@@ -284,6 +285,7 @@ public class ApacheMailSenderTest {
         props.setProperty(MailConfigurationFactory.MAIL_PROVIDER_PROPERTY, 
                 EmailProvider.APACHE_MAIL.toString());                
         MailConfigurationFactory.getInstance().reconfigure(props);        
+        ApacheMailSender.reset();
     }
     
     @Test
