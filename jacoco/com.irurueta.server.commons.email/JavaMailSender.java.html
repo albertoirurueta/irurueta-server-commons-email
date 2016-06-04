@@ -34,6 +34,16 @@ import javax.mail.internet.MimeMessage;
 public class JavaMailSender extends EmailSender&lt;MimeMessage&gt; {
     
     /**
+     * Minimum allowed port value to connect to SMTP server.
+     */
+    private static final int MIN_PORT_VALUE = 0;
+    
+    /**
+     * Maximum allowed port value to connect to SMTP server.
+     */
+    private static final int MAX_PORT_VALUE = 65535;
+    
+    /**
      * Reference to singleton instance of this class.
      */
     private static SoftReference&lt;JavaMailSender&gt; mReference;
@@ -71,16 +81,6 @@ public class JavaMailSender extends EmailSender&lt;MimeMessage&gt; {
     private boolean mEnabled;
     
     /**
-     * Minimum allowed port value to connect to SMTP server.
-     */
-    private static final int MIN_PORT_VALUE = 0;
-    
-    /**
-     * Maximum allowed port value to connect to SMTP server.
-     */
-    private static final int MAX_PORT_VALUE = 65535;
-
-    /**
      * Constructor.
      * Loads mail configuration, and if it fails for some reason, mail sending
      * becomes disabled.
@@ -115,7 +115,7 @@ public class JavaMailSender extends EmailSender&lt;MimeMessage&gt; {
      * Returns or creates singleton instance of this class.
      * @return singleton of this class.
      */
-    public synchronized static JavaMailSender getInstance() {
+    public static synchronized JavaMailSender getInstance() {
         JavaMailSender sender;
 <span class="pc bpc" id="L120" title="1 of 4 branches missed.">        if(mReference == null || (sender = mReference.get()) == null) {</span>
 <span class="fc" id="L121">            sender = new JavaMailSender();</span>
@@ -246,9 +246,9 @@ public class JavaMailSender extends EmailSender&lt;MimeMessage&gt; {
             
 <span class="fc" id="L247">                transport.close();</span>
             
-<span class="nc" id="L249">            } catch(MessagingException ex) {</span>
+<span class="nc" id="L249">            } catch (MessagingException ex) {</span>
 <span class="nc" id="L250">                throw new MailNotSentException(ex);</span>
-<span class="nc" id="L251">            } catch(Throwable t) {</span>
+<span class="nc" id="L251">            } catch (Throwable t) {</span>
 <span class="nc" id="L252">                throw new MailNotSentException(t);</span>
 <span class="fc" id="L253">            }</span>
         }

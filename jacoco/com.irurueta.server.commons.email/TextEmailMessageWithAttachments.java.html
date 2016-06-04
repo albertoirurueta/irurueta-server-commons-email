@@ -257,7 +257,7 @@ public abstract class TextEmailMessageWithAttachments&lt;E&gt; extends
             String text, List&lt;EmailAttachment&gt; attachments, 
             EmailProvider provider) {
         
-<span class="pc bfc" id="L260" title="All 3 branches covered.">        switch(provider){</span>
+<span class="pc bfc" id="L260" title="All 3 branches covered.">        switch (provider) {</span>
             case AWS_MAIL:
 <span class="fc" id="L262">                return new AWSTextEmailMessageWithAttachments(subject, text, </span>
                         attachments);

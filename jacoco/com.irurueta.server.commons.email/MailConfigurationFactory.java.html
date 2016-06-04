@@ -130,7 +130,7 @@ public class MailConfigurationFactory extends
      * Factory method to create or return singleton instance.
      * @return factory singleton.
      */
-    public synchronized static MailConfigurationFactory getInstance() {
+    public static synchronized MailConfigurationFactory getInstance() {
 <span class="fc bfc" id="L134" title="All 2 branches covered.">        if (mSingleton == null) {</span>
 <span class="fc" id="L135">            mSingleton = new MailConfigurationFactory();</span>
         }
@@ -146,19 +146,21 @@ public class MailConfigurationFactory extends
     @Override
     public MailConfiguration configure(Properties properties) 
             throws ConfigurationException {
-<span class="fc bfc" id="L149" title="All 2 branches covered.">        if(mConfiguration != null) return mConfiguration;</span>
+<span class="fc bfc" id="L149" title="All 2 branches covered.">        if (mConfiguration != null) {</span>
+<span class="fc" id="L150">            return mConfiguration;</span>
+        }
         
-<span class="fc bfc" id="L151" title="All 2 branches covered.">        if(properties == null){</span>
+<span class="fc bfc" id="L153" title="All 2 branches covered.">        if (properties == null) {</span>
             //use default configuration
-<span class="fc" id="L153">            mConfiguration = new MailConfigurationImpl();</span>
-        }else{
-<span class="fc" id="L155">            mConfiguration = new MailConfigurationImpl(properties);</span>
+<span class="fc" id="L155">            mConfiguration = new MailConfigurationImpl();</span>
+        } else {
+<span class="fc" id="L157">            mConfiguration = new MailConfigurationImpl(properties);</span>
         }
         
         //configure email sender.
-<span class="fc" id="L159">        EmailSender.getInstance();</span>
+<span class="fc" id="L161">        EmailSender.getInstance();</span>
         
-<span class="fc" id="L161">        return mConfiguration;</span>
+<span class="fc" id="L163">        return mConfiguration;</span>
     }
     
 }

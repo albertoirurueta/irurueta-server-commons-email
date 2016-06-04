@@ -89,7 +89,7 @@
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>              <em class="jxr_comment">//add inline attachments</em>
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>              List&lt;InlineAttachment&gt; inlineAttachments = getInlineAttachments();
 <a class="jxr_linenumber" name="L83" href="#L83">83</a>              <strong class="jxr_keyword">if</strong> (inlineAttachments != <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="L84" href="#L84">84</a>                  <strong class="jxr_keyword">for</strong>(<a href="../../../../../com/irurueta/server/commons/email/InlineAttachment.html">InlineAttachment</a> attachment : inlineAttachments){
+<a class="jxr_linenumber" name="L84" href="#L84">84</a>                  <strong class="jxr_keyword">for</strong> (InlineAttachment attachment : inlineAttachments) {
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>                      <em class="jxr_comment">//only add attachments with files and content ids</em>
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>                      <strong class="jxr_keyword">if</strong> (attachment.getContentId() == <strong class="jxr_keyword">null</strong> || 
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>                              attachment.getAttachment() == <strong class="jxr_keyword">null</strong>) {
@@ -139,7 +139,7 @@
 <a class="jxr_linenumber" name="L131" href="#L131">131</a>             <strong class="jxr_keyword">int</strong> counter = 0;
 <a class="jxr_linenumber" name="L132" href="#L132">132</a>             <strong class="jxr_keyword">boolean</strong> isGeneratedId;
 <a class="jxr_linenumber" name="L133" href="#L133">133</a>             String contentId;
-<a class="jxr_linenumber" name="L134" href="#L134">134</a>             <strong class="jxr_keyword">for</strong> (InlineAttachment attachment : attachments ) {
+<a class="jxr_linenumber" name="L134" href="#L134">134</a>             <strong class="jxr_keyword">for</strong> (InlineAttachment attachment : attachments) {
 <a class="jxr_linenumber" name="L135" href="#L135">135</a>                 isGeneratedId = attachment.getContentId() == <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L136" href="#L136">136</a>                 result[counter] = isGeneratedId;
 <a class="jxr_linenumber" name="L137" href="#L137">137</a>                 <strong class="jxr_keyword">if</strong> (isGeneratedId) {

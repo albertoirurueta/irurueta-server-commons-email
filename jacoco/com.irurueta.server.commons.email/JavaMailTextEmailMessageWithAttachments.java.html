@@ -95,16 +95,15 @@ public class JavaMailTextEmailMessageWithAttachments extends
      */    
     @Override
     protected void buildContent(MimeMessage message) throws EmailException {        
-        try{
+        try {
             
             //finally add multipart contents to mail message
 <span class="fc" id="L101">            message.setContent(buildMultipart());            </span>
             
-            //message.setText(getText());
-<span class="nc" id="L104">        }catch(MessagingException e){</span>
-<span class="nc" id="L105">            throw new EmailException(e);</span>
-<span class="fc" id="L106">        }</span>
-<span class="fc" id="L107">    }  </span>
+<span class="nc" id="L103">        } catch (MessagingException e) {</span>
+<span class="nc" id="L104">            throw new EmailException(e);</span>
+<span class="fc" id="L105">        }</span>
+<span class="fc" id="L106">    }  </span>
     
     /**
      * Builds multipart content of email.
@@ -113,43 +112,45 @@ public class JavaMailTextEmailMessageWithAttachments extends
      * @throws EmailException if building multipart fails.
      */
     private Multipart buildMultipart() throws EmailException{
-        try{
+        try {
             //create multipart. One part will be for text content, and remaining
             //parts will be for attachments
-<span class="fc" id="L119">            Multipart multipart = new MimeMultipart();            </span>
+<span class="fc" id="L118">            Multipart multipart = new MimeMultipart();            </span>
             //set text content in body part
             BodyPart messageBodyPart;
-<span class="pc bpc" id="L122" title="1 of 2 branches missed.">            if(getText()!= null){            </span>
-<span class="fc" id="L123">                messageBodyPart = new MimeBodyPart();</span>
-<span class="fc" id="L124">                messageBodyPart.setContent(getText(), </span>
+<span class="pc bpc" id="L121" title="1 of 2 branches missed.">            if (getText()!= null) {</span>
+<span class="fc" id="L122">                messageBodyPart = new MimeBodyPart();</span>
+<span class="fc" id="L123">                messageBodyPart.setContent(getText(), </span>
                         &quot;text/plain; charset=utf-8&quot;);
-<span class="fc" id="L126">                multipart.addBodyPart(messageBodyPart);</span>
+<span class="fc" id="L125">                multipart.addBodyPart(messageBodyPart);</span>
             }
             
             //add attachments parts
-<span class="fc" id="L130">            List&lt;EmailAttachment&gt; attachments = getAttachments();</span>
-<span class="pc bpc" id="L131" title="1 of 2 branches missed.">            if(attachments != null){</span>
-<span class="fc bfc" id="L132" title="All 2 branches covered.">                for(EmailAttachment attachment : attachments){</span>
+<span class="fc" id="L129">            List&lt;EmailAttachment&gt; attachments = getAttachments();</span>
+<span class="pc bpc" id="L130" title="1 of 2 branches missed.">            if (attachments != null) {</span>
+<span class="fc bfc" id="L131" title="All 2 branches covered.">                for (EmailAttachment attachment : attachments) {</span>
                     //only add attachments with files
-<span class="pc bpc" id="L134" title="1 of 2 branches missed.">                    if(attachment.getAttachment() == null) continue;</span>
-
-<span class="fc" id="L136">                    messageBodyPart = new MimeBodyPart();</span>
-<span class="pc bpc" id="L137" title="1 of 2 branches missed.">                    if(attachment.getName() != null){</span>
-<span class="fc" id="L138">                        messageBodyPart.setFileName(attachment.getName());</span>
+<span class="pc bpc" id="L133" title="1 of 2 branches missed.">                    if (attachment.getAttachment() == null) {</span>
+<span class="nc" id="L134">                        continue;</span>
                     }
-<span class="fc" id="L140">                    messageBodyPart.setDisposition(Part.ATTACHMENT);</span>
-<span class="pc bpc" id="L141" title="1 of 2 branches missed.">                    if(attachment.getContentType() != null){</span>
-<span class="fc" id="L142">                        messageBodyPart.addHeader(&quot;Content-Type&quot;, </span>
+
+<span class="fc" id="L137">                    messageBodyPart = new MimeBodyPart();</span>
+<span class="pc bpc" id="L138" title="1 of 2 branches missed.">                    if (attachment.getName() != null) {</span>
+<span class="fc" id="L139">                        messageBodyPart.setFileName(attachment.getName());</span>
+                    }
+<span class="fc" id="L141">                    messageBodyPart.setDisposition(Part.ATTACHMENT);</span>
+<span class="pc bpc" id="L142" title="1 of 2 branches missed.">                    if (attachment.getContentType() != null) {</span>
+<span class="fc" id="L143">                        messageBodyPart.addHeader(&quot;Content-Type&quot;, </span>
                                 attachment.getContentType());
                     }
-<span class="fc" id="L145">                    messageBodyPart.setDataHandler(new DataHandler(</span>
+<span class="fc" id="L146">                    messageBodyPart.setDataHandler(new DataHandler(</span>
                             new FileDataSource(attachment.getAttachment())));
-<span class="fc" id="L147">                    multipart.addBodyPart(messageBodyPart);</span>
-<span class="fc" id="L148">                }</span>
+<span class="fc" id="L148">                    multipart.addBodyPart(messageBodyPart);</span>
+<span class="fc" id="L149">                }</span>
             }
-<span class="fc" id="L150">            return multipart;</span>
-<span class="nc" id="L151">        }catch(MessagingException e){</span>
-<span class="nc" id="L152">            throw new EmailException(e);</span>
+<span class="fc" id="L151">            return multipart;</span>
+<span class="nc" id="L152">        } catch (MessagingException e) {</span>
+<span class="nc" id="L153">            throw new EmailException(e);</span>
         }                        
     }
 }

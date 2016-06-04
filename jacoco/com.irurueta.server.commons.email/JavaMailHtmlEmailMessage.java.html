@@ -78,94 +78,101 @@ public class JavaMailHtmlEmailMessage extends HtmlEmailMessage&lt;MimeMessage&gt
 <span class="fc" id="L78">        }</span>
 <span class="fc" id="L79">    }  </span>
     
+    /**
+     * Builds internal multipart email content.
+     * @return a multipart message.
+     * @throws EmailException if something fails.
+     */
     private Multipart buildMultipart() throws EmailException {
         try {
             //create multipart. One part will be for alternative text content, 
             //another for HTML content and remaining parts will be for inline 
             //attachments and other attachments
-<span class="fc" id="L86">            Multipart multipart = new MimeMultipart(&quot;related&quot;);</span>
+<span class="fc" id="L91">            Multipart multipart = new MimeMultipart(&quot;related&quot;);</span>
             BodyPart messageBodyPart;
                         
-<span class="pc bpc" id="L89" title="3 of 4 branches missed.">            if (getAlternativeText() != null || getHtmlContent() != null) {</span>
+<span class="pc bpc" id="L94" title="3 of 4 branches missed.">            if (getAlternativeText() != null || getHtmlContent() != null) {</span>
                 //prepare alternative multipart so it can hold both alternative
                 //text and html
-<span class="fc" id="L92">                Multipart alternativeMultipart = new MimeMultipart(</span>
+<span class="fc" id="L97">                Multipart alternativeMultipart = new MimeMultipart(</span>
                         &quot;alternative&quot;);
-<span class="pc bpc" id="L94" title="1 of 2 branches missed.">                if (getAlternativeText() != null) {</span>
-<span class="fc" id="L95">                    messageBodyPart = new MimeBodyPart();</span>
-<span class="fc" id="L96">                    messageBodyPart.setContent(getAlternativeText(), </span>
+<span class="pc bpc" id="L99" title="1 of 2 branches missed.">                if (getAlternativeText() != null) {</span>
+<span class="fc" id="L100">                    messageBodyPart = new MimeBodyPart();</span>
+<span class="fc" id="L101">                    messageBodyPart.setContent(getAlternativeText(), </span>
                             &quot;text/plain; charset=utf-8&quot;);                
-<span class="fc" id="L98">                    alternativeMultipart.addBodyPart(messageBodyPart);</span>
+<span class="fc" id="L103">                    alternativeMultipart.addBodyPart(messageBodyPart);</span>
                 }
 
                 //process inline attachments
-<span class="fc" id="L102">                boolean[] generated = processInlineAttachments();</span>
+<span class="fc" id="L107">                boolean[] generated = processInlineAttachments();</span>
 
                 //set html content in another body part
-<span class="pc bpc" id="L105" title="1 of 2 branches missed.">                if (getHtmlContent()!= null) {</span>
-<span class="fc" id="L106">                    messageBodyPart = new MimeBodyPart();</span>
-<span class="fc" id="L107">                    messageBodyPart.setContent(process(getHtmlContent(), generated), </span>
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">                if (getHtmlContent()!= null) {</span>
+<span class="fc" id="L111">                    messageBodyPart = new MimeBodyPart();</span>
+<span class="fc" id="L112">                    messageBodyPart.setContent(process(getHtmlContent(), generated), </span>
                             &quot;text/html; charset=utf-8&quot;);
-<span class="fc" id="L109">                    alternativeMultipart.addBodyPart(messageBodyPart);</span>
+<span class="fc" id="L114">                    alternativeMultipart.addBodyPart(messageBodyPart);</span>
                 }
                 
                 //wrap alternative multipart in a body part to be included in
                 //overall message multipart
-<span class="fc" id="L114">                messageBodyPart = new MimeBodyPart();</span>
-<span class="fc" id="L115">                messageBodyPart.setContent(alternativeMultipart);</span>
-<span class="fc" id="L116">                multipart.addBodyPart(messageBodyPart);</span>
+<span class="fc" id="L119">                messageBodyPart = new MimeBodyPart();</span>
+<span class="fc" id="L120">                messageBodyPart.setContent(alternativeMultipart);</span>
+<span class="fc" id="L121">                multipart.addBodyPart(messageBodyPart);</span>
             }
             
             //all attachments go into general message multipar
             
             //add inline attachments
-<span class="fc" id="L122">            List&lt;InlineAttachment&gt; inlineAttachments = getInlineAttachments();</span>
-<span class="pc bpc" id="L123" title="1 of 2 branches missed.">            if (inlineAttachments != null) {</span>
-<span class="fc bfc" id="L124" title="All 2 branches covered.">                for (InlineAttachment attachment : inlineAttachments) {</span>
+<span class="fc" id="L127">            List&lt;InlineAttachment&gt; inlineAttachments = getInlineAttachments();</span>
+<span class="pc bpc" id="L128" title="1 of 2 branches missed.">            if (inlineAttachments != null) {</span>
+<span class="fc bfc" id="L129" title="All 2 branches covered.">                for (InlineAttachment attachment : inlineAttachments) {</span>
                     //only add attachments with files and content ids
-<span class="pc bpc" id="L126" title="2 of 4 branches missed.">                    if (attachment.getContentId() == null || </span>
+<span class="pc bpc" id="L131" title="2 of 4 branches missed.">                    if (attachment.getContentId() == null || </span>
                             attachment.getAttachment() == null) {
-<span class="nc" id="L128">                        continue;</span>
+<span class="nc" id="L133">                        continue;</span>
                     }
                     
-<span class="fc" id="L131">                    messageBodyPart = new MimeBodyPart();</span>
-<span class="fc" id="L132">                    messageBodyPart.setDataHandler(new DataHandler(</span>
+<span class="fc" id="L136">                    messageBodyPart = new MimeBodyPart();</span>
+<span class="fc" id="L137">                    messageBodyPart.setDataHandler(new DataHandler(</span>
                             new FileDataSource(attachment.getAttachment())));
-<span class="fc" id="L134">                    messageBodyPart.setHeader(&quot;Content-ID&quot;, </span>
+<span class="fc" id="L139">                    messageBodyPart.setHeader(&quot;Content-ID&quot;, </span>
                             &quot;&lt;&quot; + attachment.getContentId() + &quot;&gt;&quot;);
-<span class="pc bpc" id="L136" title="1 of 2 branches missed.">                    if(attachment.getContentType() != null){</span>
-<span class="fc" id="L137">                        messageBodyPart.addHeader(&quot;Content-Type&quot;, </span>
+<span class="pc bpc" id="L141" title="1 of 2 branches missed.">                    if (attachment.getContentType() != null) {</span>
+<span class="fc" id="L142">                        messageBodyPart.addHeader(&quot;Content-Type&quot;, </span>
                                 attachment.getContentType());
                     }
-<span class="fc" id="L140">                    messageBodyPart.setDisposition(Part.INLINE);</span>
-<span class="fc" id="L141">                    multipart.addBodyPart(messageBodyPart);                    </span>
-<span class="fc" id="L142">                }</span>
+<span class="fc" id="L145">                    messageBodyPart.setDisposition(Part.INLINE);</span>
+<span class="fc" id="L146">                    multipart.addBodyPart(messageBodyPart);                    </span>
+<span class="fc" id="L147">                }</span>
             }
             
             //add other attachments parts
-<span class="fc" id="L146">            List&lt;EmailAttachment&gt; attachments = getEmailAttachments();</span>
-<span class="pc bpc" id="L147" title="1 of 2 branches missed.">            if (attachments != null) {</span>
-<span class="fc bfc" id="L148" title="All 2 branches covered.">                for (EmailAttachment attachment : attachments) {</span>
+<span class="fc" id="L151">            List&lt;EmailAttachment&gt; attachments = getEmailAttachments();</span>
+<span class="pc bpc" id="L152" title="1 of 2 branches missed.">            if (attachments != null) {</span>
+<span class="fc bfc" id="L153" title="All 2 branches covered.">                for (EmailAttachment attachment : attachments) {</span>
                     //only add attachments with files
-<span class="pc bpc" id="L150" title="1 of 2 branches missed.">                    if(attachment.getAttachment() == null) continue;</span>
-
-<span class="fc" id="L152">                    messageBodyPart = new MimeBodyPart();</span>
-<span class="pc bpc" id="L153" title="1 of 2 branches missed.">                    if (attachment.getName() != null) {</span>
-<span class="fc" id="L154">                        messageBodyPart.setFileName(attachment.getName());</span>
+<span class="pc bpc" id="L155" title="1 of 2 branches missed.">                    if (attachment.getAttachment() == null) {</span>
+<span class="nc" id="L156">                        continue;</span>
                     }
-<span class="fc" id="L156">                    messageBodyPart.setDisposition(Part.ATTACHMENT);</span>
-<span class="pc bpc" id="L157" title="1 of 2 branches missed.">                    if (attachment.getContentType() != null) {</span>
-<span class="fc" id="L158">                        messageBodyPart.addHeader(&quot;Content-Type&quot;, </span>
+
+<span class="fc" id="L159">                    messageBodyPart = new MimeBodyPart();</span>
+<span class="pc bpc" id="L160" title="1 of 2 branches missed.">                    if (attachment.getName() != null) {</span>
+<span class="fc" id="L161">                        messageBodyPart.setFileName(attachment.getName());</span>
+                    }
+<span class="fc" id="L163">                    messageBodyPart.setDisposition(Part.ATTACHMENT);</span>
+<span class="pc bpc" id="L164" title="1 of 2 branches missed.">                    if (attachment.getContentType() != null) {</span>
+<span class="fc" id="L165">                        messageBodyPart.addHeader(&quot;Content-Type&quot;, </span>
                                 attachment.getContentType());
                     }
-<span class="fc" id="L161">                    messageBodyPart.setDataHandler(new DataHandler(</span>
+<span class="fc" id="L168">                    messageBodyPart.setDataHandler(new DataHandler(</span>
                             new FileDataSource(attachment.getAttachment())));
-<span class="fc" id="L163">                    multipart.addBodyPart(messageBodyPart);</span>
-<span class="fc" id="L164">                }</span>
+<span class="fc" id="L170">                    multipart.addBodyPart(messageBodyPart);</span>
+<span class="fc" id="L171">                }</span>
             }
-<span class="fc" id="L166">            return multipart;</span>
-<span class="nc" id="L167">        }catch(MessagingException e){</span>
-<span class="nc" id="L168">            throw new EmailException(e);</span>
+<span class="fc" id="L173">            return multipart;</span>
+<span class="nc" id="L174">        } catch (MessagingException e) {</span>
+<span class="nc" id="L175">            throw new EmailException(e);</span>
         }                        
     }   
     
@@ -174,25 +181,25 @@ public class JavaMailHtmlEmailMessage extends HtmlEmailMessage&lt;MimeMessage&gt
      * @return array indicating for whith files content was inlined.
      */
     private boolean[] processInlineAttachments() {
-<span class="fc" id="L177">        List&lt;InlineAttachment&gt; attachments = getInlineAttachments();</span>
-<span class="pc bpc" id="L178" title="1 of 2 branches missed.">        if(attachments != null){</span>
-<span class="fc" id="L179">            boolean[] result = new boolean[attachments.size()];</span>
-<span class="fc" id="L180">            int counter = 0;</span>
+<span class="fc" id="L184">        List&lt;InlineAttachment&gt; attachments = getInlineAttachments();</span>
+<span class="pc bpc" id="L185" title="1 of 2 branches missed.">        if(attachments != null){</span>
+<span class="fc" id="L186">            boolean[] result = new boolean[attachments.size()];</span>
+<span class="fc" id="L187">            int counter = 0;</span>
             boolean isGeneratedId;
             String contentId;
-<span class="fc bfc" id="L183" title="All 2 branches covered.">            for(InlineAttachment attachment : attachments ){</span>
-<span class="fc bfc" id="L184" title="All 2 branches covered.">                isGeneratedId = attachment.getContentId() == null;</span>
-<span class="fc" id="L185">                result[counter] = isGeneratedId;</span>
-<span class="fc bfc" id="L186" title="All 2 branches covered.">                if(isGeneratedId){</span>
+<span class="fc bfc" id="L190" title="All 2 branches covered.">            for(InlineAttachment attachment : attachments ){</span>
+<span class="fc bfc" id="L191" title="All 2 branches covered.">                isGeneratedId = attachment.getContentId() == null;</span>
+<span class="fc" id="L192">                result[counter] = isGeneratedId;</span>
+<span class="fc bfc" id="L193" title="All 2 branches covered.">                if(isGeneratedId){</span>
                     //generate a content id for this attachment
-<span class="fc" id="L188">                    contentId = &quot;inline-attachment&quot; + counter;</span>
-<span class="fc" id="L189">                    attachment.setContentId(contentId);</span>
+<span class="fc" id="L195">                    contentId = &quot;inline-attachment&quot; + counter;</span>
+<span class="fc" id="L196">                    attachment.setContentId(contentId);</span>
                 }                
-<span class="fc" id="L191">                counter++;</span>
-<span class="fc" id="L192">            }</span>
-<span class="fc" id="L193">            return result;</span>
+<span class="fc" id="L198">                counter++;</span>
+<span class="fc" id="L199">            }</span>
+<span class="fc" id="L200">            return result;</span>
         }
-<span class="nc" id="L195">        return null;</span>
+<span class="nc" id="L202">        return null;</span>
     }
     
     /**
@@ -206,24 +213,26 @@ public class JavaMailHtmlEmailMessage extends HtmlEmailMessage&lt;MimeMessage&gt
     private String process(String htmlContent, boolean[] generated){
         //if no information about generated inline ids is available, then simply
         //return input html content
-<span class="pc bpc" id="L209" title="1 of 2 branches missed.">        if(generated == null) return htmlContent;</span>
+<span class="pc bpc" id="L216" title="1 of 2 branches missed.">        if (generated == null) {</span>
+<span class="nc" id="L217">            return htmlContent;</span>
+        }
         
         //process html content to substitute placeholders by their corresponding
         //inline attachments ids
-<span class="fc" id="L213">        List&lt;InlineAttachment&gt; attachments = getInlineAttachments();</span>
-<span class="fc" id="L214">        List&lt;String&gt; contentIds = new ArrayList&lt;String&gt;();</span>
-<span class="fc" id="L215">        int pos = 0;</span>
-<span class="pc bpc" id="L216" title="1 of 2 branches missed.">        if(attachments != null){</span>
-<span class="fc bfc" id="L217" title="All 2 branches covered.">            for(InlineAttachment attachment : attachments){</span>
-<span class="fc bfc" id="L218" title="All 2 branches covered.">                if(generated[pos]){</span>
-<span class="fc" id="L219">                    contentIds.add(attachment.getContentId());</span>
+<span class="fc" id="L222">        List&lt;InlineAttachment&gt; attachments = getInlineAttachments();</span>
+<span class="fc" id="L223">        List&lt;String&gt; contentIds = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L224">        int pos = 0;</span>
+<span class="pc bpc" id="L225" title="1 of 2 branches missed.">        if (attachments != null) {</span>
+<span class="fc bfc" id="L226" title="All 2 branches covered.">            for (InlineAttachment attachment : attachments) {</span>
+<span class="fc bfc" id="L227" title="All 2 branches covered.">                if (generated[pos]) {</span>
+<span class="fc" id="L228">                    contentIds.add(attachment.getContentId());</span>
                 }
-<span class="fc" id="L221">                pos++;</span>
-<span class="fc" id="L222">            }</span>
+<span class="fc" id="L230">                pos++;</span>
+<span class="fc" id="L231">            }</span>
         }
         
-<span class="fc" id="L225">        Object[] objects = contentIds.toArray();</span>
-<span class="fc" id="L226">        return MessageFormat.format(htmlContent, objects);</span>
+<span class="fc" id="L234">        Object[] objects = contentIds.toArray();</span>
+<span class="fc" id="L235">        return MessageFormat.format(htmlContent, objects);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

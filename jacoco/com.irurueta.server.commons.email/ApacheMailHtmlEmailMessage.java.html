@@ -81,7 +81,7 @@ public class ApacheMailHtmlEmailMessage extends HtmlEmailMessage&lt;HtmlEmail&gt
             //add inline attachments
 <span class="fc" id="L82">            List&lt;InlineAttachment&gt; inlineAttachments = getInlineAttachments();</span>
 <span class="pc bpc" id="L83" title="1 of 2 branches missed.">            if (inlineAttachments != null) {</span>
-<span class="fc bfc" id="L84" title="All 2 branches covered.">                for(InlineAttachment attachment : inlineAttachments){</span>
+<span class="fc bfc" id="L84" title="All 2 branches covered.">                for (InlineAttachment attachment : inlineAttachments) {</span>
                     //only add attachments with files and content ids
 <span class="pc bpc" id="L86" title="2 of 4 branches missed.">                    if (attachment.getContentId() == null || </span>
                             attachment.getAttachment() == null) {
@@ -131,7 +131,7 @@ public class ApacheMailHtmlEmailMessage extends HtmlEmailMessage&lt;HtmlEmail&gt
 <span class="fc" id="L131">            int counter = 0;</span>
             boolean isGeneratedId;
             String contentId;
-<span class="fc bfc" id="L134" title="All 2 branches covered.">            for (InlineAttachment attachment : attachments ) {</span>
+<span class="fc bfc" id="L134" title="All 2 branches covered.">            for (InlineAttachment attachment : attachments) {</span>
 <span class="fc bfc" id="L135" title="All 2 branches covered.">                isGeneratedId = attachment.getContentId() == null;</span>
 <span class="fc" id="L136">                result[counter] = isGeneratedId;</span>
 <span class="fc bfc" id="L137" title="All 2 branches covered.">                if (isGeneratedId) {</span>

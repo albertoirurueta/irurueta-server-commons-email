@@ -57,7 +57,7 @@ public abstract class TextEmailMessage&lt;E&gt; extends EmailMessage&lt;E&gt; {
      * Returns email text content.
      * @return email text content.
      */
-    public String getText(){
+    public String getText() {
 <span class="fc" id="L61">        return mText;</span>
     }
     
@@ -65,7 +65,7 @@ public abstract class TextEmailMessage&lt;E&gt; extends EmailMessage&lt;E&gt; {
      * Sets email text content.
      * @param text email text content.
      */
-    public void setText(String text){
+    public void setText(String text) {
 <span class="fc" id="L69">        mText = text;</span>
 <span class="fc" id="L70">    }</span>
         
@@ -135,7 +135,7 @@ public abstract class TextEmailMessage&lt;E&gt; extends EmailMessage&lt;E&gt; {
     protected static TextEmailMessage create(String subject, String text,
             EmailProvider provider) {
         
-<span class="pc bfc" id="L138" title="All 3 branches covered.">        switch(provider){</span>
+<span class="pc bfc" id="L138" title="All 3 branches covered.">        switch (provider) {</span>
             case AWS_MAIL: 
 <span class="fc" id="L140">                return new AWSTextEmailMessage(subject, text);</span>
             case APACHE_MAIL:

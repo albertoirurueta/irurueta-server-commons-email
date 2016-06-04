@@ -35,7 +35,7 @@
 <a class="jxr_linenumber" name="L27" href="#L27">27</a>  <em class="jxr_javadoccomment"> * used within html email body).</em>
 <a class="jxr_linenumber" name="L28" href="#L28">28</a>  <em class="jxr_javadoccomment"> * @param &lt;E&gt; internal type to be used by email sender implementation.</em>
 <a class="jxr_linenumber" name="L29" href="#L29">29</a>  <em class="jxr_javadoccomment"> */</em>
-<a class="jxr_linenumber" name="L30" href="#L30">30</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">abstract</strong> <strong class="jxr_keyword">class</strong> HtmlEmailMessage&lt;E&gt; <strong class="jxr_keyword">extends</strong> EmailMessage&lt;E&gt;{
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">abstract</strong> <strong class="jxr_keyword">class</strong> HtmlEmailMessage&lt;E&gt; <strong class="jxr_keyword">extends</strong> EmailMessage&lt;E&gt; {
 <a class="jxr_linenumber" name="L31" href="#L31">31</a>  
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>      <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>  <em class="jxr_javadoccomment">     * HTML content of email to be rendered as a web page.</em>
@@ -264,7 +264,7 @@
 <a class="jxr_linenumber" name="L256" href="#L256">256</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L257" href="#L257">257</a>     <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../com/irurueta/server/commons/email/HtmlEmailMessage.html">HtmlEmailMessage</a> create(String subject, String htmlContent,
 <a class="jxr_linenumber" name="L258" href="#L258">258</a>             <a href="../../../../../com/irurueta/server/commons/email/EmailProvider.html">EmailProvider</a> provider) {
-<a class="jxr_linenumber" name="L259" href="#L259">259</a>         <strong class="jxr_keyword">switch</strong>(provider){
+<a class="jxr_linenumber" name="L259" href="#L259">259</a>         <strong class="jxr_keyword">switch</strong> (provider) {
 <a class="jxr_linenumber" name="L260" href="#L260">260</a>             <strong class="jxr_keyword">case</strong> AWS_MAIL:
 <a class="jxr_linenumber" name="L261" href="#L261">261</a>                 <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../com/irurueta/server/commons/email/AWSHtmlEmailMessage.html">AWSHtmlEmailMessage</a>(subject, htmlContent);            
 <a class="jxr_linenumber" name="L262" href="#L262">262</a>             <strong class="jxr_keyword">case</strong> APACHE_MAIL:

@@ -61,7 +61,7 @@
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>  <em class="jxr_javadoccomment">     * @throws EmailException if setting mail content fails.</em>
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>  <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>      @Override
-<a class="jxr_linenumber" name="L56" href="#L56">56</a>      <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">void</strong> buildContent(MimeMessage content) <strong class="jxr_keyword">throws</strong> EmailException{
+<a class="jxr_linenumber" name="L56" href="#L56">56</a>      <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">void</strong> buildContent(MimeMessage content) <strong class="jxr_keyword">throws</strong> EmailException {
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>          <strong class="jxr_keyword">try</strong> {            
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>              content.setText(getText(), <span class="jxr_string">"utf-8"</span>);
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>          } <strong class="jxr_keyword">catch</strong> (MessagingException e) {

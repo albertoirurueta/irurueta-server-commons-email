@@ -65,7 +65,7 @@
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>  <em class="jxr_javadoccomment">     * Returns email text content.</em>
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>  <em class="jxr_javadoccomment">     * @return email text content.</em>
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L60" href="#L60">60</a>      <strong class="jxr_keyword">public</strong> String getText(){
+<a class="jxr_linenumber" name="L60" href="#L60">60</a>      <strong class="jxr_keyword">public</strong> String getText() {
 <a class="jxr_linenumber" name="L61" href="#L61">61</a>          <strong class="jxr_keyword">return</strong> mText;
 <a class="jxr_linenumber" name="L62" href="#L62">62</a>      }
 <a class="jxr_linenumber" name="L63" href="#L63">63</a>      
@@ -73,7 +73,7 @@
 <a class="jxr_linenumber" name="L65" href="#L65">65</a>  <em class="jxr_javadoccomment">     * Sets email text content.</em>
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>  <em class="jxr_javadoccomment">     * @param text email text content.</em>
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L68" href="#L68">68</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> setText(String text){
+<a class="jxr_linenumber" name="L68" href="#L68">68</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> setText(String text) {
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>          mText = text;
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>      }
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>          
@@ -143,7 +143,7 @@
 <a class="jxr_linenumber" name="L135" href="#L135">135</a>     <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../com/irurueta/server/commons/email/TextEmailMessage.html">TextEmailMessage</a> create(String subject, String text,
 <a class="jxr_linenumber" name="L136" href="#L136">136</a>             <a href="../../../../../com/irurueta/server/commons/email/EmailProvider.html">EmailProvider</a> provider) {
 <a class="jxr_linenumber" name="L137" href="#L137">137</a>         
-<a class="jxr_linenumber" name="L138" href="#L138">138</a>         <strong class="jxr_keyword">switch</strong>(provider){
+<a class="jxr_linenumber" name="L138" href="#L138">138</a>         <strong class="jxr_keyword">switch</strong> (provider) {
 <a class="jxr_linenumber" name="L139" href="#L139">139</a>             <strong class="jxr_keyword">case</strong> AWS_MAIL: 
 <a class="jxr_linenumber" name="L140" href="#L140">140</a>                 <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../com/irurueta/server/commons/email/AWSTextEmailMessage.html">AWSTextEmailMessage</a>(subject, text);
 <a class="jxr_linenumber" name="L141" href="#L141">141</a>             <strong class="jxr_keyword">case</strong> APACHE_MAIL:
