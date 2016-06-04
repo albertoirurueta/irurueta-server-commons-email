@@ -27,7 +27,7 @@ import java.util.List;
  * used within html email body).
  * @param <E> internal type to be used by email sender implementation.
  */
-public abstract class HtmlEmailMessage<E> extends EmailMessage<E>{
+public abstract class HtmlEmailMessage<E> extends EmailMessage<E> {
 
     /**
      * HTML content of email to be rendered as a web page.
@@ -256,7 +256,7 @@ public abstract class HtmlEmailMessage<E> extends EmailMessage<E>{
      */
     protected static HtmlEmailMessage create(String subject, String htmlContent,
             EmailProvider provider) {
-        switch(provider){
+        switch (provider) {
             case AWS_MAIL:
                 return new AWSHtmlEmailMessage(subject, htmlContent);            
             case APACHE_MAIL:

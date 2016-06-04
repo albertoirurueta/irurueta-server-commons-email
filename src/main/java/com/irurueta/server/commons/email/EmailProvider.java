@@ -46,7 +46,7 @@ public enum EmailProvider {
      * Constructor.
      * @param value string representation.
      */
-    private EmailProvider(String value) {
+    EmailProvider(String value) {
         mValue = value;
     }
     
@@ -54,7 +54,7 @@ public enum EmailProvider {
      * Returns string representation.
      * @return string representation.
      */
-    public String getValue(){
+    public String getValue() {
         return mValue;
     }
     

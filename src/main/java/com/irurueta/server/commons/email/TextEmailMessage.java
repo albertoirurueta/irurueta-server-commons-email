@@ -57,7 +57,7 @@ public abstract class TextEmailMessage<E> extends EmailMessage<E> {
      * Returns email text content.
      * @return email text content.
      */
-    public String getText(){
+    public String getText() {
         return mText;
     }
     
@@ -65,7 +65,7 @@ public abstract class TextEmailMessage<E> extends EmailMessage<E> {
      * Sets email text content.
      * @param text email text content.
      */
-    public void setText(String text){
+    public void setText(String text) {
         mText = text;
     }
         
@@ -135,7 +135,7 @@ public abstract class TextEmailMessage<E> extends EmailMessage<E> {
     protected static TextEmailMessage create(String subject, String text,
             EmailProvider provider) {
         
-        switch(provider){
+        switch (provider) {
             case AWS_MAIL: 
                 return new AWSTextEmailMessage(subject, text);
             case APACHE_MAIL:

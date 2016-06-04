@@ -78,6 +78,11 @@ public class JavaMailHtmlEmailMessage extends HtmlEmailMessage<MimeMessage> {
         }
     }  
     
+    /**
+     * Builds internal multipart email content.
+     * @return a multipart message.
+     * @throws EmailException if something fails.
+     */
     private Multipart buildMultipart() throws EmailException {
         try {
             //create multipart. One part will be for alternative text content, 
@@ -133,7 +138,7 @@ public class JavaMailHtmlEmailMessage extends HtmlEmailMessage<MimeMessage> {
                             new FileDataSource(attachment.getAttachment())));
                     messageBodyPart.setHeader("Content-ID", 
                             "<" + attachment.getContentId() + ">");
-                    if(attachment.getContentType() != null){
+                    if (attachment.getContentType() != null) {
                         messageBodyPart.addHeader("Content-Type", 
                                 attachment.getContentType());
                     }
@@ -147,7 +152,9 @@ public class JavaMailHtmlEmailMessage extends HtmlEmailMessage<MimeMessage> {
             if (attachments != null) {
                 for (EmailAttachment attachment : attachments) {
                     //only add attachments with files
-                    if(attachment.getAttachment() == null) continue;
+                    if (attachment.getAttachment() == null) {
+                        continue;
+                    }
 
                     messageBodyPart = new MimeBodyPart();
                     if (attachment.getName() != null) {
@@ -164,7 +171,7 @@ public class JavaMailHtmlEmailMessage extends HtmlEmailMessage<MimeMessage> {
                 }
             }
             return multipart;
-        }catch(MessagingException e){
+        } catch (MessagingException e) {
             throw new EmailException(e);
         }                        
     }   
@@ -206,16 +213,18 @@ public class JavaMailHtmlEmailMessage extends HtmlEmailMessage<MimeMessage> {
     private String process(String htmlContent, boolean[] generated){
         //if no information about generated inline ids is available, then simply
         //return input html content
-        if(generated == null) return htmlContent;
+        if (generated == null) {
+            return htmlContent;
+        }
         
         //process html content to substitute placeholders by their corresponding
         //inline attachments ids
         List<InlineAttachment> attachments = getInlineAttachments();
         List<String> contentIds = new ArrayList<String>();
         int pos = 0;
-        if(attachments != null){
-            for(InlineAttachment attachment : attachments){
-                if(generated[pos]){
+        if (attachments != null) {
+            for (InlineAttachment attachment : attachments) {
+                if (generated[pos]) {
                     contentIds.add(attachment.getContentId());
                 }
                 pos++;

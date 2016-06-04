@@ -56,9 +56,9 @@ public class ApacheMailTextEmailMessage extends
     @Override
     protected void buildContent(MultiPartEmail content) 
             throws com.irurueta.server.commons.email.EmailException {
-        try{            
+        try {            
             content.setMsg(getText());
-        }catch(EmailException e){
+        } catch(EmailException e) {
             throw new com.irurueta.server.commons.email.EmailException(e);
         }
     }    

@@ -48,6 +48,21 @@ public class AWSMailSender extends
             AWSMailSender.class.getName());
     
     /**
+     * Milliseconds to wait to check quota.
+     */
+    public static final long DEFAULT_CHECK_QUOTA_AFTER_MILLIS = 3600000;
+    
+    /**
+     * Number of sent mails to take into account before checking quota.
+     */
+    public static final long MIN_CHECK_QUOTA_AFTER_MILLIS = 0;  
+    
+    /**
+     * Number of milliseconds in a second.
+     */
+    private static double MILLISECONDS_PER_SECOND = 1000.0;
+    
+    /**
      * Reference to singleton instance of this class.
      */
     private static SoftReference<AWSMailSender> mReference;
@@ -70,7 +85,7 @@ public class AWSMailSender extends
     /**
      * Internal client to be used for mail sending.
      */
-    AmazonSimpleEmailServiceClient mClient = null;
+    private AmazonSimpleEmailServiceClient mClient;
     
     /**
      * Indicates amount of milliseconds to check quota of mail sending returned 
@@ -88,17 +103,7 @@ public class AWSMailSender extends
      * exceeded.
      */
     private volatile long mWaitIntervalMillis;
-    
-    /**
-     * Milliseconds to wait to check quota.
-     */
-    public static final long DEFAULT_CHECK_QUOTA_AFTER_MILLIS = 3600000;
-    
-    /**
-     * Number of sent mails to take into account before checking quota.
-     */
-    public static final long MIN_CHECK_QUOTA_AFTER_MILLIS = 0;
-    
+        
     /**
      * Constructor.
      * Loads mail configuration, and if it fails for some reason, mail sending
@@ -106,27 +111,21 @@ public class AWSMailSender extends
      */
     private AWSMailSender() {
         
-        if (mEnabled) {
-            LOGGER.log(Level.INFO, "AWS Email Sender enabled.");            
-        }else{
-            LOGGER.log(Level.INFO, "AWS Email Sender disabled. Any " +
-                    "attempt to send emails using Java mail will be silently " +
-                    "ignored");            
-        }
-        
         try {
             MailConfiguration cfg = MailConfigurationFactory.getInstance().
                     configure();
             mCredentials = cfg.getAWSMailCredentials();
             mMailFromAddress = cfg.getMailFromAddress();
         
-            mEnabled = (mMailFromAddress != null) && 
+            mEnabled = mMailFromAddress != null && 
                     isValidEmailAddress(mMailFromAddress) && 
                     cfg.isMailSendingEnabled();
             mCheckQuotaAfterMillis = cfg.getAWSMailCheckQuotaAfterMillis();
             mLastSentMailTimestamp = 0;
             mWaitIntervalMillis = 0;  
-        } catch (ConfigurationException e) { }
+        } catch (ConfigurationException e) { 
+            mEnabled = false;
+        }
         
         if (mEnabled) { 
             LOGGER.log(Level.INFO, "AWS Email Sender enabled.");
@@ -141,9 +140,9 @@ public class AWSMailSender extends
      * Returns or creates singleton instance of this class.
      * @return singleton of this class.
      */
-    public synchronized static AWSMailSender getInstance() {
+    public static synchronized AWSMailSender getInstance() {
         AWSMailSender sender;
-        if(mReference == null || (sender = mReference.get()) == null) {
+        if (mReference == null || (sender = mReference.get()) == null) {
             sender = new AWSMailSender();
             mReference = new SoftReference<>(sender);
         }
@@ -190,12 +189,13 @@ public class AWSMailSender extends
      */    
     @Override
     public String send(EmailMessage<Message> m) throws MailNotSentException {
-        EmailMessage m2 = m; //to avoid compilation errors regaring to casting
+        //to avoid compilation errors regaring to casting
+        EmailMessage m2 = m; 
         if (m2 instanceof AWSTextEmailMessage) {
             return sendTextEmail((AWSTextEmailMessage)m2);
-        } else if(m2 instanceof AWSTextEmailMessageWithAttachments) { 
+        } else if (m2 instanceof AWSTextEmailMessageWithAttachments) { 
             return sendRawEmail((AWSTextEmailMessageWithAttachments)m2);
-        } else if(m2 instanceof AWSHtmlEmailMessage) {
+        } else if (m2 instanceof AWSHtmlEmailMessage) {
             return sendRawEmail((AWSHtmlEmailMessage)m2);
         } else {
             throw new MailNotSentException("Unsupported email type");
@@ -223,11 +223,13 @@ public class AWSMailSender extends
         long currentTimestamp = System.currentTimeMillis();        
         prepareClient();
         if (!mEnabled) {
+            //don't send message if not enabled
             return null;
-        } //don't send message if not enabled
+        } 
         
         try {
-            synchronized (this) { //prevents throttling
+            synchronized (this) { 
+                //prevents throttling
                 checkQuota(currentTimestamp);
                 
                 Destination destination = new Destination(m.getTo());
@@ -281,7 +283,8 @@ public class AWSMailSender extends
         }
         
         try {
-            synchronized (this) { //prevents throttling and excessive memory usage
+            synchronized (this) { 
+                //prevents throttling and excessive memory usage
                 checkQuota(currentTimestamp);
                                                 
                 //if no subject, set to empty string to avoid errors
@@ -331,7 +334,7 @@ public class AWSMailSender extends
      * Checks quota of sent emails to prevent AWS SES throttling.
      * @param currentTimestamp current timestamp.
      */
-    private void checkQuota(long currentTimestamp) {
+    private synchronized void checkQuota(long currentTimestamp) {
         if ((currentTimestamp - mLastSentMailTimestamp) > 
                 mCheckQuotaAfterMillis) {
             //check quota to determine the number of messages per second to
@@ -339,21 +342,21 @@ public class AWSMailSender extends
             GetSendQuotaResult quota = mClient.getSendQuota();
             //updateinterval that we must wait between send requests
             mWaitIntervalMillis = (long)Math.ceil(
-                1000.0 / quota.getMaxSendRate());
+                MILLISECONDS_PER_SECOND / quota.getMaxSendRate());
         }        
     }
     
     /**
      * Prepares client by setting proper credentials.
      */
-    private void prepareClient() {
+    private synchronized void prepareClient() {
         if (mClient == null) {
             //instantiate new client if needed
             if (areValidCredentials()) {
                 mClient = new AmazonSimpleEmailServiceClient(
                     new BasicAWSCredentials(mCredentials.getAccessKey(), 
                     mCredentials.getSecretKey()));
-            }else{
+            } else {
                 //disabling mail sending
                 mEnabled = false;
                 Logger.getLogger(AWSMailSender.class.getName()).log(

@@ -25,13 +25,13 @@ public interface MailConfiguration extends Configuration {
      * SMTP server host to connect to send emails.
      * @return SMTP server host to connect to send emails.
      */    
-    public String getMailHost();
+    String getMailHost();
     
     /**
      * SMTP server port to connect to send emails.
      * @return SMTP server port to connect to send emails.
      */    
-    public int getMailPort();
+    int getMailPort();
     
     /**
      * User id to log into SMTP server to send emails.
@@ -39,7 +39,7 @@ public interface MailConfiguration extends Configuration {
      * require credentials.
      * @return user id to log into SMTP server to send emails.
      */    
-    public String getMailId();
+    String getMailId();
     
     /**
      * User password to log into SMTP server to send emails.
@@ -47,19 +47,19 @@ public interface MailConfiguration extends Configuration {
      * credentials.
      * @return User password to log into SMTP server to send emails.
      */    
-    public String getMailPassword();
+    String getMailPassword();
        
     /**
      * Email address to send emails from.
      * @return email address to send emails from.
      */    
-    public String getMailFromAddress();
+    String getMailFromAddress();
     
     /**
      * Indicates if email sending is enabled or not.
      * @return true if email sending is enabled, false otherwise.
      */    
-    public boolean isMailSendingEnabled();
+    boolean isMailSendingEnabled();
     
     //AWS Mail Configuration
     
@@ -67,19 +67,19 @@ public interface MailConfiguration extends Configuration {
      * Amazon AWS access key to use if Amazon SES is used as a provider.
      * @return AWS access key to use Amazon SES.
      */    
-    public String getAWSMailAccessKey();
+    String getAWSMailAccessKey();
     
     /**
      * Amazon AWS secret key to use if Amazon SES is used as a provider.
      * @return AWS secret key to use Amazon SES.
      */    
-    public String getAWSMailSecretKey();
+    String getAWSMailSecretKey();
     
     /**
      * Returns structure containing AWS credentials to use Amazon SES.
      * @return AWS credentials.
      */    
-    public AWSEmailSenderCredentials getAWSMailCredentials();    
+    AWSEmailSenderCredentials getAWSMailCredentials();    
     
     /**
      * Milliseconds to wait before checking sending quota to avoid Amazon SES
@@ -87,11 +87,11 @@ public interface MailConfiguration extends Configuration {
      * @return milliseconds to wait before checking sending quota to avoid .
      * Amazon SES throttling.
      */    
-    public long getAWSMailCheckQuotaAfterMillis();    
+    long getAWSMailCheckQuotaAfterMillis();    
     
     /**
      * Email provider to use to send emails.
      * @return an email provider.
      */    
-    public EmailProvider getProvider();
+    EmailProvider getProvider();
 }

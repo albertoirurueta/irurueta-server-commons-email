@@ -19,7 +19,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Abstract base class defining basic Email message data
+ * Abstract base class defining basic Email message data.
  * @param <E> internal type to be used by email sender implementation.
  */
 public abstract class EmailMessage<E> {
@@ -69,7 +69,7 @@ public abstract class EmailMessage<E> {
         
         if (subject != null) {
             mSubject = subject;
-        }else {
+        } else {
             mSubject = "";
         }        
     }

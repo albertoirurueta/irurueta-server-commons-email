@@ -60,7 +60,7 @@ public class AWSEmailSenderCredentials {
      * @return true if access key is available, false otherwise.
      */
     public boolean isAccessKeyAvailable() {
-        return (mAccessKey != null);
+        return mAccessKey != null;
     }
     
     /**
@@ -84,7 +84,7 @@ public class AWSEmailSenderCredentials {
      * @return true if secret key is available, false otherwise.
      */
     public boolean isSecretKeyAvailable() {
-        return (mSecretKey != null);
+        return mSecretKey != null;
     }
     
     /**
@@ -93,6 +93,6 @@ public class AWSEmailSenderCredentials {
      * @return true if ready, false otherwise.
      */
     public boolean isReady() {
-        return (mAccessKey != null) && (mSecretKey != null);
+        return mAccessKey != null && mSecretKey != null;
     }    
 }

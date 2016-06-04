@@ -81,7 +81,7 @@ public class ApacheMailHtmlEmailMessage extends HtmlEmailMessage<HtmlEmail> {
             //add inline attachments
             List<InlineAttachment> inlineAttachments = getInlineAttachments();
             if (inlineAttachments != null) {
-                for(InlineAttachment attachment : inlineAttachments){
+                for (InlineAttachment attachment : inlineAttachments) {
                     //only add attachments with files and content ids
                     if (attachment.getContentId() == null || 
                             attachment.getAttachment() == null) {
@@ -131,7 +131,7 @@ public class ApacheMailHtmlEmailMessage extends HtmlEmailMessage<HtmlEmail> {
             int counter = 0;
             boolean isGeneratedId;
             String contentId;
-            for (InlineAttachment attachment : attachments ) {
+            for (InlineAttachment attachment : attachments) {
                 isGeneratedId = attachment.getContentId() == null;
                 result[counter] = isGeneratedId;
                 if (isGeneratedId) {

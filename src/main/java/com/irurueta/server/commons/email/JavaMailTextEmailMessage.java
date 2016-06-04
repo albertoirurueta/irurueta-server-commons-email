@@ -53,7 +53,7 @@ public class JavaMailTextEmailMessage extends TextEmailMessage<MimeMessage> {
      * @throws EmailException if setting mail content fails.
      */
     @Override
-    protected void buildContent(MimeMessage content) throws EmailException{
+    protected void buildContent(MimeMessage content) throws EmailException {
         try {            
             content.setText(getText(), "utf-8");
         } catch (MessagingException e) {

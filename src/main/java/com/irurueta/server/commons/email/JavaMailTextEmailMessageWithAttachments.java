@@ -95,13 +95,12 @@ public class JavaMailTextEmailMessageWithAttachments extends
      */    
     @Override
     protected void buildContent(MimeMessage message) throws EmailException {        
-        try{
+        try {
             
             //finally add multipart contents to mail message
             message.setContent(buildMultipart());            
             
-            //message.setText(getText());
-        }catch(MessagingException e){
+        } catch (MessagingException e) {
             throw new EmailException(e);
         }
     }  
@@ -113,13 +112,13 @@ public class JavaMailTextEmailMessageWithAttachments extends
      * @throws EmailException if building multipart fails.
      */
     private Multipart buildMultipart() throws EmailException{
-        try{
+        try {
             //create multipart. One part will be for text content, and remaining
             //parts will be for attachments
             Multipart multipart = new MimeMultipart();            
             //set text content in body part
             BodyPart messageBodyPart;
-            if(getText()!= null){            
+            if (getText()!= null) {
                 messageBodyPart = new MimeBodyPart();
                 messageBodyPart.setContent(getText(), 
                         "text/plain; charset=utf-8");
@@ -128,17 +127,19 @@ public class JavaMailTextEmailMessageWithAttachments extends
             
             //add attachments parts
             List<EmailAttachment> attachments = getAttachments();
-            if(attachments != null){
-                for(EmailAttachment attachment : attachments){
+            if (attachments != null) {
+                for (EmailAttachment attachment : attachments) {
                     //only add attachments with files
-                    if(attachment.getAttachment() == null) continue;
+                    if (attachment.getAttachment() == null) {
+                        continue;
+                    }
 
                     messageBodyPart = new MimeBodyPart();
-                    if(attachment.getName() != null){
+                    if (attachment.getName() != null) {
                         messageBodyPart.setFileName(attachment.getName());
                     }
                     messageBodyPart.setDisposition(Part.ATTACHMENT);
-                    if(attachment.getContentType() != null){
+                    if (attachment.getContentType() != null) {
                         messageBodyPart.addHeader("Content-Type", 
                                 attachment.getContentType());
                     }
@@ -148,7 +149,7 @@ public class JavaMailTextEmailMessageWithAttachments extends
                 }
             }
             return multipart;
-        }catch(MessagingException e){
+        } catch (MessagingException e) {
             throw new EmailException(e);
         }                        
     }

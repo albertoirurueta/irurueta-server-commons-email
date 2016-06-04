@@ -36,6 +36,16 @@ public class ApacheMailSender extends EmailSender<Email> {
      */
     public static final Logger LOGGER = Logger.getLogger(
             ApacheMailSender.class.getName());
+    
+    /**
+     * Minimum allowed port value to connect to SMTP server.
+     */
+    private static final int MIN_PORT_VALUE = 0;
+    
+    /**
+     * Maximum allowed port value to connect to SMTP server.
+     */
+    private static final int MAX_PORT_VALUE = 65535;    
 
     /**
      * Reference to singleton instance of this class.
@@ -75,16 +85,6 @@ public class ApacheMailSender extends EmailSender<Email> {
     private boolean mEnabled;
     
     /**
-     * Minimum allowed port value to connect to SMTP server.
-     */
-    private static final int MIN_PORT_VALUE = 0;
-    
-    /**
-     * Maximum allowed port value to connect to SMTP server.
-     */
-    private static final int MAX_PORT_VALUE = 65535;
-
-    /**
      * Constructor.
      * Loads mail configuration, and if it fails for some reason, mail sending
      * becomes disabled.
@@ -102,7 +102,9 @@ public class ApacheMailSender extends EmailSender<Email> {
         
             mEnabled = isValidConfiguration(mMailHost, mMailPort, 
                     mMailFromAddress) && cfg.isMailSendingEnabled();
-        } catch (ConfigurationException ignore) { }
+        } catch (ConfigurationException e) { 
+            mEnabled = false;
+        }
         
         if (mEnabled) { 
             LOGGER.log(Level.INFO, "Apache Email Sender enabled.");
@@ -117,9 +119,9 @@ public class ApacheMailSender extends EmailSender<Email> {
      * Returns or creates singleton instance of this class.
      * @return singleton of this class.
      */
-    public synchronized static ApacheMailSender getInstance() {
+    public static synchronized ApacheMailSender getInstance() {
         ApacheMailSender sender;
-        if(mReference == null || (sender = mReference.get()) == null) {
+        if (mReference == null || (sender = mReference.get()) == null) {
             sender = new ApacheMailSender();
             mReference = new SoftReference<>(sender);
         }
@@ -137,9 +139,9 @@ public class ApacheMailSender extends EmailSender<Email> {
     private boolean isValidConfiguration(String mailHost, int mailPort,
             //String mailId, String mailPassword, 
             String mailFromAddress) {
-        return (mailHost != null && mailPort >= MIN_PORT_VALUE && 
+        return mailHost != null && mailPort >= MIN_PORT_VALUE && 
                 mailPort <= MAX_PORT_VALUE && mailFromAddress != null && 
-                isValidEmailAddress(mailFromAddress));
+                isValidEmailAddress(mailFromAddress);
     }
     
     /**
@@ -200,12 +202,13 @@ public class ApacheMailSender extends EmailSender<Email> {
      */        
     @Override
     public String send(EmailMessage<Email> m) throws MailNotSentException {
-        EmailMessage m2 = m; //to avoid compilation errors regarding to casting
+        //to avoid compilation errors regarding to casting
+        EmailMessage m2 = m;
         if (m2 instanceof ApacheMailTextEmailMessage) {
             return sendMultiPartEmail((ApacheMailTextEmailMessage)m2);
-        } else if(m2 instanceof ApacheMailTextEmailMessageWithAttachments) {
+        } else if (m2 instanceof ApacheMailTextEmailMessageWithAttachments) {
             return sendMultiPartEmail((ApacheMailTextEmailMessageWithAttachments)m2);
-        } else if(m2 instanceof ApacheMailHtmlEmailMessage) {
+        } else if (m2 instanceof ApacheMailHtmlEmailMessage) {
             return sendHtmlEmail((ApacheMailHtmlEmailMessage)m2);
         } else {
             throw new MailNotSentException("Unsupported email type");
@@ -266,7 +269,7 @@ public class ApacheMailSender extends EmailSender<Email> {
      */
     private void internalSendApacheEmail(EmailMessage m, Email email) 
             throws NotSupportedException, EmailException, 
-            com.irurueta.server.commons.email.EmailException{
+            com.irurueta.server.commons.email.EmailException {
         email.setHostName(mMailHost);
         email.setSmtpPort(mMailPort);
         if (mMailId != null && !mMailId.isEmpty() && mMailPassword != null && 

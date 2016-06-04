@@ -130,7 +130,7 @@ public class MailConfigurationFactory extends
      * Factory method to create or return singleton instance.
      * @return factory singleton.
      */
-    public synchronized static MailConfigurationFactory getInstance() {
+    public static synchronized MailConfigurationFactory getInstance() {
         if (mSingleton == null) {
             mSingleton = new MailConfigurationFactory();
         }
@@ -146,12 +146,14 @@ public class MailConfigurationFactory extends
     @Override
     public MailConfiguration configure(Properties properties) 
             throws ConfigurationException {
-        if(mConfiguration != null) return mConfiguration;
+        if (mConfiguration != null) {
+            return mConfiguration;
+        }
         
-        if(properties == null){
+        if (properties == null) {
             //use default configuration
             mConfiguration = new MailConfigurationImpl();
-        }else{
+        } else {
             mConfiguration = new MailConfigurationImpl(properties);
         }
         

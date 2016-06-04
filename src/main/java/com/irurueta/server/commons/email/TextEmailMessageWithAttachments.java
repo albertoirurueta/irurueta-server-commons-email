@@ -257,7 +257,7 @@ public abstract class TextEmailMessageWithAttachments<E> extends
             String text, List<EmailAttachment> attachments, 
             EmailProvider provider) {
         
-        switch(provider){
+        switch (provider) {
             case AWS_MAIL:
                 return new AWSTextEmailMessageWithAttachments(subject, text, 
                         attachments);

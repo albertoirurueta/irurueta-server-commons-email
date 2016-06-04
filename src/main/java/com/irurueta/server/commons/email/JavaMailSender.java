@@ -34,6 +34,16 @@ import javax.mail.internet.MimeMessage;
 public class JavaMailSender extends EmailSender<MimeMessage> {
     
     /**
+     * Minimum allowed port value to connect to SMTP server.
+     */
+    private static final int MIN_PORT_VALUE = 0;
+    
+    /**
+     * Maximum allowed port value to connect to SMTP server.
+     */
+    private static final int MAX_PORT_VALUE = 65535;
+    
+    /**
      * Reference to singleton instance of this class.
      */
     private static SoftReference<JavaMailSender> mReference;
@@ -71,16 +81,6 @@ public class JavaMailSender extends EmailSender<MimeMessage> {
     private boolean mEnabled;
     
     /**
-     * Minimum allowed port value to connect to SMTP server.
-     */
-    private static final int MIN_PORT_VALUE = 0;
-    
-    /**
-     * Maximum allowed port value to connect to SMTP server.
-     */
-    private static final int MAX_PORT_VALUE = 65535;
-
-    /**
      * Constructor.
      * Loads mail configuration, and if it fails for some reason, mail sending
      * becomes disabled.
@@ -115,7 +115,7 @@ public class JavaMailSender extends EmailSender<MimeMessage> {
      * Returns or creates singleton instance of this class.
      * @return singleton of this class.
      */
-    public synchronized static JavaMailSender getInstance() {
+    public static synchronized JavaMailSender getInstance() {
         JavaMailSender sender;
         if(mReference == null || (sender = mReference.get()) == null) {
             sender = new JavaMailSender();
@@ -246,9 +246,9 @@ public class JavaMailSender extends EmailSender<MimeMessage> {
             
                 transport.close();
             
-            } catch(MessagingException ex) {
+            } catch (MessagingException ex) {
                 throw new MailNotSentException(ex);
-            } catch(Throwable t) {
+            } catch (Throwable t) {
                 throw new MailNotSentException(t);
             }
         }
