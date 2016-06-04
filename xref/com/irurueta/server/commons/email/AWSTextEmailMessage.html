@@ -82,8 +82,8 @@
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>          <strong class="jxr_keyword">if</strong> (getText() != <strong class="jxr_keyword">null</strong>) {
 <a class="jxr_linenumber" name="L75" href="#L75">75</a>              Body body = <strong class="jxr_keyword">new</strong> Body();
 <a class="jxr_linenumber" name="L76" href="#L76">76</a>              Content content = <strong class="jxr_keyword">new</strong> Content(getText());
-<a class="jxr_linenumber" name="L77" href="#L77">77</a>              content.setCharset(<span class="jxr_string">"UTF-8"</span>); <em class="jxr_comment">//set utf-8 enconding to support all </em>
-<a class="jxr_linenumber" name="L78" href="#L78">78</a>                                          <em class="jxr_comment">//languages</em>
+<a class="jxr_linenumber" name="L77" href="#L77">77</a>              <em class="jxr_comment">//set utf-8 enconding to support all languages            </em>
+<a class="jxr_linenumber" name="L78" href="#L78">78</a>              content.setCharset(<span class="jxr_string">"UTF-8"</span>); 
 <a class="jxr_linenumber" name="L79" href="#L79">79</a>          
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>              body.setText(content);
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>              message.setBody(body);

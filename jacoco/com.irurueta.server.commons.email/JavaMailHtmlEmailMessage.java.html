@@ -107,7 +107,7 @@ public class JavaMailHtmlEmailMessage extends HtmlEmailMessage&lt;MimeMessage&gt
 <span class="fc" id="L107">                boolean[] generated = processInlineAttachments();</span>
 
                 //set html content in another body part
-<span class="pc bpc" id="L110" title="1 of 2 branches missed.">                if (getHtmlContent()!= null) {</span>
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">                if (getHtmlContent() != null) {</span>
 <span class="fc" id="L111">                    messageBodyPart = new MimeBodyPart();</span>
 <span class="fc" id="L112">                    messageBodyPart.setContent(process(getHtmlContent(), generated), </span>
                             &quot;text/html; charset=utf-8&quot;);
@@ -182,15 +182,15 @@ public class JavaMailHtmlEmailMessage extends HtmlEmailMessage&lt;MimeMessage&gt
      */
     private boolean[] processInlineAttachments() {
 <span class="fc" id="L184">        List&lt;InlineAttachment&gt; attachments = getInlineAttachments();</span>
-<span class="pc bpc" id="L185" title="1 of 2 branches missed.">        if(attachments != null){</span>
+<span class="pc bpc" id="L185" title="1 of 2 branches missed.">        if (attachments != null) {</span>
 <span class="fc" id="L186">            boolean[] result = new boolean[attachments.size()];</span>
 <span class="fc" id="L187">            int counter = 0;</span>
             boolean isGeneratedId;
             String contentId;
-<span class="fc bfc" id="L190" title="All 2 branches covered.">            for(InlineAttachment attachment : attachments ){</span>
+<span class="fc bfc" id="L190" title="All 2 branches covered.">            for (InlineAttachment attachment : attachments ) {</span>
 <span class="fc bfc" id="L191" title="All 2 branches covered.">                isGeneratedId = attachment.getContentId() == null;</span>
 <span class="fc" id="L192">                result[counter] = isGeneratedId;</span>
-<span class="fc bfc" id="L193" title="All 2 branches covered.">                if(isGeneratedId){</span>
+<span class="fc bfc" id="L193" title="All 2 branches covered.">                if (isGeneratedId) {</span>
                     //generate a content id for this attachment
 <span class="fc" id="L195">                    contentId = &quot;inline-attachment&quot; + counter;</span>
 <span class="fc" id="L196">                    attachment.setContentId(contentId);</span>

@@ -74,8 +74,8 @@ public class AWSTextEmailMessage extends TextEmailMessage&lt;Message&gt; {
 <span class="pc bpc" id="L74" title="1 of 2 branches missed.">        if (getText() != null) {</span>
 <span class="fc" id="L75">            Body body = new Body();</span>
 <span class="fc" id="L76">            Content content = new Content(getText());</span>
-<span class="fc" id="L77">            content.setCharset(&quot;UTF-8&quot;); //set utf-8 enconding to support all </span>
-                                        //languages
+            //set utf-8 enconding to support all languages            
+<span class="fc" id="L78">            content.setCharset(&quot;UTF-8&quot;); </span>
         
 <span class="fc" id="L80">            body.setText(content);</span>
 <span class="fc" id="L81">            message.setBody(body);</span>

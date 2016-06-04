@@ -119,14 +119,14 @@
 <a class="jxr_linenumber" name="L111" href="#L111">111</a> <em class="jxr_javadoccomment">     * @return a multipart.</em>
 <a class="jxr_linenumber" name="L112" href="#L112">112</a> <em class="jxr_javadoccomment">     * @throws EmailException if building multipart fails.</em>
 <a class="jxr_linenumber" name="L113" href="#L113">113</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L114" href="#L114">114</a>     <strong class="jxr_keyword">private</strong> Multipart buildMultipart() <strong class="jxr_keyword">throws</strong> EmailException{
+<a class="jxr_linenumber" name="L114" href="#L114">114</a>     <strong class="jxr_keyword">private</strong> Multipart buildMultipart() <strong class="jxr_keyword">throws</strong> EmailException {
 <a class="jxr_linenumber" name="L115" href="#L115">115</a>         <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L116" href="#L116">116</a>             <em class="jxr_comment">//create multipart. One part will be for text content, and remaining</em>
 <a class="jxr_linenumber" name="L117" href="#L117">117</a>             <em class="jxr_comment">//parts will be for attachments</em>
 <a class="jxr_linenumber" name="L118" href="#L118">118</a>             Multipart multipart = <strong class="jxr_keyword">new</strong> MimeMultipart();            
 <a class="jxr_linenumber" name="L119" href="#L119">119</a>             <em class="jxr_comment">//set text content in body part</em>
 <a class="jxr_linenumber" name="L120" href="#L120">120</a>             BodyPart messageBodyPart;
-<a class="jxr_linenumber" name="L121" href="#L121">121</a>             <strong class="jxr_keyword">if</strong> (getText()!= <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="L121" href="#L121">121</a>             <strong class="jxr_keyword">if</strong> (getText() != <strong class="jxr_keyword">null</strong>) {
 <a class="jxr_linenumber" name="L122" href="#L122">122</a>                 messageBodyPart = <strong class="jxr_keyword">new</strong> MimeBodyPart();
 <a class="jxr_linenumber" name="L123" href="#L123">123</a>                 messageBodyPart.setContent(getText(), 
 <a class="jxr_linenumber" name="L124" href="#L124">124</a>                         <span class="jxr_string">"text/plain; charset=utf-8"</span>);
