@@ -195,7 +195,7 @@
 <a class="jxr_linenumber" name="L187" href="#L187">187</a>             <strong class="jxr_keyword">int</strong> counter = 0;
 <a class="jxr_linenumber" name="L188" href="#L188">188</a>             <strong class="jxr_keyword">boolean</strong> isGeneratedId;
 <a class="jxr_linenumber" name="L189" href="#L189">189</a>             String contentId;
-<a class="jxr_linenumber" name="L190" href="#L190">190</a>             <strong class="jxr_keyword">for</strong> (InlineAttachment attachment : attachments ) {
+<a class="jxr_linenumber" name="L190" href="#L190">190</a>             <strong class="jxr_keyword">for</strong> (InlineAttachment attachment : attachments) {
 <a class="jxr_linenumber" name="L191" href="#L191">191</a>                 isGeneratedId = attachment.getContentId() == <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L192" href="#L192">192</a>                 result[counter] = isGeneratedId;
 <a class="jxr_linenumber" name="L193" href="#L193">193</a>                 <strong class="jxr_keyword">if</strong> (isGeneratedId) {
@@ -218,7 +218,7 @@
 <a class="jxr_linenumber" name="L210" href="#L210">210</a> <em class="jxr_javadoccomment">     * placeholders and correctly inlined into content.</em>
 <a class="jxr_linenumber" name="L211" href="#L211">211</a> <em class="jxr_javadoccomment">     * @return resulting content.</em>
 <a class="jxr_linenumber" name="L212" href="#L212">212</a> <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L213" href="#L213">213</a>     <strong class="jxr_keyword">private</strong> String process(String htmlContent, <strong class="jxr_keyword">boolean</strong>[] generated){
+<a class="jxr_linenumber" name="L213" href="#L213">213</a>     <strong class="jxr_keyword">private</strong> String process(String htmlContent, <strong class="jxr_keyword">boolean</strong>[] generated) {
 <a class="jxr_linenumber" name="L214" href="#L214">214</a>         <em class="jxr_comment">//if no information about generated inline ids is available, then simply</em>
 <a class="jxr_linenumber" name="L215" href="#L215">215</a>         <em class="jxr_comment">//return input html content</em>
 <a class="jxr_linenumber" name="L216" href="#L216">216</a>         <strong class="jxr_keyword">if</strong> (generated == <strong class="jxr_keyword">null</strong>) {

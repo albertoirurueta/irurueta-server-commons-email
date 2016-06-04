@@ -223,7 +223,7 @@ public class MailConfigurationImpl implements MailConfiguration {
 <span class="fc" id="L223">            String mailPortProperty = properties.getProperty(</span>
                     MailConfigurationFactory.MAIL_PORT_PROPERTY);
 <span class="fc bfc" id="L225" title="All 2 branches covered.">            if (mailPortProperty != null) {</span>
-<span class="fc" id="L226">                mMailPort = Integer.valueOf(mailPortProperty);</span>
+<span class="fc" id="L226">                mMailPort = Integer.parseInt(mailPortProperty);</span>
             }
 <span class="fc" id="L228">            mailId = properties.getProperty(</span>
                     MailConfigurationFactory.MAIL_ID_PROPERTY);
@@ -244,8 +244,8 @@ public class MailConfigurationImpl implements MailConfiguration {
                     MailConfigurationFactory.AWS_MAIL_ACCESS_KEY_PROPERTY);
 <span class="fc" id="L245">            mAwsMailSecretKey = properties.getProperty(</span>
                     MailConfigurationFactory.AWS_MAIL_SECRET_KEY_PROPERTY);
-<span class="fc" id="L247">            mAwsMailCheckQuotaAfterMillis = Long.valueOf(properties.getProperty(</span>
-                    MailConfigurationFactory.
+<span class="fc" id="L247">            mAwsMailCheckQuotaAfterMillis = Long.parseLong(</span>
+                    properties.getProperty(MailConfigurationFactory.
                     AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS_PROPERTY, String.valueOf(
                     MailConfigurationFactory.
                     DEFAULT_AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS)));              

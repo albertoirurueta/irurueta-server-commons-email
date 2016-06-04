@@ -187,7 +187,7 @@ public class JavaMailHtmlEmailMessage extends HtmlEmailMessage&lt;MimeMessage&gt
 <span class="fc" id="L187">            int counter = 0;</span>
             boolean isGeneratedId;
             String contentId;
-<span class="fc bfc" id="L190" title="All 2 branches covered.">            for (InlineAttachment attachment : attachments ) {</span>
+<span class="fc bfc" id="L190" title="All 2 branches covered.">            for (InlineAttachment attachment : attachments) {</span>
 <span class="fc bfc" id="L191" title="All 2 branches covered.">                isGeneratedId = attachment.getContentId() == null;</span>
 <span class="fc" id="L192">                result[counter] = isGeneratedId;</span>
 <span class="fc bfc" id="L193" title="All 2 branches covered.">                if (isGeneratedId) {</span>
@@ -210,7 +210,7 @@ public class JavaMailHtmlEmailMessage extends HtmlEmailMessage&lt;MimeMessage&gt
      * placeholders and correctly inlined into content.
      * @return resulting content.
      */
-    private String process(String htmlContent, boolean[] generated){
+    private String process(String htmlContent, boolean[] generated) {
         //if no information about generated inline ids is available, then simply
         //return input html content
 <span class="pc bpc" id="L216" title="1 of 2 branches missed.">        if (generated == null) {</span>
