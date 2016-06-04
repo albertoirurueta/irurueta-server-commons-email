@@ -60,7 +60,7 @@ public class AWSMailSender extends
     /**
      * Number of milliseconds in a second.
      */
-    private static double MILLISECONDS_PER_SECOND = 1000.0;
+    private static final double MILLISECONDS_PER_SECOND = 1000.0;
     
     /**
      * Reference to singleton instance of this class.
@@ -166,10 +166,10 @@ public class AWSMailSender extends
     }
     
     /**
-     * Indicates if this mail sender controller is enabled
+     * Indicates if this mail sender controller is enabled.
      * @return true if enabled, false otherwise
      */
-    public boolean isEnabled(){
+    public boolean isEnabled() {
         return mEnabled;
     }    
     

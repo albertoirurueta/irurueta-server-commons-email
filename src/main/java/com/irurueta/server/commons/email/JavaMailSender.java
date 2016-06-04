@@ -98,7 +98,9 @@ public class JavaMailSender extends EmailSender<MimeMessage> {
         
             mEnabled = isValidConfiguration(mMailHost, mMailPort, 
                     mMailFromAddress) && cfg.isMailSendingEnabled();
-        } catch (ConfigurationException e) { }
+        } catch (ConfigurationException e) { 
+            mEnabled = false;
+        }
         
         if (mEnabled) { 
             Logger.getLogger(JavaMailSender.class.getName()).log(
@@ -117,7 +119,7 @@ public class JavaMailSender extends EmailSender<MimeMessage> {
      */
     public static synchronized JavaMailSender getInstance() {
         JavaMailSender sender;
-        if(mReference == null || (sender = mReference.get()) == null) {
+        if (mReference == null || (sender = mReference.get()) == null) {
             sender = new JavaMailSender();
             mReference = new SoftReference<>(sender);
         }
@@ -135,9 +137,9 @@ public class JavaMailSender extends EmailSender<MimeMessage> {
     private boolean isValidConfiguration(String mailHost, int mailPort,
             //String mailId, String mailPassword, 
             String mailFromAddress) {
-        return (mailHost != null && mailPort >= MIN_PORT_VALUE && 
+        return mailHost != null && mailPort >= MIN_PORT_VALUE && 
                 mailPort <= MAX_PORT_VALUE && mailFromAddress != null && 
-                isValidEmailAddress(mailFromAddress));
+                isValidEmailAddress(mailFromAddress);
     }
     
     /**
@@ -197,7 +199,8 @@ public class JavaMailSender extends EmailSender<MimeMessage> {
      * @throws MailNotSentException if mail couldn't be sent.
      */    
     @Override
-    public String send(EmailMessage<MimeMessage> m) throws MailNotSentException{
+    public String send(EmailMessage<MimeMessage> m) 
+            throws MailNotSentException {
         
         if (mEnabled) {
             Properties props = new Properties();

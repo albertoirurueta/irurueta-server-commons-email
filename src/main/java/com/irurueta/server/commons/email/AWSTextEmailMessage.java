@@ -74,8 +74,8 @@ public class AWSTextEmailMessage extends TextEmailMessage<Message> {
         if (getText() != null) {
             Body body = new Body();
             Content content = new Content(getText());
-            content.setCharset("UTF-8"); //set utf-8 enconding to support all 
-                                        //languages
+            //set utf-8 enconding to support all languages            
+            content.setCharset("UTF-8"); 
         
             body.setText(content);
             message.setBody(body);

@@ -249,7 +249,7 @@ public class MailConfigurationImpl implements MailConfiguration {
                     AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS_PROPERTY, String.valueOf(
                     MailConfigurationFactory.
                     DEFAULT_AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS)));              
-        } catch(Throwable t) {
+        } catch (Throwable t) {
             throw new ConfigurationException(t);
         }
     }

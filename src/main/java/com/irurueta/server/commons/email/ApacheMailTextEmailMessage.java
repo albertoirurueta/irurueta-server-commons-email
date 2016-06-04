@@ -58,7 +58,7 @@ public class ApacheMailTextEmailMessage extends
             throws com.irurueta.server.commons.email.EmailException {
         try {            
             content.setMsg(getText());
-        } catch(EmailException e) {
+        } catch (EmailException e) {
             throw new com.irurueta.server.commons.email.EmailException(e);
         }
     }    

@@ -107,7 +107,7 @@ public class JavaMailHtmlEmailMessage extends HtmlEmailMessage<MimeMessage> {
                 boolean[] generated = processInlineAttachments();
 
                 //set html content in another body part
-                if (getHtmlContent()!= null) {
+                if (getHtmlContent() != null) {
                     messageBodyPart = new MimeBodyPart();
                     messageBodyPart.setContent(process(getHtmlContent(), generated), 
                             "text/html; charset=utf-8");
@@ -182,15 +182,15 @@ public class JavaMailHtmlEmailMessage extends HtmlEmailMessage<MimeMessage> {
      */
     private boolean[] processInlineAttachments() {
         List<InlineAttachment> attachments = getInlineAttachments();
-        if(attachments != null){
+        if (attachments != null) {
             boolean[] result = new boolean[attachments.size()];
             int counter = 0;
             boolean isGeneratedId;
             String contentId;
-            for(InlineAttachment attachment : attachments ){
+            for (InlineAttachment attachment : attachments ) {
                 isGeneratedId = attachment.getContentId() == null;
                 result[counter] = isGeneratedId;
-                if(isGeneratedId){
+                if (isGeneratedId) {
                     //generate a content id for this attachment
                     contentId = "inline-attachment" + counter;
                     attachment.setContentId(contentId);

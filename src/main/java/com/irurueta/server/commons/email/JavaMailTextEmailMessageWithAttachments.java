@@ -111,14 +111,14 @@ public class JavaMailTextEmailMessageWithAttachments extends
      * @return a multipart.
      * @throws EmailException if building multipart fails.
      */
-    private Multipart buildMultipart() throws EmailException{
+    private Multipart buildMultipart() throws EmailException {
         try {
             //create multipart. One part will be for text content, and remaining
             //parts will be for attachments
             Multipart multipart = new MimeMultipart();            
             //set text content in body part
             BodyPart messageBodyPart;
-            if (getText()!= null) {
+            if (getText() != null) {
                 messageBodyPart = new MimeBodyPart();
                 messageBodyPart.setContent(getText(), 
                         "text/plain; charset=utf-8");
