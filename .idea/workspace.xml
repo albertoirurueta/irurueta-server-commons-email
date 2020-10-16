@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="1a33ec8e-798e-4ad8-8c84-a2679c42f1ed" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.tar.gz.enc" beforeDir="false" afterPath="$PROJECT_DIR$/config.tar.gz.enc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/build-info.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/build-info.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/email/AWSMailSenderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/email/AWSMailSenderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/email/ApacheMailSenderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/email/ApacheMailSenderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/email/JavaMailSenderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/email/JavaMailSenderTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +49,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -320,7 +322,7 @@
       <updated>1464637294631</updated>
       <workItem from="1602797742976" duration="3137000" />
       <workItem from="1602831797569" duration="901000" />
-      <workItem from="1602833310941" duration="1657000" />
+      <workItem from="1602833310941" duration="2956000" />
     </task>
     <servers />
   </component>
@@ -348,6 +350,10 @@
       <screen x="0" y="23" width="1536" height="937" />
     </state>
     <state width="1494" height="250" key="GridCell.Tab.0.right/0.23.1536.937@0.23.1536.937" timestamp="1602834047805" />
+    <state x="262" y="130" key="SettingsEditor" timestamp="1602836736310">
+      <screen x="0" y="23" width="1536" height="937" />
+    </state>
+    <state x="262" y="130" key="SettingsEditor/0.23.1536.937@0.23.1536.937" timestamp="1602836736310" />
     <state x="730" y="246" width="598" height="490" key="find.popup" timestamp="1602832165108">
       <screen x="0" y="23" width="1536" height="937" />
     </state>

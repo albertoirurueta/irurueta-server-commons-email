@@ -28,7 +28,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class JavaMailSenderTest {
-    
+
+    private static final long SLEEP = 1000;
+
     public static final String PROPS_FILE = "./java-mail.properties";
         
     public JavaMailSenderTest() { }
@@ -88,8 +90,7 @@ public class JavaMailSenderTest {
     }
     
     @Test
-    public void testSendMessage() throws ConfigurationException, 
-            MailNotSentException, NotSupportedException {
+    public void testSendMessage() throws MailNotSentException, NotSupportedException, InterruptedException {
         JavaMailSender mailSender = 
                 JavaMailSender.getInstance();
         
@@ -102,12 +103,13 @@ public class JavaMailSenderTest {
         
         
         assertNull(mailSender.send(message));
+
+        Thread.sleep(SLEEP);
     }    
     
     @Test
-    public void testSendMessageToMultipleRecipients() 
-            throws ConfigurationException, MailNotSentException, 
-            NotSupportedException {
+    public void testSendMessageToMultipleRecipients()
+            throws MailNotSentException, NotSupportedException, InterruptedException {
         JavaMailSender mailSender = 
                 JavaMailSender.getInstance();
         
@@ -120,12 +122,13 @@ public class JavaMailSenderTest {
         message.getTo().add("webmaster@irurueta.com");
         
         assertNull(mailSender.send(message));
+
+        Thread.sleep(SLEEP);
     }    
     
     @Test
-    public void testSendMessageWithNonEnglishCharacters() 
-            throws ConfigurationException, MailNotSentException, 
-            NotSupportedException{
+    public void testSendMessageWithNonEnglishCharacters()
+            throws MailNotSentException, NotSupportedException, InterruptedException {
         
         JavaMailSender mailSender =
                 JavaMailSender.getInstance();
@@ -138,12 +141,13 @@ public class JavaMailSenderTest {
         message.getTo().add("alberto@irurueta.com");
         
         assertNull(mailSender.send(message));
+
+        Thread.sleep(SLEEP);
     }
     
     @Test
-    public void testSendMessageWithAttachment() throws ConfigurationException, 
-            MailNotSentException,
-            NotSupportedException{
+    public void testSendMessageWithAttachment() throws MailNotSentException,
+            NotSupportedException, InterruptedException {
         JavaMailSender mailSender = 
                 JavaMailSender.getInstance();
         
@@ -163,12 +167,13 @@ public class JavaMailSenderTest {
         message.getAttachments().add(emailAttachment);        
         
         assertNull(mailSender.send(message));
+
+        Thread.sleep(SLEEP);
     }    
     
     @Test
-    public void testSendMessageToMultipleRecipientsWithAttachment() 
-            throws ConfigurationException, MailNotSentException, 
-            NotSupportedException {
+    public void testSendMessageToMultipleRecipientsWithAttachment()
+            throws MailNotSentException, NotSupportedException, InterruptedException {
         JavaMailSender mailSender = 
                 JavaMailSender.getInstance();
         
@@ -188,12 +193,13 @@ public class JavaMailSenderTest {
         message.getAttachments().add(emailAttachment);        
         
         assertNull(mailSender.send(message));
+
+        Thread.sleep(SLEEP);
     }    
     
     @Test
-    public void testSendMessageWithNonEnglishCharactersAndAttachment() 
-            throws ConfigurationException, MailNotSentException, 
-            NotSupportedException{
+    public void testSendMessageWithNonEnglishCharactersAndAttachment()
+            throws MailNotSentException, NotSupportedException, InterruptedException {
         
         JavaMailSender mailSender =
                 JavaMailSender.getInstance();
@@ -214,11 +220,13 @@ public class JavaMailSenderTest {
         message.getAttachments().add(emailAttachment);        
         
         assertNull(mailSender.send(message));
+
+        Thread.sleep(SLEEP);
     }
     
     @Test
-    public void testSendHtmlMessageWithEmailAndInlineAttachments() 
-            throws NotSupportedException, MailNotSentException{
+    public void testSendHtmlMessageWithEmailAndInlineAttachments()
+            throws NotSupportedException, MailNotSentException, InterruptedException {
         JavaMailSender mailSender =
                 JavaMailSender.getInstance();
 
@@ -254,6 +262,8 @@ public class JavaMailSenderTest {
         message.getEmailAttachments().add(emailAttachment);        
         
         assertNull(mailSender.send(message));
+
+        Thread.sleep(SLEEP);
     }
     
     @Test
