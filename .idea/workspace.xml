@@ -5,19 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a33ec8e-798e-4ad8-8c84-a2679c42f1ed" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/sonar-project.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_irurueta_irurueta_server_commons_1_0_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_irurueta_irurueta_server_commons_1_0_SNAPSHOT.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_11.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cd/before-deploy.sh" beforeDir="false" afterPath="$PROJECT_DIR$/cd/before-deploy.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cd/codesigning.asc.enc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cd/decode.sh" beforeDir="false" afterPath="$PROJECT_DIR$/cd/decode.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.tar.gz.enc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/irurueta-server-commons-email.iml" beforeDir="false" afterPath="$PROJECT_DIR$/irurueta-server-commons-email.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.tar.gz.enc" beforeDir="false" afterPath="$PROJECT_DIR$/config.tar.gz.enc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/build-info.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/build-info.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +55,7 @@
       <recent name="$PROJECT_DIR$/cd" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.JavaMailSenderTest">
+  <component name="RunManager" selected="JUnit.ApacheMailSenderTest">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
       <option name="DEPLOY" value="true" />
@@ -312,8 +302,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.JavaMailSenderTest" />
         <item itemvalue="JUnit.ApacheMailSenderTest" />
+        <item itemvalue="JUnit.JavaMailSenderTest" />
         <item itemvalue="JUnit.ApacheMailSenderTest.testSendMessage" />
         <item itemvalue="JUnit.All in irurueta-server-commons-email (1)" />
         <item itemvalue="JUnit.All in irurueta-server-commons-email" />
@@ -328,41 +318,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1464637294631</updated>
-      <workItem from="1602797742976" duration="2607000" />
+      <workItem from="1602797742976" duration="3137000" />
+      <workItem from="1602831797569" duration="901000" />
+      <workItem from="1602833310941" duration="1657000" />
     </task>
     <servers />
-  </component>
-  <component name="TestHistory">
-    <history-entry file="ApacheMailSenderTest - 2016.05.30 at 22h 04m 57s.xml">
-      <configuration name="ApacheMailSenderTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ApacheMailSenderTest - 2016.05.30 at 22h 07m 45s.xml">
-      <configuration name="ApacheMailSenderTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ApacheMailSenderTest - 2016.05.30 at 22h 10m 14s.xml">
-      <configuration name="ApacheMailSenderTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ApacheMailSenderTest - 2016.05.30 at 22h 14m 02s.xml">
-      <configuration name="ApacheMailSenderTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ApacheMailSenderTest - 2016.05.30 at 22h 16m 25s.xml">
-      <configuration name="ApacheMailSenderTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ApacheMailSenderTest - 2016.05.30 at 22h 22m 46s.xml">
-      <configuration name="ApacheMailSenderTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ApacheMailSenderTest - 2016.05.30 at 22h 26m 11s.xml">
-      <configuration name="ApacheMailSenderTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ApacheMailSenderTest_testSendMessage - 2016.05.30 at 21h 59m 36s.xml">
-      <configuration name="ApacheMailSenderTest.testSendMessage" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="JavaMailSenderTest - 2016.05.30 at 22h 08m 33s.xml">
-      <configuration name="JavaMailSenderTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="JavaMailSenderTest - 2016.05.30 at 22h 26m 57s.xml">
-      <configuration name="JavaMailSenderTest" configurationId="JUnit" />
-    </history-entry>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
@@ -372,10 +332,26 @@
       <screen x="0" y="23" width="1536" height="937" />
     </state>
     <state x="833" y="301" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1536.937@0.23.1536.937" timestamp="1602799815867" />
-    <state x="730" y="246" width="598" height="490" key="find.popup" timestamp="1602799125296">
+    <state width="1494" height="250" key="GridCell.Tab.0.bottom" timestamp="1602834047805">
       <screen x="0" y="23" width="1536" height="937" />
     </state>
-    <state x="730" y="246" width="598" height="490" key="find.popup/0.23.1536.937@0.23.1536.937" timestamp="1602799125296" />
+    <state width="1494" height="250" key="GridCell.Tab.0.bottom/0.23.1536.937@0.23.1536.937" timestamp="1602834047805" />
+    <state width="1494" height="250" key="GridCell.Tab.0.center" timestamp="1602834047805">
+      <screen x="0" y="23" width="1536" height="937" />
+    </state>
+    <state width="1494" height="250" key="GridCell.Tab.0.center/0.23.1536.937@0.23.1536.937" timestamp="1602834047805" />
+    <state width="1494" height="250" key="GridCell.Tab.0.left" timestamp="1602834047804">
+      <screen x="0" y="23" width="1536" height="937" />
+    </state>
+    <state width="1494" height="250" key="GridCell.Tab.0.left/0.23.1536.937@0.23.1536.937" timestamp="1602834047804" />
+    <state width="1494" height="250" key="GridCell.Tab.0.right" timestamp="1602834047805">
+      <screen x="0" y="23" width="1536" height="937" />
+    </state>
+    <state width="1494" height="250" key="GridCell.Tab.0.right/0.23.1536.937@0.23.1536.937" timestamp="1602834047805" />
+    <state x="730" y="246" width="598" height="490" key="find.popup" timestamp="1602832165108">
+      <screen x="0" y="23" width="1536" height="937" />
+    </state>
+    <state x="730" y="246" width="598" height="490" key="find.popup/0.23.1536.937@0.23.1536.937" timestamp="1602832165108" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
