@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1a33ec8e-798e-4ad8-8c84-a2679c42f1ed" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -323,7 +323,7 @@
       <updated>1464637294631</updated>
       <workItem from="1602797742976" duration="3137000" />
       <workItem from="1602831797569" duration="901000" />
-      <workItem from="1602833310941" duration="4218000" />
+      <workItem from="1602833310941" duration="4926000" />
     </task>
     <servers />
   </component>
@@ -345,30 +345,30 @@
       <screen x="0" y="23" width="1536" height="937" />
     </state>
     <state x="833" y="301" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1536.937@0.23.1536.937" timestamp="1602799815867" />
-    <state width="1494" height="250" key="GridCell.Tab.0.bottom" timestamp="1602838049112">
+    <state width="1494" height="250" key="GridCell.Tab.0.bottom" timestamp="1602839154866">
       <screen x="0" y="23" width="1536" height="937" />
     </state>
-    <state width="1494" height="250" key="GridCell.Tab.0.bottom/0.23.1536.937@0.23.1536.937" timestamp="1602838049112" />
-    <state width="1494" height="250" key="GridCell.Tab.0.center" timestamp="1602838049111">
+    <state width="1494" height="250" key="GridCell.Tab.0.bottom/0.23.1536.937@0.23.1536.937" timestamp="1602839154866" />
+    <state width="1494" height="250" key="GridCell.Tab.0.center" timestamp="1602839154865">
       <screen x="0" y="23" width="1536" height="937" />
     </state>
-    <state width="1494" height="250" key="GridCell.Tab.0.center/0.23.1536.937@0.23.1536.937" timestamp="1602838049111" />
-    <state width="1494" height="250" key="GridCell.Tab.0.left" timestamp="1602838049111">
+    <state width="1494" height="250" key="GridCell.Tab.0.center/0.23.1536.937@0.23.1536.937" timestamp="1602839154865" />
+    <state width="1494" height="250" key="GridCell.Tab.0.left" timestamp="1602839154865">
       <screen x="0" y="23" width="1536" height="937" />
     </state>
-    <state width="1494" height="250" key="GridCell.Tab.0.left/0.23.1536.937@0.23.1536.937" timestamp="1602838049111" />
-    <state width="1494" height="250" key="GridCell.Tab.0.right" timestamp="1602838049112">
+    <state width="1494" height="250" key="GridCell.Tab.0.left/0.23.1536.937@0.23.1536.937" timestamp="1602839154865" />
+    <state width="1494" height="250" key="GridCell.Tab.0.right" timestamp="1602839154865">
       <screen x="0" y="23" width="1536" height="937" />
     </state>
-    <state width="1494" height="250" key="GridCell.Tab.0.right/0.23.1536.937@0.23.1536.937" timestamp="1602838049112" />
+    <state width="1494" height="250" key="GridCell.Tab.0.right/0.23.1536.937@0.23.1536.937" timestamp="1602839154865" />
     <state x="262" y="123" key="SettingsEditor" timestamp="1602839151680">
       <screen x="0" y="23" width="1536" height="937" />
     </state>
     <state x="262" y="123" key="SettingsEditor/0.23.1536.937@0.23.1536.937" timestamp="1602839151680" />
-    <state x="730" y="246" width="598" height="490" key="find.popup" timestamp="1602832165108">
+    <state x="730" y="246" width="598" height="490" key="find.popup" timestamp="1602839764955">
       <screen x="0" y="23" width="1536" height="937" />
     </state>
-    <state x="730" y="246" width="598" height="490" key="find.popup/0.23.1536.937@0.23.1536.937" timestamp="1602832165108" />
+    <state x="730" y="246" width="598" height="490" key="find.popup/0.23.1536.937@0.23.1536.937" timestamp="1602839764955" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
