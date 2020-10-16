@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a33ec8e-798e-4ad8-8c84-a2679c42f1ed" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +47,9 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
   </component>
   <component name="RecentsManager">
@@ -319,7 +323,7 @@
       <updated>1464637294631</updated>
       <workItem from="1602797742976" duration="3137000" />
       <workItem from="1602831797569" duration="901000" />
-      <workItem from="1602833310941" duration="3718000" />
+      <workItem from="1602833310941" duration="4218000" />
     </task>
     <servers />
   </component>
@@ -357,10 +361,10 @@
       <screen x="0" y="23" width="1536" height="937" />
     </state>
     <state width="1494" height="250" key="GridCell.Tab.0.right/0.23.1536.937@0.23.1536.937" timestamp="1602838049112" />
-    <state x="262" y="130" key="SettingsEditor" timestamp="1602836736310">
+    <state x="262" y="123" key="SettingsEditor" timestamp="1602839151680">
       <screen x="0" y="23" width="1536" height="937" />
     </state>
-    <state x="262" y="130" key="SettingsEditor/0.23.1536.937@0.23.1536.937" timestamp="1602836736310" />
+    <state x="262" y="123" key="SettingsEditor/0.23.1536.937@0.23.1536.937" timestamp="1602839151680" />
     <state x="730" y="246" width="598" height="490" key="find.popup" timestamp="1602832165108">
       <screen x="0" y="23" width="1536" height="937" />
     </state>
