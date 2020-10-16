@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>AWSMailSender.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">AWSMailSender.java</span></div><h1>AWSMailSender.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AWSMailSender.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">AWSMailSender.java</span></div><h1>AWSMailSender.java</h1><pre class="source lang-java linenums">/**
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -45,7 +45,7 @@ public class AWSMailSender extends
      * Logger for this class.
      */
 <span class="fc" id="L47">    public static final Logger LOGGER = Logger.getLogger(</span>
-            AWSMailSender.class.getName());
+<span class="fc" id="L48">            AWSMailSender.class.getName());</span>
     
     /**
      * Milliseconds to wait to check quota.
@@ -113,13 +113,13 @@ public class AWSMailSender extends
         
         try {
 <span class="fc" id="L115">            MailConfiguration cfg = MailConfigurationFactory.getInstance().</span>
-                    configure();
+<span class="fc" id="L116">                    configure();</span>
 <span class="fc" id="L117">            mCredentials = cfg.getAWSMailCredentials();</span>
 <span class="fc" id="L118">            mMailFromAddress = cfg.getMailFromAddress();</span>
         
-<span class="pc bpc" id="L120" title="2 of 6 branches missed.">            mEnabled = mMailFromAddress != null &amp;&amp; </span>
-                    isValidEmailAddress(mMailFromAddress) &amp;&amp; 
-                    cfg.isMailSendingEnabled();
+<span class="fc bfc" id="L120" title="All 2 branches covered.">            mEnabled = mMailFromAddress != null &amp;&amp; </span>
+<span class="pc bpc" id="L121" title="1 of 2 branches missed.">                    isValidEmailAddress(mMailFromAddress) &amp;&amp; </span>
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">                    cfg.isMailSendingEnabled();</span>
 <span class="fc" id="L123">            mCheckQuotaAfterMillis = cfg.getAWSMailCheckQuotaAfterMillis();</span>
 <span class="fc" id="L124">            mLastSentMailTimestamp = 0;</span>
 <span class="fc" id="L125">            mWaitIntervalMillis = 0;  </span>
@@ -264,7 +264,7 @@ public class AWSMailSender extends
                 //wait to avoid throwttling exceptions to avoid making any
                 //further requests
 <span class="fc" id="L266">                this.wait(mWaitIntervalMillis);</span>
-<span class="pc" id="L267">            }</span>
+<span class="fc" id="L267">            }</span>
 <span class="nc" id="L268">        } catch (Throwable t) {</span>
 <span class="nc" id="L269">            throw new MailNotSentException(t);</span>
 <span class="fc" id="L270">        }      </span>
@@ -314,7 +314,7 @@ public class AWSMailSender extends
                 //m.buildMultipart().writeTo(outputStream);
 
 <span class="fc" id="L316">                RawMessage rawMessage = new RawMessage(ByteBuffer.wrap(</span>
-                        outputStream.toByteArray()));
+<span class="fc" id="L317">                        outputStream.toByteArray()));</span>
 
 <span class="fc" id="L319">                SendRawEmailRequest rawRequest = new SendRawEmailRequest(</span>
                         rawMessage);
@@ -329,7 +329,7 @@ public class AWSMailSender extends
                 //wait to avoid throwttling exceptions to avoid making any
                 //further requests
 <span class="fc" id="L331">                this.wait(mWaitIntervalMillis);</span>
-<span class="pc" id="L332">            }</span>
+<span class="fc" id="L332">            }</span>
 <span class="nc" id="L333">        } catch (Throwable t) {</span>
 <span class="nc" id="L334">            throw new MailNotSentException(t);</span>
 <span class="fc" id="L335">        }        </span>
@@ -349,7 +349,7 @@ public class AWSMailSender extends
 <span class="fc" id="L349">            GetSendQuotaResult quota = mClient.getSendQuota();</span>
             //updateinterval that we must wait between send requests
 <span class="fc" id="L351">            mWaitIntervalMillis = (long)Math.ceil(</span>
-                MILLISECONDS_PER_SECOND / quota.getMaxSendRate());
+<span class="fc" id="L352">                MILLISECONDS_PER_SECOND / quota.getMaxSendRate());</span>
         }        
 <span class="fc" id="L354">    }</span>
     
@@ -361,8 +361,8 @@ public class AWSMailSender extends
             //instantiate new client if needed
 <span class="fc bfc" id="L362" title="All 2 branches covered.">            if (areValidCredentials()) {</span>
 <span class="fc" id="L363">                mClient = new AmazonSimpleEmailServiceClient(</span>
-                    new BasicAWSCredentials(mCredentials.getAccessKey(), 
-                    mCredentials.getSecretKey()));
+<span class="fc" id="L364">                    new BasicAWSCredentials(mCredentials.getAccessKey(), </span>
+<span class="fc" id="L365">                    mCredentials.getSecretKey()));</span>
             } else {
                 //disabling mail sending
 <span class="fc" id="L368">                mEnabled = false;</span>
@@ -385,4 +385,4 @@ public class AWSMailSender extends
         }
     }
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

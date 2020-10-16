@@ -23,7 +23,7 @@ under the License.
     <link>https://github.com/albertoirurueta/irurueta-server-commons-email</link>
     <description>com.irurueta:irurueta-server-commons-email - Checkstyle report</description>
     <language>en-us</language>
-    <copyright>&#169;2016</copyright>
+    <copyright>&#169;2016 - 2020</copyright>
     <item>
       <title>File: 31,
              Errors: 7,
@@ -46,259 +46,7 @@ under the License.
           <tbody>
                           <tr>
                 <td>
-                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.build-info.properties">com/irurueta/server/commons/email/build-info.properties</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.EmailSender.java">com/irurueta/server/commons/email/EmailSender.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.TextEmailMessageWithAttachments.java">com/irurueta/server/commons/email/TextEmailMessageWithAttachments.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.EmailException.java">com/irurueta/server/commons/email/EmailException.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.MailConfiguration.java">com/irurueta/server/commons/email/MailConfiguration.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.AWSHtmlEmailMessage.java">com/irurueta/server/commons/email/AWSHtmlEmailMessage.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.EmailProvider.java">com/irurueta/server/commons/email/EmailProvider.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  3
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.JavaMailHtmlEmailMessage.java">com/irurueta/server/commons/email/JavaMailHtmlEmailMessage.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  1
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.JavaMailTextEmailMessage.java">com/irurueta/server/commons/email/JavaMailTextEmailMessage.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.JavaMailTextEmailMessageWithAttachments.java">com/irurueta/server/commons/email/JavaMailTextEmailMessageWithAttachments.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.AWSTextEmailMessageWithAttachments.java">com/irurueta/server/commons/email/AWSTextEmailMessageWithAttachments.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.EmailMessage.java">com/irurueta/server/commons/email/EmailMessage.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.MailConfigurationFactory.java">com/irurueta/server/commons/email/MailConfigurationFactory.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.MailNotSentException.java">com/irurueta/server/commons/email/MailNotSentException.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.TextEmailMessage.java">com/irurueta/server/commons/email/TextEmailMessage.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
                   <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.NotSupportedException.java">com/irurueta/server/commons/email/NotSupportedException.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.AWSTextEmailMessage.java">com/irurueta/server/commons/email/AWSTextEmailMessage.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  1
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.HtmlEmailMessage.java">com/irurueta/server/commons/email/HtmlEmailMessage.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.AWSEmailSenderCredentials.java">com/irurueta/server/commons/email/AWSEmailSenderCredentials.java</a>
                 </td>
                 <td>
                   0
@@ -326,6 +74,20 @@ under the License.
               </tr>
                           <tr>
                 <td>
+                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.MailConfigurationFactory.java">com/irurueta/server/commons/email/MailConfigurationFactory.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
                   <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.AWSMailSender.java">com/irurueta/server/commons/email/AWSMailSender.java</a>
                 </td>
                 <td>
@@ -340,7 +102,119 @@ under the License.
               </tr>
                           <tr>
                 <td>
+                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.JavaMailTextEmailMessageWithAttachments.java">com/irurueta/server/commons/email/JavaMailTextEmailMessageWithAttachments.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.JavaMailHtmlEmailMessage.java">com/irurueta/server/commons/email/JavaMailHtmlEmailMessage.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.JavaMailSender.java">com/irurueta/server/commons/email/JavaMailSender.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  2
+                </td>
+              </tr>
+                          <tr>
+                <td>
                   <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.ApacheMailHtmlEmailMessage.java">com/irurueta/server/commons/email/ApacheMailHtmlEmailMessage.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.EmailAttachment.java">com/irurueta/server/commons/email/EmailAttachment.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.ApacheMailSender.java">com/irurueta/server/commons/email/ApacheMailSender.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.EmailProvider.java">com/irurueta/server/commons/email/EmailProvider.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  3
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.AWSHtmlEmailMessage.java">com/irurueta/server/commons/email/AWSHtmlEmailMessage.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.EmailException.java">com/irurueta/server/commons/email/EmailException.java</a>
                 </td>
                 <td>
                   0
@@ -382,21 +256,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.JavaMailSender.java">com/irurueta/server/commons/email/JavaMailSender.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  2
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.EmailAttachment.java">com/irurueta/server/commons/email/EmailAttachment.java</a>
+                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.TextEmailMessage.java">com/irurueta/server/commons/email/TextEmailMessage.java</a>
                 </td>
                 <td>
                   0
@@ -410,7 +270,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.ApacheMailTextEmailMessage.java">com/irurueta/server/commons/email/ApacheMailTextEmailMessage.java</a>
+                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.MailConfiguration.java">com/irurueta/server/commons/email/MailConfiguration.java</a>
                 </td>
                 <td>
                   0
@@ -438,7 +298,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.package-info.java">com/irurueta/server/commons/email/package-info.java</a>
+                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.build-info.properties">com/irurueta/server/commons/email/build-info.properties</a>
                 </td>
                 <td>
                   0
@@ -466,7 +326,147 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.ApacheMailSender.java">com/irurueta/server/commons/email/ApacheMailSender.java</a>
+                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.AWSTextEmailMessageWithAttachments.java">com/irurueta/server/commons/email/AWSTextEmailMessageWithAttachments.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.HtmlEmailMessage.java">com/irurueta/server/commons/email/HtmlEmailMessage.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.AWSTextEmailMessage.java">com/irurueta/server/commons/email/AWSTextEmailMessage.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.AWSEmailSenderCredentials.java">com/irurueta/server/commons/email/AWSEmailSenderCredentials.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.JavaMailTextEmailMessage.java">com/irurueta/server/commons/email/JavaMailTextEmailMessage.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.EmailSender.java">com/irurueta/server/commons/email/EmailSender.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.package-info.java">com/irurueta/server/commons/email/package-info.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.TextEmailMessageWithAttachments.java">com/irurueta/server/commons/email/TextEmailMessageWithAttachments.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.ApacheMailTextEmailMessage.java">com/irurueta/server/commons/email/ApacheMailTextEmailMessage.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.MailNotSentException.java">com/irurueta/server/commons/email/MailNotSentException.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/albertoirurueta/irurueta-server-commons-email/checkstyle.html#com.irurueta.server.commons.email.EmailMessage.java">com/irurueta/server/commons/email/EmailMessage.java</a>
                 </td>
                 <td>
                   0
