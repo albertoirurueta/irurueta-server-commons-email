@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a33ec8e-798e-4ad8-8c84-a2679c42f1ed" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/email/AWSMailSenderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/email/AWSMailSenderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -319,7 +319,7 @@
       <updated>1464637294631</updated>
       <workItem from="1602797742976" duration="3137000" />
       <workItem from="1602831797569" duration="901000" />
-      <workItem from="1602833310941" duration="3447000" />
+      <workItem from="1602833310941" duration="3718000" />
     </task>
     <servers />
   </component>
