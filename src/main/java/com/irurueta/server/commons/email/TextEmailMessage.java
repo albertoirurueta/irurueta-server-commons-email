@@ -80,7 +80,7 @@ public abstract class TextEmailMessage<E> extends EmailMessage<E> {
      * @param sender class in charge of sending this email.
      * @return a textual email message.
      */
-    public static TextEmailMessage<?> create(final EmailSender<?> sender) {
+    public static TextEmailMessage<?> create(final EmailSender sender) {
         return create(sender.getProvider());
     }
 
@@ -103,7 +103,7 @@ public abstract class TextEmailMessage<E> extends EmailMessage<E> {
      * @return a textual email message.
      */
     public static TextEmailMessage<?> create(final String subject,
-                                             final EmailSender<?> sender) {
+                                             final EmailSender sender) {
         return create(subject, sender.getProvider());
     }
 
@@ -130,7 +130,7 @@ public abstract class TextEmailMessage<E> extends EmailMessage<E> {
      * @return a textual email message.
      */
     public static TextEmailMessage<?> create(final String subject, final String text,
-                                             final EmailSender<?> sender) {
+                                             final EmailSender sender) {
         return create(subject, text, sender.getProvider());
     }
 

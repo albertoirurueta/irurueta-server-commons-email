@@ -23,10 +23,8 @@ import java.util.regex.Pattern;
  * Base class in charge of sending emails.
  * This class is a singleton and an instance must be obtained using getInstance
  * and using current mail configuration.
- * @param <E> internal representation of an email. Depends on actual provider 
- * implementation.
  */
-public abstract class EmailSender<E> {
+public abstract class EmailSender {
 
     /**
      * Regular expression to validate emails.
@@ -39,7 +37,7 @@ public abstract class EmailSender<E> {
      * @return singleton instance.
      * @throws ConfigurationException if mail configuration fails.
      */
-    public static EmailSender<?> getInstance()
+    public static EmailSender getInstance()
             throws ConfigurationException {
         
         return getInstance(MailConfigurationFactory.getInstance().
@@ -51,7 +49,7 @@ public abstract class EmailSender<E> {
      * @param provider provider to use.
      * @return an email sender controller singleton.
      */
-    protected static EmailSender<?> getInstance(final EmailProvider provider) {
+    protected static EmailSender getInstance(final EmailProvider provider) {
         switch (provider) {
             case AWS_MAIL:
                 return AWSMailSender.getInstance();
@@ -98,8 +96,9 @@ public abstract class EmailSender<E> {
      * @param m email message to be sent.
      * @return id of message that has been sent.
      * @throws MailNotSentException if mail couldn't be sent.
+     * @throws InterruptedException if thread is interrupted.
      */
-    public abstract String send(final EmailMessage<E> m) throws MailNotSentException;
+    public abstract String send(final EmailMessage<?> m) throws MailNotSentException, InterruptedException;
     
     /**
      * Returns provider used by this email sender.

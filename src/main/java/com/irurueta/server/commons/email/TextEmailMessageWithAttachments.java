@@ -122,7 +122,7 @@ public abstract class TextEmailMessageWithAttachments<E> extends
      * @return a textual email message with attachments.
      */
     public static TextEmailMessageWithAttachments<?> create(
-            final EmailSender<?> sender) {
+            final EmailSender sender) {
         return create("", sender);
     }
 
@@ -147,7 +147,7 @@ public abstract class TextEmailMessageWithAttachments<E> extends
      * @return a textual email message with attachments.
      */
     public static TextEmailMessageWithAttachments<?> create(
-            final String subject, final EmailSender<?> sender) {
+            final String subject, final EmailSender sender) {
         return create(subject, "", sender);
     }
 
@@ -174,7 +174,7 @@ public abstract class TextEmailMessageWithAttachments<E> extends
      * @return a textual email message with attachments.
      */
     public static TextEmailMessageWithAttachments<?> create(
-            final String subject, final String text, final EmailSender<?> sender) {
+            final String subject, final String text, final EmailSender sender) {
         return create(subject, text, sender.getProvider());
     }
 
@@ -202,7 +202,7 @@ public abstract class TextEmailMessageWithAttachments<E> extends
      * @return a textual email message with attachments.
      */
     public static TextEmailMessageWithAttachments<?> create(
-            final List<EmailAttachment> attachments, final EmailSender<?> sender) {
+            final List<EmailAttachment> attachments, final EmailSender sender) {
         return create("", attachments, sender);
     }
 
@@ -229,7 +229,7 @@ public abstract class TextEmailMessageWithAttachments<E> extends
      * @return a textual email message with attachments.
      */
     public static TextEmailMessageWithAttachments<?> create(
-            final String subject, final List<EmailAttachment> attachments, final EmailSender<?> sender) {
+            final String subject, final List<EmailAttachment> attachments, final EmailSender sender) {
         return create(subject, "", attachments, sender);
     }
 
@@ -259,7 +259,7 @@ public abstract class TextEmailMessageWithAttachments<E> extends
      */
     public static TextEmailMessageWithAttachments<?> create(
             final String subject, final String text, final List<EmailAttachment> attachments,
-            final EmailSender<?> sender) {
+            final EmailSender sender) {
         return create(subject, text, attachments, sender.getProvider());
     }
 

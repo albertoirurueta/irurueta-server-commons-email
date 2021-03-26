@@ -39,8 +39,7 @@ import javax.mail.internet.MimeMessage;
 /**
  * Class to send emails using Amazon Web Services (AWS) SES.
  */
-public class AWSMailSender extends
-        EmailSender<Message> {
+public class AWSMailSender extends EmailSender {
 
     /**
      * Logger for this class.
@@ -200,16 +199,17 @@ public class AWSMailSender extends
      * @param m email message to be sent.
      * @return id of message that has been sent.
      * @throws MailNotSentException if mail couldn't be sent.
+     * @throws InterruptedException if thread is interrupted.
      */
     @Override
-    public String send(final EmailMessage<Message> m) throws MailNotSentException {
+    public String send(final EmailMessage<?> m) throws MailNotSentException, InterruptedException {
         // to avoid compilation errors because of casting
         if (m instanceof AWSTextEmailMessage) {
             return sendTextEmail((AWSTextEmailMessage) m);
-        } else if ((EmailMessage<?>) m instanceof AWSTextEmailMessageWithAttachments) {
-            return sendRawEmail((AWSTextEmailMessageWithAttachments) (EmailMessage<?>) m);
-        } else if ((EmailMessage<?>) m instanceof AWSHtmlEmailMessage) {
-            return sendRawEmail((AWSHtmlEmailMessage) (EmailMessage<?>) m);
+        } else if (m instanceof AWSTextEmailMessageWithAttachments) {
+            return sendRawEmail((AWSTextEmailMessageWithAttachments) m);
+        } else if (m instanceof AWSHtmlEmailMessage) {
+            return sendRawEmail((AWSHtmlEmailMessage) m);
         } else {
             throw new MailNotSentException("Unsupported email type");
         }
@@ -231,9 +231,10 @@ public class AWSMailSender extends
      * @param m email message to be sent.
      * @return id of message that has been sent.
      * @throws MailNotSentException if mail couldn't be sent.
+     * @throws InterruptedException if thread is interrupted.
      */
     private String sendTextEmail(final AWSTextEmailMessage m)
-            throws MailNotSentException {
+            throws MailNotSentException, InterruptedException {
         final String messageId;
         final long currentTimestamp = System.currentTimeMillis();
         prepareClient();
@@ -276,6 +277,8 @@ public class AWSMailSender extends
                     wait(mWaitIntervalMillis);
                 }
             }
+        } catch (final InterruptedException e) {
+            throw e;
         } catch (final Exception e) {
             throw new MailNotSentException(e);
         }
@@ -289,9 +292,10 @@ public class AWSMailSender extends
      * @param m email message to be sent.
      * @return id of message that has been sent.
      * @throws MailNotSentException if mail couldn't be sent.
+     * @throws InterruptedException if thread is interrupted.
      */
     private String sendRawEmail(final EmailMessage<MimeMessage> m)
-            throws MailNotSentException {
+            throws MailNotSentException, InterruptedException {
 
         final String messageId;
         final long currentTimestamp = System.currentTimeMillis();
@@ -344,6 +348,8 @@ public class AWSMailSender extends
                     wait(mWaitIntervalMillis);
                 }
             }
+        } catch (final InterruptedException e) {
+            throw e;
         } catch (final Exception e) {
             throw new MailNotSentException(e);
         }

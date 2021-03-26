@@ -31,7 +31,7 @@ import java.util.logging.Logger;
 /**
  * Class to send emails using JavaMail.
  */
-public class JavaMailSender extends EmailSender<MimeMessage> {
+public class JavaMailSender extends EmailSender {
 
     /**
      * Minimum allowed port value to connect to SMTP server.
@@ -214,7 +214,7 @@ public class JavaMailSender extends EmailSender<MimeMessage> {
      * @throws MailNotSentException if mail couldn't be sent.
      */
     @Override
-    public String send(final EmailMessage<MimeMessage> m)
+    public String send(final EmailMessage<?> m)
             throws MailNotSentException {
 
         if (mEnabled) {
@@ -254,7 +254,9 @@ public class JavaMailSender extends EmailSender<MimeMessage> {
                     message.setSubject(m.getSubject(), "utf-8");
                 }
                 // sets content of message
-                m.buildContent(message);
+                //noinspection unchecked
+                final EmailMessage<MimeMessage> m2 = (EmailMessage<MimeMessage>) m;
+                m2.buildContent(message);
                 // set date when mail was sent
                 message.setSentDate(new Date());
 

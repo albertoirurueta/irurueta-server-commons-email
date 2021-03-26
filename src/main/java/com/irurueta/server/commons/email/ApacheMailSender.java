@@ -29,7 +29,7 @@ import java.util.logging.Logger;
 /**
  * Class to send emails using Apache mail.
  */
-public class ApacheMailSender extends EmailSender<Email> {
+public class ApacheMailSender extends EmailSender {
 
     /**
      * Logger for this class.
@@ -216,19 +216,19 @@ public class ApacheMailSender extends EmailSender<Email> {
      * @throws MailNotSentException if mail couldn't be sent.
      */
     @Override
-    public String send(final EmailMessage<Email> m) throws MailNotSentException {
+    public String send(final EmailMessage<?> m) throws MailNotSentException {
         if (!mEnabled) {
             //don't send message if not enabled
             return null;
         }
 
         //to avoid compilation errors regarding to casting
-        if ((EmailMessage<?>) m instanceof ApacheMailTextEmailMessage) {
-            return sendMultiPartEmail((ApacheMailTextEmailMessage) (EmailMessage<?>) m);
-        } else if ((EmailMessage<?>) m instanceof ApacheMailTextEmailMessageWithAttachments) {
-            return sendMultiPartEmail((ApacheMailTextEmailMessageWithAttachments) (EmailMessage<?>) m);
-        } else if ((EmailMessage<?>) m instanceof ApacheMailHtmlEmailMessage) {
-            return sendHtmlEmail((ApacheMailHtmlEmailMessage) (EmailMessage<?>) m);
+        if (m instanceof ApacheMailTextEmailMessage) {
+            return sendMultiPartEmail((ApacheMailTextEmailMessage) m);
+        } else if (m instanceof ApacheMailTextEmailMessageWithAttachments) {
+            return sendMultiPartEmail((ApacheMailTextEmailMessageWithAttachments) m);
+        } else if (m instanceof ApacheMailHtmlEmailMessage) {
+            return sendHtmlEmail((ApacheMailHtmlEmailMessage) m);
         } else {
             throw new MailNotSentException("Unsupported email type");
         }

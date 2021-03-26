@@ -16,7 +16,6 @@
 package com.irurueta.server.commons.email;
 
 import com.irurueta.server.commons.configuration.ConfigurationException;
-import org.apache.commons.mail.Email;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -89,9 +88,7 @@ public class ApacheMailSenderTest {
                 mailSender);
         message.getTo().add("alberto@irurueta.com");
 
-
-        //noinspection unchecked
-        assertNull(mailSender.send((EmailMessage<Email>) message));
+        assertNull(mailSender.send(message));
 
         Thread.sleep(SLEEP);
     }
@@ -111,8 +108,7 @@ public class ApacheMailSenderTest {
         message.getTo().add("alberto@irurueta.com");
         message.getTo().add("webmaster@irurueta.com");
 
-        //noinspection unchecked
-        assertNull(mailSender.send((EmailMessage<Email>) message));
+        assertNull(mailSender.send(message));
 
         Thread.sleep(SLEEP);
     }
@@ -132,8 +128,7 @@ public class ApacheMailSenderTest {
                 mailSender);
         message.getTo().add("alberto@irurueta.com");
 
-        //noinspection unchecked
-        assertNull(mailSender.send((EmailMessage<Email>) message));
+        assertNull(mailSender.send(message));
 
         Thread.sleep(SLEEP);
     }
@@ -159,8 +154,7 @@ public class ApacheMailSenderTest {
 
         message.getAttachments().add(emailAttachment);
 
-        //noinspection unchecked
-        assertNull(mailSender.send((EmailMessage<Email>) message));
+        assertNull(mailSender.send(message));
 
         Thread.sleep(SLEEP);
     }
@@ -186,8 +180,7 @@ public class ApacheMailSenderTest {
 
         message.getAttachments().add(emailAttachment);
 
-        //noinspection unchecked
-        assertNull(mailSender.send((EmailMessage<Email>) message));
+        assertNull(mailSender.send(message));
 
         Thread.sleep(SLEEP);
     }
@@ -214,8 +207,7 @@ public class ApacheMailSenderTest {
 
         message.getAttachments().add(emailAttachment);
 
-        //noinspection unchecked
-        assertNull(mailSender.send((EmailMessage<Email>) message));
+        assertNull(mailSender.send(message));
 
         Thread.sleep(SLEEP);
     }
@@ -257,8 +249,7 @@ public class ApacheMailSenderTest {
                 "image.jpg", "image/jpg");
         message.getEmailAttachments().add(emailAttachment);
 
-        //noinspection unchecked
-        assertNull(mailSender.send((EmailMessage<Email>) message));
+        assertNull(mailSender.send(message));
 
         Thread.sleep(SLEEP);
     }
@@ -281,8 +272,7 @@ public class ApacheMailSenderTest {
         message.getTo().add("alberto@irurueta.com");
         message.getTo().add("webmaster@irurueta.com");
 
-        //noinspection unchecked
-        assertNull(mailSender.send((EmailMessage<Email>) message));
+        assertNull(mailSender.send(message));
 
 
         // reset configuration

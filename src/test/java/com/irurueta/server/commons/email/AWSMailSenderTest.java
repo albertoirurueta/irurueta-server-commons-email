@@ -15,7 +15,6 @@
  */
 package com.irurueta.server.commons.email;
 
-import com.amazonaws.services.simpleemail.model.Message;
 import com.irurueta.server.commons.configuration.ConfigurationException;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -113,9 +112,7 @@ public class AWSMailSenderTest {
                 mailSender);
         message.getTo().add("alberto@irurueta.com");
 
-
-        //noinspection unchecked
-        assertNotNull(mailSender.send((EmailMessage<Message>) message));
+        assertNotNull(mailSender.send(message));
 
         Thread.sleep(SLEEP);
     }
@@ -134,8 +131,7 @@ public class AWSMailSenderTest {
         message.getTo().add("alberto@irurueta.com");
         message.getTo().add("webmaster@irurueta.com");
 
-        //noinspection unchecked
-        assertNotNull(mailSender.send((EmailMessage<Message>) message));
+        assertNotNull(mailSender.send(message));
 
         Thread.sleep(SLEEP);
     }
@@ -154,8 +150,7 @@ public class AWSMailSenderTest {
                 mailSender);
         message.getTo().add("alberto@irurueta.com");
 
-        //noinspection unchecked
-        assertNotNull(mailSender.send((EmailMessage<Message>) message));
+        assertNotNull(mailSender.send(message));
 
         Thread.sleep(SLEEP);
     }
@@ -179,8 +174,7 @@ public class AWSMailSenderTest {
 
         message.getAttachments().add(emailAttachment);
 
-        //noinspection unchecked
-        assertNotNull(mailSender.send((EmailMessage<Message>) message));
+        assertNotNull(mailSender.send(message));
 
         Thread.sleep(SLEEP);
     }
@@ -206,8 +200,7 @@ public class AWSMailSenderTest {
 
         message.getAttachments().add(emailAttachment);
 
-        //noinspection unchecked
-        assertNotNull(mailSender.send((EmailMessage<Message>) message));
+        assertNotNull(mailSender.send(message));
 
         Thread.sleep(SLEEP);
     }
@@ -232,8 +225,7 @@ public class AWSMailSenderTest {
 
         message.getAttachments().add(emailAttachment);
 
-        //noinspection unchecked
-        assertNotNull(mailSender.send((EmailMessage<Message>) message));
+        assertNotNull(mailSender.send(message));
 
         Thread.sleep(SLEEP);
     }
@@ -274,15 +266,14 @@ public class AWSMailSenderTest {
                 "image.jpg", "image/jpg");
         message.getEmailAttachments().add(emailAttachment);
 
-        //noinspection unchecked
-        assertNotNull(mailSender.send((EmailMessage<Message>) message));
+        assertNotNull(mailSender.send(message));
 
         Thread.sleep(SLEEP);
     }
 
     @Test
     public void testSendDisabled() throws ConfigurationException, IOException,
-            NotSupportedException, MailNotSentException {
+            NotSupportedException, MailNotSentException, InterruptedException {
         Properties props = new Properties();
         MailConfigurationFactory.getInstance().reconfigure(props);
 
@@ -297,8 +288,7 @@ public class AWSMailSenderTest {
         message.getTo().add("alberto@irurueta.com");
         message.getTo().add("webmaster@irurueta.com");
 
-        //noinspection unchecked
-        assertNull(mailSender.send((EmailMessage<Message>) message));
+        assertNull(mailSender.send(message));
 
 
         // reset configuration

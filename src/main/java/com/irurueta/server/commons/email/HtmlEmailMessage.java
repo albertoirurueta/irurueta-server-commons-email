@@ -208,7 +208,7 @@ public abstract class HtmlEmailMessage<E> extends EmailMessage<E> {
      * @param sender class in charge of sending this email.
      * @return an HTML email message.
      */
-    public static HtmlEmailMessage<?> create(final EmailSender<?> sender) {
+    public static HtmlEmailMessage<?> create(final EmailSender sender) {
         return create(sender.getProvider());
     }
 
@@ -231,7 +231,7 @@ public abstract class HtmlEmailMessage<E> extends EmailMessage<E> {
      * @return an HTML email message.
      */
     public static HtmlEmailMessage<?> create(final String subject,
-                                             final EmailSender<?> sender) {
+                                             final EmailSender sender) {
         return create(subject, sender.getProvider());
     }
 
@@ -258,7 +258,7 @@ public abstract class HtmlEmailMessage<E> extends EmailMessage<E> {
      * @return an HTML email message.
      */
     public static HtmlEmailMessage<?> create(final String subject, final String htmlContent,
-                                             final EmailSender<?> sender) {
+                                             final EmailSender sender) {
         return create(subject, htmlContent, sender.getProvider());
     }
 

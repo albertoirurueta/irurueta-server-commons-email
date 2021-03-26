@@ -5,7 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a33ec8e-798e-4ad8-8c84-a2679c42f1ed" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/AWSMailSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/AWSMailSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/ApacheMailSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/ApacheMailSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/EmailSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/EmailSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/HtmlEmailMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/HtmlEmailMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/JavaMailSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/JavaMailSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/TextEmailMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/TextEmailMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/TextEmailMessageWithAttachments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/TextEmailMessageWithAttachments.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/build-info.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/build-info.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/email/AWSMailSenderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/email/AWSMailSenderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/email/ApacheMailSenderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/email/ApacheMailSenderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/email/JavaMailSenderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/email/JavaMailSenderTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +69,7 @@
       <recent name="$PROJECT_DIR$/cd" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ApacheMailSenderTest">
+  <component name="RunManager" selected="JUnit.ApacheMailHtmlEmailMessageTest">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
       <option name="DEPLOY" value="true" />
@@ -179,10 +190,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in irurueta-server-commons-email" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ApacheMailHtmlEmailMessageTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="irurueta-server-commons-email" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.irurueta.server.commons.email.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.irurueta.server.commons.email" />
+      <option name="MAIN_CLASS_NAME" value="com.irurueta.server.commons.email.ApacheMailHtmlEmailMessageTest" />
+      <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -297,19 +315,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.All in irurueta-server-commons-email" />
       <item itemvalue="JUnit.All in irurueta-server-commons-email (1)" />
       <item itemvalue="JUnit.ApacheMailSenderTest" />
       <item itemvalue="JUnit.ApacheMailSenderTest.testSendMessage" />
       <item itemvalue="JUnit.JavaMailSenderTest" />
+      <item itemvalue="JUnit.ApacheMailHtmlEmailMessageTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ApacheMailHtmlEmailMessageTest" />
         <item itemvalue="JUnit.ApacheMailSenderTest" />
         <item itemvalue="JUnit.JavaMailSenderTest" />
         <item itemvalue="JUnit.ApacheMailSenderTest.testSendMessage" />
         <item itemvalue="JUnit.All in irurueta-server-commons-email (1)" />
-        <item itemvalue="JUnit.All in irurueta-server-commons-email" />
       </list>
     </recent_temporary>
   </component>
@@ -325,7 +343,7 @@
       <workItem from="1602831797569" duration="901000" />
       <workItem from="1602833310941" duration="5710000" />
       <workItem from="1602947366171" duration="545000" />
-      <workItem from="1616788319304" duration="9533000" />
+      <workItem from="1616788319304" duration="11393000" />
     </task>
     <servers />
   </component>
