@@ -181,45 +181,6 @@ com.irurueta:irurueta-server-commons-email
 <th>File</th>
 <th>Line</th></tr>
 <tr class="b">
-<td>com/irurueta/server/commons/email/JavaMailHtmlEmailMessage.java</td>
-<td><a href="./xref/com/irurueta/server/commons/email/JavaMailHtmlEmailMessage.html#L154">154</a></td></tr>
-<tr class="a">
-<td>com/irurueta/server/commons/email/JavaMailTextEmailMessageWithAttachments.java</td>
-<td><a href="./xref/com/irurueta/server/commons/email/JavaMailTextEmailMessageWithAttachments.html#L135">135</a></td></tr>
-<tr class="b"><td colspan='2'>
-<div>
-<pre>            final List&lt;EmailAttachment&gt; attachments = getEmailAttachments();
-            if (attachments != null) {
-                for (final EmailAttachment attachment : attachments) {
-                    // only add attachments with files
-                    if (attachment.getAttachment() == null) {
-                        continue;
-                    }
-
-                    messageBodyPart = new MimeBodyPart();
-                    if (attachment.getName() != null) {
-                        messageBodyPart.setFileName(attachment.getName());
-                    }
-                    messageBodyPart.setDisposition(Part.ATTACHMENT);
-                    if (attachment.getContentType() != null) {
-                        messageBodyPart.addHeader(&quot;Content-Type&quot;,
-                                attachment.getContentType());
-                    }
-                    messageBodyPart.setDataHandler(new DataHandler(
-                            new FileDataSource(attachment.getAttachment())));
-                    multipart.addBodyPart(messageBodyPart);
-                }
-            }
-            return multipart;
-        } catch (final MessagingException e) {
-            throw new EmailException(e);
-        }
-    }</pre></div></td></tr></table>
-<table border="0" class="bodyTable">
-<tr class="a">
-<th>File</th>
-<th>Line</th></tr>
-<tr class="b">
 <td>com/irurueta/server/commons/email/ApacheMailSender.java</td>
 <td><a href="./xref/com/irurueta/server/commons/email/ApacheMailSender.html#L126">126</a></td></tr>
 <tr class="a">
@@ -320,7 +281,47 @@ com.irurueta:irurueta-server-commons-email
      * @throws MailNotSentException if mail couldn't be sent.
      */
     @Override
-    public String send(final EmailMessage&lt;Email&gt; m) throws MailNotSentException {</pre></div></td></tr></table></div>
+    public String send(final EmailMessage&lt;?&gt; m) throws MailNotSentException {
+        if (!mEnabled) {</pre></div></td></tr></table>
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>File</th>
+<th>Line</th></tr>
+<tr class="b">
+<td>com/irurueta/server/commons/email/JavaMailHtmlEmailMessage.java</td>
+<td><a href="./xref/com/irurueta/server/commons/email/JavaMailHtmlEmailMessage.html#L154">154</a></td></tr>
+<tr class="a">
+<td>com/irurueta/server/commons/email/JavaMailTextEmailMessageWithAttachments.java</td>
+<td><a href="./xref/com/irurueta/server/commons/email/JavaMailTextEmailMessageWithAttachments.html#L135">135</a></td></tr>
+<tr class="b"><td colspan='2'>
+<div>
+<pre>            final List&lt;EmailAttachment&gt; attachments = getEmailAttachments();
+            if (attachments != null) {
+                for (final EmailAttachment attachment : attachments) {
+                    // only add attachments with files
+                    if (attachment.getAttachment() == null) {
+                        continue;
+                    }
+
+                    messageBodyPart = new MimeBodyPart();
+                    if (attachment.getName() != null) {
+                        messageBodyPart.setFileName(attachment.getName());
+                    }
+                    messageBodyPart.setDisposition(Part.ATTACHMENT);
+                    if (attachment.getContentType() != null) {
+                        messageBodyPart.addHeader(&quot;Content-Type&quot;,
+                                attachment.getContentType());
+                    }
+                    messageBodyPart.setDataHandler(new DataHandler(
+                            new FileDataSource(attachment.getAttachment())));
+                    multipart.addBodyPart(messageBodyPart);
+                }
+            }
+            return multipart;
+        } catch (final MessagingException e) {
+            throw new EmailException(e);
+        }
+    }</pre></div></td></tr></table></div>
       </div>
     </div>
     <div class="clear">

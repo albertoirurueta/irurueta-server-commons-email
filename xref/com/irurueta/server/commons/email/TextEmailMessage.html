@@ -88,7 +88,7 @@
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>  <em class="jxr_javadoccomment">     * @param sender class in charge of sending this email.</em>
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>  <em class="jxr_javadoccomment">     * @return a textual email message.</em>
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="L83" href="#L83">83</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> TextEmailMessage&lt;?&gt; create(<strong class="jxr_keyword">final</strong> EmailSender&lt;?&gt; sender) {
+<a class="jxr_linenumber" name="L83" href="#L83">83</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> TextEmailMessage&lt;?&gt; create(<strong class="jxr_keyword">final</strong> <a href="../../../../../com/irurueta/server/commons/email/EmailSender.html">EmailSender</a> sender) {
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>          <strong class="jxr_keyword">return</strong> create(sender.getProvider());
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>      }
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>  
@@ -111,7 +111,7 @@
 <a class="jxr_linenumber" name="L103" href="#L103">103</a> <em class="jxr_javadoccomment">     * @return a textual email message.</em>
 <a class="jxr_linenumber" name="L104" href="#L104">104</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L105" href="#L105">105</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> TextEmailMessage&lt;?&gt; create(<strong class="jxr_keyword">final</strong> String subject,
-<a class="jxr_linenumber" name="L106" href="#L106">106</a>                                              <strong class="jxr_keyword">final</strong> EmailSender&lt;?&gt; sender) {
+<a class="jxr_linenumber" name="L106" href="#L106">106</a>                                              <strong class="jxr_keyword">final</strong> <a href="../../../../../com/irurueta/server/commons/email/EmailSender.html">EmailSender</a> sender) {
 <a class="jxr_linenumber" name="L107" href="#L107">107</a>         <strong class="jxr_keyword">return</strong> create(subject, sender.getProvider());
 <a class="jxr_linenumber" name="L108" href="#L108">108</a>     }
 <a class="jxr_linenumber" name="L109" href="#L109">109</a> 
@@ -138,7 +138,7 @@
 <a class="jxr_linenumber" name="L130" href="#L130">130</a> <em class="jxr_javadoccomment">     * @return a textual email message.</em>
 <a class="jxr_linenumber" name="L131" href="#L131">131</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L132" href="#L132">132</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> TextEmailMessage&lt;?&gt; create(<strong class="jxr_keyword">final</strong> String subject, <strong class="jxr_keyword">final</strong> String text,
-<a class="jxr_linenumber" name="L133" href="#L133">133</a>                                              <strong class="jxr_keyword">final</strong> EmailSender&lt;?&gt; sender) {
+<a class="jxr_linenumber" name="L133" href="#L133">133</a>                                              <strong class="jxr_keyword">final</strong> <a href="../../../../../com/irurueta/server/commons/email/EmailSender.html">EmailSender</a> sender) {
 <a class="jxr_linenumber" name="L134" href="#L134">134</a>         <strong class="jxr_keyword">return</strong> create(subject, text, sender.getProvider());
 <a class="jxr_linenumber" name="L135" href="#L135">135</a>     }
 <a class="jxr_linenumber" name="L136" href="#L136">136</a> 

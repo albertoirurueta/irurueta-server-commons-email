@@ -23,10 +23,8 @@ import java.util.regex.Pattern;
  * Base class in charge of sending emails.
  * This class is a singleton and an instance must be obtained using getInstance
  * and using current mail configuration.
- * @param &lt;E&gt; internal representation of an email. Depends on actual provider 
- * implementation.
  */
-<span class="fc" id="L29">public abstract class EmailSender&lt;E&gt; {</span>
+<span class="fc" id="L27">public abstract class EmailSender {</span>
 
     /**
      * Regular expression to validate emails.
@@ -39,11 +37,11 @@ import java.util.regex.Pattern;
      * @return singleton instance.
      * @throws ConfigurationException if mail configuration fails.
      */
-    public static EmailSender&lt;?&gt; getInstance()
+    public static EmailSender getInstance()
             throws ConfigurationException {
         
-<span class="fc" id="L45">        return getInstance(MailConfigurationFactory.getInstance().</span>
-<span class="fc" id="L46">                configure().getProvider());</span>
+<span class="fc" id="L43">        return getInstance(MailConfigurationFactory.getInstance().</span>
+<span class="fc" id="L44">                configure().getProvider());</span>
     }
     
     /**
@@ -51,15 +49,15 @@ import java.util.regex.Pattern;
      * @param provider provider to use.
      * @return an email sender controller singleton.
      */
-    protected static EmailSender&lt;?&gt; getInstance(final EmailProvider provider) {
-<span class="fc bfc" id="L55" title="All 3 branches covered.">        switch (provider) {</span>
+    protected static EmailSender getInstance(final EmailProvider provider) {
+<span class="fc bfc" id="L53" title="All 3 branches covered.">        switch (provider) {</span>
             case AWS_MAIL:
-<span class="fc" id="L57">                return AWSMailSender.getInstance();</span>
+<span class="fc" id="L55">                return AWSMailSender.getInstance();</span>
             case APACHE_MAIL:
-<span class="fc" id="L59">                return ApacheMailSender.getInstance();</span>
+<span class="fc" id="L57">                return ApacheMailSender.getInstance();</span>
             case JAVA_MAIL:
             default:
-<span class="fc" id="L62">                return JavaMailSender.getInstance();</span>
+<span class="fc" id="L60">                return JavaMailSender.getInstance();</span>
         }
     }
 
@@ -88,9 +86,9 @@ import java.util.regex.Pattern;
 
         // Initialize reg ex for email.
         // Make the comparison case-insensitive.
-<span class="fc" id="L91">        final Pattern pattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);</span>
-<span class="fc" id="L92">        final Matcher matcher = pattern.matcher(email);</span>
-<span class="fc" id="L93">        return matcher.matches();        </span>
+<span class="fc" id="L89">        final Pattern pattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);</span>
+<span class="fc" id="L90">        final Matcher matcher = pattern.matcher(email);</span>
+<span class="fc" id="L91">        return matcher.matches();        </span>
     }
     
     /**
@@ -98,8 +96,9 @@ import java.util.regex.Pattern;
      * @param m email message to be sent.
      * @return id of message that has been sent.
      * @throws MailNotSentException if mail couldn't be sent.
+     * @throws InterruptedException if thread is interrupted.
      */
-    public abstract String send(final EmailMessage&lt;E&gt; m) throws MailNotSentException;
+    public abstract String send(final EmailMessage&lt;?&gt; m) throws MailNotSentException, InterruptedException;
     
     /**
      * Returns provider used by this email sender.

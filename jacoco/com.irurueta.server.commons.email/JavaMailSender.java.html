@@ -31,7 +31,7 @@ import java.util.logging.Logger;
 /**
  * Class to send emails using JavaMail.
  */
-public class JavaMailSender extends EmailSender&lt;MimeMessage&gt; {
+public class JavaMailSender extends EmailSender {
 
     /**
      * Minimum allowed port value to connect to SMTP server.
@@ -214,7 +214,7 @@ public class JavaMailSender extends EmailSender&lt;MimeMessage&gt; {
      * @throws MailNotSentException if mail couldn't be sent.
      */
     @Override
-    public String send(final EmailMessage&lt;MimeMessage&gt; m)
+    public String send(final EmailMessage&lt;?&gt; m)
             throws MailNotSentException {
 
 <span class="fc bfc" id="L220" title="All 2 branches covered.">        if (mEnabled) {</span>
@@ -254,22 +254,24 @@ public class JavaMailSender extends EmailSender&lt;MimeMessage&gt; {
 <span class="fc" id="L254">                    message.setSubject(m.getSubject(), &quot;utf-8&quot;);</span>
                 }
                 // sets content of message
-<span class="fc" id="L257">                m.buildContent(message);</span>
+                //noinspection unchecked
+<span class="fc" id="L258">                final EmailMessage&lt;MimeMessage&gt; m2 = (EmailMessage&lt;MimeMessage&gt;) m;</span>
+<span class="fc" id="L259">                m2.buildContent(message);</span>
                 // set date when mail was sent
-<span class="fc" id="L259">                message.setSentDate(new Date());</span>
+<span class="fc" id="L261">                message.setSentDate(new Date());</span>
 
-<span class="fc" id="L261">                final Transport transport = session.getTransport(&quot;smtp&quot;);</span>
-<span class="fc" id="L262">                transport.connect(mMailHost, mMailPort, mMailId, mMailPassword);</span>
+<span class="fc" id="L263">                final Transport transport = session.getTransport(&quot;smtp&quot;);</span>
+<span class="fc" id="L264">                transport.connect(mMailHost, mMailPort, mMailId, mMailPassword);</span>
 
-<span class="fc" id="L264">                transport.sendMessage(message, message.getAllRecipients());</span>
+<span class="fc" id="L266">                transport.sendMessage(message, message.getAllRecipients());</span>
 
-<span class="fc" id="L266">                transport.close();</span>
+<span class="fc" id="L268">                transport.close();</span>
 
-<span class="nc" id="L268">            } catch (final Exception ex) {</span>
-<span class="nc" id="L269">                throw new MailNotSentException(ex);</span>
-<span class="fc" id="L270">            }</span>
+<span class="nc" id="L270">            } catch (final Exception ex) {</span>
+<span class="nc" id="L271">                throw new MailNotSentException(ex);</span>
+<span class="fc" id="L272">            }</span>
         }
-<span class="fc" id="L272">        return null;</span>
+<span class="fc" id="L274">        return null;</span>
     }
 
     /**
@@ -279,7 +281,7 @@ public class JavaMailSender extends EmailSender&lt;MimeMessage&gt; {
      */
     @Override
     public EmailProvider getProvider() {
-<span class="fc" id="L282">        return EmailProvider.JAVA_MAIL;</span>
+<span class="fc" id="L284">        return EmailProvider.JAVA_MAIL;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

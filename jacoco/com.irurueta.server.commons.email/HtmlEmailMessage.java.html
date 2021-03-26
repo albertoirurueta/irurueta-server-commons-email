@@ -208,7 +208,7 @@ public abstract class HtmlEmailMessage&lt;E&gt; extends EmailMessage&lt;E&gt; {
      * @param sender class in charge of sending this email.
      * @return an HTML email message.
      */
-    public static HtmlEmailMessage&lt;?&gt; create(final EmailSender&lt;?&gt; sender) {
+    public static HtmlEmailMessage&lt;?&gt; create(final EmailSender sender) {
 <span class="fc" id="L212">        return create(sender.getProvider());</span>
     }
 
@@ -231,7 +231,7 @@ public abstract class HtmlEmailMessage&lt;E&gt; extends EmailMessage&lt;E&gt; {
      * @return an HTML email message.
      */
     public static HtmlEmailMessage&lt;?&gt; create(final String subject,
-                                             final EmailSender&lt;?&gt; sender) {
+                                             final EmailSender sender) {
 <span class="fc" id="L235">        return create(subject, sender.getProvider());</span>
     }
 
@@ -258,7 +258,7 @@ public abstract class HtmlEmailMessage&lt;E&gt; extends EmailMessage&lt;E&gt; {
      * @return an HTML email message.
      */
     public static HtmlEmailMessage&lt;?&gt; create(final String subject, final String htmlContent,
-                                             final EmailSender&lt;?&gt; sender) {
+                                             final EmailSender sender) {
 <span class="fc" id="L262">        return create(subject, htmlContent, sender.getProvider());</span>
     }
 

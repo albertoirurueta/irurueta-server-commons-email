@@ -29,7 +29,7 @@ import java.util.logging.Logger;
 /**
  * Class to send emails using Apache mail.
  */
-public class ApacheMailSender extends EmailSender&lt;Email&gt; {
+public class ApacheMailSender extends EmailSender {
 
     /**
      * Logger for this class.
@@ -216,19 +216,19 @@ public class ApacheMailSender extends EmailSender&lt;Email&gt; {
      * @throws MailNotSentException if mail couldn't be sent.
      */
     @Override
-    public String send(final EmailMessage&lt;Email&gt; m) throws MailNotSentException {
+    public String send(final EmailMessage&lt;?&gt; m) throws MailNotSentException {
 <span class="fc bfc" id="L220" title="All 2 branches covered.">        if (!mEnabled) {</span>
             //don't send message if not enabled
 <span class="fc" id="L222">            return null;</span>
         }
 
         //to avoid compilation errors regarding to casting
-<span class="fc bfc" id="L226" title="All 2 branches covered.">        if ((EmailMessage&lt;?&gt;) m instanceof ApacheMailTextEmailMessage) {</span>
-<span class="fc" id="L227">            return sendMultiPartEmail((ApacheMailTextEmailMessage) (EmailMessage&lt;?&gt;) m);</span>
-<span class="fc bfc" id="L228" title="All 2 branches covered.">        } else if ((EmailMessage&lt;?&gt;) m instanceof ApacheMailTextEmailMessageWithAttachments) {</span>
-<span class="fc" id="L229">            return sendMultiPartEmail((ApacheMailTextEmailMessageWithAttachments) (EmailMessage&lt;?&gt;) m);</span>
-<span class="pc bpc" id="L230" title="1 of 2 branches missed.">        } else if ((EmailMessage&lt;?&gt;) m instanceof ApacheMailHtmlEmailMessage) {</span>
-<span class="fc" id="L231">            return sendHtmlEmail((ApacheMailHtmlEmailMessage) (EmailMessage&lt;?&gt;) m);</span>
+<span class="fc bfc" id="L226" title="All 2 branches covered.">        if (m instanceof ApacheMailTextEmailMessage) {</span>
+<span class="fc" id="L227">            return sendMultiPartEmail((ApacheMailTextEmailMessage) m);</span>
+<span class="fc bfc" id="L228" title="All 2 branches covered.">        } else if (m instanceof ApacheMailTextEmailMessageWithAttachments) {</span>
+<span class="fc" id="L229">            return sendMultiPartEmail((ApacheMailTextEmailMessageWithAttachments) m);</span>
+<span class="pc bpc" id="L230" title="1 of 2 branches missed.">        } else if (m instanceof ApacheMailHtmlEmailMessage) {</span>
+<span class="fc" id="L231">            return sendHtmlEmail((ApacheMailHtmlEmailMessage) m);</span>
         } else {
 <span class="nc" id="L233">            throw new MailNotSentException(&quot;Unsupported email type&quot;);</span>
         }
