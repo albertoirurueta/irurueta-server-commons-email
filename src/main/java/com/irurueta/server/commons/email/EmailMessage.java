@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,19 +27,19 @@ public abstract class EmailMessage<E> {
     /**
      * List of addresses to send an email to.
      */
-    private List<String> mTo;
+    private final List<String> mTo;
     
     /**
      * List of Carbon Copy addresses to send a copy of an email.
      */
-    private List<String> mCc;
+    private final List<String> mCc;
     
     /**
      * List of Blind Carbon Copy addresses to send a copy of an email.
      * Other recipients of the email won't be able to see addresses in this 
      * list.
      */
-    private List<String> mBcc;
+    private final List<String> mBcc;
     
     /**
      * Subject of an email.
@@ -50,10 +50,10 @@ public abstract class EmailMessage<E> {
      * Constructor.
      * Creates an email with no content, subject and no recipients.
      */
-    public EmailMessage() {
-        mTo = new LinkedList<String>();
-        mCc = new LinkedList<String>();
-        mBcc = new LinkedList<String>();
+    protected EmailMessage() {
+        mTo = new LinkedList<>();
+        mCc = new LinkedList<>();
+        mBcc = new LinkedList<>();
         mSubject = "";
     }
     
@@ -62,10 +62,10 @@ public abstract class EmailMessage<E> {
      * Creates an email with subject, no content and no recipients.
      * @param subject subject to be set on the email.
      */
-    public EmailMessage(String subject) {
-        mTo = new LinkedList<String>();
-        mCc = new LinkedList<String>();
-        mBcc = new LinkedList<String>();
+    protected EmailMessage(final String subject) {
+        mTo = new LinkedList<>();
+        mCc = new LinkedList<>();
+        mBcc = new LinkedList<>();
         
         if (subject != null) {
             mSubject = subject;
@@ -151,7 +151,7 @@ public abstract class EmailMessage<E> {
      * Sets subject of this email.
      * @param subject subject of this email.
      */
-    public void setSubject(String subject) {
+    public void setSubject(final String subject) {
         mSubject = subject;
     }
 
@@ -163,5 +163,5 @@ public abstract class EmailMessage<E> {
      * @param content Structure containing email content data to be sent.
      * @throws EmailException if content cannot be properly built.
      */
-    protected abstract void buildContent(E content) throws EmailException;
+    protected abstract void buildContent(final E content) throws EmailException;
 }

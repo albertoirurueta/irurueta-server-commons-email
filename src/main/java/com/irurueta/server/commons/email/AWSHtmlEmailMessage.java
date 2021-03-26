@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,41 +30,45 @@ public class AWSHtmlEmailMessage extends JavaMailHtmlEmailMessage {
     public AWSHtmlEmailMessage() {
         super();
     }
-    
+
     /**
      * Constructor with email subject.
+     *
      * @param subject subject to be set.
-     */    
-    public AWSHtmlEmailMessage(String subject) {
+     */
+    public AWSHtmlEmailMessage(final String subject) {
         super(subject);
     }
-    
+
     /**
      * Constructor with email subject and textual content.
-     * @param subject subject to be set.
+     *
+     * @param subject     subject to be set.
      * @param htmlContent HTML content.
-     */    
-    public AWSHtmlEmailMessage(String subject, String htmlContent) {
+     */
+    public AWSHtmlEmailMessage(final String subject, final String htmlContent) {
         super(subject, htmlContent);
-    }    
-    
+    }
+
     /**
      * Indicates if CC is supported for this kind of email to send Carbon Copies
      * of this email. Some email types do not support this feature.
+     *
      * @return true if CC feature is supported, false otherwise.
      */
     @Override
     public boolean isCCSupported() {
         return false;
     }
-    
+
     /**
      * Indicates if BCC is supported for this kind of email to send Blind Carbon
      * Copies of this email. Some email types do not support this feature.
+     *
      * @return true if BCC feature is supported, false otherwise.
      */
     @Override
     public boolean isBCCSupported() {
         return false;
-    }    
+    }
 }

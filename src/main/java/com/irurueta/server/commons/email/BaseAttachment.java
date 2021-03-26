@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -35,7 +35,7 @@ public abstract class BaseAttachment {
      * Constructor with file attachment.
      * @param attachment file being attached.
      */
-    public BaseAttachment(File attachment) {
+    protected BaseAttachment(final File attachment) {
         mAttachment = attachment;
         mContentType = null;
     }
@@ -45,7 +45,7 @@ public abstract class BaseAttachment {
      * @param attachment file being attached.
      * @param contentType MIME type of the file being attached.
      */
-    public BaseAttachment(File attachment, String contentType) {
+    protected BaseAttachment(final File attachment, final String contentType) {
         mAttachment = attachment;
         mContentType = contentType;
     }
@@ -62,7 +62,7 @@ public abstract class BaseAttachment {
      * Sets file being attached.
      * @param attachment file being attached.
      */
-    public void setAttachment(File attachment) {
+    public void setAttachment(final File attachment) {
         mAttachment = attachment;
     }
     
@@ -78,7 +78,7 @@ public abstract class BaseAttachment {
      * Sets MIME type of the file being attached.
      * @param contentType MIME type of the file being attached.
      */
-    public void setContentType(String contentType) {
+    public void setContentType(final String contentType) {
         mContentType = contentType;
     }    
 }

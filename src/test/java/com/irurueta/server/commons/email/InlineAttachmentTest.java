@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,103 +15,88 @@
  */
 package com.irurueta.server.commons.email;
 
-import java.io.File;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import java.io.File;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class InlineAttachmentTest {
-    
-    public InlineAttachmentTest() {}
-    
-    @BeforeClass
-    public static void setUpClass() {}
-    
-    @AfterClass
-    public static void tearDownClass() {}
-    
-    @Before
-    public void setUp() {}
-    
-    @After
-    public void tearDown() {}
-    
+
     @Test
-    public void testConstructor(){
-        File attachment = new File(
+    public void testConstructor() {
+        final File attachment = new File(
                 "./src/test/java/com/irurueta/server/commons/mail/rotate1.jpg");
-        
-        //constructor with file
-        InlineAttachment inlineAttachment = new InlineAttachment(attachment);        
+
+        // constructor with file
+        InlineAttachment inlineAttachment = new InlineAttachment(attachment);
         assertEquals(inlineAttachment.getAttachment(), attachment);
         assertNull(inlineAttachment.getContentId());
         assertNull(inlineAttachment.getContentType());
-        
-        //constructor with file and content type
+
+        // constructor with file and content type
         inlineAttachment = new InlineAttachment(attachment, "image/jpg");
         assertEquals(inlineAttachment.getAttachment(), attachment);
         assertNull(inlineAttachment.getContentId());
         assertEquals(inlineAttachment.getContentType(), "image/jpg");
-        
-        //constructor with file, part id and content type
-        inlineAttachment = new InlineAttachment(attachment, "part1", 
+
+        // constructor with file, part id and content type
+        inlineAttachment = new InlineAttachment(attachment, "part1",
                 "image/jpg");
         assertEquals(inlineAttachment.getAttachment(), attachment);
         assertEquals(inlineAttachment.getContentId(), "part1");
         assertEquals(inlineAttachment.getContentType(), "image/jpg");
     }
-    
-    @Test
-    public void testGetSetAttachment(){
-        File attachment = new File(
-                "./src/test/java/com/irurueta/server/commons/mail/rotate1.jpg");
-        File attachment2 = new File(
-                "./src/test/java/com/irurueta/server/commons/mail/rotate2.jpg");
-        
 
-        InlineAttachment inlineAttachment = new InlineAttachment(attachment);
-        
+    @Test
+    public void testGetSetAttachment() {
+        final File attachment = new File(
+                "./src/test/java/com/irurueta/server/commons/mail/rotate1.jpg");
+        final File attachment2 = new File(
+                "./src/test/java/com/irurueta/server/commons/mail/rotate2.jpg");
+
+
+        final InlineAttachment inlineAttachment = new InlineAttachment(attachment);
+
         assertEquals(inlineAttachment.getAttachment(), attachment);
-        
-        //set new attachment
+
+        // set new attachment
         inlineAttachment.setAttachment(attachment2);
-        
-        //check correctness
+
+        // check correctness
         assertEquals(inlineAttachment.getAttachment(), attachment2);
     }
-    
+
     @Test
-    public void testGetSetContentId(){
-        File attachment = new File(
+    public void testGetSetContentId() {
+        final File attachment = new File(
                 "./src/test/java/com/irurueta/server/commons/mail/rotate1.jpg");
 
-        InlineAttachment inlineAttachment = new InlineAttachment(attachment);
-        
+        final InlineAttachment inlineAttachment = new InlineAttachment(attachment);
+
         assertNull(inlineAttachment.getContentId());
-        
-        //set new value
+
+        // set new value
         inlineAttachment.setContentId("part1");
-        
-        //check correctness
+
+        // check correctness
         assertEquals(inlineAttachment.getContentId(), "part1");
     }
-    
+
     @Test
-    public void testGetSetContentType(){
-        File attachment = new File(
+    public void testGetSetContentType() {
+        final File attachment = new File(
                 "./src/test/java/com/irurueta/server/commons/mail/rotate1.jpg");
 
-        InlineAttachment inlineAttachment = new InlineAttachment(attachment);
+        final InlineAttachment inlineAttachment = new InlineAttachment(attachment);
 
         assertNull(inlineAttachment.getContentType());
-        
-        //set content type
+
+        // set content type
         inlineAttachment.setContentType("image/jpg");
-        
-        //check correctness
+
+        // check correctness
         assertEquals(inlineAttachment.getContentType(), "image/jpg");
     }
 }

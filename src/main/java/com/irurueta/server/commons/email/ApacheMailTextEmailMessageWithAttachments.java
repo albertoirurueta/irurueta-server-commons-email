@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,7 +37,7 @@ public class ApacheMailTextEmailMessageWithAttachments extends
      * Constructor with email subject.
      * @param subject subject to be set on email.
      */
-    public ApacheMailTextEmailMessageWithAttachments(String subject) {
+    public ApacheMailTextEmailMessageWithAttachments(final String subject) {
         super(subject);
     }
     
@@ -46,8 +46,8 @@ public class ApacheMailTextEmailMessageWithAttachments extends
      * @param subject subject to be set on email.
      * @param text textual email content.
      */
-    public ApacheMailTextEmailMessageWithAttachments(String subject, 
-            String text) {
+    public ApacheMailTextEmailMessageWithAttachments(final String subject,
+            final String text) {
         super(subject, text);
     }
     
@@ -56,7 +56,7 @@ public class ApacheMailTextEmailMessageWithAttachments extends
      * @param attachments list of file attachments to be included in email.
      */
     public ApacheMailTextEmailMessageWithAttachments(
-            List<EmailAttachment> attachments) {
+            final List<EmailAttachment> attachments) {
         super(attachments);
     }
     
@@ -65,8 +65,8 @@ public class ApacheMailTextEmailMessageWithAttachments extends
      * @param subject subject to be set on email.
      * @param attachments list of file attachments to be included in email.
      */
-    public ApacheMailTextEmailMessageWithAttachments(String subject, 
-            List<EmailAttachment> attachments) {
+    public ApacheMailTextEmailMessageWithAttachments(final String subject,
+            final List<EmailAttachment> attachments) {
         super(subject, attachments);
     }
     
@@ -76,8 +76,8 @@ public class ApacheMailTextEmailMessageWithAttachments extends
      * @param text textual email content.
      * @param attachments list of file attachments to be included in email.
      */
-    public ApacheMailTextEmailMessageWithAttachments(String subject, 
-            String text, List<EmailAttachment> attachments) {
+    public ApacheMailTextEmailMessageWithAttachments(final String subject,
+            final String text, final List<EmailAttachment> attachments) {
         super(subject, text, attachments);
     }    
 
@@ -88,19 +88,19 @@ public class ApacheMailTextEmailMessageWithAttachments extends
      * content fails.
      */        
     @Override
-    protected void buildContent(MultiPartEmail content) 
+    protected void buildContent(final MultiPartEmail content)
             throws com.irurueta.server.commons.email.EmailException {
         try {
             if (getText() != null) {
                 content.setMsg(getText());
             }
                         
-            //add attachments
-            List<EmailAttachment> attachments = getAttachments();
+            // add attachments
+            final List<EmailAttachment> attachments = getAttachments();
             org.apache.commons.mail.EmailAttachment apacheAttachment;
             if (attachments != null) {
-                for (EmailAttachment attachment : attachments) {
-                    //only add attachments with files
+                for (final EmailAttachment attachment : attachments) {
+                    // only add attachments with files
                     if (attachment.getAttachment() == null) {
                         continue;
                     }
@@ -117,7 +117,7 @@ public class ApacheMailTextEmailMessageWithAttachments extends
                     content.attach(apacheAttachment);
                 }
             }
-        } catch (EmailException e) {
+        } catch (final EmailException e) {
             throw new com.irurueta.server.commons.email.EmailException(e);
         }
     }  

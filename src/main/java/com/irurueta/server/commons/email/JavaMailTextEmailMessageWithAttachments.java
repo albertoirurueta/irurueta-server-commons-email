@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,106 +30,112 @@ import javax.mail.internet.MimeMultipart;
  * Class containing a text only email message that can contain file attachments
  * and is meant to be sent using JavaMail.
  */
-public class JavaMailTextEmailMessageWithAttachments extends 
+public class JavaMailTextEmailMessageWithAttachments extends
         TextEmailMessageWithAttachments<MimeMessage> {
-    
+
     /**
      * Constructor.
      */
     public JavaMailTextEmailMessageWithAttachments() {
         super();
     }
-    
+
     /**
      * Constructor with email subject.
+     *
      * @param subject subject to be set on email.
      */
-    public JavaMailTextEmailMessageWithAttachments(String subject) {
+    public JavaMailTextEmailMessageWithAttachments(final String subject) {
         super(subject);
     }
-    
+
     /**
      * Constructor with email subject and content text.
+     *
      * @param subject subject to be set on email.
-     * @param text textual email content.
+     * @param text    textual email content.
      */
-    public JavaMailTextEmailMessageWithAttachments(String subject, 
-            String text) {
+    public JavaMailTextEmailMessageWithAttachments(final String subject,
+                                                   final String text) {
         super(subject, text);
     }
-    
+
     /**
      * Constructor with file attachments.
+     *
      * @param attachments list of file attachments to be included in email.
      */
     public JavaMailTextEmailMessageWithAttachments(
-            List<EmailAttachment> attachments) {
+            final List<EmailAttachment> attachments) {
         super(attachments);
     }
-    
+
     /**
      * Constructor with subject and file attachments.
-     * @param subject subject to be set on email.
+     *
+     * @param subject     subject to be set on email.
      * @param attachments list of file attachments to be included in email.
      */
-    public JavaMailTextEmailMessageWithAttachments(String subject, 
-            List<EmailAttachment> attachments) {
+    public JavaMailTextEmailMessageWithAttachments(final String subject,
+                                                   final List<EmailAttachment> attachments) {
         super(subject, attachments);
     }
-    
+
     /**
      * Constructor with subject, content text and file attachments.
-     * @param subject subject to be set on email.
-     * @param text textual email content.
+     *
+     * @param subject     subject to be set on email.
+     * @param text        textual email content.
      * @param attachments list of file attachments to be included in email.
      */
-    public JavaMailTextEmailMessageWithAttachments(String subject, String text,
-            List<EmailAttachment> attachments) {
+    public JavaMailTextEmailMessageWithAttachments(final String subject, String text,
+                                                   final List<EmailAttachment> attachments) {
         super(subject, text, attachments);
-    }    
+    }
 
     /**
      * Builds email content to be sent using an email sender.
+     *
      * @param message instance where content must be set.
      * @throws EmailException if setting mail content fails.
-     */    
+     */
     @Override
-    protected void buildContent(MimeMessage message) throws EmailException {        
+    protected void buildContent(final MimeMessage message) throws EmailException {
         try {
-            
-            //finally add multipart contents to mail message
-            message.setContent(buildMultipart());            
-            
-        } catch (MessagingException e) {
+            // finally add multipart contents to mail message
+            message.setContent(buildMultipart());
+
+        } catch (final MessagingException e) {
             throw new EmailException(e);
         }
-    }  
-    
+    }
+
     /**
      * Builds multipart content of email.
      * Multipart is used when a text email needs to have files attached.
+     *
      * @return a multipart.
      * @throws EmailException if building multipart fails.
      */
     private Multipart buildMultipart() throws EmailException {
         try {
-            //create multipart. One part will be for text content, and remaining
-            //parts will be for attachments
-            Multipart multipart = new MimeMultipart();            
-            //set text content in body part
+            // create multipart. One part will be for text content, and remaining
+            // parts will be for attachments
+            final Multipart multipart = new MimeMultipart();
+            // set text content in body part
             BodyPart messageBodyPart;
             if (getText() != null) {
                 messageBodyPart = new MimeBodyPart();
-                messageBodyPart.setContent(getText(), 
+                messageBodyPart.setContent(getText(),
                         "text/plain; charset=utf-8");
                 multipart.addBodyPart(messageBodyPart);
             }
-            
-            //add attachments parts
-            List<EmailAttachment> attachments = getAttachments();
+
+            // add attachments parts
+            final List<EmailAttachment> attachments = getAttachments();
             if (attachments != null) {
-                for (EmailAttachment attachment : attachments) {
-                    //only add attachments with files
+                for (final EmailAttachment attachment : attachments) {
+                    // only add attachments with files
                     if (attachment.getAttachment() == null) {
                         continue;
                     }
@@ -140,7 +146,7 @@ public class JavaMailTextEmailMessageWithAttachments extends
                     }
                     messageBodyPart.setDisposition(Part.ATTACHMENT);
                     if (attachment.getContentType() != null) {
-                        messageBodyPart.addHeader("Content-Type", 
+                        messageBodyPart.addHeader("Content-Type",
                                 attachment.getContentType());
                     }
                     messageBodyPart.setDataHandler(new DataHandler(
@@ -149,8 +155,8 @@ public class JavaMailTextEmailMessageWithAttachments extends
                 }
             }
             return multipart;
-        } catch (MessagingException e) {
+        } catch (final MessagingException e) {
             throw new EmailException(e);
-        }                        
+        }
     }
 }

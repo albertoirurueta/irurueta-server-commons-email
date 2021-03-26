@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,58 +26,63 @@ import java.io.File;
  * email address exists or if an email was actually read.
  */
 public class InlineAttachment extends BaseAttachment {
-    
+
     /**
      * Id to be assigned to part created to send the inline attachment.
      */
     private String mContentId;
-        
+
     /**
      * Constructor with file attachment.
+     *
      * @param attachment file being attached.
      */
-    public InlineAttachment(File attachment) {
+    public InlineAttachment(final File attachment) {
         super(attachment);
         mContentId = null;
     }
-    
+
     /**
      * Constructor with file attachment and content type.
-     * @param attachment file being attached.
+     *
+     * @param attachment  file being attached.
      * @param contentType MIME type of the file being attached.
      */
-    public InlineAttachment(File attachment, String contentType) {
+    public InlineAttachment(final File attachment, final String contentType) {
         super(attachment, contentType);
         mContentId = null;
     }
-    
+
     /**
      * Constructor with file attachment, file name shown to the receiver and
      * content type.
-     * @param attachment file being attached.
-     * @param contentId id to be assigned to inline part containing file data.
+     *
+     * @param attachment  file being attached.
+     * @param contentId   id to be assigned to inline part containing file data.
      * @param contentType MIME type of the file being attached.
      */
-    public InlineAttachment(File attachment, String contentId, 
-            String contentType) {
+    public InlineAttachment(final File attachment, final String contentId,
+                            final String contentType) {
         super(attachment, contentType);
         mContentId = contentId;
     }
-        
+
     /**
      * Returns Id to be assigned to part created to send the inline attachment.
+     *
      * @return id to be assigned to part created to send the inline attachment.
      */
     public String getContentId() {
         return mContentId;
     }
-    
+
     /**
      * Sets id to be assigned to part created to send the inline attachment.
+     *
      * @param contentId id to be assigned to part created to send the inline
-     * attachment.
+     *                  attachment.
      */
-    public void setContentId(String contentId) {
+    public void setContentId(final String contentId) {
         mContentId = contentId;
-    }        
+    }
 }

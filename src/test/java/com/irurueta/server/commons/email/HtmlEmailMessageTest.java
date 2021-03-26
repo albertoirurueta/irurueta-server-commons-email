@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,64 +16,52 @@
 package com.irurueta.server.commons.email;
 
 import com.irurueta.server.commons.configuration.ConfigurationException;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class HtmlEmailMessageTest {
-    
+
     public static final String PROPS_FILE = "./java-mail.properties";
-    
-    public HtmlEmailMessageTest() {}
-    
+
     @BeforeClass
     public static void setUpClass() throws IOException, ConfigurationException {
-        Properties props = new Properties();
+        final Properties props = new Properties();
         props.load(new FileInputStream(PROPS_FILE));
-        props.setProperty(MailConfigurationFactory.MAIL_PROVIDER_PROPERTY, 
-                EmailProvider.JAVA_MAIL.toString());                
-        MailConfigurationFactory.getInstance().reconfigure(props);        
+        props.setProperty(MailConfigurationFactory.MAIL_PROVIDER_PROPERTY,
+                EmailProvider.JAVA_MAIL.toString());
+        MailConfigurationFactory.getInstance().reconfigure(props);
     }
-    
-    @AfterClass
-    public static void tearDownClass() {}
-    
-    @Before
-    public void setUp() {}
-    
-    @After
-    public void tearDown() {}
-    
+
     @Test
     public void testCreate() {
-        JavaMailSender mailSender = JavaMailSender.getInstance();
-        
-        //test with mail sender
-        HtmlEmailMessage email = HtmlEmailMessage.create(mailSender);
+        final JavaMailSender mailSender = JavaMailSender.getInstance();
+
+        // test with mail sender
+        HtmlEmailMessage<?> email = HtmlEmailMessage.create(mailSender);
         assertTrue(email instanceof JavaMailHtmlEmailMessage);
-        
-        //test with provider
+
+        // test with provider
         email = HtmlEmailMessage.create(EmailProvider.AWS_MAIL);
-        assertTrue(email instanceof AWSHtmlEmailMessage);        
+        assertTrue(email instanceof AWSHtmlEmailMessage);
         email = HtmlEmailMessage.create(EmailProvider.APACHE_MAIL);
-        assertTrue(email instanceof ApacheMailHtmlEmailMessage);        
+        assertTrue(email instanceof ApacheMailHtmlEmailMessage);
         email = HtmlEmailMessage.create(EmailProvider.JAVA_MAIL);
         assertTrue(email instanceof JavaMailHtmlEmailMessage);
-        
-        //test with subject and sender
+
+        // test with subject and sender
         email = HtmlEmailMessage.create("subject", mailSender);
         assertTrue(email instanceof JavaMailHtmlEmailMessage);
         assertEquals(email.getSubject(), "subject");
-        
-        //test with subject and provider
+
+        // test with subject and provider
         email = HtmlEmailMessage.create("subject", EmailProvider.AWS_MAIL);
         assertTrue(email instanceof AWSHtmlEmailMessage);
         assertEquals(email.getSubject(), "subject");
@@ -83,60 +71,60 @@ public class HtmlEmailMessageTest {
         email = HtmlEmailMessage.create("subject", EmailProvider.JAVA_MAIL);
         assertTrue(email instanceof JavaMailHtmlEmailMessage);
         assertEquals(email.getSubject(), "subject");
-        
-        
-        //test with subject, html and sender
-        String html = "<p>html</p>";
+
+
+        // test with subject, html and sender
+        final String html = "<p>html</p>";
         email = HtmlEmailMessage.create("subject", html, mailSender);
         assertTrue(email instanceof JavaMailHtmlEmailMessage);
         assertEquals(email.getSubject(), "subject");
         assertEquals(email.getHtmlContent(), html);
-        
-        //test with subject, html and provider
-        email = HtmlEmailMessage.create("subject", html, 
+
+        // test with subject, html and provider
+        email = HtmlEmailMessage.create("subject", html,
                 EmailProvider.AWS_MAIL);
         assertTrue(email instanceof AWSHtmlEmailMessage);
         assertEquals(email.getSubject(), "subject");
         assertEquals(email.getHtmlContent(), html);
-        email = HtmlEmailMessage.create("subject", html, 
+        email = HtmlEmailMessage.create("subject", html,
                 EmailProvider.APACHE_MAIL);
         assertTrue(email instanceof ApacheMailHtmlEmailMessage);
         assertEquals(email.getSubject(), "subject");
         assertEquals(email.getHtmlContent(), html);
-        email = HtmlEmailMessage.create("subject", html, 
+        email = HtmlEmailMessage.create("subject", html,
                 EmailProvider.JAVA_MAIL);
         assertTrue(email instanceof JavaMailHtmlEmailMessage);
         assertEquals(email.getSubject(), "subject");
         assertEquals(email.getHtmlContent(), html);
     }
-    
+
     @Test
     public void testGetSetEmailAttachments() {
-        HtmlEmailMessage email = HtmlEmailMessage.create(
+        final HtmlEmailMessage<?> email = HtmlEmailMessage.create(
                 EmailProvider.JAVA_MAIL);
-        
+
         assertNotNull(email.getEmailAttachments());
-        
-        //set new value
-        List<EmailAttachment> attachments = new ArrayList<EmailAttachment>();
+
+        // set new value
+        final List<EmailAttachment> attachments = new ArrayList<>();
         email.setEmailAttachments(attachments);
-        
-        //check correctness
+
+        // check correctness
         assertSame(email.getEmailAttachments(), attachments);
     }
-    
+
     @Test
     public void testGetSetInlineAttachments() {
-        HtmlEmailMessage email = HtmlEmailMessage.create(
+        final HtmlEmailMessage<?> email = HtmlEmailMessage.create(
                 EmailProvider.JAVA_MAIL);
 
         assertNotNull(email.getInlineAttachments());
-        
-        //set new value
-        List<InlineAttachment> attachments = new ArrayList<InlineAttachment>();
+
+        // set new value
+        final List<InlineAttachment> attachments = new ArrayList<>();
         email.setInlineAttachments(attachments);
-        
-        //check correctness
+
+        // check correctness
         assertSame(email.getInlineAttachments(), attachments);
     }
 }

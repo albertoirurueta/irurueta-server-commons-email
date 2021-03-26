@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,11 +15,12 @@
  */
 package com.irurueta.server.commons.email;
 
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.HtmlEmail;
+
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.mail.EmailException;
-import org.apache.commons.mail.HtmlEmail;
 
 /**
  * Class to build emails having HTML markup as in webpages using Apache Mail.
@@ -37,73 +38,76 @@ public class ApacheMailHtmlEmailMessage extends HtmlEmailMessage<HtmlEmail> {
     public ApacheMailHtmlEmailMessage() {
         super();
     }
-    
+
     /**
      * Constructor with email subject.
+     *
      * @param subject subject to be set.
-     */    
-    public ApacheMailHtmlEmailMessage(String subject) {
+     */
+    public ApacheMailHtmlEmailMessage(final String subject) {
         super(subject);
     }
-    
+
     /**
      * Constructor with email subject and textual content.
-     * @param subject subject to be set.
+     *
+     * @param subject     subject to be set.
      * @param htmlContent HTML content.
-     */    
-    public ApacheMailHtmlEmailMessage(String subject, String htmlContent) {
+     */
+    public ApacheMailHtmlEmailMessage(final String subject, final String htmlContent) {
         super(subject, htmlContent);
     }
-    
+
     /**
      * Builds email content to be sent using an email sender.
+     *
      * @param content instance where content must be set.
-     * @throws com.irurueta.server.commons.email.EmailException if setting mail 
-     * content fails.
-     */        
+     * @throws com.irurueta.server.commons.email.EmailException if setting mail
+     *                                                          content fails.
+     */
     @Override
-    protected void buildContent(HtmlEmail content) 
+    protected void buildContent(final HtmlEmail content)
             throws com.irurueta.server.commons.email.EmailException {
         try {
             if (getAlternativeText() != null) {
                 content.setTextMsg(getAlternativeText());
             }
-            
-            //process inline attachments
-            boolean[] generated = processInlineAttachments();
-            
+
+            // process inline attachments
+            final boolean[] generated = processInlineAttachments();
+
             if (getHtmlContent() != null) {
                 content.setHtmlMsg(process(getHtmlContent(), generated));
             }
-            
-            //all attachments go into general message multipar
-            
-            //add inline attachments
-            List<InlineAttachment> inlineAttachments = getInlineAttachments();
+
+            // all attachments go into general message multipar
+
+            // add inline attachments
+            final List<InlineAttachment> inlineAttachments = getInlineAttachments();
             if (inlineAttachments != null) {
-                for (InlineAttachment attachment : inlineAttachments) {
-                    //only add attachments with files and content ids
-                    if (attachment.getContentId() == null || 
+                for (final InlineAttachment attachment : inlineAttachments) {
+                    // only add attachments with files and content ids
+                    if (attachment.getContentId() == null ||
                             attachment.getAttachment() == null) {
                         continue;
                     }
-                    
-                    content.embed(attachment.getAttachment(), 
+
+                    content.embed(attachment.getAttachment(),
                             attachment.getContentId());
                 }
             }
-            
-            //add other attachments parts
-            List<EmailAttachment> attachments = getEmailAttachments();
+
+            // add other attachments parts
+            final List<EmailAttachment> attachments = getEmailAttachments();
             org.apache.commons.mail.EmailAttachment apacheAttachment;
             if (attachments != null) {
-                for (EmailAttachment attachment : attachments) {
-                    //only add attachments with files
+                for (final EmailAttachment attachment : attachments) {
+                    // only add attachments with files
                     if (attachment.getAttachment() == null) {
                         continue;
                     }
 
-                    apacheAttachment = new  org.apache.commons.mail.
+                    apacheAttachment = new org.apache.commons.mail.
                             EmailAttachment();
                     apacheAttachment.setPath(attachment.getAttachment().getAbsolutePath());
                     apacheAttachment.setDisposition(
@@ -111,71 +115,73 @@ public class ApacheMailHtmlEmailMessage extends HtmlEmailMessage<HtmlEmail> {
                     if (attachment.getName() != null) {
                         apacheAttachment.setName(attachment.getName());
                     }
-                    
+
                     content.attach(apacheAttachment);
                 }
-            }                        
-        } catch (EmailException e) {
+            }
+        } catch (final EmailException e) {
             throw new com.irurueta.server.commons.email.EmailException(e);
         }
     }
-    
+
     /**
      * Reads files to be attached inline in HTML content.
+     *
      * @return array indicating for whith files content was inlined.
      */
     private boolean[] processInlineAttachments() {
-        List<InlineAttachment> attachments = getInlineAttachments();
+        final List<InlineAttachment> attachments = getInlineAttachments();
         if (attachments != null) {
-            boolean[] result = new boolean[attachments.size()];
+            final boolean[] result = new boolean[attachments.size()];
             int counter = 0;
             boolean isGeneratedId;
             String contentId;
-            for (InlineAttachment attachment : attachments) {
+            for (final InlineAttachment attachment : attachments) {
                 isGeneratedId = attachment.getContentId() == null;
                 result[counter] = isGeneratedId;
                 if (isGeneratedId) {
-                    //generate a content id for this attachment
+                    // generate a content id for this attachment
                     contentId = "inline-attachment" + counter;
                     attachment.setContentId(contentId);
-                }                
+                }
                 counter++;
             }
             return result;
         }
         return null;
     }
-    
+
     /**
      * Processes HTML content to substitute placeholders by their corresponding
      * //inline attachment ids.
+     *
      * @param htmlContent HTML content to be sent.
-     * @param generated array containing inlined files that where found as 
-     * placeholders and correctly inlined into content.
+     * @param generated   array containing inlined files that where found as
+     *                    placeholders and correctly inlined into content.
      * @return resulting content.
-     */    
-    private String process(String htmlContent, boolean[] generated) {
-        //if no information about generated inline ids is available, then simply
-        //return input html content
+     */
+    private String process(final String htmlContent, final boolean[] generated) {
+        // if no information about generated inline ids is available, then simply
+        // return input html content
         if (generated == null) {
             return htmlContent;
         }
-        
-        //process html content to substitute placeholders by their corresponding
-        //inline attachments ids
-        List<InlineAttachment> attachments = getInlineAttachments();
-        List<String> contentIds = new ArrayList<>();
+
+        // process html content to substitute placeholders by their corresponding
+        // inline attachments ids
+        final List<InlineAttachment> attachments = getInlineAttachments();
+        final List<String> contentIds = new ArrayList<>();
         int pos = 0;
         if (attachments != null) {
-            for (InlineAttachment attachment : attachments) {
+            for (final InlineAttachment attachment : attachments) {
                 if (generated[pos]) {
                     contentIds.add(attachment.getContentId());
                 }
                 pos++;
             }
         }
-        
-        Object[] objects = contentIds.toArray();
+
+        final Object[] objects = contentIds.toArray();
         return MessageFormat.format(htmlContent, objects);
-    }    
+    }
 }

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +15,6 @@
  */
 package com.irurueta.server.commons.email;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.SoftReference;
 import java.text.SimpleDateFormat;
@@ -28,7 +27,6 @@ import java.util.logging.Logger;
 /**
  * Contains build data for this library.
  */
-@SuppressWarnings("WeakerAccess")
 public class BuildInfo {
     /**
      * This class logger.
@@ -128,17 +126,14 @@ public class BuildInfo {
      * Constructor.
      */
     private BuildInfo() {
-        //loads properties file data
-        InputStream stream = null;
-        try {
-            stream = com.irurueta.server.commons.BuildInfo.class.getResourceAsStream(BUILD_INFO_PROPERTIES);
-
-            Properties props = new Properties();
+        // loads properties file data
+        try (final InputStream stream = BuildInfo.class.getResourceAsStream(BUILD_INFO_PROPERTIES)) {
+            final Properties props = new Properties();
             props.load(stream);
 
-            String buildTimestampString = props.getProperty(
+            final String buildTimestampString = props.getProperty(
                     BUILD_TIMESTAMP_KEY);
-            SimpleDateFormat format = new SimpleDateFormat(TIMESTAMP_FORMAT, 
+            final SimpleDateFormat format = new SimpleDateFormat(TIMESTAMP_FORMAT,
                     Locale.ENGLISH);
             mBuildTimestamp = format.parse(buildTimestampString);
 
@@ -148,17 +143,8 @@ public class BuildInfo {
             mBuildNumber = props.getProperty(BUILD_NUMBER_KEY);
             mCommit = props.getProperty(COMMIT_KEY);
             mBranch = props.getProperty(BRANCH_KEY);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             LOGGER.log(Level.WARNING, "Failed to load build info", e);
-        } finally {
-            if (stream != null) {
-                try {
-                    stream.close();
-                } catch (IOException ignore) {
-                    LOGGER.log(Level.WARNING, "Could not properly close stream",
-                            ignore);
-                }
-            }
         }
     }
 

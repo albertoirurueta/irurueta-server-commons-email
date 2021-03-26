@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,226 +15,217 @@
  */
 package com.irurueta.server.commons.email;
 
-import java.io.File;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.io.File;
+
 import static org.junit.Assert.*;
 
 public class AWSHtmlEmailMessageTest {
-    
-    public AWSHtmlEmailMessageTest() {}
-    
-    @BeforeClass
-    public static void setUpClass() {}
-    
-    @AfterClass
-    public static void tearDownClass() {}
-    
-    @Before
-    public void setUp() {}
-    
-    @After
-    public void tearDown() {}
-    
-    
+
     @Test
-    public void testConstructor() throws NotSupportedException{
-        //test empty constructor
+    public void testConstructor() throws NotSupportedException {
+        // test empty constructor
         AWSHtmlEmailMessage message = new AWSHtmlEmailMessage();
-        
-        //check correctness
+
+        // check correctness
         assertNull(message.getHtmlContent());
         assertNull(message.getAlternativeText());
         assertTrue(message.getTo().isEmpty());
         assertTrue(message.isToSupported());
-        
-        try{
+
+        try {
             assertTrue(message.getCC().isEmpty());
             fail("NotSupportedException expected but not thrown");
-        }catch(NotSupportedException e){}        
+        } catch (NotSupportedException ignore) {
+        }
         assertFalse(message.isCCSupported());
-        
-        try{
+
+        try {
             assertTrue(message.getBCC().isEmpty());
             fail("NotSupportedException expected but not thrown");
-        }catch(NotSupportedException e){}
+        } catch (NotSupportedException ignore) {
+        }
         assertFalse(message.isBCCSupported());
-        
+
         assertTrue(message.getSubject().isEmpty());
         assertTrue(message.getEmailAttachments().isEmpty());
         assertTrue(message.getInlineAttachments().isEmpty());
-        
-        //test constructor with subject
+
+        // test constructor with subject
         message = new AWSHtmlEmailMessage("subject");
-        
-        //check correctness
+
+        // check correctness
         assertNull(message.getHtmlContent());
         assertNull(message.getAlternativeText());
         assertTrue(message.getTo().isEmpty());
         assertTrue(message.isToSupported());
-        
-        try{
+
+        try {
             assertTrue(message.getCC().isEmpty());
             fail("NotSupportedException expected but not thrown");
-        }catch(NotSupportedException e){}        
+        } catch (NotSupportedException ignore) {
+        }
         assertFalse(message.isCCSupported());
-        
-        try{
+
+        try {
             assertTrue(message.getBCC().isEmpty());
             fail("NotSupportedException expected but not thrown");
-        }catch(NotSupportedException e){}
+        } catch (NotSupportedException ignore) {
+        }
         assertFalse(message.isBCCSupported());
-        
+
         assertEquals(message.getSubject(), "subject");
         assertTrue(message.getEmailAttachments().isEmpty());
         assertTrue(message.getInlineAttachments().isEmpty());
-        
-        //test constructor with subject and text
+
+        // test constructor with subject and text
         message = new AWSHtmlEmailMessage("subject", "<p>content</p>");
-        
-        //check correctness
+
+        // check correctness
         assertEquals(message.getHtmlContent(), "<p>content</p>");
         assertNull(message.getAlternativeText());
         assertTrue(message.getTo().isEmpty());
         assertTrue(message.isToSupported());
-        
-        try{
+
+        try {
             assertTrue(message.getCC().isEmpty());
             fail("NotSupportedException expected but not thrown");
-        }catch(NotSupportedException e){}        
+        } catch (NotSupportedException ignore) {
+        }
         assertFalse(message.isCCSupported());
-        
-        try{
+
+        try {
             assertTrue(message.getBCC().isEmpty());
             fail("NotSupportedException expected but not thrown");
-        }catch(NotSupportedException e){}
+        } catch (NotSupportedException ignore) {
+        }
         assertFalse(message.isBCCSupported());
-        
+
         assertEquals(message.getSubject(), "subject");
         assertTrue(message.getEmailAttachments().isEmpty());
         assertTrue(message.getInlineAttachments().isEmpty());
     }
-    
+
     @Test
-    public void testGetSetHtmlContent(){
-        AWSHtmlEmailMessage message = new AWSHtmlEmailMessage();
-        
-        //check correctness
+    public void testGetSetHtmlContent() {
+        final AWSHtmlEmailMessage message = new AWSHtmlEmailMessage();
+
+        // check correctness
         assertNull(message.getHtmlContent());
-        
-        //set new text
-        String text = "<p>content</p>";
+
+        // set new text
+        final String text = "<p>content</p>";
         message.setHtmlContent(text);
-        
-        //check correctness
+
+        // check correctness
         assertEquals(message.getHtmlContent(), text);
     }
-    
+
     @Test
-    public void testGetSetAlternativeText(){
-        AWSHtmlEmailMessage message = new AWSHtmlEmailMessage();
-        
-        //check correctness
+    public void testGetSetAlternativeText() {
+        final AWSHtmlEmailMessage message = new AWSHtmlEmailMessage();
+
+        // check correctness
         assertNull(message.getAlternativeText());
-        
-        //set new text
-        String text = "text";
+
+        // set new text
+        final String text = "text";
         message.setAlternativeText(text);
-        
-        //check correctness
+
+        // check correctness
         assertEquals(message.getAlternativeText(), text);
     }
-    
+
     @Test
-    public void testGetTo() throws NotSupportedException{
-        AWSHtmlEmailMessage message = new AWSHtmlEmailMessage();
-        
-        //check correctness
+    public void testGetTo() throws NotSupportedException {
+        final AWSHtmlEmailMessage message = new AWSHtmlEmailMessage();
+
+        // check correctness
         assertTrue(message.getTo().isEmpty());
-        
-        //add destination
+
+        // add destination
         message.getTo().add("airurueta@visual-engin.com");
-        
-        //check correctness
+
+        // check correctness
         assertEquals(message.getTo().size(), 1);
         assertTrue(message.getTo().contains("airurueta@visual-engin.com"));
     }
-    
+
     @Test
-    public void testGetCC() throws NotSupportedException{
-        AWSHtmlEmailMessage message = new AWSHtmlEmailMessage();
-        
-        //Force NotSupportedException
-        try{
+    public void testGetCC() {
+        final AWSHtmlEmailMessage message = new AWSHtmlEmailMessage();
+
+        // Force NotSupportedException
+        try {
             message.getCC();
             fail("NotSupportedException expected but not thrown");
-        }catch(NotSupportedException e){}
+        } catch (final NotSupportedException ignore) {
+        }
     }
-    
+
     @Test
-    public void testGetBCC() throws NotSupportedException{
-        AWSHtmlEmailMessage message = new AWSHtmlEmailMessage();
-        
-        //Force NotSupportedException
-        try{
+    public void testGetBCC() {
+        final AWSHtmlEmailMessage message = new AWSHtmlEmailMessage();
+
+        // Force NotSupportedException
+        try {
             message.getBCC();
             fail("NotSupportedException expected but not thrown");
-        }catch(NotSupportedException e){}
+        } catch (NotSupportedException ignore) {
+        }
     }
-    
+
     @Test
-    public void testGetSetSubject(){
-        AWSHtmlEmailMessage message = new AWSHtmlEmailMessage();
-        
-        //check correctness
+    public void testGetSetSubject() {
+        final AWSHtmlEmailMessage message = new AWSHtmlEmailMessage();
+
+        // check correctness
         assertTrue(message.getSubject().isEmpty());
-        
-        //set subject
-        String subject = "subject";
+
+        // set subject
+        final String subject = "subject";
         message.setSubject(subject);
-        
-        //check correctness
+
+        // check correctness
         assertEquals(message.getSubject(), subject);
     }
-    
+
     @Test
-    public void testGetSetEmailAttachments(){
-        File attachment = new File(
+    public void testGetSetEmailAttachments() {
+        final File attachment = new File(
                 "./test/com/irurueta/server/commons/mail/rotate1.jpg");
-        
-        AWSHtmlEmailMessage message = new AWSHtmlEmailMessage();
-        
-        //check correctness
+
+        final AWSHtmlEmailMessage message = new AWSHtmlEmailMessage();
+
+        // check correctness
         assertTrue(message.getEmailAttachments().isEmpty());
-        
-        EmailAttachment emailAttachment = new EmailAttachment(attachment);
-        
+
+        final EmailAttachment emailAttachment = new EmailAttachment(attachment);
+
         message.getEmailAttachments().add(emailAttachment);
-        
-        //check correctness
+
+        // check correctness
         assertTrue(message.getEmailAttachments().contains(emailAttachment));
         assertEquals(message.getEmailAttachments().size(), 1);
-    }    
-    
+    }
+
     @Test
-    public void testGetSetInlineAttachments(){
-        File attachment = new File(
+    public void testGetSetInlineAttachments() {
+        final File attachment = new File(
                 "./test/com/irurueta/server/commons/mail/rotate1.jpg");
-        
-        AWSHtmlEmailMessage message = new AWSHtmlEmailMessage();
-        
-        //check correctness
+
+        final AWSHtmlEmailMessage message = new AWSHtmlEmailMessage();
+
+        // check correctness
         assertTrue(message.getInlineAttachments().isEmpty());
-        
-        InlineAttachment inlineAttachment = new InlineAttachment(attachment);
-        
+
+        final InlineAttachment inlineAttachment = new InlineAttachment(attachment);
+
         message.getInlineAttachments().add(inlineAttachment);
-        
-        //check correctness
+
+        // check correctness
         assertTrue(message.getInlineAttachments().contains(inlineAttachment));
-        assertEquals(message.getInlineAttachments().size(), 1);        
-    }    
+        assertEquals(message.getInlineAttachments().size(), 1);
+    }
 }

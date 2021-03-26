@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,18 +15,15 @@
  */
 package com.irurueta.server.commons.email;
 
+import com.amazonaws.services.simpleemail.model.Message;
 import com.irurueta.server.commons.configuration.ConfigurationException;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
-
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
 
 import static org.junit.Assert.*;
 
@@ -39,12 +36,9 @@ public class AWSMailSenderTest {
     public static final long AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS = 3600000;
 
 
-    public AWSMailSenderTest() {
-    }
-
     @BeforeClass
     public static void setUpClass() throws ConfigurationException, IOException {
-        Properties props = new Properties();
+        final Properties props = new Properties();
         props.load(new FileInputStream(PROPS_FILE));
         props.setProperty(MailConfigurationFactory.
                         AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS_PROPERTY,
@@ -54,25 +48,18 @@ public class AWSMailSenderTest {
         MailConfigurationFactory.getInstance().reconfigure(props);
     }
 
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
+    @Test
+    public void testConstants() {
+        assertEquals(3600000, AWSMailSender.DEFAULT_CHECK_QUOTA_AFTER_MILLIS);
+        assertEquals(0, AWSMailSender.MIN_CHECK_QUOTA_AFTER_MILLIS);
     }
 
     @Test
     public void testGetInstanceAndReset() {
-        AWSMailSender mailSender =
-                AWSMailSender.getInstance();
+        final AWSMailSender mailSender = AWSMailSender.getInstance();
         assertNotNull(mailSender);
 
-        MailConfiguration cfg = MailConfigurationFactory.getInstance().
+        final MailConfiguration cfg = MailConfigurationFactory.getInstance().
                 getConfiguration();
 
         assertNotNull(mailSender.getCredentials());
@@ -89,13 +76,13 @@ public class AWSMailSenderTest {
                 AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS);
         assertEquals(mailSender.getProvider(), EmailProvider.AWS_MAIL);
 
-        AWSMailSender mailSender2 = AWSMailSender.getInstance();
+        final AWSMailSender mailSender2 = AWSMailSender.getInstance();
         assertSame(mailSender, mailSender2);
 
-        //reset
+        // reset
         AWSMailSender.reset();
 
-        AWSMailSender mailSender3 = AWSMailSender.getInstance();
+        final AWSMailSender mailSender3 = AWSMailSender.getInstance();
 
         assertNotNull(mailSender3.getCredentials());
         assertTrue(mailSender3.getCredentials().isReady());
@@ -117,18 +104,18 @@ public class AWSMailSenderTest {
     @Test
     public void testSendMessage() throws MailNotSentException,
             NotSupportedException, InterruptedException {
-        AWSMailSender mailSender =
-                AWSMailSender.getInstance();
+        final AWSMailSender mailSender = AWSMailSender.getInstance();
 
-        String text = "This is some test mail using AWS SES";
-        String subject = "Test";
+        final String text = "This is some test mail using AWS SES";
+        final String subject = "Test";
 
-        TextEmailMessage message = TextEmailMessage.create(subject, text,
+        TextEmailMessage<?> message = TextEmailMessage.create(subject, text,
                 mailSender);
         message.getTo().add("alberto@irurueta.com");
 
 
-        assertNotNull(mailSender.send(message));
+        //noinspection unchecked
+        assertNotNull(mailSender.send((EmailMessage<Message>) message));
 
         Thread.sleep(SLEEP);
     }
@@ -137,18 +124,18 @@ public class AWSMailSenderTest {
     public void testSendMessageToMultipleRecipients()
             throws MailNotSentException,
             NotSupportedException, InterruptedException {
-        AWSMailSender mailSender =
-                AWSMailSender.getInstance();
+        final AWSMailSender mailSender = AWSMailSender.getInstance();
 
-        String text = "This is a test mail using AWS SES for multiple recipients";
-        String subject = "Multiple recipients test";
+        final String text = "This is a test mail using AWS SES for multiple recipients";
+        final String subject = "Multiple recipients test";
 
-        TextEmailMessage message = TextEmailMessage.create(subject, text,
+        final TextEmailMessage<?> message = TextEmailMessage.create(subject, text,
                 mailSender);
         message.getTo().add("alberto@irurueta.com");
         message.getTo().add("webmaster@irurueta.com");
 
-        assertNotNull(mailSender.send(message));
+        //noinspection unchecked
+        assertNotNull(mailSender.send((EmailMessage<Message>) message));
 
         Thread.sleep(SLEEP);
     }
@@ -158,17 +145,17 @@ public class AWSMailSenderTest {
             throws MailNotSentException,
             NotSupportedException, InterruptedException {
 
-        AWSMailSender mailSender =
-                AWSMailSender.getInstance();
+        final AWSMailSender mailSender = AWSMailSender.getInstance();
 
-        String text = "Atención. Este mensaje contiene carácteres españoles. AWS SES";
-        String subject = "Prueba de carácteres";
+        final String text = "Atención. Este mensaje contiene carácteres españoles. AWS SES";
+        final String subject = "Prueba de carácteres";
 
-        TextEmailMessage message = TextEmailMessage.create(subject, text,
+        final TextEmailMessage<?> message = TextEmailMessage.create(subject, text,
                 mailSender);
         message.getTo().add("alberto@irurueta.com");
 
-        assertNotNull(mailSender.send(message));
+        //noinspection unchecked
+        assertNotNull(mailSender.send((EmailMessage<Message>) message));
 
         Thread.sleep(SLEEP);
     }
@@ -176,25 +163,24 @@ public class AWSMailSenderTest {
     @Test
     public void testSendMessageWithAttachment() throws MailNotSentException,
             NotSupportedException, InterruptedException {
-        AWSMailSender mailSender =
-                AWSMailSender.getInstance();
+        final AWSMailSender mailSender = AWSMailSender.getInstance();
 
-        String text = "This is some test AWS mail with attachment";
-        String subject = "Test with attachment";
+        final String text = "This is some test AWS mail with attachment";
+        final String subject = "Test with attachment";
 
-        TextEmailMessageWithAttachments message =
-                TextEmailMessageWithAttachments.create(subject, text,
-                        mailSender);
+        final TextEmailMessageWithAttachments<?> message = TextEmailMessageWithAttachments.create(subject, text,
+                mailSender);
         message.getTo().add("alberto@irurueta.com");
 
-        File attachment = new File(
+        final File attachment = new File(
                 "./src/test/java/com/irurueta/server/commons/email/rotate1.jpg");
-        EmailAttachment emailAttachment = new EmailAttachment(attachment,
+        final EmailAttachment emailAttachment = new EmailAttachment(attachment,
                 "image.jpg", "image/jpg");
 
         message.getAttachments().add(emailAttachment);
 
-        assertNotNull(mailSender.send(message));
+        //noinspection unchecked
+        assertNotNull(mailSender.send((EmailMessage<Message>) message));
 
         Thread.sleep(SLEEP);
     }
@@ -203,26 +189,25 @@ public class AWSMailSenderTest {
     public void testSendMessageToMultipleRecipientsWithAttachment()
             throws MailNotSentException,
             NotSupportedException, InterruptedException {
-        AWSMailSender mailSender =
-                AWSMailSender.getInstance();
+        final AWSMailSender mailSender = AWSMailSender.getInstance();
 
-        String text = "This is a test mail for multiple recipients with attachment. AWS SES";
-        String subject = "Multiple recipients test with attachment";
+        final String text = "This is a test mail for multiple recipients with attachment. AWS SES";
+        final String subject = "Multiple recipients test with attachment";
 
-        TextEmailMessageWithAttachments message =
-                TextEmailMessageWithAttachments.create(subject, text,
-                        mailSender);
+        final TextEmailMessageWithAttachments<?> message = TextEmailMessageWithAttachments.create(subject, text,
+                mailSender);
         message.getTo().add("alberto@irurueta.com");
         message.getTo().add("webmaster@irurueta.com");
 
-        File attachment = new File(
+        final File attachment = new File(
                 "./src/test/java/com/irurueta/server/commons/email/rotate1.jpg");
-        EmailAttachment emailAttachment = new EmailAttachment(attachment,
+        final EmailAttachment emailAttachment = new EmailAttachment(attachment,
                 "image.jpg", "image/jpg");
 
         message.getAttachments().add(emailAttachment);
 
-        assertNotNull(mailSender.send(message));
+        //noinspection unchecked
+        assertNotNull(mailSender.send((EmailMessage<Message>) message));
 
         Thread.sleep(SLEEP);
     }
@@ -231,25 +216,24 @@ public class AWSMailSenderTest {
     public void testSendMessageWithNonEnglishCharactersAndAttachment()
             throws MailNotSentException, NotSupportedException, InterruptedException {
 
-        AWSMailSender mailSender =
-                AWSMailSender.getInstance();
+        final AWSMailSender mailSender = AWSMailSender.getInstance();
 
-        String text = "Atención. Este mensaje contiene carácteres españoles y tiene un archivo adjunto. AWS SES";
-        String subject = "Prueba de carácteres con archivo adjunto";
+        final String text = "Atención. Este mensaje contiene carácteres españoles y tiene un archivo adjunto. AWS SES";
+        final String subject = "Prueba de carácteres con archivo adjunto";
 
-        TextEmailMessageWithAttachments message =
-                TextEmailMessageWithAttachments.create(subject, text,
-                        mailSender);
+        final TextEmailMessageWithAttachments<?> message = TextEmailMessageWithAttachments.create(subject, text,
+                mailSender);
         message.getTo().add("alberto@irurueta.com");
 
-        File attachment = new File(
+        final File attachment = new File(
                 "./src/test/java/com/irurueta/server/commons/email/rotate1.jpg");
-        EmailAttachment emailAttachment = new EmailAttachment(attachment,
+        final EmailAttachment emailAttachment = new EmailAttachment(attachment,
                 "image.jpg", "image/jpg");
 
         message.getAttachments().add(emailAttachment);
 
-        assertNotNull(mailSender.send(message));
+        //noinspection unchecked
+        assertNotNull(mailSender.send((EmailMessage<Message>) message));
 
         Thread.sleep(SLEEP);
     }
@@ -257,41 +241,41 @@ public class AWSMailSenderTest {
     @Test
     public void testSendHtmlMessageWithEmailAndInlineAttachments()
             throws NotSupportedException, MailNotSentException, InterruptedException {
-        AWSMailSender mailSender =
-                AWSMailSender.getInstance();
+        final AWSMailSender mailSender = AWSMailSender.getInstance();
 
-        String html = "<h1>HTML email using AWS SES</h1>"
+        final String html = "<h1>HTML email using AWS SES</h1>"
                 + "<h2>Inline image with id</h2>"
                 + "<img src=\"cid:image\"/>"
                 + "<h2>Inline image without id</h2>"
                 + "<img src=\"cid:{0}\"/>";
-        String alternativeText = "alternative text";
-        String subject = "HTML email";
+        final String alternativeText = "alternative text";
+        final String subject = "HTML email";
 
-        HtmlEmailMessage message = HtmlEmailMessage.create(subject, html,
+        final HtmlEmailMessage<?> message = HtmlEmailMessage.create(subject, html,
                 mailSender);
         message.setAlternativeText(alternativeText);
         message.getTo().add("alberto@irurueta.com");
 
-        File f = new File(
+        final File f = new File(
                 "./src/test/java/com/irurueta/server/commons/email/rotate1.jpg");
 
-        //add inline attachments
+        // add inline attachments
 
-        //inline attachment with id "image"
+        // inline attachment with id "image"
         InlineAttachment inlineAttachment = new InlineAttachment(f, "image",
                 "image/jpg");
         message.getInlineAttachments().add(inlineAttachment);
-        //inline attachment without id
+        // inline attachment without id
         inlineAttachment = new InlineAttachment(f, "image/jpg");
         message.getInlineAttachments().add(inlineAttachment);
 
-        //add email attachment
-        EmailAttachment emailAttachment = new EmailAttachment(f,
+        // add email attachment
+        final EmailAttachment emailAttachment = new EmailAttachment(f,
                 "image.jpg", "image/jpg");
         message.getEmailAttachments().add(emailAttachment);
 
-        assertNotNull(mailSender.send(message));
+        //noinspection unchecked
+        assertNotNull(mailSender.send((EmailMessage<Message>) message));
 
         Thread.sleep(SLEEP);
     }
@@ -303,20 +287,21 @@ public class AWSMailSenderTest {
         MailConfigurationFactory.getInstance().reconfigure(props);
 
         AWSMailSender.reset();
-        AWSMailSender mailSender = AWSMailSender.getInstance();
+        final AWSMailSender mailSender = AWSMailSender.getInstance();
 
-        String text = "Disabled test";
-        String subject = null;
+        final String text = "Disabled test";
+        final String subject = null;
 
-        TextEmailMessage message = TextEmailMessage.create(subject, text,
+        final TextEmailMessage<?> message = TextEmailMessage.create(subject, text,
                 mailSender);
         message.getTo().add("alberto@irurueta.com");
         message.getTo().add("webmaster@irurueta.com");
 
-        assertNull(mailSender.send(message));
+        //noinspection unchecked
+        assertNull(mailSender.send((EmailMessage<Message>) message));
 
 
-        //reset configuration
+        // reset configuration
         props = new Properties();
         props.load(new FileInputStream(PROPS_FILE));
         props.setProperty(MailConfigurationFactory.
@@ -330,12 +315,12 @@ public class AWSMailSenderTest {
 
     @Test
     public void testSendWithCcBccAndNoSubject() throws NotSupportedException {
-        AWSMailSender mailSender = AWSMailSender.getInstance();
+        final AWSMailSender mailSender = AWSMailSender.getInstance();
 
-        String text = "No subject test";
-        String subject = null;
+        final String text = "No subject test";
+        final String subject = null;
 
-        TextEmailMessage message = TextEmailMessage.create(subject, text,
+        final TextEmailMessage<?> message = TextEmailMessage.create(subject, text,
                 mailSender);
         message.getTo().add("alberto@irurueta.com");
         message.getBCC().add("webmaster@irurueta.com");

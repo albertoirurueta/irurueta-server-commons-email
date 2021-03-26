@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,42 +15,24 @@
  */
 package com.irurueta.server.commons.email;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertNotNull;
 
 public class NotSupportedExceptionTest {
-    
-    public NotSupportedExceptionTest() {}
-    
-    @BeforeClass
-    public static void setUpClass() {}
-    
-    @AfterClass
-    public static void tearDownClass() {}
-    
-    @Before
-    public void setUp() {}
-    
-    @After
-    public void tearDown() {}
-    
+
     @Test
     public void testConstructor(){
-        NotSupportedException ex;
-        assertNotNull(ex = new NotSupportedException());
-        
-        ex = null;
-        assertNotNull(ex = new NotSupportedException("message"));
-        
-        ex = null;
-        assertNotNull(ex = new NotSupportedException(new Exception()));
-        
-        ex = null;
-        assertNotNull(ex = new NotSupportedException("message", 
-                new Exception()));
+        NotSupportedException ex = new NotSupportedException();
+        assertNotNull(ex);
+
+        ex = new NotSupportedException("message");
+        assertNotNull(ex);
+
+        ex = new NotSupportedException(new Exception());
+        assertNotNull(ex);
+
+        ex = new NotSupportedException("message", new Exception());
+        assertNotNull(ex);
     }
 }

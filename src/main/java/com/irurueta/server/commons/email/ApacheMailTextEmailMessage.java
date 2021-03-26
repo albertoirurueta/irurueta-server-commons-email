@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,7 @@ import org.apache.commons.mail.MultiPartEmail;
 /**
  * Class containing a text only email message to be sent using Apache Mail.
  */
-public class ApacheMailTextEmailMessage extends 
+public class ApacheMailTextEmailMessage extends
         TextEmailMessage<MultiPartEmail> {
     /**
      * Constructor.
@@ -29,37 +29,40 @@ public class ApacheMailTextEmailMessage extends
     public ApacheMailTextEmailMessage() {
         super();
     }
-    
+
     /**
      * Constructor with email subject.
+     *
      * @param subject subject to be set on email.
      */
-    public ApacheMailTextEmailMessage(String subject) {
+    public ApacheMailTextEmailMessage(final String subject) {
         super(subject);
     }
-    
+
     /**
      * Constructor with email subject and content text.
+     *
      * @param subject subject to be set on email.
-     * @param text textual email content.
+     * @param text    textual email content.
      */
-    public ApacheMailTextEmailMessage(String subject, String text) {
+    public ApacheMailTextEmailMessage(final String subject, final String text) {
         super(subject, text);
     }
-    
+
     /**
      * Builds email content to be sent using an email sender.
+     *
      * @param content instance where content must be set.
-     * @throws com.irurueta.server.commons.email.EmailException if setting mail 
-     * content fails.
+     * @throws com.irurueta.server.commons.email.EmailException if setting mail
+     *                                                          content fails.
      */
     @Override
-    protected void buildContent(MultiPartEmail content) 
+    protected void buildContent(final MultiPartEmail content)
             throws com.irurueta.server.commons.email.EmailException {
-        try {            
+        try {
             content.setMsg(getText());
-        } catch (EmailException e) {
+        } catch (final EmailException e) {
             throw new com.irurueta.server.commons.email.EmailException(e);
         }
-    }    
+    }
 }

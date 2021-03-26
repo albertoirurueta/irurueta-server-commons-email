@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,7 @@ package com.irurueta.server.commons.email;
  * Raised if a given feature is not supported.
  */
 public class NotSupportedException extends EmailException {
-    
+
     /**
      * Constructor.
      */
@@ -29,28 +29,31 @@ public class NotSupportedException extends EmailException {
 
     /**
      * Constructor with message.
+     *
      * @param message message describing the cause of the exception.
-     */    
-    public NotSupportedException(String message) {
+     */
+    public NotSupportedException(final String message) {
         super(message);
     }
 
     /**
      * Constructor with message and cause.
+     *
      * @param message message describing the cause of the exception.
-     * @param cause originating exception that caused this exception. This can
-     * be used to obtain stack traces.
-     */    
-    public NotSupportedException(String message, Throwable cause) {
+     * @param cause   originating exception that caused this exception. This can
+     *                be used to obtain stack traces.
+     */
+    public NotSupportedException(final String message, final Throwable cause) {
         super(message, cause);
     }
 
     /**
      * Constructor with cause.
+     *
      * @param cause originating exception that caused this exception. This can
-     * be used to obtain stack traces.
-     */    
-    public NotSupportedException(Throwable cause) {
+     *              be used to obtain stack traces.
+     */
+    public NotSupportedException(final Throwable cause) {
         super(cause);
-    }        
+    }
 }

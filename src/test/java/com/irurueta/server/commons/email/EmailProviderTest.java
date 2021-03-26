@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,49 +15,33 @@
  */
 package com.irurueta.server.commons.email;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
 public class EmailProviderTest {
-    
-    public EmailProviderTest() {}
-    
-    @BeforeClass
-    public static void setUpClass() {}
-    
-    @AfterClass
-    public static void tearDownClass() {}
-    
-    @Before
-    public void setUp() {}
-    
-    @After
-    public void tearDown() {}
-    
+
     @Test
-    public void testFromValue(){
+    public void testFromValue() {
         EmailProvider provider = EmailProvider.fromValue("java_mail");
         assertEquals(provider, EmailProvider.JAVA_MAIL);
-        
+
         provider = EmailProvider.fromValue("apache_mail");
         assertEquals(provider, EmailProvider.APACHE_MAIL);
-        
+
         provider = EmailProvider.fromValue("aws_mail");
         assertEquals(provider, EmailProvider.AWS_MAIL);
-        
+
         provider = EmailProvider.fromValue("none");
         assertNull(provider);
-        
+
         provider = EmailProvider.fromValue("other");
         assertNull(provider);
     }
-    
+
     @Test
-    public void testGetValue(){
+    public void testGetValue() {
         assertEquals(EmailProvider.JAVA_MAIL.getValue(), "java_mail");
         assertEquals(EmailProvider.APACHE_MAIL.getValue(), "apache_mail");
         assertEquals(EmailProvider.AWS_MAIL.getValue(), "aws_mail");

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,7 @@ public class EmailAttachment extends BaseAttachment {
      * Constructor with file attachment.
      * @param attachment file being attached.
      */
-    public EmailAttachment(File attachment) {
+    public EmailAttachment(final File attachment) {
         super(attachment);
         mName = attachment.getName();
     }
@@ -41,7 +41,7 @@ public class EmailAttachment extends BaseAttachment {
      * @param attachment file being attached.
      * @param contentType MIME type of the file being attached.
      */
-    public EmailAttachment(File attachment, String contentType) {
+    public EmailAttachment(final File attachment, final String contentType) {
         super(attachment, contentType);
         mName = attachment.getName();
     }
@@ -53,7 +53,7 @@ public class EmailAttachment extends BaseAttachment {
      * @param name file name shown to the receiver.
      * @param contentType MIME type of the file being attached.
      */
-    public EmailAttachment(File attachment, String name, String contentType) {
+    public EmailAttachment(final File attachment, final String name, final String contentType) {
         super(attachment, contentType);
         mName = name;
     }
@@ -72,7 +72,7 @@ public class EmailAttachment extends BaseAttachment {
      * to be the real attachment file name on the server.
      * @param name file name shown to the receiver.
      */
-    public void setName(String name) {
+    public void setName(final String name) {
         this.mName = name;
     }    
 }

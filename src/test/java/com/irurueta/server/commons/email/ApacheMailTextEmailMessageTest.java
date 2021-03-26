@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,35 +15,19 @@
  */
 package com.irurueta.server.commons.email;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ApacheMailTextEmailMessageTest {
-    
-    public ApacheMailTextEmailMessageTest() {}
-    
-    @BeforeClass
-    public static void setUpClass() {}
-    
-    @AfterClass
-    public static void tearDownClass() {}
-    
-    @Before
-    public void setUp() {}
-    
-    @After
-    public void tearDown() {}
-    
+
     @Test
-    public void testConstructor() throws NotSupportedException{
-        //test empty constructor
+    public void testConstructor() throws NotSupportedException {
+        // test empty constructor
         ApacheMailTextEmailMessage message = new ApacheMailTextEmailMessage();
 
-        //check correctness
+        // check correctness
         assertTrue(message.getText().isEmpty());
         assertTrue(message.getTo().isEmpty());
         assertTrue(message.isToSupported());
@@ -52,11 +36,11 @@ public class ApacheMailTextEmailMessageTest {
         assertTrue(message.getBCC().isEmpty());
         assertTrue(message.isBCCSupported());
         assertTrue(message.getSubject().isEmpty());
-        
-                //test constructor with subject
+
+        // test constructor with subject
         message = new ApacheMailTextEmailMessage("subject");
-        
-        //check correctness
+
+        // check correctness
         assertTrue(message.getText().isEmpty());
         assertTrue(message.getTo().isEmpty());
         assertTrue(message.isToSupported());
@@ -65,11 +49,11 @@ public class ApacheMailTextEmailMessageTest {
         assertTrue(message.getBCC().isEmpty());
         assertTrue(message.isBCCSupported());
         assertEquals(message.getSubject(), "subject");
-        
-        //test constructor with subject and text
+
+        // test constructor with subject and text
         message = new ApacheMailTextEmailMessage("subject", "text");
-        
-        //check correctness
+
+        // check correctness
         assertEquals(message.getText(), "text");
         assertTrue(message.getTo().isEmpty());
         assertTrue(message.isToSupported());
@@ -77,81 +61,81 @@ public class ApacheMailTextEmailMessageTest {
         assertTrue(message.isCCSupported());
         assertTrue(message.getBCC().isEmpty());
         assertTrue(message.isBCCSupported());
-        assertEquals(message.getSubject(), "subject");        
+        assertEquals(message.getSubject(), "subject");
     }
-    
+
     @Test
-    public void testGetSetText(){
-        ApacheMailTextEmailMessage message = new ApacheMailTextEmailMessage();
-        
-        //check correctness
+    public void testGetSetText() {
+        final ApacheMailTextEmailMessage message = new ApacheMailTextEmailMessage();
+
+        // check correctness
         assertTrue(message.getText().isEmpty());
-        
-        //set new text
-        String text = "text";
+
+        // set new text
+        final String text = "text";
         message.setText(text);
-        
-        //check correctness
+
+        // check correctness
         assertEquals(message.getText(), text);
     }
-    
+
     @Test
-    public void testGetTo() throws NotSupportedException{
-        ApacheMailTextEmailMessage message = new ApacheMailTextEmailMessage();
-        
-        //check correctness
+    public void testGetTo() throws NotSupportedException {
+        final ApacheMailTextEmailMessage message = new ApacheMailTextEmailMessage();
+
+        // check correctness
         assertTrue(message.getTo().isEmpty());
-        
-        //add destination
+
+        // add destination
         message.getTo().add("alberto@irurueta.com");
-        
-        //check correctness
+
+        // check correctness
         assertEquals(message.getTo().size(), 1);
         assertTrue(message.getTo().contains("alberto@irurueta.com"));
     }
-    
+
     @Test
-    public void testGetCC() throws NotSupportedException{
-        ApacheMailTextEmailMessage message = new ApacheMailTextEmailMessage();
-        
-        //check correctness
+    public void testGetCC() throws NotSupportedException {
+        final ApacheMailTextEmailMessage message = new ApacheMailTextEmailMessage();
+
+        // check correctness
         assertTrue(message.getCC().isEmpty());
-        
-        //add destination
+
+        // add destination
         message.getCC().add("alberto@irurueta.com");
-        
-        //check correctness
+
+        // check correctness
         assertEquals(message.getCC().size(), 1);
         assertTrue(message.getCC().contains("alberto@irurueta.com"));
     }
-    
+
     @Test
-    public void testGetBCC() throws NotSupportedException{
-        ApacheMailTextEmailMessage message = new ApacheMailTextEmailMessage();
-        
-        //check correctness
+    public void testGetBCC() throws NotSupportedException {
+        final ApacheMailTextEmailMessage message = new ApacheMailTextEmailMessage();
+
+        // check correctness
         assertTrue(message.getBCC().isEmpty());
-        
-        //add destination
+
+        // add destination
         message.getBCC().add("alberto@irurueta.com");
-        
-        //check correctness
+
+        // check correctness
         assertEquals(message.getBCC().size(), 1);
         assertTrue(message.getBCC().contains("alberto@irurueta.com"));
     }
-    
+
     @Test
-    public void testGetSetSubject(){
-        ApacheMailTextEmailMessage message = new ApacheMailTextEmailMessage();
-        
-        //check correctness
+    public void testGetSetSubject() {
+        final ApacheMailTextEmailMessage message = new ApacheMailTextEmailMessage();
+
+        // check correctness
         assertTrue(message.getSubject().isEmpty());
-        
-        //set subject
-        String subject = "subject";
+
+        // set subject
+        final String subject = "subject";
         message.setSubject(subject);
-        
-        //check correctness
+
+        // check correctness
         assertEquals(message.getSubject(), subject);
     }
 }

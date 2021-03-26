@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,14 +27,19 @@ import java.util.regex.Pattern;
  * implementation.
  */
 public abstract class EmailSender<E> {
-    
+
+    /**
+     * Regular expression to validate emails.
+     */
+    private static final String EMAIL_REGEX = "^[\\w.-]+@([\\w.-]+\\.)+[a-z]{2,4}$";
+
     /**
      * Factory method to obtain singleton instance using current mail
      * configuration.
      * @return singleton instance.
      * @throws ConfigurationException if mail configuration fails.
      */
-    public static EmailSender getInstance() 
+    public static EmailSender<?> getInstance()
             throws ConfigurationException {
         
         return getInstance(MailConfigurationFactory.getInstance().
@@ -46,7 +51,7 @@ public abstract class EmailSender<E> {
      * @param provider provider to use.
      * @return an email sender controller singleton.
      */
-    protected static EmailSender getInstance(EmailProvider provider) {
+    protected static EmailSender<?> getInstance(final EmailProvider provider) {
         switch (provider) {
             case AWS_MAIL:
                 return AWSMailSender.getInstance();
@@ -57,7 +62,7 @@ public abstract class EmailSender<E> {
                 return JavaMailSender.getInstance();
         }
     }
-    
+
     /**
      * Determines if provided string corresponds to an email address.
      * This method checks proper format of provided string to match the 
@@ -66,7 +71,7 @@ public abstract class EmailSender<E> {
      * @return true if provided string is a valid email address, false 
      * otherwise.
      */    
-    public static boolean isValidEmailAddress(String email) {
+    public static boolean isValidEmailAddress(final String email) {
         /*
         Email format: A valid email address will have following format:
         [\\w\\.-]+: Begins with word characters, (may include periods and hypens).
@@ -81,12 +86,10 @@ public abstract class EmailSender<E> {
         abc@xyz.net; ab.c@tx.gov
         */
 
-        //Initialize reg ex for email.
-        String expression = "^[\\w\\.-]+@([\\w\\.-]+\\.)+[a-zA-Z]{2,4}$";
-        CharSequence inputStr = email;
-        //Make the comparison case-insensitive.
-        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(inputStr);
+        // Initialize reg ex for email.
+        // Make the comparison case-insensitive.
+        final Pattern pattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
+        final Matcher matcher = pattern.matcher(email);
         return matcher.matches();        
     }
     
@@ -96,7 +99,7 @@ public abstract class EmailSender<E> {
      * @return id of message that has been sent.
      * @throws MailNotSentException if mail couldn't be sent.
      */
-    public abstract String send(EmailMessage<E> m) throws MailNotSentException;
+    public abstract String send(final EmailMessage<E> m) throws MailNotSentException;
     
     /**
      * Returns provider used by this email sender.

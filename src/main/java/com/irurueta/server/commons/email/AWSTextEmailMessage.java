@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,7 +36,7 @@ public class AWSTextEmailMessage extends TextEmailMessage<Message> {
      * Constructor with email subject.
      * @param subject subject to be set on email.
      */
-    public AWSTextEmailMessage(String subject) {
+    public AWSTextEmailMessage(final String subject) {
         super(subject);
     }
     
@@ -45,7 +45,7 @@ public class AWSTextEmailMessage extends TextEmailMessage<Message> {
      * @param subject subject to be set on email.
      * @param text textual email content.
      */
-    public AWSTextEmailMessage(String subject, String text) {
+    public AWSTextEmailMessage(final String subject, final String text) {
         super(subject, text);
     }
     
@@ -55,8 +55,8 @@ public class AWSTextEmailMessage extends TextEmailMessage<Message> {
      * @throws EmailException if setting mail content fails.
      */
     @Override
-    protected void buildContent(Message message) throws EmailException {
-        Destination destination = new Destination(getTo());
+    protected void buildContent(final Message message) throws EmailException {
+        final Destination destination = new Destination(getTo());
         if (getBCC() != null && !getBCC().isEmpty()) {
             destination.setBccAddresses(getBCC());
         }
@@ -65,16 +65,16 @@ public class AWSTextEmailMessage extends TextEmailMessage<Message> {
         }
                 
         if (getSubject() != null) {
-            Content subject = new Content(getSubject());
-            //set utf-8 enconding to support all languages
+            final Content subject = new Content(getSubject());
+            // set utf-8 encoding to support all languages
             subject.setCharset("UTF-8"); 
             message.setSubject(subject);
         }
                 
         if (getText() != null) {
-            Body body = new Body();
-            Content content = new Content(getText());
-            //set utf-8 enconding to support all languages            
+            final Body body = new Body();
+            final Content content = new Content(getText());
+            //set utf-8 encoding to support all languages
             content.setCharset("UTF-8"); 
         
             body.setText(content);

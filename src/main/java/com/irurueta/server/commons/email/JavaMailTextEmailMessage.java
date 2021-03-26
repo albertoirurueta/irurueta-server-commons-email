@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,35 +29,38 @@ public class JavaMailTextEmailMessage extends TextEmailMessage<MimeMessage> {
     public JavaMailTextEmailMessage() {
         super();
     }
-    
+
     /**
      * Constructor with email subject.
+     *
      * @param subject subject to be set on email.
      */
-    public JavaMailTextEmailMessage(String subject) {
+    public JavaMailTextEmailMessage(final String subject) {
         super(subject);
     }
-    
+
     /**
      * Constructor with email subject and content text.
+     *
      * @param subject subject to be set on email.
-     * @param text textual email content.
+     * @param text    textual email content.
      */
-    public JavaMailTextEmailMessage(String subject, String text) {
+    public JavaMailTextEmailMessage(final String subject, final String text) {
         super(subject, text);
     }
-    
+
     /**
      * Builds email content to be sent using an email sender.
+     *
      * @param content instance where content must be set.
      * @throws EmailException if setting mail content fails.
      */
     @Override
-    protected void buildContent(MimeMessage content) throws EmailException {
-        try {            
+    protected void buildContent(final MimeMessage content) throws EmailException {
+        try {
             content.setText(getText(), "utf-8");
         } catch (MessagingException e) {
             throw new EmailException(e);
         }
-    }    
+    }
 }

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,42 +15,24 @@
  */
 package com.irurueta.server.commons.email;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static org.junit.Assert.assertNotNull;
+
 public class MailNotSentExceptionTest {
-    
-    public MailNotSentExceptionTest() {}
-    
-    @BeforeClass
-    public static void setUpClass() {}
-    
-    @AfterClass
-    public static void tearDownClass() {}
-    
-    @Before
-    public void setUp() {}
-    
-    @After
-    public void tearDown() {}
-    
+
     @Test
-    public void testConstructor(){
-        MailNotSentException ex;
-        assertNotNull(ex = new MailNotSentException());
-        
-        ex = null;
-        assertNotNull(ex = new MailNotSentException("message"));
-        
-        ex = null;
-        assertNotNull(ex = new MailNotSentException(new Exception()));
-        
-        ex = null;
-        assertNotNull(ex = new MailNotSentException("message", 
-                new Exception()));
+    public void testConstructor() {
+        MailNotSentException ex = new MailNotSentException();
+        assertNotNull(ex);
+
+        ex = new MailNotSentException("message");
+        assertNotNull(ex);
+
+        ex = new MailNotSentException(new Exception());
+        assertNotNull(ex);
+
+        ex = new MailNotSentException("message", new Exception());
+        assertNotNull(ex);
     }
 }

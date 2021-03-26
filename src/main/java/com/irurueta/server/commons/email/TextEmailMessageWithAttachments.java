@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,253 +20,273 @@ import java.util.List;
 
 /**
  * Base class for text only email messages containing file attachments.
+ *
  * @param <E> internal representation of email using by internal client.
  */
-public abstract class TextEmailMessageWithAttachments<E> extends 
+public abstract class TextEmailMessageWithAttachments<E> extends
         TextEmailMessage<E> {
 
     /**
      * List of attachments to be included in email.
      */
     private List<EmailAttachment> mAttachments;
-    
+
     /**
      * Constructor.
      */
-    public TextEmailMessageWithAttachments() {
+    protected TextEmailMessageWithAttachments() {
         super();
-        mAttachments = new ArrayList<EmailAttachment>();
+        mAttachments = new ArrayList<>();
     }
-    
+
     /**
      * Constructor with email subject.
+     *
      * @param subject subject to be set.
-     */    
-    public TextEmailMessageWithAttachments(String subject) {
+     */
+    protected TextEmailMessageWithAttachments(final String subject) {
         super(subject);
-        mAttachments = new ArrayList<EmailAttachment>();
+        mAttachments = new ArrayList<>();
     }
-    
+
     /**
      * Constructor with email subject and textual content.
+     *
      * @param subject subject to be set.
-     * @param text textual content.
-     */    
-    public TextEmailMessageWithAttachments(String subject, String text) {
+     * @param text    textual content.
+     */
+    protected TextEmailMessageWithAttachments(final String subject, final String text) {
         super(subject, text);
-        mAttachments = new ArrayList<EmailAttachment>();
+        mAttachments = new ArrayList<>();
     }
-    
+
     /**
      * Constructor with list of files to be attached.
+     *
      * @param attachments list of files to be attached.
      */
-    public TextEmailMessageWithAttachments(List<EmailAttachment> attachments) {
+    protected TextEmailMessageWithAttachments(final List<EmailAttachment> attachments) {
         super();
         mAttachments = attachments;
     }
-    
+
     /**
      * Constructor with email subject and list of files to be attached.
-     * @param subject subject to be set.
+     *
+     * @param subject     subject to be set.
      * @param attachments list of files to be attached.
      */
-    public TextEmailMessageWithAttachments(String subject, 
-            List<EmailAttachment> attachments) {
+    protected TextEmailMessageWithAttachments(final String subject,
+                                              final List<EmailAttachment> attachments) {
         super(subject);
         mAttachments = attachments;
     }
-    
+
     /**
      * Constructor with email subject, textual content and list of files to be
      * attached.
-     * @param subject subject to be set.
-     * @param text textual content.
+     *
+     * @param subject     subject to be set.
+     * @param text        textual content.
      * @param attachments list of files to be attached.
      */
-    public TextEmailMessageWithAttachments(String subject, String text,
-            List<EmailAttachment> attachments) {
+    protected TextEmailMessageWithAttachments(final String subject, final String text,
+                                              final List<EmailAttachment> attachments) {
         super(subject, text);
         mAttachments = attachments;
     }
-    
+
     /**
      * Get list of files to be attached.
+     *
      * @return list of files to be attached.
      */
     public List<EmailAttachment> getAttachments() {
         return mAttachments;
     }
-    
+
     /**
      * Sets list of files to be attached.
+     *
      * @param attachments list of files to be attached.
      */
-    public void setAttachments(List<EmailAttachment> attachments) {
+    public void setAttachments(final List<EmailAttachment> attachments) {
         mAttachments = attachments;
     }
-    
+
     /**
-     * Creates a textual email message with attachments using provided email 
+     * Creates a textual email message with attachments using provided email
      * sender.
+     *
      * @param sender class in charge of sending this email.
      * @return a textual email message with attachments.
      */
-    public static TextEmailMessageWithAttachments create(
-            EmailSender sender) {
+    public static TextEmailMessageWithAttachments<?> create(
+            final EmailSender<?> sender) {
         return create("", sender);
     }
-    
+
     /**
-     * Creates a textual email message with attachments using given email 
+     * Creates a textual email message with attachments using given email
      * provider.
+     *
      * @param provider email provider.
      * @return a textual email message with attachments.
-     */    
-    protected static TextEmailMessageWithAttachments create(
-            EmailProvider provider) {
+     */
+    protected static TextEmailMessageWithAttachments<?> create(
+            final EmailProvider provider) {
         return create("", provider);
     }
-    
+
     /**
-     * Creates a textual email message with attachments having provided subject 
+     * Creates a textual email message with attachments having provided subject
      * and using provided email sender.
+     *
      * @param subject email subject to be set.
-     * @param sender class in charge of sending this email.
+     * @param sender  class in charge of sending this email.
      * @return a textual email message with attachments.
-     */    
-    public static TextEmailMessageWithAttachments create(String subject, 
-            EmailSender sender) {
+     */
+    public static TextEmailMessageWithAttachments<?> create(
+            final String subject, final EmailSender<?> sender) {
         return create(subject, "", sender);
     }
-    
+
     /**
-     * Creates a textual email message with attachments having provided subject 
+     * Creates a textual email message with attachments having provided subject
      * and given email provider.
-     * @param subject email subject to be set.
+     *
+     * @param subject  email subject to be set.
      * @param provider email provider.
      * @return a textual email message with attachments.
-     */    
-    protected static TextEmailMessageWithAttachments create(String subject,
-            EmailProvider provider) {
+     */
+    protected static TextEmailMessageWithAttachments<?> create(
+            final String subject, final EmailProvider provider) {
         return create(subject, "", provider);
     }
-    
+
     /**
      * Creates a textual email message with attachments having provided subject,
      * text content and using provided email sender.
+     *
      * @param subject email subject to be set.
-     * @param text text content of email.
-     * @param sender class in charge of sending this email.
+     * @param text    text content of email.
+     * @param sender  class in charge of sending this email.
      * @return a textual email message with attachments.
-     */    
-    public static TextEmailMessageWithAttachments create(String subject,
-            String text, EmailSender sender) {
+     */
+    public static TextEmailMessageWithAttachments<?> create(
+            final String subject, final String text, final EmailSender<?> sender) {
         return create(subject, text, sender.getProvider());
     }
-    
+
     /**
      * Creates a textual email message with attachments having provided subject,
      * text content and using given email provider.
-     * @param subject email subject to be set.
-     * @param text text content of email.
+     *
+     * @param subject  email subject to be set.
+     * @param text     text content of email.
      * @param provider email provider.
      * @return a textual email message with attachments.
-     */    
-    protected static TextEmailMessageWithAttachments create(String subject,
-            String text, EmailProvider provider) {
-        return create(subject, text, new ArrayList<EmailAttachment>(), 
+     */
+    protected static TextEmailMessageWithAttachments<?> create(
+            final String subject, final String text, final EmailProvider provider) {
+        return create(subject, text, new ArrayList<EmailAttachment>(),
                 provider);
     }
-    
+
     /**
-     * Creates a textual email message with provided attachments and using 
+     * Creates a textual email message with provided attachments and using
      * provided email sender.
+     *
      * @param attachments list of files to be attached.
-     * @param sender class in charge of sending this email.
+     * @param sender      class in charge of sending this email.
      * @return a textual email message with attachments.
      */
-    public static TextEmailMessageWithAttachments create(
-            List<EmailAttachment> attachments, EmailSender sender) {
+    public static TextEmailMessageWithAttachments<?> create(
+            final List<EmailAttachment> attachments, final EmailSender<?> sender) {
         return create("", attachments, sender);
     }
-    
+
     /**
      * Creates a textual email message with provided attachments and using given
      * email provider.
+     *
      * @param attachments list of files to be attached.
-     * @param provider email provider.
+     * @param provider    email provider.
      * @return a textual email message with attachments.
      */
-    protected static TextEmailMessageWithAttachments create(
-            List<EmailAttachment> attachments, EmailProvider provider) {
+    protected static TextEmailMessageWithAttachments<?> create(
+            final List<EmailAttachment> attachments, final EmailProvider provider) {
         return create("", attachments, provider);
     }
-    
+
     /**
      * Creates a textual email message with provided attachments, subject and
      * using provided email sender.
-     * @param subject subject to be set.
+     *
+     * @param subject     subject to be set.
      * @param attachments list of files to be attached.
-     * @param sender class in charge of sending this email.
+     * @param sender      class in charge of sending this email.
      * @return a textual email message with attachments.
      */
-    public static TextEmailMessageWithAttachments create(String subject,
-            List<EmailAttachment> attachments, EmailSender sender) {
+    public static TextEmailMessageWithAttachments<?> create(
+            final String subject, final List<EmailAttachment> attachments, final EmailSender<?> sender) {
         return create(subject, "", attachments, sender);
     }
-    
+
     /**
      * Creates a textual email message with provided attachments, subject and
      * using given email provider.
-     * @param subject subject to be set.
+     *
+     * @param subject     subject to be set.
      * @param attachments list of files to be attached.
-     * @param provider email provider.
+     * @param provider    email provider.
      * @return a textual email message with attachments.
      */
-    protected static TextEmailMessageWithAttachments create(String subject,
-            List<EmailAttachment> attachments, EmailProvider provider) {
+    protected static TextEmailMessageWithAttachments<?> create(
+            final String subject, final List<EmailAttachment> attachments, final EmailProvider provider) {
         return create(subject, "", attachments, provider);
-    }    
-    
+    }
+
     /**
      * Creates a textual email message with provided attachments, subject,
      * text content and using provided email sender.
-     * @param subject subject to be set.
-     * @param text email text content.
+     *
+     * @param subject     subject to be set.
+     * @param text        email text content.
      * @param attachments list of files to be attached.
-     * @param sender class in charge of sending this email.
+     * @param sender      class in charge of sending this email.
      * @return a textual email message with attachments.
      */
-    public static TextEmailMessageWithAttachments create(String subject,
-            String text, List<EmailAttachment> attachments, 
-            EmailSender sender) {
+    public static TextEmailMessageWithAttachments<?> create(
+            final String subject, final String text, final List<EmailAttachment> attachments,
+            final EmailSender<?> sender) {
         return create(subject, text, attachments, sender.getProvider());
     }
-    
+
     /**
      * Creates a textual email message with provided attachments, subject, text
      * content and using given email provider.
-     * @param subject subject to be set.
-     * @param text email text content.
+     *
+     * @param subject     subject to be set.
+     * @param text        email text content.
      * @param attachments list of files to be attached.
-     * @param provider email provider.
+     * @param provider    email provider.
      * @return a textual email message with attachments.
      */
-    protected static TextEmailMessageWithAttachments create(String subject, 
-            String text, List<EmailAttachment> attachments, 
-            EmailProvider provider) {
-        
+    protected static TextEmailMessageWithAttachments<?> create(
+            final String subject, final String text, final List<EmailAttachment> attachments,
+            final EmailProvider provider) {
+
         switch (provider) {
             case AWS_MAIL:
-                return new AWSTextEmailMessageWithAttachments(subject, text, 
+                return new AWSTextEmailMessageWithAttachments(subject, text,
                         attachments);
             case APACHE_MAIL:
-                return new ApacheMailTextEmailMessageWithAttachments(subject, 
+                return new ApacheMailTextEmailMessageWithAttachments(subject,
                         text, attachments);
             case JAVA_MAIL:
             default:
-                return new JavaMailTextEmailMessageWithAttachments(subject, 
+                return new JavaMailTextEmailMessageWithAttachments(subject,
                         text, attachments);
         }
     }

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -40,13 +40,13 @@ public enum EmailProvider {
     /**
      * String representation of this enumerator.
      */
-    private String mValue;
+    private final String mValue;
     
     /**
      * Constructor.
      * @param value string representation.
      */
-    EmailProvider(String value) {
+    EmailProvider(final String value) {
         mValue = value;
     }
     
@@ -64,7 +64,7 @@ public enum EmailProvider {
      * @param value string representation.
      * @return enumerator value.
      */
-    public static EmailProvider fromValue(String value) {
+    public static EmailProvider fromValue(final String value) {
         if (value != null) {
             if (value.equalsIgnoreCase("java_mail")) {
                 return JAVA_MAIL;

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,67 +16,55 @@
 package com.irurueta.server.commons.email;
 
 import com.irurueta.server.commons.configuration.ConfigurationException;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class TextEmailMessageWithAttachmentsTest {
-    
+
     public static final String PROPS_FILE = "./java-mail.properties";
-    
-    public TextEmailMessageWithAttachmentsTest() {}
-    
+
     @BeforeClass
     public static void setUpClass() throws IOException, ConfigurationException {
-        Properties props = new Properties();
+        final Properties props = new Properties();
         props.load(new FileInputStream(PROPS_FILE));
-        props.setProperty(MailConfigurationFactory.MAIL_PROVIDER_PROPERTY, 
-                EmailProvider.JAVA_MAIL.toString());                
-        MailConfigurationFactory.getInstance().reconfigure(props);                
+        props.setProperty(MailConfigurationFactory.MAIL_PROVIDER_PROPERTY,
+                EmailProvider.JAVA_MAIL.toString());
+        MailConfigurationFactory.getInstance().reconfigure(props);
     }
-    
-    @AfterClass
-    public static void tearDownClass() {}
-    
-    @Before
-    public void setUp() {}
-    
-    @After
-    public void tearDown() {}
-    
+
     @Test
     public void testCreate() {
-        JavaMailSender mailSender = JavaMailSender.getInstance();
-        
-        //test with mail sender
-        TextEmailMessageWithAttachments email = 
+        final JavaMailSender mailSender = JavaMailSender.getInstance();
+
+        // test with mail sender
+        TextEmailMessageWithAttachments<?> email =
                 TextEmailMessageWithAttachments.create(mailSender);
         assertTrue(email instanceof JavaMailTextEmailMessageWithAttachments);
-        
-        //test with provider
+
+        // test with provider
         email = TextEmailMessageWithAttachments.create(EmailProvider.AWS_MAIL);
-        assertTrue(email instanceof AWSTextEmailMessageWithAttachments);        
+        assertTrue(email instanceof AWSTextEmailMessageWithAttachments);
         email = TextEmailMessageWithAttachments.create(
                 EmailProvider.APACHE_MAIL);
-        assertTrue(email instanceof ApacheMailTextEmailMessageWithAttachments);        
+        assertTrue(email instanceof ApacheMailTextEmailMessageWithAttachments);
         email = TextEmailMessageWithAttachments.create(EmailProvider.JAVA_MAIL);
         assertTrue(email instanceof JavaMailTextEmailMessageWithAttachments);
-        
-        //test with mail sender and subject
+
+        // test with mail sender and subject
         email = TextEmailMessageWithAttachments.create("subject", mailSender);
         assertTrue(email instanceof JavaMailTextEmailMessageWithAttachments);
         assertEquals(email.getSubject(), "subject");
-                
-        //test with provider and subject
-        email = TextEmailMessageWithAttachments.create("subject", 
+
+        // test with provider and subject
+        email = TextEmailMessageWithAttachments.create("subject",
                 EmailProvider.AWS_MAIL);
         assertTrue(email instanceof AWSTextEmailMessageWithAttachments);
         assertEquals(email.getSubject(), "subject");
@@ -84,19 +72,19 @@ public class TextEmailMessageWithAttachmentsTest {
                 EmailProvider.APACHE_MAIL);
         assertTrue(email instanceof ApacheMailTextEmailMessageWithAttachments);
         assertEquals(email.getSubject(), "subject");
-        email = TextEmailMessageWithAttachments.create("subject", 
+        email = TextEmailMessageWithAttachments.create("subject",
                 EmailProvider.JAVA_MAIL);
         assertTrue(email instanceof JavaMailTextEmailMessageWithAttachments);
         assertEquals(email.getSubject(), "subject");
 
-        //test with mail sender, subject and text
-        email = TextEmailMessageWithAttachments.create("subject", "text", 
+        // test with mail sender, subject and text
+        email = TextEmailMessageWithAttachments.create("subject", "text",
                 mailSender);
         assertTrue(email instanceof JavaMailTextEmailMessageWithAttachments);
         assertEquals(email.getSubject(), "subject");
         assertEquals(email.getText(), "text");
-        
-        //test with provider, subject and text
+
+        // test with provider, subject and text
         email = TextEmailMessageWithAttachments.create("subject", "text",
                 EmailProvider.AWS_MAIL);
         assertTrue(email instanceof AWSTextEmailMessageWithAttachments);
@@ -112,15 +100,15 @@ public class TextEmailMessageWithAttachmentsTest {
         assertTrue(email instanceof JavaMailTextEmailMessageWithAttachments);
         assertEquals(email.getSubject(), "subject");
         assertEquals(email.getText(), "text");
-        
-        //test with attachments and sender
-        List<EmailAttachment> attachments = new ArrayList<EmailAttachment>();
+
+        // test with attachments and sender
+        final List<EmailAttachment> attachments = new ArrayList<>();
         email = TextEmailMessageWithAttachments.create(attachments, mailSender);
         assertTrue(email instanceof JavaMailTextEmailMessageWithAttachments);
         assertSame(email.getAttachments(), attachments);
-        
-        //test with attachments and provider
-        email = TextEmailMessageWithAttachments.create(attachments, 
+
+        // test with attachments and provider
+        email = TextEmailMessageWithAttachments.create(attachments,
                 EmailProvider.AWS_MAIL);
         assertTrue(email instanceof AWSTextEmailMessageWithAttachments);
         assertSame(email.getAttachments(), attachments);
@@ -128,20 +116,20 @@ public class TextEmailMessageWithAttachmentsTest {
                 EmailProvider.APACHE_MAIL);
         assertTrue(email instanceof ApacheMailTextEmailMessageWithAttachments);
         assertSame(email.getAttachments(), attachments);
-        email = TextEmailMessageWithAttachments.create(attachments, 
+        email = TextEmailMessageWithAttachments.create(attachments,
                 EmailProvider.JAVA_MAIL);
         assertTrue(email instanceof JavaMailTextEmailMessageWithAttachments);
         assertSame(email.getAttachments(), attachments);
-                
-        //test with subject, attachments and sender
-        email = TextEmailMessageWithAttachments.create("subject", attachments, 
+
+        // test with subject, attachments and sender
+        email = TextEmailMessageWithAttachments.create("subject", attachments,
                 mailSender);
         assertTrue(email instanceof JavaMailTextEmailMessageWithAttachments);
         assertEquals(email.getSubject(), "subject");
         assertSame(email.getAttachments(), attachments);
-        
-        //test with subject, attachments and provider
-        email = TextEmailMessageWithAttachments.create("subject", attachments, 
+
+        // test with subject, attachments and provider
+        email = TextEmailMessageWithAttachments.create("subject", attachments,
                 EmailProvider.AWS_MAIL);
         assertTrue(email instanceof AWSTextEmailMessageWithAttachments);
         assertEquals(email.getSubject(), "subject");
@@ -151,53 +139,53 @@ public class TextEmailMessageWithAttachmentsTest {
         assertTrue(email instanceof ApacheMailTextEmailMessageWithAttachments);
         assertEquals(email.getSubject(), "subject");
         assertSame(email.getAttachments(), attachments);
-        email = TextEmailMessageWithAttachments.create("subject", attachments, 
+        email = TextEmailMessageWithAttachments.create("subject", attachments,
                 EmailProvider.JAVA_MAIL);
         assertTrue(email instanceof JavaMailTextEmailMessageWithAttachments);
         assertEquals(email.getSubject(), "subject");
         assertSame(email.getAttachments(), attachments);
-        
-        //test with subject, text, attachments and sender
-        email = TextEmailMessageWithAttachments.create("subject", "text", 
+
+        // test with subject, text, attachments and sender
+        email = TextEmailMessageWithAttachments.create("subject", "text",
                 attachments, mailSender);
         assertTrue(email instanceof JavaMailTextEmailMessageWithAttachments);
         assertEquals(email.getSubject(), "subject");
         assertEquals(email.getText(), "text");
-        assertSame(email.getAttachments(), attachments); 
-        
-        //test with subject, text, attachments and provider
-        email = TextEmailMessageWithAttachments.create("subject", "text", 
+        assertSame(email.getAttachments(), attachments);
+
+        // test with subject, text, attachments and provider
+        email = TextEmailMessageWithAttachments.create("subject", "text",
                 attachments, EmailProvider.AWS_MAIL);
         assertTrue(email instanceof AWSTextEmailMessageWithAttachments);
         assertEquals(email.getSubject(), "subject");
         assertEquals(email.getText(), "text");
         assertSame(email.getAttachments(), attachments);
-        email = TextEmailMessageWithAttachments.create("subject", "text", 
+        email = TextEmailMessageWithAttachments.create("subject", "text",
                 attachments, EmailProvider.APACHE_MAIL);
         assertTrue(email instanceof ApacheMailTextEmailMessageWithAttachments);
         assertEquals(email.getSubject(), "subject");
         assertEquals(email.getText(), "text");
         assertSame(email.getAttachments(), attachments);
-        email = TextEmailMessageWithAttachments.create("subject", "text", 
+        email = TextEmailMessageWithAttachments.create("subject", "text",
                 attachments, EmailProvider.JAVA_MAIL);
         assertTrue(email instanceof JavaMailTextEmailMessageWithAttachments);
         assertEquals(email.getSubject(), "subject");
         assertEquals(email.getText(), "text");
-        assertSame(email.getAttachments(), attachments);        
+        assertSame(email.getAttachments(), attachments);
     }
-    
+
     @Test
     public void testGetSetAttachments() {
-        TextEmailMessageWithAttachments email = 
+        final TextEmailMessageWithAttachments<?> email =
                 TextEmailMessageWithAttachments.create(EmailProvider.AWS_MAIL);
-        
+
         assertNotNull(email.getAttachments());
-        
-        //set new value
-        List<EmailAttachment> attachments = new ArrayList<EmailAttachment>();
+
+        // set new value
+        final List<EmailAttachment> attachments = new ArrayList<>();
         email.setAttachments(attachments);
-        
-        //check correctness
+
+        // check correctness
         assertSame(email.getAttachments(), attachments);
     }
 }

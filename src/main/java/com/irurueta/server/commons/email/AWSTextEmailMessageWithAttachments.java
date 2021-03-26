@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -35,7 +35,7 @@ public class AWSTextEmailMessageWithAttachments extends
      * Constructor with email subject.
      * @param subject subject to be set on email.
      */
-    public AWSTextEmailMessageWithAttachments(String subject) {
+    public AWSTextEmailMessageWithAttachments(final String subject) {
         super(subject);
     }
     
@@ -44,7 +44,7 @@ public class AWSTextEmailMessageWithAttachments extends
      * @param subject subject to be set on email.
      * @param text textual email content.
      */
-    public AWSTextEmailMessageWithAttachments(String subject, String text) {
+    public AWSTextEmailMessageWithAttachments(final String subject, final String text) {
         super(subject, text);
     }
     
@@ -53,7 +53,7 @@ public class AWSTextEmailMessageWithAttachments extends
      * @param attachments list of file attachments to be included in email.
      */
     public AWSTextEmailMessageWithAttachments(
-            List<EmailAttachment> attachments) {
+            final List<EmailAttachment> attachments) {
         super(attachments);
     }
     
@@ -62,8 +62,8 @@ public class AWSTextEmailMessageWithAttachments extends
      * @param subject subject to be set on email.
      * @param attachments list of file attachments to be included in email.
      */
-    public AWSTextEmailMessageWithAttachments(String subject, 
-            List<EmailAttachment> attachments) {
+    public AWSTextEmailMessageWithAttachments(final String subject,
+            final List<EmailAttachment> attachments) {
         super(subject, attachments);
     }
     
@@ -73,8 +73,8 @@ public class AWSTextEmailMessageWithAttachments extends
      * @param text textual email content.
      * @param attachments list of file attachments to be included in email.
      */
-    public AWSTextEmailMessageWithAttachments(String subject, String text,
-            List<EmailAttachment> attachments) {
+    public AWSTextEmailMessageWithAttachments(final String subject, final String text,
+            final List<EmailAttachment> attachments) {
         super(subject, text, attachments);
     }    
     

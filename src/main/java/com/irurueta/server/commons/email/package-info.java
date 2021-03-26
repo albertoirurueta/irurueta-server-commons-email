@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,14 +18,14 @@
  * This package contains classes related to sending emails.
  * The main classes of this package are:
  * - EmailSender: to send emails
- * - EmailMessage: which contains the email data: text, subject, 
+ * - EmailMessage: which contains the email data: text, subject,
  * attached files, etc.
- * Different implementations of these classes exist providing different 
+ * Different implementations of these classes exist providing different
  * behaviors (i.e. text emails only, emails with attachments, HTML emails etc).
- * Currently JavaMail, Amazon SES and Apache Mail are supported but further 
+ * Currently JavaMail, Amazon SES and Apache Mail are supported but further
  * implementations can be added to support other providers.
- * MailConfigurationFactory contains all the properties to be used during 
- * configuration so that the system knows how to send emails (i.e. server, 
+ * MailConfigurationFactory contains all the properties to be used during
+ * configuration so that the system knows how to send emails (i.e. server,
  * credentials, etc).
  */
 package com.irurueta.server.commons.email;
