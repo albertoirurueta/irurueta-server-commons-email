@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AWSTextEmailMessageWithAttachments.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">AWSTextEmailMessageWithAttachments.java</span></div><h1>AWSTextEmailMessageWithAttachments.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AWSTextEmailMessageWithAttachments.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">AWSTextEmailMessageWithAttachments.java</span></div><h1>AWSTextEmailMessageWithAttachments.java</h1><pre class="source lang-java linenums">/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -35,7 +35,7 @@ public class AWSTextEmailMessageWithAttachments extends
      * Constructor with email subject.
      * @param subject subject to be set on email.
      */
-    public AWSTextEmailMessageWithAttachments(String subject) {
+    public AWSTextEmailMessageWithAttachments(final String subject) {
 <span class="fc" id="L39">        super(subject);</span>
 <span class="fc" id="L40">    }</span>
     
@@ -44,7 +44,7 @@ public class AWSTextEmailMessageWithAttachments extends
      * @param subject subject to be set on email.
      * @param text textual email content.
      */
-    public AWSTextEmailMessageWithAttachments(String subject, String text) {
+    public AWSTextEmailMessageWithAttachments(final String subject, final String text) {
 <span class="fc" id="L48">        super(subject, text);</span>
 <span class="fc" id="L49">    }</span>
     
@@ -53,7 +53,7 @@ public class AWSTextEmailMessageWithAttachments extends
      * @param attachments list of file attachments to be included in email.
      */
     public AWSTextEmailMessageWithAttachments(
-            List&lt;EmailAttachment&gt; attachments) {
+            final List&lt;EmailAttachment&gt; attachments) {
 <span class="fc" id="L57">        super(attachments);</span>
 <span class="fc" id="L58">    }</span>
     
@@ -62,8 +62,8 @@ public class AWSTextEmailMessageWithAttachments extends
      * @param subject subject to be set on email.
      * @param attachments list of file attachments to be included in email.
      */
-    public AWSTextEmailMessageWithAttachments(String subject, 
-            List&lt;EmailAttachment&gt; attachments) {
+    public AWSTextEmailMessageWithAttachments(final String subject,
+            final List&lt;EmailAttachment&gt; attachments) {
 <span class="fc" id="L67">        super(subject, attachments);</span>
 <span class="fc" id="L68">    }</span>
     
@@ -73,8 +73,8 @@ public class AWSTextEmailMessageWithAttachments extends
      * @param text textual email content.
      * @param attachments list of file attachments to be included in email.
      */
-    public AWSTextEmailMessageWithAttachments(String subject, String text,
-            List&lt;EmailAttachment&gt; attachments) {
+    public AWSTextEmailMessageWithAttachments(final String subject, final String text,
+            final List&lt;EmailAttachment&gt; attachments) {
 <span class="fc" id="L78">        super(subject, text, attachments);</span>
 <span class="fc" id="L79">    }    </span>
     

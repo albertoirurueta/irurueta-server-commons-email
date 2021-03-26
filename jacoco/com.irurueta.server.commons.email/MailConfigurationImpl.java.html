@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MailConfigurationImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">MailConfigurationImpl.java</span></div><h1>MailConfigurationImpl.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MailConfigurationImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">MailConfigurationImpl.java</span></div><h1>MailConfigurationImpl.java</h1><pre class="source lang-java linenums">/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -16,6 +16,7 @@
 package com.irurueta.server.commons.email;
 
 import com.irurueta.server.commons.configuration.ConfigurationException;
+
 import java.util.Properties;
 
 /**
@@ -24,286 +25,300 @@ import java.util.Properties;
  * from.
  */
 public class MailConfigurationImpl implements MailConfiguration {
-    
+
     /**
      * SMTP server host to connect to send emails.
      */
     private String mMailHost;
-    
+
     /**
      * SMTP server port to connect to send emails.
      */
     private int mMailPort;
-    
+
     /**
      * User id to log into SMTP server to send emails.
      * This value is optional and can be left as null if server does not
      * require credentials.
      */
     private String mailId;
-    
+
     /**
      * User password to log into SMTP server to send emails.
      * This value is optional and can be left as null if server does not require
      * credentials.
      */
     private String mMailPassword;
-    
+
     /**
      * Email address to send emails from.
      */
     private String mMailFromAddress;
-    
+
     /**
      * Indicates if email sending is enabled or not.
      */
     private boolean mMailSendingEnabled;
-    
+
     /**
      * Email provider to use to send emails.
      */
-    private EmailProvider mProvider; 
-    
+    private EmailProvider mProvider;
+
     /**
      * Amazon AWS access key to use if Amazon SES is used as a provider.
      */
     private String mAwsMailAccessKey;
-    
+
     /**
      * Amazon AWS secret key to use if Amazon SES is used as a provider.
      */
     private String mAwsMailSecretKey;
-    
+
     /**
      * Milliseconds to wait before checking sending quota to avoid Amazon SES
      * throttling.
      */
-    private long mAwsMailCheckQuotaAfterMillis;   
-    
+    private long mAwsMailCheckQuotaAfterMillis;
+
     /**
      * Constructor.
      */
-<span class="fc" id="L86">    public MailConfigurationImpl() {</span>
-<span class="fc" id="L87">        mMailSendingEnabled = </span>
-                MailConfigurationFactory.DEFAULT_MAIL_SENDING_ENABLED;                
-<span class="fc" id="L89">        mProvider = MailConfigurationFactory.DEFAULT_MAIL_PROVIDER;</span>
-<span class="fc" id="L90">        mAwsMailCheckQuotaAfterMillis = MailConfigurationFactory.</span>
-                DEFAULT_AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS;  
-<span class="fc" id="L92">        mMailPort = MailConfigurationFactory.DEFAULT_TLS_PORT;</span>
-<span class="fc" id="L93">    }</span>
-    
+<span class="fc" id="L87">    public MailConfigurationImpl() {</span>
+<span class="fc" id="L88">        mMailSendingEnabled =</span>
+                MailConfigurationFactory.DEFAULT_MAIL_SENDING_ENABLED;
+<span class="fc" id="L90">        mProvider = MailConfigurationFactory.DEFAULT_MAIL_PROVIDER;</span>
+<span class="fc" id="L91">        mAwsMailCheckQuotaAfterMillis = MailConfigurationFactory.</span>
+                DEFAULT_AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS;
+<span class="fc" id="L93">        mMailPort = MailConfigurationFactory.DEFAULT_TLS_PORT;</span>
+<span class="fc" id="L94">    }</span>
+
     /**
      * Constructor from properties.
+     *
      * @param properties properties containing configuration.
      * @throws ConfigurationException if any property value is invalid.
      */
-    public MailConfigurationImpl(Properties properties) 
-<span class="fc" id="L101">            throws ConfigurationException {</span>
-<span class="fc" id="L102">        fromProperties(properties);</span>
-<span class="fc" id="L103">    }</span>
+    public MailConfigurationImpl(final Properties properties)
+<span class="fc" id="L103">            throws ConfigurationException {</span>
+<span class="fc" id="L104">        fromProperties(properties);</span>
+<span class="fc" id="L105">    }</span>
 
     /**
      * SMTP server host to connect to send emails.
+     *
      * @return SMTP server host to connect to send emails.
      */
     @Override
     public String getMailHost() {
-<span class="fc" id="L111">        return mMailHost;</span>
+<span class="fc" id="L114">        return mMailHost;</span>
     }
 
     /**
      * SMTP server port to connect to send emails.
+     *
      * @return SMTP server port to connect to send emails.
      */
     @Override
     public int getMailPort() {
-<span class="fc" id="L120">        return mMailPort;</span>
+<span class="fc" id="L124">        return mMailPort;</span>
     }
 
     /**
      * User id to log into SMTP server to send emails.
      * This value is optional and can be left as null if server does not
      * require credentials.
+     *
      * @return user id to log into SMTP server to send emails.
      */
     @Override
     public String getMailId() {
-<span class="fc" id="L131">        return mailId;</span>
+<span class="fc" id="L136">        return mailId;</span>
     }
 
     /**
      * User password to log into SMTP server to send emails.
      * This value is optional and can be left as null if server does not require
      * credentials.
+     *
      * @return User password to log into SMTP server to send emails.
      */
     @Override
     public String getMailPassword() {
-<span class="fc" id="L142">        return mMailPassword;</span>
+<span class="fc" id="L148">        return mMailPassword;</span>
     }
 
     /**
      * Email address to send emails from.
+     *
      * @return email address to send emails from.
      */
     @Override
     public String getMailFromAddress() {
-<span class="fc" id="L151">        return mMailFromAddress;</span>
+<span class="fc" id="L158">        return mMailFromAddress;</span>
     }
 
     /**
      * Indicates if email sending is enabled or not.
+     *
      * @return true if email sending is enabled, false otherwise.
      */
     @Override
     public boolean isMailSendingEnabled() {
-<span class="fc" id="L160">        return mMailSendingEnabled;</span>
+<span class="fc" id="L168">        return mMailSendingEnabled;</span>
     }
 
     /**
      * Amazon AWS access key to use if Amazon SES is used as a provider.
+     *
      * @return AWS access key to use Amazon SES.
      */
     @Override
     public String getAWSMailAccessKey() {
-<span class="fc" id="L169">        return mAwsMailAccessKey;</span>
+<span class="fc" id="L178">        return mAwsMailAccessKey;</span>
     }
 
     /**
      * Amazon AWS secret key to use if Amazon SES is used as a provider.
+     *
      * @return AWS secret key to use Amazon SES.
      */
     @Override
     public String getAWSMailSecretKey() {
-<span class="fc" id="L178">        return mAwsMailSecretKey;</span>
+<span class="fc" id="L188">        return mAwsMailSecretKey;</span>
     }
 
     /**
      * Returns structure containing AWS credentials to use Amazon SES.
+     *
      * @return AWS credentials.
      */
     @Override
     public AWSEmailSenderCredentials getAWSMailCredentials() {
-<span class="fc" id="L187">        return new AWSEmailSenderCredentials(mAwsMailAccessKey, </span>
+<span class="fc" id="L198">        return new AWSEmailSenderCredentials(mAwsMailAccessKey,</span>
                 mAwsMailSecretKey);
     }
 
     /**
      * Milliseconds to wait before checking sending quota to avoid Amazon SES
      * throttling.
-     * @return milliseconds to wait before checking sending quota to avoid 
+     *
+     * @return milliseconds to wait before checking sending quota to avoid
      * Amazon SES throttling.
      */
     @Override
     public long getAWSMailCheckQuotaAfterMillis() {
-<span class="fc" id="L199">        return mAwsMailCheckQuotaAfterMillis;</span>
+<span class="fc" id="L211">        return mAwsMailCheckQuotaAfterMillis;</span>
     }
-    
+
     /**
      * Email provider to use to send emails.
+     *
      * @return an email provider.
      */
     @Override
     public EmailProvider getProvider() {
-<span class="fc" id="L208">        return mProvider;</span>
+<span class="fc" id="L221">        return mProvider;</span>
     }
 
     /**
      * Loads configuration from provided properties.
+     *
      * @param properties properties containing configuration.
      * @throws ConfigurationException if any properties value is invalid.
      */
     @Override
-    public final void fromProperties(Properties properties) 
+    public final void fromProperties(final Properties properties)
             throws ConfigurationException {
         try {
-            //set mail
-<span class="fc" id="L221">            mMailHost = properties.getProperty(</span>
+            // set mail
+<span class="fc" id="L235">            mMailHost = properties.getProperty(</span>
                     MailConfigurationFactory.MAIL_HOST_PROPERTY);
-<span class="fc" id="L223">            String mailPortProperty = properties.getProperty(</span>
+<span class="fc" id="L237">            final String mailPortProperty = properties.getProperty(</span>
                     MailConfigurationFactory.MAIL_PORT_PROPERTY);
-<span class="fc bfc" id="L225" title="All 2 branches covered.">            if (mailPortProperty != null) {</span>
-<span class="fc" id="L226">                mMailPort = Integer.parseInt(mailPortProperty);</span>
+<span class="fc bfc" id="L239" title="All 2 branches covered.">            if (mailPortProperty != null) {</span>
+<span class="fc" id="L240">                mMailPort = Integer.parseInt(mailPortProperty);</span>
             }
-<span class="fc" id="L228">            mailId = properties.getProperty(</span>
+<span class="fc" id="L242">            mailId = properties.getProperty(</span>
                     MailConfigurationFactory.MAIL_ID_PROPERTY);
-<span class="fc" id="L230">            mMailPassword = properties.getProperty(</span>
+<span class="fc" id="L244">            mMailPassword = properties.getProperty(</span>
                     MailConfigurationFactory.MAIL_PASSWORD_PROPERTY);
-<span class="fc" id="L232">            mMailFromAddress = properties.getProperty(</span>
+<span class="fc" id="L246">            mMailFromAddress = properties.getProperty(</span>
                     MailConfigurationFactory.MAIL_FROM_ADDRESS_PROPERTY);
-<span class="fc" id="L234">            mMailSendingEnabled = Boolean.valueOf(properties.getProperty(</span>
-                    MailConfigurationFactory.MAIL_SENDING_ENABLED_PROPERTY, 
-<span class="fc" id="L236">                    String.valueOf(</span>
-                    MailConfigurationFactory.DEFAULT_MAIL_SENDING_ENABLED)));
-<span class="fc" id="L238">            mProvider = EmailProvider.fromValue(properties.getProperty(</span>
-                    MailConfigurationFactory.MAIL_PROVIDER_PROPERTY, 
-<span class="fc" id="L240">                    MailConfigurationFactory.DEFAULT_MAIL_PROVIDER.getValue()));</span>
-        
-            //set aws mail
-<span class="fc" id="L243">            mAwsMailAccessKey = properties.getProperty(</span>
+<span class="fc" id="L248">            mMailSendingEnabled = Boolean.parseBoolean(properties.getProperty(</span>
+                    MailConfigurationFactory.MAIL_SENDING_ENABLED_PROPERTY,
+<span class="fc" id="L250">                    String.valueOf(</span>
+                            MailConfigurationFactory.DEFAULT_MAIL_SENDING_ENABLED)));
+<span class="fc" id="L252">            mProvider = EmailProvider.fromValue(properties.getProperty(</span>
+                    MailConfigurationFactory.MAIL_PROVIDER_PROPERTY,
+<span class="fc" id="L254">                    MailConfigurationFactory.DEFAULT_MAIL_PROVIDER.getValue()));</span>
+
+            // set aws mail
+<span class="fc" id="L257">            mAwsMailAccessKey = properties.getProperty(</span>
                     MailConfigurationFactory.AWS_MAIL_ACCESS_KEY_PROPERTY);
-<span class="fc" id="L245">            mAwsMailSecretKey = properties.getProperty(</span>
+<span class="fc" id="L259">            mAwsMailSecretKey = properties.getProperty(</span>
                     MailConfigurationFactory.AWS_MAIL_SECRET_KEY_PROPERTY);
-<span class="fc" id="L247">            mAwsMailCheckQuotaAfterMillis = Long.parseLong(</span>
-<span class="fc" id="L248">                    properties.getProperty(MailConfigurationFactory.</span>
-<span class="fc" id="L249">                    AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS_PROPERTY, String.valueOf(</span>
-                    MailConfigurationFactory.
-                    DEFAULT_AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS)));              
-<span class="fc" id="L252">        } catch (Throwable t) {</span>
-<span class="fc" id="L253">            throw new ConfigurationException(t);</span>
-<span class="fc" id="L254">        }</span>
-<span class="fc" id="L255">    }</span>
+<span class="fc" id="L261">            mAwsMailCheckQuotaAfterMillis = Long.parseLong(</span>
+<span class="fc" id="L262">                    properties.getProperty(MailConfigurationFactory.</span>
+<span class="fc" id="L263">                            AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS_PROPERTY, String.valueOf(</span>
+                            MailConfigurationFactory.
+                                    DEFAULT_AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS)));
+<span class="fc" id="L266">        } catch (final Exception e) {</span>
+<span class="fc" id="L267">            throw new ConfigurationException(e);</span>
+<span class="fc" id="L268">        }</span>
+<span class="fc" id="L269">    }</span>
 
     /**
      * Converts current configuration into properties.
+     *
      * @return properties containing configuration.
      */
     @Override
     public Properties toProperties() {
-<span class="fc" id="L263">        Properties properties = new Properties();</span>
-<span class="pc bpc" id="L264" title="1 of 2 branches missed.">        if (mMailHost != null) {</span>
-<span class="fc" id="L265">            properties.setProperty(MailConfigurationFactory.MAIL_HOST_PROPERTY, </span>
+<span class="fc" id="L278">        final Properties properties = new Properties();</span>
+<span class="pc bpc" id="L279" title="1 of 2 branches missed.">        if (mMailHost != null) {</span>
+<span class="fc" id="L280">            properties.setProperty(MailConfigurationFactory.MAIL_HOST_PROPERTY,</span>
                     mMailHost);
         }
-<span class="pc bpc" id="L268" title="1 of 2 branches missed.">        if (mMailPort &gt;= 0) {</span>
-<span class="fc" id="L269">            properties.setProperty(MailConfigurationFactory.MAIL_PORT_PROPERTY, </span>
-<span class="fc" id="L270">                    String.valueOf(mMailPort));</span>
+<span class="pc bpc" id="L283" title="1 of 2 branches missed.">        if (mMailPort &gt;= 0) {</span>
+<span class="fc" id="L284">            properties.setProperty(MailConfigurationFactory.MAIL_PORT_PROPERTY,</span>
+<span class="fc" id="L285">                    String.valueOf(mMailPort));</span>
         }
-<span class="pc bpc" id="L272" title="1 of 2 branches missed.">        if (mailId != null) {</span>
-<span class="fc" id="L273">            properties.setProperty(MailConfigurationFactory.MAIL_ID_PROPERTY, </span>
+<span class="pc bpc" id="L287" title="1 of 2 branches missed.">        if (mailId != null) {</span>
+<span class="fc" id="L288">            properties.setProperty(MailConfigurationFactory.MAIL_ID_PROPERTY,</span>
                     mailId);
         }
-<span class="pc bpc" id="L276" title="1 of 2 branches missed.">        if (mMailPassword != null) {</span>
-<span class="fc" id="L277">            properties.setProperty(MailConfigurationFactory.</span>
+<span class="pc bpc" id="L291" title="1 of 2 branches missed.">        if (mMailPassword != null) {</span>
+<span class="fc" id="L292">            properties.setProperty(MailConfigurationFactory.</span>
                     MAIL_PASSWORD_PROPERTY, mMailPassword);
         }
-<span class="pc bpc" id="L280" title="1 of 2 branches missed.">        if (mMailFromAddress != null) {</span>
-<span class="fc" id="L281">            properties.setProperty(MailConfigurationFactory.</span>
+<span class="pc bpc" id="L295" title="1 of 2 branches missed.">        if (mMailFromAddress != null) {</span>
+<span class="fc" id="L296">            properties.setProperty(MailConfigurationFactory.</span>
                     MAIL_FROM_ADDRESS_PROPERTY, mMailFromAddress);
         }
-<span class="fc" id="L284">        properties.setProperty(MailConfigurationFactory.</span>
-                MAIL_SENDING_ENABLED_PROPERTY, 
-<span class="fc" id="L286">                String.valueOf(mMailSendingEnabled));</span>
-<span class="pc bpc" id="L287" title="1 of 2 branches missed.">        if (mProvider != null) {</span>
-<span class="fc" id="L288">            properties.setProperty(MailConfigurationFactory.</span>
-<span class="fc" id="L289">                    MAIL_PROVIDER_PROPERTY, mProvider.getValue());</span>
-            
-<span class="pc bpc" id="L291" title="1 of 2 branches missed.">            if (mProvider == EmailProvider.AWS_MAIL) {</span>
-                //AWS mail
-<span class="pc bpc" id="L293" title="1 of 2 branches missed.">                if (mAwsMailAccessKey != null) {</span>
-<span class="fc" id="L294">                    properties.setProperty(MailConfigurationFactory.</span>
+<span class="fc" id="L299">        properties.setProperty(MailConfigurationFactory.</span>
+                        MAIL_SENDING_ENABLED_PROPERTY,
+<span class="fc" id="L301">                String.valueOf(mMailSendingEnabled));</span>
+<span class="pc bpc" id="L302" title="1 of 2 branches missed.">        if (mProvider != null) {</span>
+<span class="fc" id="L303">            properties.setProperty(MailConfigurationFactory.</span>
+<span class="fc" id="L304">                    MAIL_PROVIDER_PROPERTY, mProvider.getValue());</span>
+
+<span class="pc bpc" id="L306" title="1 of 2 branches missed.">            if (mProvider == EmailProvider.AWS_MAIL) {</span>
+                // AWS mail
+<span class="pc bpc" id="L308" title="1 of 2 branches missed.">                if (mAwsMailAccessKey != null) {</span>
+<span class="fc" id="L309">                    properties.setProperty(MailConfigurationFactory.</span>
                             AWS_MAIL_ACCESS_KEY_PROPERTY, mAwsMailAccessKey);
                 }
-<span class="pc bpc" id="L297" title="1 of 2 branches missed.">                if (mAwsMailSecretKey != null) {</span>
-<span class="fc" id="L298">                    properties.setProperty(MailConfigurationFactory.</span>
+<span class="pc bpc" id="L312" title="1 of 2 branches missed.">                if (mAwsMailSecretKey != null) {</span>
+<span class="fc" id="L313">                    properties.setProperty(MailConfigurationFactory.</span>
                             AWS_MAIL_SECRET_KEY_PROPERTY, mAwsMailSecretKey);
-                }                
-<span class="fc" id="L301">                properties.setProperty(MailConfigurationFactory.</span>
-                        AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS_PROPERTY, 
-<span class="fc" id="L303">                        String.valueOf(mAwsMailCheckQuotaAfterMillis));</span>
+                }
+<span class="fc" id="L316">                properties.setProperty(MailConfigurationFactory.</span>
+                                AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS_PROPERTY,
+<span class="fc" id="L318">                        String.valueOf(mAwsMailCheckQuotaAfterMillis));</span>
             }
         }
-<span class="fc" id="L306">        return properties;</span>
+<span class="fc" id="L321">        return properties;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

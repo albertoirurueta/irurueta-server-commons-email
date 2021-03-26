@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HtmlEmailMessage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">HtmlEmailMessage.java</span></div><h1>HtmlEmailMessage.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HtmlEmailMessage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">HtmlEmailMessage.java</span></div><h1>HtmlEmailMessage.java</h1><pre class="source lang-java linenums">/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -25,6 +25,7 @@ import java.util.List;
  * Files can be attached as in text emails, or they can be sent inline so they
  * can be used within the html content (such as images or css resources to be
  * used within html email body).
+ *
  * @param &lt;E&gt; internal type to be used by email sender implementation.
  */
 public abstract class HtmlEmailMessage&lt;E&gt; extends EmailMessage&lt;E&gt; {
@@ -33,12 +34,12 @@ public abstract class HtmlEmailMessage&lt;E&gt; extends EmailMessage&lt;E&gt; {
      * HTML content of email to be rendered as a web page.
      */
     private String mHtmlContent;
-    
+
     /**
      * Alternative text to be shown on clients not supporting HTML content.
      */
-    private String mAlternativeText;    
-    
+    private String mAlternativeText;
+
     /**
      * List of attachments to be included in email. Attachments are shown in
      * mail clients as files that can be downloaded from the email.
@@ -56,214 +57,230 @@ public abstract class HtmlEmailMessage&lt;E&gt; extends EmailMessage&lt;E&gt; {
      * markup in the same order as the inline attachments are provided.
      */
     private List&lt;InlineAttachment&gt; mInlineAttachments;
-    
+
     /**
      * Constructor.
      */
-    public HtmlEmailMessage() {
-<span class="fc" id="L64">        super();</span>
-<span class="fc" id="L65">        mHtmlContent = null;</span>
-<span class="fc" id="L66">        mAlternativeText = null;</span>
-<span class="fc" id="L67">        mEmailAttachments = new ArrayList&lt;EmailAttachment&gt;();</span>
-<span class="fc" id="L68">        mInlineAttachments = new ArrayList&lt;InlineAttachment&gt;();</span>
-<span class="fc" id="L69">    }</span>
-    
+    protected HtmlEmailMessage() {
+<span class="fc" id="L65">        super();</span>
+<span class="fc" id="L66">        mHtmlContent = null;</span>
+<span class="fc" id="L67">        mAlternativeText = null;</span>
+<span class="fc" id="L68">        mEmailAttachments = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L69">        mInlineAttachments = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L70">    }</span>
+
     /**
      * Constructor with email subject.
+     *
      * @param subject subject to be set.
-     */    
-    public HtmlEmailMessage(String subject) {
-<span class="fc" id="L76">        super(subject);</span>
-<span class="fc" id="L77">        mHtmlContent = null;</span>
-<span class="fc" id="L78">        mAlternativeText = null;</span>
-<span class="fc" id="L79">        mEmailAttachments = new ArrayList&lt;EmailAttachment&gt;();</span>
-<span class="fc" id="L80">        mInlineAttachments = new ArrayList&lt;InlineAttachment&gt;();</span>
-<span class="fc" id="L81">    }</span>
-    
+     */
+    protected HtmlEmailMessage(final String subject) {
+<span class="fc" id="L78">        super(subject);</span>
+<span class="fc" id="L79">        mHtmlContent = null;</span>
+<span class="fc" id="L80">        mAlternativeText = null;</span>
+<span class="fc" id="L81">        mEmailAttachments = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L82">        mInlineAttachments = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L83">    }</span>
+
     /**
      * Constructor with email subject and textual content.
-     * @param subject subject to be set.
+     *
+     * @param subject     subject to be set.
      * @param htmlContent HTML content.
-     */    
-    public HtmlEmailMessage(String subject, String htmlContent) {
-<span class="fc" id="L89">        super(subject);</span>
-<span class="fc" id="L90">        mHtmlContent = htmlContent;</span>
-<span class="fc" id="L91">        mAlternativeText = null;</span>
-<span class="fc" id="L92">        mEmailAttachments = new ArrayList&lt;EmailAttachment&gt;();</span>
-<span class="fc" id="L93">        mInlineAttachments = new ArrayList&lt;InlineAttachment&gt;();</span>
-<span class="fc" id="L94">    }</span>
-    
+     */
+    protected HtmlEmailMessage(final String subject, final String htmlContent) {
+<span class="fc" id="L92">        super(subject);</span>
+<span class="fc" id="L93">        mHtmlContent = htmlContent;</span>
+<span class="fc" id="L94">        mAlternativeText = null;</span>
+<span class="fc" id="L95">        mEmailAttachments = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L96">        mInlineAttachments = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L97">    }</span>
+
     /**
      * Returns HTML content to be rendered in this email as a webpage.
      * HTML content can have placeholders in the form {0}, {1}, {2}, etc where
-     * id's of resources can be automatically embedded inline for those 
+     * id's of resources can be automatically embedded inline for those
      * attachments where no id is provided.
      * Notice that HTML content can also use regular external links, but some
      * email clients might block those links for security reasons.
+     *
      * @return HTML content to be rendered as a webpage.
      */
     public String getHtmlContent() {
-<span class="fc" id="L106">        return mHtmlContent;</span>
+<span class="fc" id="L110">        return mHtmlContent;</span>
     }
-    
+
     /**
      * Sets HTML content to be rendered in this email as a webpage.
      * HTML content can have placeholders in the form {0}, {1}, {2}, etc where
-     * id's of resources can be automatically embedded inline for those 
+     * id's of resources can be automatically embedded inline for those
      * attachments where no id is provided.
-     * Notice that HTML content can also use regular external links, but some 
+     * Notice that HTML content can also use regular external links, but some
      * email clients might block those links for security reasons.
+     *
      * @param htmlContent html content of email to be sent.
      */
-    public void setHtmlContent(String htmlContent) {
-<span class="fc" id="L119">        mHtmlContent = htmlContent;</span>
-<span class="fc" id="L120">    }</span>
-    
+    public void setHtmlContent(final String htmlContent) {
+<span class="fc" id="L124">        mHtmlContent = htmlContent;</span>
+<span class="fc" id="L125">    }</span>
+
     /**
-     * Returns alternative text to be shown on those clients not supporting HTML 
+     * Returns alternative text to be shown on those clients not supporting HTML
      * content.
+     *
      * @return alternative text.
      */
     public String getAlternativeText() {
-<span class="fc" id="L128">        return mAlternativeText;        </span>
+<span class="fc" id="L134">        return mAlternativeText;</span>
     }
-    
+
     /**
      * Sets alternative text to be shown on those clients not supporting HTML
      * content.
+     *
      * @param alternativeText alternative text.
      */
-    public void setAlternativeText(String alternativeText) {
-<span class="fc" id="L137">        this.mAlternativeText = alternativeText;</span>
-<span class="fc" id="L138">    }</span>
-    
+    public void setAlternativeText(final String alternativeText) {
+<span class="fc" id="L144">        this.mAlternativeText = alternativeText;</span>
+<span class="fc" id="L145">    }</span>
+
     /**
-     * Get list of files to be attached. Attachments are shown in mail clients 
+     * Get list of files to be attached. Attachments are shown in mail clients
      * as files that can be downloaded from the email.
+     *
      * @return list of files to be attached.
      */
     public List&lt;EmailAttachment&gt; getEmailAttachments() {
-<span class="fc" id="L146">        return mEmailAttachments;</span>
+<span class="fc" id="L154">        return mEmailAttachments;</span>
     }
-    
+
     /**
-     * Sets list of files to be attached. Attachments are shown in mail clients 
+     * Sets list of files to be attached. Attachments are shown in mail clients
      * as files that can be downloaded from the email.
+     *
      * @param emailAttachments list of files to be attached.
      */
-    public void setEmailAttachments(List&lt;EmailAttachment&gt; emailAttachments) {
-<span class="fc" id="L155">        mEmailAttachments = emailAttachments;</span>
-<span class="fc" id="L156">    }    </span>
-    
+    public void setEmailAttachments(final List&lt;EmailAttachment&gt; emailAttachments) {
+<span class="fc" id="L164">        mEmailAttachments = emailAttachments;</span>
+<span class="fc" id="L165">    }</span>
+
     /**
-     * Returns list of files to be embedded inline within the email so they are 
-     * shown as part of the html content. These files can be used within the 
+     * Returns list of files to be embedded inline within the email so they are
+     * shown as part of the html content. These files can be used within the
      * HTML body as images, css resources, etc.
      * In order to use this resources within the HTML markup, and id must be
      * provided on each inline attachment and the same id must be used within
      * the HTML markup. If no id is generated, one will be randomly created, and
      * placeholders of the form {0}, {1}, etc will be filled within the HTML
      * markup in the same order as the inline attachments are provided. For
-     * instance an image in the HTML can be defined either as 
-     * &amp;lt;img src=&quot;cid:some-id&quot;/&amp;gt;, or instead a placeholder can be used such 
+     * instance an image in the HTML can be defined either as
+     * &amp;lt;img src=&quot;cid:some-id&quot;/&amp;gt;, or instead a placeholder can be used such
      * as &amp;lt;img src=&quot;cid:{0}&quot;/&amp;gt;.
+     *
      * @return list of files to be embedded inline.
      */
     public List&lt;InlineAttachment&gt; getInlineAttachments() {
-<span class="fc" id="L173">        return mInlineAttachments;</span>
+<span class="fc" id="L183">        return mInlineAttachments;</span>
     }
-    
+
     /**
      * Sets list of files to be embedded inline within the email so they are
-     * shown as part of the html content. These files can be used within the 
+     * shown as part of the html content. These files can be used within the
      * HTML body as images, css resources, etc.
      * In order to use this resources within the HTML markup, and id must be
      * provided on each inline attachment and the same id must be used within
      * the HTML markup. If no id is generated, one will be randomly created, and
      * placeholders of the form {0}, {1}, etc will be filled within the HTML
      * markup in the same order as the inline attachments are provided. For
-     * instance an image in the HTML can be defined either as 
-     * &amp;lt;img src=&quot;cid:some-id&quot;/&amp;gt;, or instead a placeholder can be used such 
+     * instance an image in the HTML can be defined either as
+     * &amp;lt;img src=&quot;cid:some-id&quot;/&amp;gt;, or instead a placeholder can be used such
      * as &amp;lt;img src=&quot;cid:{0}&quot;/&amp;gt;.
+     *
      * @param inlineAttachments list of files to be embedded inline.
      */
-    public void setInlineAttachments(List&lt;InlineAttachment&gt; inlineAttachments) {
-<span class="fc" id="L191">        mInlineAttachments = inlineAttachments;</span>
-<span class="fc" id="L192">    }</span>
-    
+    public void setInlineAttachments(final List&lt;InlineAttachment&gt; inlineAttachments) {
+<span class="fc" id="L202">        mInlineAttachments = inlineAttachments;</span>
+<span class="fc" id="L203">    }</span>
+
     /**
      * Creates an HTML email message using provided email sender.
+     *
      * @param sender class in charge of sending this email.
      * @return an HTML email message.
      */
-    public static HtmlEmailMessage create(EmailSender sender) {
-<span class="fc" id="L200">        return create(sender.getProvider());</span>
+    public static HtmlEmailMessage&lt;?&gt; create(final EmailSender&lt;?&gt; sender) {
+<span class="fc" id="L212">        return create(sender.getProvider());</span>
     }
-    
+
     /**
      * Creates an HTML email message using given email provider.
+     *
      * @param provider email provider.
      * @return an HTML email message.
-     */    
-    protected static HtmlEmailMessage create(EmailProvider provider) {
-<span class="fc" id="L209">        return create(&quot;&quot;, provider);</span>
+     */
+    protected static HtmlEmailMessage&lt;?&gt; create(final EmailProvider provider) {
+<span class="fc" id="L222">        return create(&quot;&quot;, provider);</span>
     }
-    
+
     /**
-     * Creates an HTML email message having provided subject and using 
+     * Creates an HTML email message having provided subject and using
      * provided email sender.
+     *
      * @param subject email subject to be set.
-     * @param sender class in charge of sending this email.
+     * @param sender  class in charge of sending this email.
      * @return an HTML email message.
-     */    
-    public static HtmlEmailMessage create(String subject, 
-            EmailSender sender) {
-<span class="fc" id="L221">        return create(subject, sender.getProvider());</span>
+     */
+    public static HtmlEmailMessage&lt;?&gt; create(final String subject,
+                                             final EmailSender&lt;?&gt; sender) {
+<span class="fc" id="L235">        return create(subject, sender.getProvider());</span>
     }
-    
+
     /**
      * Creates an HTML email message having provided subject and given email
      * provider.
-     * @param subject email subject to be set.
+     *
+     * @param subject  email subject to be set.
      * @param provider email provider.
      * @return an HTML email message.
-     */    
-    protected static HtmlEmailMessage create(String subject, 
-            EmailProvider provider) {
-<span class="fc" id="L233">        return create(subject, &quot;&quot;, provider);</span>
+     */
+    protected static HtmlEmailMessage&lt;?&gt; create(final String subject,
+                                                final EmailProvider provider) {
+<span class="fc" id="L248">        return create(subject, &quot;&quot;, provider);</span>
     }
-    
+
     /**
      * Creates an HTML email message having provided subject, HTML content and
      * using provided email sender.
-     * @param subject email subject to be set.
+     *
+     * @param subject     email subject to be set.
      * @param htmlContent email HTML content.
-     * @param sender class in charge of sending this email.
+     * @param sender      class in charge of sending this email.
      * @return an HTML email message.
      */
-    public static HtmlEmailMessage create(String subject, String htmlContent,
-            EmailSender sender) {
-<span class="fc" id="L246">        return create(subject, htmlContent, sender.getProvider());</span>
+    public static HtmlEmailMessage&lt;?&gt; create(final String subject, final String htmlContent,
+                                             final EmailSender&lt;?&gt; sender) {
+<span class="fc" id="L262">        return create(subject, htmlContent, sender.getProvider());</span>
     }
-    
+
     /**
      * Creates an HTML email message having provided subject, HTML content and
      * given email provider.
-     * @param subject email subject to be set.
+     *
+     * @param subject     email subject to be set.
      * @param htmlContent email HTML content.
-     * @param provider email provider.
+     * @param provider    email provider.
      * @return an HTML email message.
      */
-    protected static HtmlEmailMessage create(String subject, String htmlContent,
-            EmailProvider provider) {
-<span class="fc bfc" id="L259" title="All 3 branches covered.">        switch (provider) {</span>
+    protected static HtmlEmailMessage&lt;?&gt; create(final String subject, final String htmlContent,
+                                                final EmailProvider provider) {
+<span class="fc bfc" id="L276" title="All 3 branches covered.">        switch (provider) {</span>
             case AWS_MAIL:
-<span class="fc" id="L261">                return new AWSHtmlEmailMessage(subject, htmlContent);            </span>
+<span class="fc" id="L278">                return new AWSHtmlEmailMessage(subject, htmlContent);</span>
             case APACHE_MAIL:
-<span class="fc" id="L263">                return new ApacheMailHtmlEmailMessage(subject, htmlContent);</span>
+<span class="fc" id="L280">                return new ApacheMailHtmlEmailMessage(subject, htmlContent);</span>
             case JAVA_MAIL:
             default:
-<span class="fc" id="L266">                return new JavaMailHtmlEmailMessage(subject, htmlContent);</span>
+<span class="fc" id="L283">                return new JavaMailHtmlEmailMessage(subject, htmlContent);</span>
         }
     }
 }

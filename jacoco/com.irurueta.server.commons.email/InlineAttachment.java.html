@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InlineAttachment.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">InlineAttachment.java</span></div><h1>InlineAttachment.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InlineAttachment.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">InlineAttachment.java</span></div><h1>InlineAttachment.java</h1><pre class="source lang-java linenums">/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -26,59 +26,64 @@ import java.io.File;
  * email address exists or if an email was actually read.
  */
 public class InlineAttachment extends BaseAttachment {
-    
+
     /**
      * Id to be assigned to part created to send the inline attachment.
      */
     private String mContentId;
-        
+
     /**
      * Constructor with file attachment.
+     *
      * @param attachment file being attached.
      */
-    public InlineAttachment(File attachment) {
-<span class="fc" id="L40">        super(attachment);</span>
-<span class="fc" id="L41">        mContentId = null;</span>
-<span class="fc" id="L42">    }</span>
-    
+    public InlineAttachment(final File attachment) {
+<span class="fc" id="L41">        super(attachment);</span>
+<span class="fc" id="L42">        mContentId = null;</span>
+<span class="fc" id="L43">    }</span>
+
     /**
      * Constructor with file attachment and content type.
-     * @param attachment file being attached.
+     *
+     * @param attachment  file being attached.
      * @param contentType MIME type of the file being attached.
      */
-    public InlineAttachment(File attachment, String contentType) {
-<span class="fc" id="L50">        super(attachment, contentType);</span>
-<span class="fc" id="L51">        mContentId = null;</span>
-<span class="fc" id="L52">    }</span>
-    
+    public InlineAttachment(final File attachment, final String contentType) {
+<span class="fc" id="L52">        super(attachment, contentType);</span>
+<span class="fc" id="L53">        mContentId = null;</span>
+<span class="fc" id="L54">    }</span>
+
     /**
      * Constructor with file attachment, file name shown to the receiver and
      * content type.
-     * @param attachment file being attached.
-     * @param contentId id to be assigned to inline part containing file data.
+     *
+     * @param attachment  file being attached.
+     * @param contentId   id to be assigned to inline part containing file data.
      * @param contentType MIME type of the file being attached.
      */
-    public InlineAttachment(File attachment, String contentId, 
-            String contentType) {
-<span class="fc" id="L63">        super(attachment, contentType);</span>
-<span class="fc" id="L64">        mContentId = contentId;</span>
-<span class="fc" id="L65">    }</span>
-        
+    public InlineAttachment(final File attachment, final String contentId,
+                            final String contentType) {
+<span class="fc" id="L66">        super(attachment, contentType);</span>
+<span class="fc" id="L67">        mContentId = contentId;</span>
+<span class="fc" id="L68">    }</span>
+
     /**
      * Returns Id to be assigned to part created to send the inline attachment.
+     *
      * @return id to be assigned to part created to send the inline attachment.
      */
     public String getContentId() {
-<span class="fc" id="L72">        return mContentId;</span>
+<span class="fc" id="L76">        return mContentId;</span>
     }
-    
+
     /**
      * Sets id to be assigned to part created to send the inline attachment.
+     *
      * @param contentId id to be assigned to part created to send the inline
-     * attachment.
+     *                  attachment.
      */
-    public void setContentId(String contentId) {
-<span class="fc" id="L81">        mContentId = contentId;</span>
-<span class="fc" id="L82">    }        </span>
+    public void setContentId(final String contentId) {
+<span class="fc" id="L86">        mContentId = contentId;</span>
+<span class="fc" id="L87">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

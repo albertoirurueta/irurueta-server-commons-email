@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EmailException.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">EmailException.java</span></div><h1>EmailException.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EmailException.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">EmailException.java</span></div><h1>EmailException.java</h1><pre class="source lang-java linenums">/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -31,7 +31,7 @@ public class EmailException extends Exception {
      * Constructor with message.
      * @param message message describing the cause of the exception.
      */
-    public EmailException(String message) {
+    public EmailException(final String message) {
 <span class="fc" id="L35">        super(message);</span>
 <span class="fc" id="L36">    }</span>
 
@@ -41,7 +41,7 @@ public class EmailException extends Exception {
      * @param cause originating exception that caused this exception. This can
      * be used to obtain stack traces.
      */
-    public EmailException(String message, Throwable cause) {
+    public EmailException(final String message, final Throwable cause) {
 <span class="fc" id="L45">        super(message, cause);</span>
 <span class="fc" id="L46">    }</span>
 
@@ -50,7 +50,7 @@ public class EmailException extends Exception {
      * @param cause originating exception that caused this exception. This can
      * be used to obtain stack traces.
      */
-    public EmailException(Throwable cause) {
+    public EmailException(final Throwable cause) {
 <span class="fc" id="L54">        super(cause);</span>
 <span class="fc" id="L55">    }    </span>
 }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MailConfigurationFactory.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">MailConfigurationFactory.java</span></div><h1>MailConfigurationFactory.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MailConfigurationFactory.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">MailConfigurationFactory.java</span></div><h1>MailConfigurationFactory.java</h1><pre class="source lang-java linenums">/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -17,151 +17,155 @@ package com.irurueta.server.commons.email;
 
 import com.irurueta.server.commons.configuration.BaseConfigurationFactory;
 import com.irurueta.server.commons.configuration.ConfigurationException;
+
 import java.util.Properties;
 
 /**
  * Class in charge of loading and configuring the email sending layer.
  */
-public class MailConfigurationFactory extends 
+public class MailConfigurationFactory extends
         BaseConfigurationFactory&lt;MailConfiguration&gt; {
 
     /**
      * Property indicating SMTP server to connect to.
      */
-    public static final String MAIL_HOST_PROPERTY = 
+    public static final String MAIL_HOST_PROPERTY =
             &quot;com.irurueta.server.commons.email.MAIL_HOST&quot;;
-    
+
     /**
      * Property indicating SMTP server port to connect to.
      */
-    public static final String MAIL_PORT_PROPERTY = 
+    public static final String MAIL_PORT_PROPERTY =
             &quot;com.irurueta.server.commons.email.MAIL_PORT&quot;;
-    
+
     /**
      * Property indicating user id to log into SMTP server.
      */
-    public static final String MAIL_ID_PROPERTY = 
+    public static final String MAIL_ID_PROPERTY =
             &quot;com.irurueta.server.commons.email.MAIL_ID&quot;;
-    
+
     /**
      * Property indicating user password to log into SMTP server.
      */
-    public static final String MAIL_PASSWORD_PROPERTY = 
+    public static final String MAIL_PASSWORD_PROPERTY =
             &quot;com.irurueta.server.commons.email.MAIL_PASSWORD&quot;;
-    
+
     /**
      * Property indicating email address to send emails from.
      */
-    public static final String MAIL_FROM_ADDRESS_PROPERTY = 
+    public static final String MAIL_FROM_ADDRESS_PROPERTY =
             &quot;com.irurueta.server.commons.email.MAIL_FROM_ADDRESS&quot;;
-    
+
     /**
      * Property indicating whether email sending is enabled or not.
      * When disabled, email sending will transparently fail.
      */
-    public static final String MAIL_SENDING_ENABLED_PROPERTY = 
-            &quot;com.irurueta.server.commons.email.MAIL_SENDING_ENABLED&quot;;    
-    
+    public static final String MAIL_SENDING_ENABLED_PROPERTY =
+            &quot;com.irurueta.server.commons.email.MAIL_SENDING_ENABLED&quot;;
+
     /**
      * Property indicating which email provider to use to send emails.
      */
     public static final String MAIL_PROVIDER_PROPERTY =
-            &quot;com.irurueta.server.commons.email.MAIL_PROVIDER&quot;;    
-    
+            &quot;com.irurueta.server.commons.email.MAIL_PROVIDER&quot;;
+
     /**
      * Property indicating Amazon AWS access key to use for Amazon SES.
      */
-    public static final String AWS_MAIL_ACCESS_KEY_PROPERTY = 
+    public static final String AWS_MAIL_ACCESS_KEY_PROPERTY =
             &quot;com.irurueta.server.commons.email.AWS_MAIL_ACCESS_KEY&quot;;
-    
+
     /**
      * Property indicating Amazon AWS secret key to use for Amazon SES.
      */
-    public static final String AWS_MAIL_SECRET_KEY_PROPERTY = 
+    public static final String AWS_MAIL_SECRET_KEY_PROPERTY =
             &quot;com.irurueta.server.commons.email.AWS_MAIL_SECRET_KEY&quot;;
-    
+
     /**
      * Property indicating time in milliseconds to wait to check sending quota.
      * This is used to avoid Amazon SES throttling when sending large amounts
      * of emails.
      */
-    public static final String AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS_PROPERTY = 
+    public static final String AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS_PROPERTY =
             &quot;com.irurueta.server.commons.email.AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS&quot;;
-    
+
     /**
      * Default amount of time in milliseconds to wait to check email sending
      * quota using AWS SES.
      */
-    public static final long DEFAULT_AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS = 
-            3600000;           
-    
+    public static final long DEFAULT_AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS =
+            3600000;
+
     /**
      * Property indicating whether email sending is enabled by default or not.
      */
     public static final boolean DEFAULT_MAIL_SENDING_ENABLED = false;
-    
+
     /**
      * Property indicating email sending provider if none is given.
      */
-<span class="fc" id="L106">    public static final EmailProvider DEFAULT_MAIL_PROVIDER = </span>
+<span class="fc" id="L107">    public static final EmailProvider DEFAULT_MAIL_PROVIDER =</span>
             EmailProvider.JAVA_MAIL;
-    
+
     /**
      * Default port for SSL.
      */
     public static final int DEFAULT_SSL_PORT = 465;
-    
+
     /**
      * Default port for TLS.
      */
     public static final int DEFAULT_TLS_PORT = 587;
-    
+
     /**
      * Reference to factory singleton.
      */
     private static MailConfigurationFactory mSingleton;
-    
+
     /**
      * Constructor.
      */
-    private MailConfigurationFactory() { }
-    
+    private MailConfigurationFactory() {
+    }
+
     /**
      * Factory method to create or return singleton instance.
+     *
      * @return factory singleton.
      */
     public static synchronized MailConfigurationFactory getInstance() {
-<span class="fc bfc" id="L134" title="All 2 branches covered.">        if (mSingleton == null) {</span>
-<span class="fc" id="L135">            mSingleton = new MailConfigurationFactory();</span>
+<span class="fc bfc" id="L137" title="All 2 branches covered.">        if (mSingleton == null) {</span>
+<span class="fc" id="L138">            mSingleton = new MailConfigurationFactory();</span>
         }
-<span class="fc" id="L137">        return mSingleton;</span>
+<span class="fc" id="L140">        return mSingleton;</span>
     }
 
     /**
      * Configures the email sending layer using provided properties.
+     *
      * @param properties properties containing email configuration.
      * @return email configuration.
      * @throws ConfigurationException if any property value was invalid.
      */
     @Override
-    public MailConfiguration configure(Properties properties) 
+    public MailConfiguration configure(final Properties properties)
             throws ConfigurationException {
-<span class="fc bfc" id="L149" title="All 2 branches covered.">        if (mConfiguration != null) {</span>
-<span class="fc" id="L150">            return mConfiguration;</span>
+<span class="fc bfc" id="L153" title="All 2 branches covered.">        if (mConfiguration != null) {</span>
+<span class="fc" id="L154">            return mConfiguration;</span>
         }
-        
-<span class="fc bfc" id="L153" title="All 2 branches covered.">        if (properties == null) {</span>
-            //use default configuration
-<span class="fc" id="L155">            mConfiguration = new MailConfigurationImpl();</span>
+
+<span class="fc bfc" id="L157" title="All 2 branches covered.">        if (properties == null) {</span>
+            // use default configuration
+<span class="fc" id="L159">            mConfiguration = new MailConfigurationImpl();</span>
         } else {
-<span class="fc" id="L157">            mConfiguration = new MailConfigurationImpl(properties);</span>
+<span class="fc" id="L161">            mConfiguration = new MailConfigurationImpl(properties);</span>
         }
-        
-        //configure email sender.
-<span class="fc" id="L161">        EmailSender.getInstance();</span>
-        
-<span class="fc" id="L163">        return mConfiguration;</span>
+
+        // configure email sender.
+<span class="fc" id="L165">        EmailSender.getInstance();</span>
+
+<span class="fc" id="L167">        return mConfiguration;</span>
     }
-    
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

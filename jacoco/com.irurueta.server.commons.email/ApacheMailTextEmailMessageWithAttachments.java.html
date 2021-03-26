@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ApacheMailTextEmailMessageWithAttachments.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">ApacheMailTextEmailMessageWithAttachments.java</span></div><h1>ApacheMailTextEmailMessageWithAttachments.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ApacheMailTextEmailMessageWithAttachments.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">ApacheMailTextEmailMessageWithAttachments.java</span></div><h1>ApacheMailTextEmailMessageWithAttachments.java</h1><pre class="source lang-java linenums">/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -37,7 +37,7 @@ public class ApacheMailTextEmailMessageWithAttachments extends
      * Constructor with email subject.
      * @param subject subject to be set on email.
      */
-    public ApacheMailTextEmailMessageWithAttachments(String subject) {
+    public ApacheMailTextEmailMessageWithAttachments(final String subject) {
 <span class="fc" id="L41">        super(subject);</span>
 <span class="fc" id="L42">    }</span>
     
@@ -46,8 +46,8 @@ public class ApacheMailTextEmailMessageWithAttachments extends
      * @param subject subject to be set on email.
      * @param text textual email content.
      */
-    public ApacheMailTextEmailMessageWithAttachments(String subject, 
-            String text) {
+    public ApacheMailTextEmailMessageWithAttachments(final String subject,
+            final String text) {
 <span class="fc" id="L51">        super(subject, text);</span>
 <span class="fc" id="L52">    }</span>
     
@@ -56,7 +56,7 @@ public class ApacheMailTextEmailMessageWithAttachments extends
      * @param attachments list of file attachments to be included in email.
      */
     public ApacheMailTextEmailMessageWithAttachments(
-            List&lt;EmailAttachment&gt; attachments) {
+            final List&lt;EmailAttachment&gt; attachments) {
 <span class="fc" id="L60">        super(attachments);</span>
 <span class="fc" id="L61">    }</span>
     
@@ -65,8 +65,8 @@ public class ApacheMailTextEmailMessageWithAttachments extends
      * @param subject subject to be set on email.
      * @param attachments list of file attachments to be included in email.
      */
-    public ApacheMailTextEmailMessageWithAttachments(String subject, 
-            List&lt;EmailAttachment&gt; attachments) {
+    public ApacheMailTextEmailMessageWithAttachments(final String subject,
+            final List&lt;EmailAttachment&gt; attachments) {
 <span class="fc" id="L70">        super(subject, attachments);</span>
 <span class="fc" id="L71">    }</span>
     
@@ -76,8 +76,8 @@ public class ApacheMailTextEmailMessageWithAttachments extends
      * @param text textual email content.
      * @param attachments list of file attachments to be included in email.
      */
-    public ApacheMailTextEmailMessageWithAttachments(String subject, 
-            String text, List&lt;EmailAttachment&gt; attachments) {
+    public ApacheMailTextEmailMessageWithAttachments(final String subject,
+            final String text, final List&lt;EmailAttachment&gt; attachments) {
 <span class="fc" id="L81">        super(subject, text, attachments);</span>
 <span class="fc" id="L82">    }    </span>
 
@@ -88,19 +88,19 @@ public class ApacheMailTextEmailMessageWithAttachments extends
      * content fails.
      */        
     @Override
-    protected void buildContent(MultiPartEmail content) 
+    protected void buildContent(final MultiPartEmail content)
             throws com.irurueta.server.commons.email.EmailException {
         try {
 <span class="pc bpc" id="L94" title="1 of 2 branches missed.">            if (getText() != null) {</span>
 <span class="fc" id="L95">                content.setMsg(getText());</span>
             }
                         
-            //add attachments
-<span class="fc" id="L99">            List&lt;EmailAttachment&gt; attachments = getAttachments();</span>
+            // add attachments
+<span class="fc" id="L99">            final List&lt;EmailAttachment&gt; attachments = getAttachments();</span>
             org.apache.commons.mail.EmailAttachment apacheAttachment;
 <span class="pc bpc" id="L101" title="1 of 2 branches missed.">            if (attachments != null) {</span>
-<span class="fc bfc" id="L102" title="All 2 branches covered.">                for (EmailAttachment attachment : attachments) {</span>
-                    //only add attachments with files
+<span class="fc bfc" id="L102" title="All 2 branches covered.">                for (final EmailAttachment attachment : attachments) {</span>
+                    // only add attachments with files
 <span class="pc bpc" id="L104" title="1 of 2 branches missed.">                    if (attachment.getAttachment() == null) {</span>
 <span class="nc" id="L105">                        continue;</span>
                     }
@@ -117,7 +117,7 @@ public class ApacheMailTextEmailMessageWithAttachments extends
 <span class="fc" id="L117">                    content.attach(apacheAttachment);</span>
 <span class="fc" id="L118">                }</span>
             }
-<span class="nc" id="L120">        } catch (EmailException e) {</span>
+<span class="nc" id="L120">        } catch (final EmailException e) {</span>
 <span class="nc" id="L121">            throw new com.irurueta.server.commons.email.EmailException(e);</span>
 <span class="fc" id="L122">        }</span>
 <span class="fc" id="L123">    }  </span>

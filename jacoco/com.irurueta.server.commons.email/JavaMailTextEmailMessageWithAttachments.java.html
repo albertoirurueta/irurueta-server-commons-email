@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JavaMailTextEmailMessageWithAttachments.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">JavaMailTextEmailMessageWithAttachments.java</span></div><h1>JavaMailTextEmailMessageWithAttachments.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JavaMailTextEmailMessageWithAttachments.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">JavaMailTextEmailMessageWithAttachments.java</span></div><h1>JavaMailTextEmailMessageWithAttachments.java</h1><pre class="source lang-java linenums">/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -30,128 +30,134 @@ import javax.mail.internet.MimeMultipart;
  * Class containing a text only email message that can contain file attachments
  * and is meant to be sent using JavaMail.
  */
-public class JavaMailTextEmailMessageWithAttachments extends 
+public class JavaMailTextEmailMessageWithAttachments extends
         TextEmailMessageWithAttachments&lt;MimeMessage&gt; {
-    
+
     /**
      * Constructor.
      */
     public JavaMailTextEmailMessageWithAttachments() {
 <span class="fc" id="L40">        super();</span>
 <span class="fc" id="L41">    }</span>
-    
+
     /**
      * Constructor with email subject.
+     *
      * @param subject subject to be set on email.
      */
-    public JavaMailTextEmailMessageWithAttachments(String subject) {
-<span class="fc" id="L48">        super(subject);</span>
-<span class="fc" id="L49">    }</span>
-    
+    public JavaMailTextEmailMessageWithAttachments(final String subject) {
+<span class="fc" id="L49">        super(subject);</span>
+<span class="fc" id="L50">    }</span>
+
     /**
      * Constructor with email subject and content text.
+     *
      * @param subject subject to be set on email.
-     * @param text textual email content.
+     * @param text    textual email content.
      */
-    public JavaMailTextEmailMessageWithAttachments(String subject, 
-            String text) {
-<span class="fc" id="L58">        super(subject, text);</span>
-<span class="fc" id="L59">    }</span>
-    
+    public JavaMailTextEmailMessageWithAttachments(final String subject,
+                                                   final String text) {
+<span class="fc" id="L60">        super(subject, text);</span>
+<span class="fc" id="L61">    }</span>
+
     /**
      * Constructor with file attachments.
+     *
      * @param attachments list of file attachments to be included in email.
      */
     public JavaMailTextEmailMessageWithAttachments(
-            List&lt;EmailAttachment&gt; attachments) {
-<span class="fc" id="L67">        super(attachments);</span>
-<span class="fc" id="L68">    }</span>
-    
+            final List&lt;EmailAttachment&gt; attachments) {
+<span class="fc" id="L70">        super(attachments);</span>
+<span class="fc" id="L71">    }</span>
+
     /**
      * Constructor with subject and file attachments.
-     * @param subject subject to be set on email.
+     *
+     * @param subject     subject to be set on email.
      * @param attachments list of file attachments to be included in email.
      */
-    public JavaMailTextEmailMessageWithAttachments(String subject, 
-            List&lt;EmailAttachment&gt; attachments) {
-<span class="fc" id="L77">        super(subject, attachments);</span>
-<span class="fc" id="L78">    }</span>
-    
+    public JavaMailTextEmailMessageWithAttachments(final String subject,
+                                                   final List&lt;EmailAttachment&gt; attachments) {
+<span class="fc" id="L81">        super(subject, attachments);</span>
+<span class="fc" id="L82">    }</span>
+
     /**
      * Constructor with subject, content text and file attachments.
-     * @param subject subject to be set on email.
-     * @param text textual email content.
+     *
+     * @param subject     subject to be set on email.
+     * @param text        textual email content.
      * @param attachments list of file attachments to be included in email.
      */
-    public JavaMailTextEmailMessageWithAttachments(String subject, String text,
-            List&lt;EmailAttachment&gt; attachments) {
-<span class="fc" id="L88">        super(subject, text, attachments);</span>
-<span class="fc" id="L89">    }    </span>
+    public JavaMailTextEmailMessageWithAttachments(final String subject, String text,
+                                                   final List&lt;EmailAttachment&gt; attachments) {
+<span class="fc" id="L93">        super(subject, text, attachments);</span>
+<span class="fc" id="L94">    }</span>
 
     /**
      * Builds email content to be sent using an email sender.
+     *
      * @param message instance where content must be set.
      * @throws EmailException if setting mail content fails.
-     */    
+     */
     @Override
-    protected void buildContent(MimeMessage message) throws EmailException {        
+    protected void buildContent(final MimeMessage message) throws EmailException {
         try {
-            
-            //finally add multipart contents to mail message
-<span class="fc" id="L101">            message.setContent(buildMultipart());            </span>
-            
-<span class="nc" id="L103">        } catch (MessagingException e) {</span>
-<span class="nc" id="L104">            throw new EmailException(e);</span>
-<span class="fc" id="L105">        }</span>
-<span class="fc" id="L106">    }  </span>
-    
+            // finally add multipart contents to mail message
+<span class="fc" id="L106">            message.setContent(buildMultipart());</span>
+
+<span class="nc" id="L108">        } catch (final MessagingException e) {</span>
+<span class="nc" id="L109">            throw new EmailException(e);</span>
+<span class="fc" id="L110">        }</span>
+<span class="fc" id="L111">    }</span>
+
     /**
      * Builds multipart content of email.
      * Multipart is used when a text email needs to have files attached.
+     *
      * @return a multipart.
      * @throws EmailException if building multipart fails.
      */
     private Multipart buildMultipart() throws EmailException {
         try {
-            //create multipart. One part will be for text content, and remaining
-            //parts will be for attachments
-<span class="fc" id="L118">            Multipart multipart = new MimeMultipart();            </span>
-            //set text content in body part
+            // create multipart. One part will be for text content, and remaining
+            // parts will be for attachments
+<span class="fc" id="L124">            final Multipart multipart = new MimeMultipart();</span>
+            // set text content in body part
             BodyPart messageBodyPart;
-<span class="pc bpc" id="L121" title="1 of 2 branches missed.">            if (getText() != null) {</span>
-<span class="fc" id="L122">                messageBodyPart = new MimeBodyPart();</span>
-<span class="fc" id="L123">                messageBodyPart.setContent(getText(), </span>
+<span class="pc bpc" id="L127" title="1 of 2 branches missed.">            if (getText() != null) {</span>
+<span class="fc" id="L128">                messageBodyPart = new MimeBodyPart();</span>
+<span class="fc" id="L129">                messageBodyPart.setContent(getText(),</span>
                         &quot;text/plain; charset=utf-8&quot;);
-<span class="fc" id="L125">                multipart.addBodyPart(messageBodyPart);</span>
+<span class="fc" id="L131">                multipart.addBodyPart(messageBodyPart);</span>
             }
-            
-            //add attachments parts
-<span class="fc" id="L129">            List&lt;EmailAttachment&gt; attachments = getAttachments();</span>
-<span class="pc bpc" id="L130" title="1 of 2 branches missed.">            if (attachments != null) {</span>
-<span class="fc bfc" id="L131" title="All 2 branches covered.">                for (EmailAttachment attachment : attachments) {</span>
-                    //only add attachments with files
-<span class="pc bpc" id="L133" title="1 of 2 branches missed.">                    if (attachment.getAttachment() == null) {</span>
-<span class="nc" id="L134">                        continue;</span>
+
+            // add attachments parts
+<span class="fc" id="L135">            final List&lt;EmailAttachment&gt; attachments = getAttachments();</span>
+<span class="pc bpc" id="L136" title="1 of 2 branches missed.">            if (attachments != null) {</span>
+<span class="fc bfc" id="L137" title="All 2 branches covered.">                for (final EmailAttachment attachment : attachments) {</span>
+                    // only add attachments with files
+<span class="pc bpc" id="L139" title="1 of 2 branches missed.">                    if (attachment.getAttachment() == null) {</span>
+<span class="nc" id="L140">                        continue;</span>
                     }
 
-<span class="fc" id="L137">                    messageBodyPart = new MimeBodyPart();</span>
-<span class="pc bpc" id="L138" title="1 of 2 branches missed.">                    if (attachment.getName() != null) {</span>
-<span class="fc" id="L139">                        messageBodyPart.setFileName(attachment.getName());</span>
+<span class="fc" id="L143">                    messageBodyPart = new MimeBodyPart();</span>
+<span class="pc bpc" id="L144" title="1 of 2 branches missed.">                    if (attachment.getName() != null) {</span>
+<span class="fc" id="L145">                        messageBodyPart.setFileName(attachment.getName());</span>
                     }
-<span class="fc" id="L141">                    messageBodyPart.setDisposition(Part.ATTACHMENT);</span>
-<span class="pc bpc" id="L142" title="1 of 2 branches missed.">                    if (attachment.getContentType() != null) {</span>
-<span class="fc" id="L143">                        messageBodyPart.addHeader(&quot;Content-Type&quot;, </span>
-<span class="fc" id="L144">                                attachment.getContentType());</span>
+<span class="fc" id="L147">                    messageBodyPart.setDisposition(Part.ATTACHMENT);</span>
+<span class="pc bpc" id="L148" title="1 of 2 branches missed.">                    if (attachment.getContentType() != null) {</span>
+<span class="fc" id="L149">                        messageBodyPart.addHeader(&quot;Content-Type&quot;,</span>
+<span class="fc" id="L150">                                attachment.getContentType());</span>
                     }
-<span class="fc" id="L146">                    messageBodyPart.setDataHandler(new DataHandler(</span>
-<span class="fc" id="L147">                            new FileDataSource(attachment.getAttachment())));</span>
-<span class="fc" id="L148">                    multipart.addBodyPart(messageBodyPart);</span>
-<span class="fc" id="L149">                }</span>
+<span class="fc" id="L152">                    messageBodyPart.setDataHandler(new DataHandler(</span>
+<span class="fc" id="L153">                            new FileDataSource(attachment.getAttachment())));</span>
+<span class="fc" id="L154">                    multipart.addBodyPart(messageBodyPart);</span>
+<span class="fc" id="L155">                }</span>
             }
-<span class="fc" id="L151">            return multipart;</span>
-<span class="nc" id="L152">        } catch (MessagingException e) {</span>
-<span class="nc" id="L153">            throw new EmailException(e);</span>
-        }                        
+<span class="fc" id="L157">            return multipart;</span>
+<span class="nc" id="L158">        } catch (final MessagingException e) {</span>
+<span class="nc" id="L159">            throw new EmailException(e);</span>
+        }
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AWSHtmlEmailMessage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">AWSHtmlEmailMessage.java</span></div><h1>AWSHtmlEmailMessage.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AWSHtmlEmailMessage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">AWSHtmlEmailMessage.java</span></div><h1>AWSHtmlEmailMessage.java</h1><pre class="source lang-java linenums">/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -30,42 +30,46 @@ public class AWSHtmlEmailMessage extends JavaMailHtmlEmailMessage {
     public AWSHtmlEmailMessage() {
 <span class="fc" id="L31">        super();</span>
 <span class="fc" id="L32">    }</span>
-    
+
     /**
      * Constructor with email subject.
+     *
      * @param subject subject to be set.
-     */    
-    public AWSHtmlEmailMessage(String subject) {
-<span class="fc" id="L39">        super(subject);</span>
-<span class="fc" id="L40">    }</span>
-    
+     */
+    public AWSHtmlEmailMessage(final String subject) {
+<span class="fc" id="L40">        super(subject);</span>
+<span class="fc" id="L41">    }</span>
+
     /**
      * Constructor with email subject and textual content.
-     * @param subject subject to be set.
+     *
+     * @param subject     subject to be set.
      * @param htmlContent HTML content.
-     */    
-    public AWSHtmlEmailMessage(String subject, String htmlContent) {
-<span class="fc" id="L48">        super(subject, htmlContent);</span>
-<span class="fc" id="L49">    }    </span>
-    
+     */
+    public AWSHtmlEmailMessage(final String subject, final String htmlContent) {
+<span class="fc" id="L50">        super(subject, htmlContent);</span>
+<span class="fc" id="L51">    }</span>
+
     /**
      * Indicates if CC is supported for this kind of email to send Carbon Copies
      * of this email. Some email types do not support this feature.
+     *
      * @return true if CC feature is supported, false otherwise.
      */
     @Override
     public boolean isCCSupported() {
-<span class="fc" id="L58">        return false;</span>
+<span class="fc" id="L61">        return false;</span>
     }
-    
+
     /**
      * Indicates if BCC is supported for this kind of email to send Blind Carbon
      * Copies of this email. Some email types do not support this feature.
+     *
      * @return true if BCC feature is supported, false otherwise.
      */
     @Override
     public boolean isBCCSupported() {
-<span class="fc" id="L68">        return false;</span>
-    }    
+<span class="fc" id="L72">        return false;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

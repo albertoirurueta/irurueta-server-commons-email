@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ApacheMailTextEmailMessage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">ApacheMailTextEmailMessage.java</span></div><h1>ApacheMailTextEmailMessage.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ApacheMailTextEmailMessage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">ApacheMailTextEmailMessage.java</span></div><h1>ApacheMailTextEmailMessage.java</h1><pre class="source lang-java linenums">/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -21,7 +21,7 @@ import org.apache.commons.mail.MultiPartEmail;
 /**
  * Class containing a text only email message to be sent using Apache Mail.
  */
-public class ApacheMailTextEmailMessage extends 
+public class ApacheMailTextEmailMessage extends
         TextEmailMessage&lt;MultiPartEmail&gt; {
     /**
      * Constructor.
@@ -29,38 +29,41 @@ public class ApacheMailTextEmailMessage extends
     public ApacheMailTextEmailMessage() {
 <span class="fc" id="L30">        super();</span>
 <span class="fc" id="L31">    }</span>
-    
+
     /**
      * Constructor with email subject.
+     *
      * @param subject subject to be set on email.
      */
-    public ApacheMailTextEmailMessage(String subject) {
-<span class="fc" id="L38">        super(subject);</span>
-<span class="fc" id="L39">    }</span>
-    
+    public ApacheMailTextEmailMessage(final String subject) {
+<span class="fc" id="L39">        super(subject);</span>
+<span class="fc" id="L40">    }</span>
+
     /**
      * Constructor with email subject and content text.
+     *
      * @param subject subject to be set on email.
-     * @param text textual email content.
+     * @param text    textual email content.
      */
-    public ApacheMailTextEmailMessage(String subject, String text) {
-<span class="fc" id="L47">        super(subject, text);</span>
-<span class="fc" id="L48">    }</span>
-    
+    public ApacheMailTextEmailMessage(final String subject, final String text) {
+<span class="fc" id="L49">        super(subject, text);</span>
+<span class="fc" id="L50">    }</span>
+
     /**
      * Builds email content to be sent using an email sender.
+     *
      * @param content instance where content must be set.
-     * @throws com.irurueta.server.commons.email.EmailException if setting mail 
-     * content fails.
+     * @throws com.irurueta.server.commons.email.EmailException if setting mail
+     *                                                          content fails.
      */
     @Override
-    protected void buildContent(MultiPartEmail content) 
+    protected void buildContent(final MultiPartEmail content)
             throws com.irurueta.server.commons.email.EmailException {
-        try {            
-<span class="fc" id="L60">            content.setMsg(getText());</span>
-<span class="nc" id="L61">        } catch (EmailException e) {</span>
-<span class="nc" id="L62">            throw new com.irurueta.server.commons.email.EmailException(e);</span>
-<span class="fc" id="L63">        }</span>
-<span class="fc" id="L64">    }    </span>
+        try {
+<span class="fc" id="L63">            content.setMsg(getText());</span>
+<span class="nc" id="L64">        } catch (final EmailException e) {</span>
+<span class="nc" id="L65">            throw new com.irurueta.server.commons.email.EmailException(e);</span>
+<span class="fc" id="L66">        }</span>
+<span class="fc" id="L67">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

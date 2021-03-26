@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JavaMailSender.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">JavaMailSender.java</span></div><h1>JavaMailSender.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JavaMailSender.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">com.irurueta:irurueta-server-commons-email</a> &gt; <a href="index.source.html" class="el_package">com.irurueta.server.commons.email</a> &gt; <span class="el_source">JavaMailSender.java</span></div><h1>JavaMailSender.java</h1><pre class="source lang-java linenums">/*
  * Copyright (C) 2016 Alberto Irurueta Carro (alberto@irurueta.com)
  *
  * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -16,262 +16,270 @@
 package com.irurueta.server.commons.email;
 
 import com.irurueta.server.commons.configuration.ConfigurationException;
+
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.lang.ref.SoftReference;
 import java.util.Date;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 /**
  * Class to send emails using JavaMail.
  */
 public class JavaMailSender extends EmailSender&lt;MimeMessage&gt; {
-    
+
     /**
      * Minimum allowed port value to connect to SMTP server.
      */
     private static final int MIN_PORT_VALUE = 0;
-    
+
     /**
      * Maximum allowed port value to connect to SMTP server.
      */
     private static final int MAX_PORT_VALUE = 65535;
-    
+
     /**
      * Reference to singleton instance of this class.
      */
     private static SoftReference&lt;JavaMailSender&gt; mReference;
-    
+
     /**
      * SMTP server host to connect to.
      */
     private String mMailHost;
-    
+
     /**
      * SMTP server port to connect to.
      */
     private int mMailPort;
-    
+
     /**
-     * User id to log into SMTP server. If none is provided no authentication 
+     * User id to log into SMTP server. If none is provided no authentication
      * will be used.
      */
     private String mMailId;
-    
+
     /**
-     * User password to log into SMTP server. If none is provided no 
+     * User password to log into SMTP server. If none is provided no
      * authentication will be used.
      */
     private String mMailPassword;
-    
+
     /**
      * Address to send emails from.
      */
     private String mMailFromAddress;
-    
+
     /**
      * Indicates if mail sending is enabled.
      */
     private boolean mEnabled;
-    
+
     /**
      * Constructor.
      * Loads mail configuration, and if it fails for some reason, mail sending
      * becomes disabled.
      */
 <span class="fc" id="L88">    private JavaMailSender() {</span>
-        
+
         try {
-<span class="fc" id="L91">            MailConfiguration cfg = MailConfigurationFactory.getInstance().</span>
+<span class="fc" id="L91">            final MailConfiguration cfg = MailConfigurationFactory.getInstance().</span>
 <span class="fc" id="L92">                    configure();</span>
 <span class="fc" id="L93">            mMailHost = cfg.getMailHost();</span>
 <span class="fc" id="L94">            mMailPort = cfg.getMailPort();</span>
 <span class="fc" id="L95">            mMailId = cfg.getMailId();</span>
 <span class="fc" id="L96">            mMailPassword = cfg.getMailPassword();</span>
 <span class="fc" id="L97">            mMailFromAddress = cfg.getMailFromAddress();</span>
-        
-<span class="fc bfc" id="L99" title="All 2 branches covered.">            mEnabled = isValidConfiguration(mMailHost, mMailPort, </span>
+
+<span class="fc bfc" id="L99" title="All 2 branches covered.">            mEnabled = isValidConfiguration(mMailHost, mMailPort,</span>
 <span class="pc bpc" id="L100" title="1 of 2 branches missed.">                    mMailFromAddress) &amp;&amp; cfg.isMailSendingEnabled();</span>
-<span class="nc" id="L101">        } catch (ConfigurationException e) { </span>
+<span class="nc" id="L101">        } catch (final ConfigurationException e) {</span>
 <span class="nc" id="L102">            mEnabled = false;</span>
 <span class="fc" id="L103">        }</span>
-        
-<span class="fc bfc" id="L105" title="All 2 branches covered.">        if (mEnabled) { </span>
+
+<span class="fc bfc" id="L105" title="All 2 branches covered.">        if (mEnabled) {</span>
 <span class="fc" id="L106">            Logger.getLogger(JavaMailSender.class.getName()).log(</span>
-                            Level.INFO, &quot;Java Email Sender enabled.&quot;);
+                    Level.INFO, &quot;Java Email Sender enabled.&quot;);
         } else {
 <span class="fc" id="L109">            Logger.getLogger(JavaMailSender.class.getName()).log(</span>
                     Level.INFO, &quot;Java Email Sender disabled. Any &quot; +
-                    &quot;attempt to send emails using Java mail will be silently &quot; +
-                    &quot;ignored&quot;);            
+                            &quot;attempt to send emails using Java mail will be silently &quot; +
+                            &quot;ignored&quot;);
         }
 <span class="fc" id="L114">    }</span>
-    
+
     /**
      * Returns or creates singleton instance of this class.
+     *
      * @return singleton of this class.
      */
     public static synchronized JavaMailSender getInstance() {
         JavaMailSender sender;
-<span class="pc bpc" id="L122" title="1 of 4 branches missed.">        if (mReference == null || (sender = mReference.get()) == null) {</span>
-<span class="fc" id="L123">            sender = new JavaMailSender();</span>
-<span class="fc" id="L124">            mReference = new SoftReference&lt;&gt;(sender);</span>
+<span class="pc bpc" id="L123" title="1 of 4 branches missed.">        if (mReference == null || (sender = mReference.get()) == null) {</span>
+<span class="fc" id="L124">            sender = new JavaMailSender();</span>
+<span class="fc" id="L125">            mReference = new SoftReference&lt;&gt;(sender);</span>
         }
-<span class="fc" id="L126">        return sender;</span>
+<span class="fc" id="L127">        return sender;</span>
     }
-    
+
     /**
      * Resets JavaMailSingleton.
      */
     public static synchronized void reset() {
-<span class="fc" id="L133">        mReference = null;</span>
-<span class="fc" id="L134">    }</span>
-    
+<span class="fc" id="L134">        mReference = null;</span>
+<span class="fc" id="L135">    }</span>
+
     /**
      * Indicates if provided configuration is valid by checking that SMTP server
      * and mail from address are not null, and server port is valid.
-     * @param mailHost SMTP server host.
-     * @param mailPort SMTP server port.
+     *
+     * @param mailHost        SMTP server host.
+     * @param mailPort        SMTP server port.
      * @param mailFromAddress email address to send emails from.
      * @return true if configuration is valid, false otherwise.
      */
-    private boolean isValidConfiguration(String mailHost, int mailPort,
-            //String mailId, String mailPassword, 
-            String mailFromAddress) {
-<span class="pc bpc" id="L147" title="3 of 8 branches missed.">        return mailHost != null &amp;&amp; mailPort &gt;= MIN_PORT_VALUE &amp;&amp; </span>
-                mailPort &lt;= MAX_PORT_VALUE &amp;&amp; mailFromAddress != null &amp;&amp; 
-<span class="pc bpc" id="L149" title="1 of 2 branches missed.">                isValidEmailAddress(mailFromAddress);</span>
+    private boolean isValidConfiguration(final String mailHost, final int mailPort,
+                                         final String mailFromAddress) {
+<span class="pc bpc" id="L148" title="3 of 8 branches missed.">        return mailHost != null &amp;&amp; mailPort &gt;= MIN_PORT_VALUE &amp;&amp;</span>
+                mailPort &lt;= MAX_PORT_VALUE &amp;&amp; mailFromAddress != null &amp;&amp;
+<span class="pc bpc" id="L150" title="1 of 2 branches missed.">                isValidEmailAddress(mailFromAddress);</span>
     }
-    
+
     /**
      * Returns SMTP server host.
+     *
      * @return SMTP server host.
      */
     public String getMailHost() {
-<span class="fc" id="L157">        return mMailHost;</span>
+<span class="fc" id="L159">        return mMailHost;</span>
     }
-    
+
     /**
      * Returns SMTP server port.
+     *
      * @return SMTP server port.
      */
     public int getMailPort() {
-<span class="fc" id="L165">        return mMailPort;</span>
+<span class="fc" id="L168">        return mMailPort;</span>
     }
-    
+
     /**
      * Returns user id to log into SMTP server. If this value is null server
      * authentication will be disabled.
+     *
      * @return user id to log into SMTP server.
      */
     public String getMailId() {
-<span class="fc" id="L174">        return mMailId;        </span>
+<span class="fc" id="L178">        return mMailId;</span>
     }
-    
+
     /**
      * Returns user password to log into SMTP server. If this value is null
      * server authentication will be disabled.
+     *
      * @return user password to log into SMTP server.
      */
     public String getMailPassword() {
-<span class="fc" id="L183">        return mMailPassword;</span>
+<span class="fc" id="L188">        return mMailPassword;</span>
     }
-    
+
     /**
      * Email address to send emails from.
+     *
      * @return email address to send emails from.
      */
     public String getMailFromAddress() {
-<span class="fc" id="L191">        return mMailFromAddress;</span>
+<span class="fc" id="L197">        return mMailFromAddress;</span>
     }
-    
+
     /**
      * Indicates if this mail sender controller is enabled.
+     *
      * @return true if enabled, false otherwise.
      */
     public boolean isEnabled() {
-<span class="fc" id="L199">        return mEnabled;</span>
+<span class="fc" id="L206">        return mEnabled;</span>
     }
-    
+
     /**
      * Method to send an email.
+     *
      * @param m email message to be sent.
      * @return id of message that has been sent.
      * @throws MailNotSentException if mail couldn't be sent.
-     */    
+     */
     @Override
-    public String send(EmailMessage&lt;MimeMessage&gt; m) 
+    public String send(final EmailMessage&lt;MimeMessage&gt; m)
             throws MailNotSentException {
-        
-<span class="fc bfc" id="L212" title="All 2 branches covered.">        if (mEnabled) {</span>
-<span class="fc" id="L213">            Properties props = new Properties();</span>
-<span class="pc bpc" id="L214" title="3 of 6 branches missed.">            if (mMailId == null || mMailId.isEmpty() || mMailPassword == null || </span>
-<span class="pc bpc" id="L215" title="1 of 2 branches missed.">                    mMailPassword.isEmpty()) {</span>
-                //disable authentication
-<span class="nc" id="L217">                props.put(&quot;mail.smtp.auth&quot;, &quot;false&quot;);</span>
+
+<span class="fc bfc" id="L220" title="All 2 branches covered.">        if (mEnabled) {</span>
+<span class="fc" id="L221">            final Properties props = new Properties();</span>
+<span class="pc bpc" id="L222" title="3 of 6 branches missed.">            if (mMailId == null || mMailId.isEmpty() || mMailPassword == null ||</span>
+<span class="pc bpc" id="L223" title="1 of 2 branches missed.">                    mMailPassword.isEmpty()) {</span>
+                // disable authentication
+<span class="nc" id="L225">                props.put(&quot;mail.smtp.auth&quot;, &quot;false&quot;);</span>
             } else {
-<span class="fc" id="L219">                props.put(&quot;mail.smtp.auth&quot;, &quot;true&quot;);            </span>
-<span class="fc" id="L220">                props.put(&quot;mail.smtp.socketFactory.class&quot;,</span>
-                    &quot;javax.net.ssl.SSLSocketFactory&quot;);            
-<span class="fc" id="L222">                props.put(&quot;mail.smtp.starttls.enable&quot;, &quot;true&quot;);</span>
-<span class="fc" id="L223">                props.put(&quot;mail.smtp.socketFactory.port&quot;, mMailPort);</span>
-            }            
-        
-<span class="fc" id="L226">            Session session = Session.getInstance(props, null);</span>
-        
+<span class="fc" id="L227">                props.put(&quot;mail.smtp.auth&quot;, &quot;true&quot;);</span>
+<span class="fc" id="L228">                props.put(&quot;mail.smtp.socketFactory.class&quot;,</span>
+                        &quot;javax.net.ssl.SSLSocketFactory&quot;);
+<span class="fc" id="L230">                props.put(&quot;mail.smtp.ssl.checkserveridentity&quot;, &quot;true&quot;);</span>
+<span class="fc" id="L231">                props.put(&quot;mail.smtp.starttls.enable&quot;, &quot;true&quot;);</span>
+<span class="fc" id="L232">                props.put(&quot;mail.smtp.socketFactory.port&quot;, mMailPort);</span>
+            }
+
+<span class="fc" id="L235">            final Session session = Session.getInstance(props, null);</span>
+
             try {
-<span class="fc" id="L229">                MimeMessage message = new MimeMessage(session);</span>
-<span class="fc" id="L230">                message.setFrom(new InternetAddress(mMailFromAddress));</span>
-            
-<span class="fc bfc" id="L232" title="All 2 branches covered.">                for (String s : m.getTo()) {</span>
-<span class="fc" id="L233">                    message.addRecipients(Message.RecipientType.TO, s);</span>
-<span class="fc" id="L234">                }</span>
-            
-<span class="pc bpc" id="L236" title="1 of 2 branches missed.">                for (String s : m.getCC()) {</span>
-<span class="nc" id="L237">                    message.addRecipients(Message.RecipientType.CC, s);</span>
-<span class="nc" id="L238">                }</span>
-            
-<span class="pc bpc" id="L240" title="1 of 2 branches missed.">                for (String s : m.getBCC()) {</span>
-<span class="nc" id="L241">                    message.addRecipients(Message.RecipientType.BCC, s);</span>
-<span class="nc" id="L242">                }</span>
-            
-<span class="pc bpc" id="L244" title="1 of 2 branches missed.">                if (m.getSubject() != null) {</span>
-<span class="fc" id="L245">                    message.setSubject(m.getSubject(), &quot;utf-8&quot;);</span>
+<span class="fc" id="L238">                final MimeMessage message = new MimeMessage(session);</span>
+<span class="fc" id="L239">                message.setFrom(new InternetAddress(mMailFromAddress));</span>
+
+<span class="fc bfc" id="L241" title="All 2 branches covered.">                for (final String s : m.getTo()) {</span>
+<span class="fc" id="L242">                    message.addRecipients(Message.RecipientType.TO, s);</span>
+<span class="fc" id="L243">                }</span>
+
+<span class="pc bpc" id="L245" title="1 of 2 branches missed.">                for (final String s : m.getCC()) {</span>
+<span class="nc" id="L246">                    message.addRecipients(Message.RecipientType.CC, s);</span>
+<span class="nc" id="L247">                }</span>
+
+<span class="pc bpc" id="L249" title="1 of 2 branches missed.">                for (final String s : m.getBCC()) {</span>
+<span class="nc" id="L250">                    message.addRecipients(Message.RecipientType.BCC, s);</span>
+<span class="nc" id="L251">                }</span>
+
+<span class="pc bpc" id="L253" title="1 of 2 branches missed.">                if (m.getSubject() != null) {</span>
+<span class="fc" id="L254">                    message.setSubject(m.getSubject(), &quot;utf-8&quot;);</span>
                 }
-                //sets content of message
-<span class="fc" id="L248">                m.buildContent(message);</span>
-                //set date when mail was sent
-<span class="fc" id="L250">                message.setSentDate(new Date());</span>
-            
-<span class="fc" id="L252">                Transport transport = session.getTransport(&quot;smtp&quot;);</span>
-<span class="fc" id="L253">                transport.connect(mMailHost, mMailPort, mMailId, mMailPassword);</span>
-            
-<span class="fc" id="L255">                transport.sendMessage(message, message.getAllRecipients());</span>
-            
-<span class="fc" id="L257">                transport.close();</span>
-            
-<span class="nc" id="L259">            } catch (MessagingException ex) {</span>
-<span class="nc" id="L260">                throw new MailNotSentException(ex);</span>
-<span class="nc" id="L261">            } catch (Throwable t) {</span>
-<span class="nc" id="L262">                throw new MailNotSentException(t);</span>
-<span class="fc" id="L263">            }</span>
+                // sets content of message
+<span class="fc" id="L257">                m.buildContent(message);</span>
+                // set date when mail was sent
+<span class="fc" id="L259">                message.setSentDate(new Date());</span>
+
+<span class="fc" id="L261">                final Transport transport = session.getTransport(&quot;smtp&quot;);</span>
+<span class="fc" id="L262">                transport.connect(mMailHost, mMailPort, mMailId, mMailPassword);</span>
+
+<span class="fc" id="L264">                transport.sendMessage(message, message.getAllRecipients());</span>
+
+<span class="fc" id="L266">                transport.close();</span>
+
+<span class="nc" id="L268">            } catch (final Exception ex) {</span>
+<span class="nc" id="L269">                throw new MailNotSentException(ex);</span>
+<span class="fc" id="L270">            }</span>
         }
-<span class="fc" id="L265">        return null;</span>
-    }  
-    
+<span class="fc" id="L272">        return null;</span>
+    }
+
     /**
      * Returns provider used by this email sender.
+     *
      * @return email provider.
      */
     @Override
     public EmailProvider getProvider() {
-<span class="fc" id="L274">        return EmailProvider.JAVA_MAIL;</span>
-    }        
+<span class="fc" id="L282">        return EmailProvider.JAVA_MAIL;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
