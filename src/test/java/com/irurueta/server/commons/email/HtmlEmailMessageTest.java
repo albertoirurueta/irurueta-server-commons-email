@@ -45,7 +45,7 @@ public class HtmlEmailMessageTest {
         final JavaMailSender mailSender = JavaMailSender.getInstance();
 
         // test with mail sender
-        HtmlEmailMessage<?> email = HtmlEmailMessage.create(mailSender);
+        HtmlEmailMessage email = HtmlEmailMessage.create(mailSender);
         assertTrue(email instanceof JavaMailHtmlEmailMessage);
 
         // test with provider
@@ -100,7 +100,7 @@ public class HtmlEmailMessageTest {
 
     @Test
     public void testGetSetEmailAttachments() {
-        final HtmlEmailMessage<?> email = HtmlEmailMessage.create(
+        final HtmlEmailMessage email = HtmlEmailMessage.create(
                 EmailProvider.JAVA_MAIL);
 
         assertNotNull(email.getEmailAttachments());
@@ -115,7 +115,7 @@ public class HtmlEmailMessageTest {
 
     @Test
     public void testGetSetInlineAttachments() {
-        final HtmlEmailMessage<?> email = HtmlEmailMessage.create(
+        final HtmlEmailMessage email = HtmlEmailMessage.create(
                 EmailProvider.JAVA_MAIL);
 
         assertNotNull(email.getInlineAttachments());

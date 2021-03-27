@@ -45,7 +45,7 @@ public class TextEmailMessageWithAttachmentsTest {
         final JavaMailSender mailSender = JavaMailSender.getInstance();
 
         // test with mail sender
-        TextEmailMessageWithAttachments<?> email =
+        TextEmailMessageWithAttachments email =
                 TextEmailMessageWithAttachments.create(mailSender);
         assertTrue(email instanceof JavaMailTextEmailMessageWithAttachments);
 
@@ -176,7 +176,7 @@ public class TextEmailMessageWithAttachmentsTest {
 
     @Test
     public void testGetSetAttachments() {
-        final TextEmailMessageWithAttachments<?> email =
+        final TextEmailMessageWithAttachments email =
                 TextEmailMessageWithAttachments.create(EmailProvider.AWS_MAIL);
 
         assertNotNull(email.getAttachments());

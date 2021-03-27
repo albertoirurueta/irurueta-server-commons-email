@@ -16,6 +16,7 @@
 package com.irurueta.server.commons.email;
 
 import java.util.List;
+
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.MultiPartEmail;
 
@@ -23,78 +24,84 @@ import org.apache.commons.mail.MultiPartEmail;
  * Class containing a text only email message that can contain file attachments
  * and is meant to be sent using Apache Mail.
  */
-public class ApacheMailTextEmailMessageWithAttachments extends 
-        TextEmailMessageWithAttachments<MultiPartEmail> {
-    
+public class ApacheMailTextEmailMessageWithAttachments extends TextEmailMessageWithAttachments
+        implements ApacheMultipartEmailMessage {
+
     /**
      * Constructor.
      */
     public ApacheMailTextEmailMessageWithAttachments() {
         super();
     }
-    
+
     /**
      * Constructor with email subject.
+     *
      * @param subject subject to be set on email.
      */
     public ApacheMailTextEmailMessageWithAttachments(final String subject) {
         super(subject);
     }
-    
+
     /**
      * Constructor with email subject and content text.
+     *
      * @param subject subject to be set on email.
-     * @param text textual email content.
+     * @param text    textual email content.
      */
     public ApacheMailTextEmailMessageWithAttachments(final String subject,
-            final String text) {
+                                                     final String text) {
         super(subject, text);
     }
-    
+
     /**
      * Constructor with file attachments.
+     *
      * @param attachments list of file attachments to be included in email.
      */
     public ApacheMailTextEmailMessageWithAttachments(
             final List<EmailAttachment> attachments) {
         super(attachments);
     }
-    
+
     /**
      * Constructor with subject and file attachments.
-     * @param subject subject to be set on email.
+     *
+     * @param subject     subject to be set on email.
      * @param attachments list of file attachments to be included in email.
      */
     public ApacheMailTextEmailMessageWithAttachments(final String subject,
-            final List<EmailAttachment> attachments) {
+                                                     final List<EmailAttachment> attachments) {
         super(subject, attachments);
     }
-    
+
     /**
      * Constructor with subject, content text and file attachments.
-     * @param subject subject to be set on email.
-     * @param text textual email content.
+     *
+     * @param subject     subject to be set on email.
+     * @param text        textual email content.
      * @param attachments list of file attachments to be included in email.
      */
     public ApacheMailTextEmailMessageWithAttachments(final String subject,
-            final String text, final List<EmailAttachment> attachments) {
+                                                     final String text, final List<EmailAttachment> attachments) {
         super(subject, text, attachments);
-    }    
+    }
 
     /**
      * Builds email content to be sent using an email sender.
+     *
      * @param content instance where content must be set.
-     * @throws com.irurueta.server.commons.email.EmailException if setting mail 
-     * content fails.
-     */        
+     * @throws com.irurueta.server.commons.email.EmailException if setting mail
+     *                                                          content fails.
+     */
     @Override
-    protected void buildContent(final MultiPartEmail content)
+    public void buildContent(final MultiPartEmail content)
             throws com.irurueta.server.commons.email.EmailException {
         try {
             if (getText() != null) {
                 content.setMsg(getText());
             }
-                        
+
             // add attachments
             final List<EmailAttachment> attachments = getAttachments();
             org.apache.commons.mail.EmailAttachment apacheAttachment;
@@ -104,8 +111,8 @@ public class ApacheMailTextEmailMessageWithAttachments extends
                     if (attachment.getAttachment() == null) {
                         continue;
                     }
-                    
-                    apacheAttachment = new  org.apache.commons.mail.
+
+                    apacheAttachment = new org.apache.commons.mail.
                             EmailAttachment();
                     apacheAttachment.setPath(attachment.getAttachment().getAbsolutePath());
                     apacheAttachment.setDisposition(
@@ -113,12 +120,12 @@ public class ApacheMailTextEmailMessageWithAttachments extends
                     if (attachment.getName() != null) {
                         apacheAttachment.setName(attachment.getName());
                     }
-                    
+
                     content.attach(apacheAttachment);
                 }
             }
         } catch (final EmailException e) {
             throw new com.irurueta.server.commons.email.EmailException(e);
         }
-    }  
+    }
 }

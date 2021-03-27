@@ -30,7 +30,7 @@ import java.util.List;
  * can be used within the html content (such as images or css resources to be
  * used within html email body).
  */
-public class ApacheMailHtmlEmailMessage extends HtmlEmailMessage<HtmlEmail> {
+public class ApacheMailHtmlEmailMessage extends HtmlEmailMessage implements ApacheEmailMessage {
 
     /**
      * Constructor.
@@ -66,7 +66,7 @@ public class ApacheMailHtmlEmailMessage extends HtmlEmailMessage<HtmlEmail> {
      *                                                          content fails.
      */
     @Override
-    protected void buildContent(final HtmlEmail content)
+    public void buildContent(final HtmlEmail content)
             throws com.irurueta.server.commons.email.EmailException {
         try {
             if (getAlternativeText() != null) {

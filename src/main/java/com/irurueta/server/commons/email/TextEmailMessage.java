@@ -17,10 +17,8 @@ package com.irurueta.server.commons.email;
 
 /**
  * Base class for text only email messages.
- *
- * @param <E> internal representation of email using by internal client.
  */
-public abstract class TextEmailMessage<E> extends EmailMessage<E> {
+public abstract class TextEmailMessage extends EmailMessage {
 
     /**
      * Text content of email.
@@ -80,7 +78,7 @@ public abstract class TextEmailMessage<E> extends EmailMessage<E> {
      * @param sender class in charge of sending this email.
      * @return a textual email message.
      */
-    public static TextEmailMessage<?> create(final EmailSender sender) {
+    public static TextEmailMessage create(final EmailSender sender) {
         return create(sender.getProvider());
     }
 
@@ -90,7 +88,7 @@ public abstract class TextEmailMessage<E> extends EmailMessage<E> {
      * @param provider email provider.
      * @return a textual email message.
      */
-    protected static TextEmailMessage<?> create(final EmailProvider provider) {
+    protected static TextEmailMessage create(final EmailProvider provider) {
         return create("", provider);
     }
 
@@ -102,7 +100,7 @@ public abstract class TextEmailMessage<E> extends EmailMessage<E> {
      * @param sender  class in charge of sending this email.
      * @return a textual email message.
      */
-    public static TextEmailMessage<?> create(final String subject,
+    public static TextEmailMessage create(final String subject,
                                              final EmailSender sender) {
         return create(subject, sender.getProvider());
     }
@@ -115,7 +113,7 @@ public abstract class TextEmailMessage<E> extends EmailMessage<E> {
      * @param provider email provider.
      * @return a textual email message.
      */
-    protected static TextEmailMessage<?> create(final String subject,
+    protected static TextEmailMessage create(final String subject,
                                                 final EmailProvider provider) {
         return create(subject, "", provider);
     }
@@ -129,7 +127,7 @@ public abstract class TextEmailMessage<E> extends EmailMessage<E> {
      * @param sender  class in charge of sending this email.
      * @return a textual email message.
      */
-    public static TextEmailMessage<?> create(final String subject, final String text,
+    public static TextEmailMessage create(final String subject, final String text,
                                              final EmailSender sender) {
         return create(subject, text, sender.getProvider());
     }
@@ -143,7 +141,7 @@ public abstract class TextEmailMessage<E> extends EmailMessage<E> {
      * @param provider email provider.
      * @return a textual email message.
      */
-    protected static TextEmailMessage<?> create(final String subject, final String text,
+    protected static TextEmailMessage create(final String subject, final String text,
                                                 final EmailProvider provider) {
 
         switch (provider) {

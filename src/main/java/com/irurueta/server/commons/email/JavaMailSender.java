@@ -214,7 +214,7 @@ public class JavaMailSender extends EmailSender {
      * @throws MailNotSentException if mail couldn't be sent.
      */
     @Override
-    public String send(final EmailMessage<?> m)
+    public String send(final EmailMessage m)
             throws MailNotSentException {
 
         if (mEnabled) {
@@ -231,6 +231,12 @@ public class JavaMailSender extends EmailSender {
                 props.put("mail.smtp.starttls.enable", "true");
                 props.put("mail.smtp.socketFactory.port", mMailPort);
             }
+
+            if (!(m instanceof JavaMailEmailMessage)) {
+                throw new MailNotSentException("Wrong provider");
+            }
+
+            final JavaMailEmailMessage javaEmailMessage = (JavaMailEmailMessage) m;
 
             final Session session = Session.getInstance(props, null);
 
@@ -254,9 +260,7 @@ public class JavaMailSender extends EmailSender {
                     message.setSubject(m.getSubject(), "utf-8");
                 }
                 // sets content of message
-                //noinspection unchecked
-                final EmailMessage<MimeMessage> m2 = (EmailMessage<MimeMessage>) m;
-                m2.buildContent(message);
+                javaEmailMessage.buildContent(message);
                 // set date when mail was sent
                 message.setSentDate(new Date());
 

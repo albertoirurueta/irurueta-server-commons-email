@@ -21,8 +21,7 @@ import org.apache.commons.mail.MultiPartEmail;
 /**
  * Class containing a text only email message to be sent using Apache Mail.
  */
-public class ApacheMailTextEmailMessage extends
-        TextEmailMessage<MultiPartEmail> {
+public class ApacheMailTextEmailMessage extends TextEmailMessage implements ApacheMultipartEmailMessage {
     /**
      * Constructor.
      */
@@ -57,7 +56,7 @@ public class ApacheMailTextEmailMessage extends
      *                                                          content fails.
      */
     @Override
-    protected void buildContent(final MultiPartEmail content)
+    public void buildContent(final MultiPartEmail content)
             throws com.irurueta.server.commons.email.EmailException {
         try {
             content.setMsg(getText());

@@ -31,7 +31,7 @@ import javax.mail.internet.MimeMultipart;
  * and is meant to be sent using JavaMail.
  */
 public class JavaMailTextEmailMessageWithAttachments extends
-        TextEmailMessageWithAttachments<MimeMessage> {
+        TextEmailMessageWithAttachments implements JavaMailEmailMessage {
 
     /**
      * Constructor.
@@ -100,7 +100,7 @@ public class JavaMailTextEmailMessageWithAttachments extends
      * @throws EmailException if setting mail content fails.
      */
     @Override
-    protected void buildContent(final MimeMessage message) throws EmailException {
+    public void buildContent(final MimeMessage message) throws EmailException {
         try {
             // finally add multipart contents to mail message
             message.setContent(buildMultipart());

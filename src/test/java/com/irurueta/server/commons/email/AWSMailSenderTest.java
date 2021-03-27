@@ -108,7 +108,7 @@ public class AWSMailSenderTest {
         final String text = "This is some test mail using AWS SES";
         final String subject = "Test";
 
-        TextEmailMessage<?> message = TextEmailMessage.create(subject, text,
+        TextEmailMessage message = TextEmailMessage.create(subject, text,
                 mailSender);
         message.getTo().add("alberto@irurueta.com");
 
@@ -126,7 +126,7 @@ public class AWSMailSenderTest {
         final String text = "This is a test mail using AWS SES for multiple recipients";
         final String subject = "Multiple recipients test";
 
-        final TextEmailMessage<?> message = TextEmailMessage.create(subject, text,
+        final TextEmailMessage message = TextEmailMessage.create(subject, text,
                 mailSender);
         message.getTo().add("alberto@irurueta.com");
         message.getTo().add("webmaster@irurueta.com");
@@ -146,7 +146,7 @@ public class AWSMailSenderTest {
         final String text = "Atención. Este mensaje contiene carácteres españoles. AWS SES";
         final String subject = "Prueba de carácteres";
 
-        final TextEmailMessage<?> message = TextEmailMessage.create(subject, text,
+        final TextEmailMessage message = TextEmailMessage.create(subject, text,
                 mailSender);
         message.getTo().add("alberto@irurueta.com");
 
@@ -163,7 +163,7 @@ public class AWSMailSenderTest {
         final String text = "This is some test AWS mail with attachment";
         final String subject = "Test with attachment";
 
-        final TextEmailMessageWithAttachments<?> message = TextEmailMessageWithAttachments.create(subject, text,
+        final TextEmailMessageWithAttachments message = TextEmailMessageWithAttachments.create(subject, text,
                 mailSender);
         message.getTo().add("alberto@irurueta.com");
 
@@ -188,7 +188,7 @@ public class AWSMailSenderTest {
         final String text = "This is a test mail for multiple recipients with attachment. AWS SES";
         final String subject = "Multiple recipients test with attachment";
 
-        final TextEmailMessageWithAttachments<?> message = TextEmailMessageWithAttachments.create(subject, text,
+        final TextEmailMessageWithAttachments message = TextEmailMessageWithAttachments.create(subject, text,
                 mailSender);
         message.getTo().add("alberto@irurueta.com");
         message.getTo().add("webmaster@irurueta.com");
@@ -214,7 +214,7 @@ public class AWSMailSenderTest {
         final String text = "Atención. Este mensaje contiene carácteres españoles y tiene un archivo adjunto. AWS SES";
         final String subject = "Prueba de carácteres con archivo adjunto";
 
-        final TextEmailMessageWithAttachments<?> message = TextEmailMessageWithAttachments.create(subject, text,
+        final TextEmailMessageWithAttachments message = TextEmailMessageWithAttachments.create(subject, text,
                 mailSender);
         message.getTo().add("alberto@irurueta.com");
 
@@ -243,7 +243,7 @@ public class AWSMailSenderTest {
         final String alternativeText = "alternative text";
         final String subject = "HTML email";
 
-        final HtmlEmailMessage<?> message = HtmlEmailMessage.create(subject, html,
+        final HtmlEmailMessage message = HtmlEmailMessage.create(subject, html,
                 mailSender);
         message.setAlternativeText(alternativeText);
         message.getTo().add("alberto@irurueta.com");
@@ -283,7 +283,7 @@ public class AWSMailSenderTest {
         final String text = "Disabled test";
         final String subject = null;
 
-        final TextEmailMessage<?> message = TextEmailMessage.create(subject, text,
+        final TextEmailMessage message = TextEmailMessage.create(subject, text,
                 mailSender);
         message.getTo().add("alberto@irurueta.com");
         message.getTo().add("webmaster@irurueta.com");
@@ -310,7 +310,7 @@ public class AWSMailSenderTest {
         final String text = "No subject test";
         final String subject = null;
 
-        final TextEmailMessage<?> message = TextEmailMessage.create(subject, text,
+        final TextEmailMessage message = TextEmailMessage.create(subject, text,
                 mailSender);
         message.getTo().add("alberto@irurueta.com");
         message.getBCC().add("webmaster@irurueta.com");

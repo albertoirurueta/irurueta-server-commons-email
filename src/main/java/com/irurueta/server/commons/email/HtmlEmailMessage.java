@@ -25,10 +25,8 @@ import java.util.List;
  * Files can be attached as in text emails, or they can be sent inline so they
  * can be used within the html content (such as images or css resources to be
  * used within html email body).
- *
- * @param <E> internal type to be used by email sender implementation.
  */
-public abstract class HtmlEmailMessage<E> extends EmailMessage<E> {
+public abstract class HtmlEmailMessage extends EmailMessage {
 
     /**
      * HTML content of email to be rendered as a web page.
@@ -208,7 +206,7 @@ public abstract class HtmlEmailMessage<E> extends EmailMessage<E> {
      * @param sender class in charge of sending this email.
      * @return an HTML email message.
      */
-    public static HtmlEmailMessage<?> create(final EmailSender sender) {
+    public static HtmlEmailMessage create(final EmailSender sender) {
         return create(sender.getProvider());
     }
 
@@ -218,7 +216,7 @@ public abstract class HtmlEmailMessage<E> extends EmailMessage<E> {
      * @param provider email provider.
      * @return an HTML email message.
      */
-    protected static HtmlEmailMessage<?> create(final EmailProvider provider) {
+    protected static HtmlEmailMessage create(final EmailProvider provider) {
         return create("", provider);
     }
 
@@ -230,7 +228,7 @@ public abstract class HtmlEmailMessage<E> extends EmailMessage<E> {
      * @param sender  class in charge of sending this email.
      * @return an HTML email message.
      */
-    public static HtmlEmailMessage<?> create(final String subject,
+    public static HtmlEmailMessage create(final String subject,
                                              final EmailSender sender) {
         return create(subject, sender.getProvider());
     }
@@ -243,7 +241,7 @@ public abstract class HtmlEmailMessage<E> extends EmailMessage<E> {
      * @param provider email provider.
      * @return an HTML email message.
      */
-    protected static HtmlEmailMessage<?> create(final String subject,
+    protected static HtmlEmailMessage create(final String subject,
                                                 final EmailProvider provider) {
         return create(subject, "", provider);
     }
@@ -257,7 +255,7 @@ public abstract class HtmlEmailMessage<E> extends EmailMessage<E> {
      * @param sender      class in charge of sending this email.
      * @return an HTML email message.
      */
-    public static HtmlEmailMessage<?> create(final String subject, final String htmlContent,
+    public static HtmlEmailMessage create(final String subject, final String htmlContent,
                                              final EmailSender sender) {
         return create(subject, htmlContent, sender.getProvider());
     }
@@ -271,7 +269,7 @@ public abstract class HtmlEmailMessage<E> extends EmailMessage<E> {
      * @param provider    email provider.
      * @return an HTML email message.
      */
-    protected static HtmlEmailMessage<?> create(final String subject, final String htmlContent,
+    protected static HtmlEmailMessage create(final String subject, final String htmlContent,
                                                 final EmailProvider provider) {
         switch (provider) {
             case AWS_MAIL:

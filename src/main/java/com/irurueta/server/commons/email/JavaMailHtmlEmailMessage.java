@@ -36,7 +36,7 @@ import java.util.List;
  * can be used within the html content (such as images or css resources to be
  * used within html email body).
  */
-public class JavaMailHtmlEmailMessage extends HtmlEmailMessage<MimeMessage> {
+public class JavaMailHtmlEmailMessage extends HtmlEmailMessage implements JavaMailEmailMessage {
 
     /**
      * Constructor.
@@ -71,7 +71,7 @@ public class JavaMailHtmlEmailMessage extends HtmlEmailMessage<MimeMessage> {
      * @throws EmailException if setting mail content fails.
      */
     @Override
-    protected void buildContent(final MimeMessage message) throws EmailException {
+    public void buildContent(final MimeMessage message) throws EmailException {
         try {
             // finally add multipart contents to mail message
             message.setContent(buildMultipart());

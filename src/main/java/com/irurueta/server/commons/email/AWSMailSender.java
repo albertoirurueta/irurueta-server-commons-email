@@ -202,14 +202,14 @@ public class AWSMailSender extends EmailSender {
      * @throws InterruptedException if thread is interrupted.
      */
     @Override
-    public String send(final EmailMessage<?> m) throws MailNotSentException, InterruptedException {
+    public String send(final EmailMessage m) throws MailNotSentException, InterruptedException {
         // to avoid compilation errors because of casting
         if (m instanceof AWSTextEmailMessage) {
             return sendTextEmail((AWSTextEmailMessage) m);
         } else if (m instanceof AWSTextEmailMessageWithAttachments) {
-            return sendRawEmail((AWSTextEmailMessageWithAttachments) m);
+            return sendRawEmail(m);
         } else if (m instanceof AWSHtmlEmailMessage) {
-            return sendRawEmail((AWSHtmlEmailMessage) m);
+            return sendRawEmail(m);
         } else {
             throw new MailNotSentException("Unsupported email type");
         }
@@ -294,7 +294,7 @@ public class AWSMailSender extends EmailSender {
      * @throws MailNotSentException if mail couldn't be sent.
      * @throws InterruptedException if thread is interrupted.
      */
-    private String sendRawEmail(final EmailMessage<MimeMessage> m)
+    private String sendRawEmail(final EmailMessage m)
             throws MailNotSentException, InterruptedException {
 
         final String messageId;
@@ -304,6 +304,12 @@ public class AWSMailSender extends EmailSender {
             // don't send message if not enabled
             return null;
         }
+
+        if (!(m instanceof JavaMailEmailMessage)) {
+            throw new MailNotSentException("Wrong provider");
+        }
+
+        final JavaMailEmailMessage javaEmailMessage = (JavaMailEmailMessage) m;
 
         try {
             synchronized (this) {
@@ -325,7 +331,7 @@ public class AWSMailSender extends EmailSender {
                 if (m.getSubject() != null) {
                     mimeMessage.setSubject(m.getSubject(), "utf-8");
                 }
-                m.buildContent(mimeMessage);
+                javaEmailMessage.buildContent(mimeMessage);
                 mimeMessage.writeTo(outputStream);
 
                 final RawMessage rawMessage = new RawMessage(ByteBuffer.wrap(

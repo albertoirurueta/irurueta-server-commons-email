@@ -44,7 +44,7 @@ public class TextEmailMessageTest {
         final JavaMailSender mailSender = JavaMailSender.getInstance();
 
         // test with mail sender
-        TextEmailMessage<?> email = TextEmailMessage.create(mailSender);
+        TextEmailMessage email = TextEmailMessage.create(mailSender);
         assertTrue(email instanceof JavaMailTextEmailMessage);
 
         // test with provider

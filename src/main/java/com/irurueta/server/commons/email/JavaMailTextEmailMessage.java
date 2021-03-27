@@ -21,7 +21,7 @@ import javax.mail.internet.MimeMessage;
 /**
  * Class containing a text only email message to be sent using JavaMail.
  */
-public class JavaMailTextEmailMessage extends TextEmailMessage<MimeMessage> {
+public class JavaMailTextEmailMessage extends TextEmailMessage implements JavaMailEmailMessage {
 
     /**
      * Constructor.
@@ -56,7 +56,7 @@ public class JavaMailTextEmailMessage extends TextEmailMessage<MimeMessage> {
      * @throws EmailException if setting mail content fails.
      */
     @Override
-    protected void buildContent(final MimeMessage content) throws EmailException {
+    public void buildContent(final MimeMessage content) throws EmailException {
         try {
             content.setText(getText(), "utf-8");
         } catch (MessagingException e) {

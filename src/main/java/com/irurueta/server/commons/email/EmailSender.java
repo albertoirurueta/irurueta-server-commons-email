@@ -98,7 +98,7 @@ public abstract class EmailSender {
      * @throws MailNotSentException if mail couldn't be sent.
      * @throws InterruptedException if thread is interrupted.
      */
-    public abstract String send(final EmailMessage<?> m) throws MailNotSentException, InterruptedException;
+    public abstract String send(final EmailMessage m) throws MailNotSentException, InterruptedException;
     
     /**
      * Returns provider used by this email sender.

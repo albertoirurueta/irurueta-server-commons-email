@@ -84,7 +84,7 @@ public class ApacheMailSenderTest {
         final String text = "This is some test mail using Apache Mail";
         final String subject = "Test";
 
-        final TextEmailMessage<?> message = TextEmailMessage.create(subject, text,
+        final TextEmailMessage message = TextEmailMessage.create(subject, text,
                 mailSender);
         message.getTo().add("alberto@irurueta.com");
 
@@ -103,7 +103,7 @@ public class ApacheMailSenderTest {
         final String text = "This is a test mail using Apache Mail for multiple recipients";
         final String subject = "Multiple recipients test";
 
-        final TextEmailMessage<?> message = TextEmailMessage.create(subject, text,
+        final TextEmailMessage message = TextEmailMessage.create(subject, text,
                 mailSender);
         message.getTo().add("alberto@irurueta.com");
         message.getTo().add("webmaster@irurueta.com");
@@ -124,7 +124,7 @@ public class ApacheMailSenderTest {
         final String text = "Atención. Este mensaje contiene carácteres españoles. Apache Mail";
         final String subject = "Prueba de carácteres";
 
-        final TextEmailMessage<?> message = TextEmailMessage.create(subject, text,
+        final TextEmailMessage message = TextEmailMessage.create(subject, text,
                 mailSender);
         message.getTo().add("alberto@irurueta.com");
 
@@ -142,7 +142,7 @@ public class ApacheMailSenderTest {
         final String text = "This is some test Apache mail with attachment";
         final String subject = "Test with attachment";
 
-        final TextEmailMessageWithAttachments<?> message =
+        final TextEmailMessageWithAttachments message =
                 TextEmailMessageWithAttachments.create(subject, text,
                         mailSender);
         message.getTo().add("alberto@irurueta.com");
@@ -168,7 +168,7 @@ public class ApacheMailSenderTest {
         String text = "This is a test Apache mail for multiple recipients with attachment";
         String subject = "Multiple recipients test with attachment";
 
-        final TextEmailMessageWithAttachments<?> message =
+        final TextEmailMessageWithAttachments message =
                 TextEmailMessageWithAttachments.create(subject, text, mailSender);
         message.getTo().add("alberto@irurueta.com");
         message.getTo().add("webmaster@irurueta.com");
@@ -195,7 +195,7 @@ public class ApacheMailSenderTest {
         final String text = "Atención. Este mensaje contiene carácteres españoles y tiene un archivo adjunto. Apache mail";
         final String subject = "Prueba de carácteres con archivo adjunto";
 
-        final TextEmailMessageWithAttachments<?> message =
+        final TextEmailMessageWithAttachments message =
                 TextEmailMessageWithAttachments.create(subject, text,
                         mailSender);
         message.getTo().add("alberto@irurueta.com");
@@ -226,7 +226,7 @@ public class ApacheMailSenderTest {
         final String alternativeText = "alternative text";
         final String subject = "HTML email";
 
-        final HtmlEmailMessage<?> message = HtmlEmailMessage.create(subject, html,
+        final HtmlEmailMessage message = HtmlEmailMessage.create(subject, html,
                 mailSender);
         message.setAlternativeText(alternativeText);
         message.getTo().add("alberto@irurueta.com");
@@ -267,7 +267,7 @@ public class ApacheMailSenderTest {
         final String text = "Disabled test";
         final String subject = null;
 
-        final TextEmailMessage<?> message = TextEmailMessage.create(subject, text,
+        final TextEmailMessage message = TextEmailMessage.create(subject, text,
                 mailSender);
         message.getTo().add("alberto@irurueta.com");
         message.getTo().add("webmaster@irurueta.com");
@@ -291,7 +291,7 @@ public class ApacheMailSenderTest {
         final String text = "No subject test";
         final String subject = null;
 
-        TextEmailMessage<?> message = TextEmailMessage.create(subject, text,
+        TextEmailMessage message = TextEmailMessage.create(subject, text,
                 mailSender);
         message.getTo().add("alberto@irurueta.com");
         message.getBCC().add("webmaster@irurueta.com");

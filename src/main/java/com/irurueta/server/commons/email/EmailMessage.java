@@ -20,9 +20,8 @@ import java.util.List;
 
 /**
  * Abstract base class defining basic Email message data.
- * @param <E> internal type to be used by email sender implementation.
  */
-public abstract class EmailMessage<E> {
+public abstract class EmailMessage {
 
     /**
      * List of addresses to send an email to.
@@ -154,14 +153,4 @@ public abstract class EmailMessage<E> {
     public void setSubject(final String subject) {
         mSubject = subject;
     }
-
-    /**
-     * Method to be overridden so that email content can be built.
-     * Depending on type of content of email (text, attachments, HTML) and email 
-     * provider (JavaMail, Apache Mail or Amazon SES) this method will be 
-     * implemented in different ways.
-     * @param content Structure containing email content data to be sent.
-     * @throws EmailException if content cannot be properly built.
-     */
-    protected abstract void buildContent(final E content) throws EmailException;
 }

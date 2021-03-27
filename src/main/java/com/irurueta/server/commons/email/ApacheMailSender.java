@@ -216,7 +216,7 @@ public class ApacheMailSender extends EmailSender {
      * @throws MailNotSentException if mail couldn't be sent.
      */
     @Override
-    public String send(final EmailMessage<?> m) throws MailNotSentException {
+    public String send(final EmailMessage m) throws MailNotSentException {
         if (!mEnabled) {
             //don't send message if not enabled
             return null;
@@ -224,11 +224,11 @@ public class ApacheMailSender extends EmailSender {
 
         //to avoid compilation errors regarding to casting
         if (m instanceof ApacheMailTextEmailMessage) {
-            return sendMultiPartEmail((ApacheMailTextEmailMessage) m);
+            return sendMultiPartEmail(m);
         } else if (m instanceof ApacheMailTextEmailMessageWithAttachments) {
-            return sendMultiPartEmail((ApacheMailTextEmailMessageWithAttachments) m);
+            return sendMultiPartEmail(m);
         } else if (m instanceof ApacheMailHtmlEmailMessage) {
-            return sendHtmlEmail((ApacheMailHtmlEmailMessage) m);
+            return sendHtmlEmail(m);
         } else {
             throw new MailNotSentException("Unsupported email type");
         }
@@ -251,7 +251,7 @@ public class ApacheMailSender extends EmailSender {
      * @return id of message that has been sent.
      * @throws MailNotSentException if mail couldn't be sent.
      */
-    public String sendMultiPartEmail(final EmailMessage<MultiPartEmail> m)
+    public String sendMultiPartEmail(final EmailMessage m)
             throws MailNotSentException {
         try {
             final MultiPartEmail email = new MultiPartEmail();
@@ -269,7 +269,7 @@ public class ApacheMailSender extends EmailSender {
      * @return id of message that has been sent.
      * @throws MailNotSentException if mail couldn't be sent.
      */
-    public String sendHtmlEmail(final EmailMessage<HtmlEmail> m)
+    public String sendHtmlEmail(final EmailMessage m)
             throws MailNotSentException {
         try {
             final HtmlEmail email = new HtmlEmail();
@@ -290,9 +290,22 @@ public class ApacheMailSender extends EmailSender {
      * @throws com.irurueta.server.commons.email.EmailException if sending
      *                                                          email fails.
      */
-    private <T extends Email> void internalSendApacheEmail(final EmailMessage<T> m, T email)
+    private <T extends Email> void internalSendApacheEmail(final EmailMessage m, T email)
             throws NotSupportedException, EmailException,
             com.irurueta.server.commons.email.EmailException {
+
+        ApacheEmailMessage apacheEmailMessage = null;
+        ApacheMultipartEmailMessage apacheMultipartEmailMessage = null;
+        if (m instanceof ApacheEmailMessage) {
+            apacheEmailMessage = (ApacheEmailMessage) m;
+        }
+        if (m instanceof ApacheMultipartEmailMessage) {
+            apacheMultipartEmailMessage = (ApacheMultipartEmailMessage) m;
+        }
+        if (apacheEmailMessage == null && apacheMultipartEmailMessage == null) {
+            throw new MailNotSentException("Wrong provider");
+        }
+
         email.setHostName(mMailHost);
         email.setSmtpPort(mMailPort);
         if (mMailId != null && !mMailId.isEmpty() && mMailPassword != null &&
@@ -305,8 +318,12 @@ public class ApacheMailSender extends EmailSender {
         if (m.getSubject() != null) {
             email.setSubject(m.getSubject());
         }
-        m.buildContent(email);
-
+        if (apacheEmailMessage != null) {
+            apacheEmailMessage.buildContent((HtmlEmail) email);
+        }
+        if (apacheMultipartEmailMessage != null) {
+            apacheMultipartEmailMessage.buildContent((MultiPartEmail) email);
+        }
 
         // add destinations
         for (final String s : m.getTo()) {

@@ -20,11 +20,9 @@ import java.util.List;
 
 /**
  * Base class for text only email messages containing file attachments.
- *
- * @param <E> internal representation of email using by internal client.
  */
-public abstract class TextEmailMessageWithAttachments<E> extends
-        TextEmailMessage<E> {
+public abstract class TextEmailMessageWithAttachments extends
+        TextEmailMessage {
 
     /**
      * List of attachments to be included in email.
@@ -121,7 +119,7 @@ public abstract class TextEmailMessageWithAttachments<E> extends
      * @param sender class in charge of sending this email.
      * @return a textual email message with attachments.
      */
-    public static TextEmailMessageWithAttachments<?> create(
+    public static TextEmailMessageWithAttachments create(
             final EmailSender sender) {
         return create("", sender);
     }
@@ -133,7 +131,7 @@ public abstract class TextEmailMessageWithAttachments<E> extends
      * @param provider email provider.
      * @return a textual email message with attachments.
      */
-    protected static TextEmailMessageWithAttachments<?> create(
+    protected static TextEmailMessageWithAttachments create(
             final EmailProvider provider) {
         return create("", provider);
     }
@@ -146,7 +144,7 @@ public abstract class TextEmailMessageWithAttachments<E> extends
      * @param sender  class in charge of sending this email.
      * @return a textual email message with attachments.
      */
-    public static TextEmailMessageWithAttachments<?> create(
+    public static TextEmailMessageWithAttachments create(
             final String subject, final EmailSender sender) {
         return create(subject, "", sender);
     }
@@ -159,7 +157,7 @@ public abstract class TextEmailMessageWithAttachments<E> extends
      * @param provider email provider.
      * @return a textual email message with attachments.
      */
-    protected static TextEmailMessageWithAttachments<?> create(
+    protected static TextEmailMessageWithAttachments create(
             final String subject, final EmailProvider provider) {
         return create(subject, "", provider);
     }
@@ -173,7 +171,7 @@ public abstract class TextEmailMessageWithAttachments<E> extends
      * @param sender  class in charge of sending this email.
      * @return a textual email message with attachments.
      */
-    public static TextEmailMessageWithAttachments<?> create(
+    public static TextEmailMessageWithAttachments create(
             final String subject, final String text, final EmailSender sender) {
         return create(subject, text, sender.getProvider());
     }
@@ -187,7 +185,7 @@ public abstract class TextEmailMessageWithAttachments<E> extends
      * @param provider email provider.
      * @return a textual email message with attachments.
      */
-    protected static TextEmailMessageWithAttachments<?> create(
+    protected static TextEmailMessageWithAttachments create(
             final String subject, final String text, final EmailProvider provider) {
         return create(subject, text, new ArrayList<EmailAttachment>(),
                 provider);
@@ -201,7 +199,7 @@ public abstract class TextEmailMessageWithAttachments<E> extends
      * @param sender      class in charge of sending this email.
      * @return a textual email message with attachments.
      */
-    public static TextEmailMessageWithAttachments<?> create(
+    public static TextEmailMessageWithAttachments create(
             final List<EmailAttachment> attachments, final EmailSender sender) {
         return create("", attachments, sender);
     }
@@ -214,7 +212,7 @@ public abstract class TextEmailMessageWithAttachments<E> extends
      * @param provider    email provider.
      * @return a textual email message with attachments.
      */
-    protected static TextEmailMessageWithAttachments<?> create(
+    protected static TextEmailMessageWithAttachments create(
             final List<EmailAttachment> attachments, final EmailProvider provider) {
         return create("", attachments, provider);
     }
@@ -228,7 +226,7 @@ public abstract class TextEmailMessageWithAttachments<E> extends
      * @param sender      class in charge of sending this email.
      * @return a textual email message with attachments.
      */
-    public static TextEmailMessageWithAttachments<?> create(
+    public static TextEmailMessageWithAttachments create(
             final String subject, final List<EmailAttachment> attachments, final EmailSender sender) {
         return create(subject, "", attachments, sender);
     }
@@ -242,7 +240,7 @@ public abstract class TextEmailMessageWithAttachments<E> extends
      * @param provider    email provider.
      * @return a textual email message with attachments.
      */
-    protected static TextEmailMessageWithAttachments<?> create(
+    protected static TextEmailMessageWithAttachments create(
             final String subject, final List<EmailAttachment> attachments, final EmailProvider provider) {
         return create(subject, "", attachments, provider);
     }
@@ -257,7 +255,7 @@ public abstract class TextEmailMessageWithAttachments<E> extends
      * @param sender      class in charge of sending this email.
      * @return a textual email message with attachments.
      */
-    public static TextEmailMessageWithAttachments<?> create(
+    public static TextEmailMessageWithAttachments create(
             final String subject, final String text, final List<EmailAttachment> attachments,
             final EmailSender sender) {
         return create(subject, text, attachments, sender.getProvider());
@@ -273,7 +271,7 @@ public abstract class TextEmailMessageWithAttachments<E> extends
      * @param provider    email provider.
      * @return a textual email message with attachments.
      */
-    protected static TextEmailMessageWithAttachments<?> create(
+    protected static TextEmailMessageWithAttachments create(
             final String subject, final String text, final List<EmailAttachment> attachments,
             final EmailProvider provider) {
 
