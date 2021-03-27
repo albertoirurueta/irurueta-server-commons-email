@@ -152,30 +152,10 @@ public class JavaMailHtmlEmailMessage extends HtmlEmailMessage implements JavaMa
 
             // add other attachments parts
 <span class="fc" id="L154">            final List&lt;EmailAttachment&gt; attachments = getEmailAttachments();</span>
-<span class="pc bpc" id="L155" title="1 of 2 branches missed.">            if (attachments != null) {</span>
-<span class="fc bfc" id="L156" title="All 2 branches covered.">                for (final EmailAttachment attachment : attachments) {</span>
-                    // only add attachments with files
-<span class="pc bpc" id="L158" title="1 of 2 branches missed.">                    if (attachment.getAttachment() == null) {</span>
-<span class="nc" id="L159">                        continue;</span>
-                    }
-
-<span class="fc" id="L162">                    messageBodyPart = new MimeBodyPart();</span>
-<span class="pc bpc" id="L163" title="1 of 2 branches missed.">                    if (attachment.getName() != null) {</span>
-<span class="fc" id="L164">                        messageBodyPart.setFileName(attachment.getName());</span>
-                    }
-<span class="fc" id="L166">                    messageBodyPart.setDisposition(Part.ATTACHMENT);</span>
-<span class="pc bpc" id="L167" title="1 of 2 branches missed.">                    if (attachment.getContentType() != null) {</span>
-<span class="fc" id="L168">                        messageBodyPart.addHeader(&quot;Content-Type&quot;,</span>
-<span class="fc" id="L169">                                attachment.getContentType());</span>
-                    }
-<span class="fc" id="L171">                    messageBodyPart.setDataHandler(new DataHandler(</span>
-<span class="fc" id="L172">                            new FileDataSource(attachment.getAttachment())));</span>
-<span class="fc" id="L173">                    multipart.addBodyPart(messageBodyPart);</span>
-<span class="fc" id="L174">                }</span>
-            }
-<span class="fc" id="L176">            return multipart;</span>
-<span class="nc" id="L177">        } catch (final MessagingException e) {</span>
-<span class="nc" id="L178">            throw new EmailException(e);</span>
+<span class="fc" id="L155">            JavaMailTextEmailMessageWithAttachments.attach(multipart, attachments);</span>
+<span class="fc" id="L156">            return multipart;</span>
+<span class="nc" id="L157">        } catch (final MessagingException e) {</span>
+<span class="nc" id="L158">            throw new EmailException(e);</span>
         }
     }
 
@@ -185,25 +165,25 @@ public class JavaMailHtmlEmailMessage extends HtmlEmailMessage implements JavaMa
      * @return array indicating for whith files content was inlined.
      */
     private boolean[] processInlineAttachments() {
-<span class="fc" id="L188">        final List&lt;InlineAttachment&gt; attachments = getInlineAttachments();</span>
-<span class="pc bpc" id="L189" title="1 of 2 branches missed.">        if (attachments != null) {</span>
-<span class="fc" id="L190">            final boolean[] result = new boolean[attachments.size()];</span>
-<span class="fc" id="L191">            int counter = 0;</span>
+<span class="fc" id="L168">        final List&lt;InlineAttachment&gt; attachments = getInlineAttachments();</span>
+<span class="pc bpc" id="L169" title="1 of 2 branches missed.">        if (attachments != null) {</span>
+<span class="fc" id="L170">            final boolean[] result = new boolean[attachments.size()];</span>
+<span class="fc" id="L171">            int counter = 0;</span>
             boolean isGeneratedId;
             String contentId;
-<span class="fc bfc" id="L194" title="All 2 branches covered.">            for (final InlineAttachment attachment : attachments) {</span>
-<span class="fc bfc" id="L195" title="All 2 branches covered.">                isGeneratedId = attachment.getContentId() == null;</span>
-<span class="fc" id="L196">                result[counter] = isGeneratedId;</span>
-<span class="fc bfc" id="L197" title="All 2 branches covered.">                if (isGeneratedId) {</span>
+<span class="fc bfc" id="L174" title="All 2 branches covered.">            for (final InlineAttachment attachment : attachments) {</span>
+<span class="fc bfc" id="L175" title="All 2 branches covered.">                isGeneratedId = attachment.getContentId() == null;</span>
+<span class="fc" id="L176">                result[counter] = isGeneratedId;</span>
+<span class="fc bfc" id="L177" title="All 2 branches covered.">                if (isGeneratedId) {</span>
                     //generate a content id for this attachment
-<span class="fc" id="L199">                    contentId = &quot;inline-attachment&quot; + counter;</span>
-<span class="fc" id="L200">                    attachment.setContentId(contentId);</span>
+<span class="fc" id="L179">                    contentId = &quot;inline-attachment&quot; + counter;</span>
+<span class="fc" id="L180">                    attachment.setContentId(contentId);</span>
                 }
-<span class="fc" id="L202">                counter++;</span>
-<span class="fc" id="L203">            }</span>
-<span class="fc" id="L204">            return result;</span>
+<span class="fc" id="L182">                counter++;</span>
+<span class="fc" id="L183">            }</span>
+<span class="fc" id="L184">            return result;</span>
         }
-<span class="nc" id="L206">        return null;</span>
+<span class="nc" id="L186">        return null;</span>
     }
 
     /**
@@ -218,26 +198,26 @@ public class JavaMailHtmlEmailMessage extends HtmlEmailMessage implements JavaMa
     private String process(final String htmlContent, final boolean[] generated) {
         // if no information about generated inline ids is available, then simply
         // return input html content
-<span class="pc bpc" id="L221" title="1 of 2 branches missed.">        if (generated == null) {</span>
-<span class="nc" id="L222">            return htmlContent;</span>
+<span class="pc bpc" id="L201" title="1 of 2 branches missed.">        if (generated == null) {</span>
+<span class="nc" id="L202">            return htmlContent;</span>
         }
 
         // process html content to substitute placeholders by their corresponding
         // inline attachments ids
-<span class="fc" id="L227">        final List&lt;InlineAttachment&gt; attachments = getInlineAttachments();</span>
-<span class="fc" id="L228">        final List&lt;String&gt; contentIds = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L229">        int pos = 0;</span>
-<span class="pc bpc" id="L230" title="1 of 2 branches missed.">        if (attachments != null) {</span>
-<span class="fc bfc" id="L231" title="All 2 branches covered.">            for (final InlineAttachment attachment : attachments) {</span>
-<span class="fc bfc" id="L232" title="All 2 branches covered.">                if (generated[pos]) {</span>
-<span class="fc" id="L233">                    contentIds.add(attachment.getContentId());</span>
+<span class="fc" id="L207">        final List&lt;InlineAttachment&gt; attachments = getInlineAttachments();</span>
+<span class="fc" id="L208">        final List&lt;String&gt; contentIds = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L209">        int pos = 0;</span>
+<span class="pc bpc" id="L210" title="1 of 2 branches missed.">        if (attachments != null) {</span>
+<span class="fc bfc" id="L211" title="All 2 branches covered.">            for (final InlineAttachment attachment : attachments) {</span>
+<span class="fc bfc" id="L212" title="All 2 branches covered.">                if (generated[pos]) {</span>
+<span class="fc" id="L213">                    contentIds.add(attachment.getContentId());</span>
                 }
-<span class="fc" id="L235">                pos++;</span>
-<span class="fc" id="L236">            }</span>
+<span class="fc" id="L215">                pos++;</span>
+<span class="fc" id="L216">            }</span>
         }
 
-<span class="fc" id="L239">        final Object[] objects = contentIds.toArray();</span>
-<span class="fc" id="L240">        return MessageFormat.format(htmlContent, objects);</span>
+<span class="fc" id="L219">        final Object[] objects = contentIds.toArray();</span>
+<span class="fc" id="L220">        return MessageFormat.format(htmlContent, objects);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

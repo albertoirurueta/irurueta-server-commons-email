@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
     /**
      * Regular expression to validate emails.
      */
-    private static final String EMAIL_REGEX = &quot;^[\\w.-]+@([\\w.-]+\\.)+[a-z]{2,4}$&quot;;
+    private static final String EMAIL_REGEX = &quot;^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$&quot;;
 
     /**
      * Factory method to obtain singleton instance using current mail

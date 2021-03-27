@@ -15,7 +15,6 @@
  */
 package com.irurueta.server.commons.email;
 
-import com.irurueta.server.commons.configuration.ConfigurationException;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
@@ -29,23 +28,13 @@ import java.util.logging.Logger;
 /**
  * Class to send emails using Apache mail.
  */
-public class ApacheMailSender extends EmailSender {
+public class ApacheMailSender extends CommonEmailSender {
 
     /**
      * Logger for this class.
      */
-<span class="fc" id="L37">    public static final Logger LOGGER = Logger.getLogger(</span>
-<span class="fc" id="L38">            ApacheMailSender.class.getName());</span>
-
-    /**
-     * Minimum allowed port value to connect to SMTP server.
-     */
-    private static final int MIN_PORT_VALUE = 0;
-
-    /**
-     * Maximum allowed port value to connect to SMTP server.
-     */
-    private static final int MAX_PORT_VALUE = 65535;
+<span class="fc" id="L36">    public static final Logger LOGGER = Logger.getLogger(</span>
+<span class="fc" id="L37">            ApacheMailSender.class.getName());</span>
 
     /**
      * Reference to singleton instance of this class.
@@ -53,67 +42,21 @@ public class ApacheMailSender extends EmailSender {
     private static SoftReference&lt;ApacheMailSender&gt; mReference;
 
     /**
-     * SMTP server host to connect to.
-     */
-    private String mMailHost;
-
-    /**
-     * SMTP server port to connect to.
-     */
-    private int mMailPort;
-
-    /**
-     * User id to log into SMTP server. If none is provided no authentication
-     * will be used.
-     */
-    private String mMailId;
-
-    /**
-     * User password to log into SMTP server. If none is provided no
-     * authentication will be used.
-     */
-    private String mMailPassword;
-
-    /**
-     * Address to send emails from.
-     */
-    private String mMailFromAddress;
-
-    /**
-     * Indicates if mail sending is enabled.
-     */
-    private boolean mEnabled;
-
-    /**
      * Constructor.
      * Loads mail configuration, and if it fails for some reason, mail sending
      * becomes disabled.
      */
-<span class="fc" id="L92">    private ApacheMailSender() {</span>
+    private ApacheMailSender() {
+<span class="fc" id="L50">        super();</span>
 
-        try {
-<span class="fc" id="L95">            final MailConfiguration cfg = MailConfigurationFactory.getInstance().</span>
-<span class="fc" id="L96">                    configure();</span>
-<span class="fc" id="L97">            mMailHost = cfg.getMailHost();</span>
-<span class="fc" id="L98">            mMailPort = cfg.getMailPort();</span>
-<span class="fc" id="L99">            mMailId = cfg.getMailId();</span>
-<span class="fc" id="L100">            mMailPassword = cfg.getMailPassword();</span>
-<span class="fc" id="L101">            mMailFromAddress = cfg.getMailFromAddress();</span>
-
-<span class="fc bfc" id="L103" title="All 2 branches covered.">            mEnabled = isValidConfiguration(mMailHost, mMailPort,</span>
-<span class="pc bpc" id="L104" title="1 of 2 branches missed.">                    mMailFromAddress) &amp;&amp; cfg.isMailSendingEnabled();</span>
-<span class="nc" id="L105">        } catch (final ConfigurationException e) {</span>
-<span class="nc" id="L106">            mEnabled = false;</span>
-<span class="fc" id="L107">        }</span>
-
-<span class="fc bfc" id="L109" title="All 2 branches covered.">        if (mEnabled) {</span>
-<span class="fc" id="L110">            LOGGER.log(Level.INFO, &quot;Apache Email Sender enabled.&quot;);</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        if (mEnabled) {</span>
+<span class="fc" id="L53">            LOGGER.log(Level.INFO, &quot;Apache Email Sender enabled.&quot;);</span>
         } else {
-<span class="fc" id="L112">            LOGGER.log(Level.INFO, &quot;Apache Email Sender disabled. Any &quot; +</span>
+<span class="fc" id="L55">            LOGGER.log(Level.INFO, &quot;Apache Email Sender disabled. Any &quot; +</span>
                     &quot;attempt to send emails using Apache mail will be &quot; +
                     &quot;silently ignored&quot;);
         }
-<span class="fc" id="L116">    }</span>
+<span class="fc" id="L59">    }</span>
 
     /**
      * Returns or creates singleton instance of this class.
@@ -122,35 +65,19 @@ public class ApacheMailSender extends EmailSender {
      */
     public static synchronized ApacheMailSender getInstance() {
         ApacheMailSender sender;
-<span class="pc bpc" id="L125" title="1 of 4 branches missed.">        if (mReference == null || (sender = mReference.get()) == null) {</span>
-<span class="fc" id="L126">            sender = new ApacheMailSender();</span>
-<span class="fc" id="L127">            mReference = new SoftReference&lt;&gt;(sender);</span>
+<span class="pc bpc" id="L68" title="1 of 4 branches missed.">        if (mReference == null || (sender = mReference.get()) == null) {</span>
+<span class="fc" id="L69">            sender = new ApacheMailSender();</span>
+<span class="fc" id="L70">            mReference = new SoftReference&lt;&gt;(sender);</span>
         }
-<span class="fc" id="L129">        return sender;</span>
+<span class="fc" id="L72">        return sender;</span>
     }
 
     /**
      * Resets ApacheMailSender singleton.
      */
     public static synchronized void reset() {
-<span class="fc" id="L136">        mReference = null;</span>
-<span class="fc" id="L137">    }</span>
-
-    /**
-     * Indicates if provided configuration is valid by checking that SMTP server
-     * and mail from address are not null, and server port is valid.
-     *
-     * @param mailHost        SMTP server host.
-     * @param mailPort        SMTP server port.
-     * @param mailFromAddress email address to send emails from.
-     * @return true if configuration is valid, false otherwise.
-     */
-    private boolean isValidConfiguration(final String mailHost, final int mailPort,
-                                         final String mailFromAddress) {
-<span class="pc bpc" id="L150" title="3 of 8 branches missed.">        return mailHost != null &amp;&amp; mailPort &gt;= MIN_PORT_VALUE &amp;&amp;</span>
-                mailPort &lt;= MAX_PORT_VALUE &amp;&amp; mailFromAddress != null &amp;&amp;
-<span class="pc bpc" id="L152" title="1 of 2 branches missed.">                isValidEmailAddress(mailFromAddress);</span>
-    }
+<span class="fc" id="L79">        mReference = null;</span>
+<span class="fc" id="L80">    }</span>
 
     /**
      * Returns SMTP server host.
@@ -158,7 +85,7 @@ public class ApacheMailSender extends EmailSender {
      * @return SMTP server host.
      */
     public String getMailHost() {
-<span class="fc" id="L161">        return mMailHost;</span>
+<span class="fc" id="L88">        return mMailHost;</span>
     }
 
     /**
@@ -167,7 +94,7 @@ public class ApacheMailSender extends EmailSender {
      * @return SMTP server port.
      */
     public int getMailPort() {
-<span class="fc" id="L170">        return mMailPort;</span>
+<span class="fc" id="L97">        return mMailPort;</span>
     }
 
     /**
@@ -177,7 +104,7 @@ public class ApacheMailSender extends EmailSender {
      * @return user id to log into SMTP server.
      */
     public String getMailId() {
-<span class="fc" id="L180">        return mMailId;</span>
+<span class="fc" id="L107">        return mMailId;</span>
     }
 
     /**
@@ -187,7 +114,7 @@ public class ApacheMailSender extends EmailSender {
      * @return user password to log into SMTP server.
      */
     public String getMailPassword() {
-<span class="fc" id="L190">        return mMailPassword;</span>
+<span class="fc" id="L117">        return mMailPassword;</span>
     }
 
     /**
@@ -196,7 +123,7 @@ public class ApacheMailSender extends EmailSender {
      * @return email address to send emails from.
      */
     public String getMailFromAddress() {
-<span class="fc" id="L199">        return mMailFromAddress;</span>
+<span class="fc" id="L126">        return mMailFromAddress;</span>
     }
 
     /**
@@ -205,7 +132,7 @@ public class ApacheMailSender extends EmailSender {
      * @return true if enabled, false otherwise.
      */
     public boolean isEnabled() {
-<span class="fc" id="L208">        return mEnabled;</span>
+<span class="fc" id="L135">        return mEnabled;</span>
     }
 
     /**
@@ -217,20 +144,20 @@ public class ApacheMailSender extends EmailSender {
      */
     @Override
     public String send(final EmailMessage m) throws MailNotSentException {
-<span class="fc bfc" id="L220" title="All 2 branches covered.">        if (!mEnabled) {</span>
+<span class="fc bfc" id="L147" title="All 2 branches covered.">        if (!mEnabled) {</span>
             //don't send message if not enabled
-<span class="fc" id="L222">            return null;</span>
+<span class="fc" id="L149">            return null;</span>
         }
 
         //to avoid compilation errors regarding to casting
-<span class="fc bfc" id="L226" title="All 2 branches covered.">        if (m instanceof ApacheMailTextEmailMessage) {</span>
-<span class="fc" id="L227">            return sendMultiPartEmail(m);</span>
-<span class="fc bfc" id="L228" title="All 2 branches covered.">        } else if (m instanceof ApacheMailTextEmailMessageWithAttachments) {</span>
-<span class="fc" id="L229">            return sendMultiPartEmail(m);</span>
-<span class="pc bpc" id="L230" title="1 of 2 branches missed.">        } else if (m instanceof ApacheMailHtmlEmailMessage) {</span>
-<span class="fc" id="L231">            return sendHtmlEmail(m);</span>
+<span class="fc bfc" id="L153" title="All 2 branches covered.">        if (m instanceof ApacheMailTextEmailMessage) {</span>
+<span class="fc" id="L154">            return sendMultiPartEmail(m);</span>
+<span class="fc bfc" id="L155" title="All 2 branches covered.">        } else if (m instanceof ApacheMailTextEmailMessageWithAttachments) {</span>
+<span class="fc" id="L156">            return sendMultiPartEmail(m);</span>
+<span class="pc bpc" id="L157" title="1 of 2 branches missed.">        } else if (m instanceof ApacheMailHtmlEmailMessage) {</span>
+<span class="fc" id="L158">            return sendHtmlEmail(m);</span>
         } else {
-<span class="nc" id="L233">            throw new MailNotSentException(&quot;Unsupported email type&quot;);</span>
+<span class="nc" id="L160">            throw new MailNotSentException(&quot;Unsupported email type&quot;);</span>
         }
     }
 
@@ -241,7 +168,7 @@ public class ApacheMailSender extends EmailSender {
      */
     @Override
     public EmailProvider getProvider() {
-<span class="fc" id="L244">        return EmailProvider.APACHE_MAIL;</span>
+<span class="fc" id="L171">        return EmailProvider.APACHE_MAIL;</span>
     }
 
     /**
@@ -254,12 +181,12 @@ public class ApacheMailSender extends EmailSender {
     public String sendMultiPartEmail(final EmailMessage m)
             throws MailNotSentException {
         try {
-<span class="fc" id="L257">            final MultiPartEmail email = new MultiPartEmail();</span>
-<span class="fc" id="L258">            internalSendApacheEmail(m, email);</span>
-<span class="nc" id="L259">        } catch (final Exception e) {</span>
-<span class="nc" id="L260">            throw new MailNotSentException(e);</span>
-<span class="fc" id="L261">        }</span>
-<span class="fc" id="L262">        return null;</span>
+<span class="fc" id="L184">            final MultiPartEmail email = new MultiPartEmail();</span>
+<span class="fc" id="L185">            internalSendApacheEmail(m, email);</span>
+<span class="nc" id="L186">        } catch (final Exception e) {</span>
+<span class="nc" id="L187">            throw new MailNotSentException(e);</span>
+<span class="fc" id="L188">        }</span>
+<span class="fc" id="L189">        return null;</span>
     }
 
     /**
@@ -272,12 +199,12 @@ public class ApacheMailSender extends EmailSender {
     public String sendHtmlEmail(final EmailMessage m)
             throws MailNotSentException {
         try {
-<span class="fc" id="L275">            final HtmlEmail email = new HtmlEmail();</span>
-<span class="fc" id="L276">            internalSendApacheEmail(m, email);</span>
-<span class="nc" id="L277">        } catch (final Exception e) {</span>
-<span class="nc" id="L278">            throw new MailNotSentException(e);</span>
-<span class="fc" id="L279">        }</span>
-<span class="fc" id="L280">        return null;</span>
+<span class="fc" id="L202">            final HtmlEmail email = new HtmlEmail();</span>
+<span class="fc" id="L203">            internalSendApacheEmail(m, email);</span>
+<span class="nc" id="L204">        } catch (final Exception e) {</span>
+<span class="nc" id="L205">            throw new MailNotSentException(e);</span>
+<span class="fc" id="L206">        }</span>
+<span class="fc" id="L207">        return null;</span>
     }
 
     /**
@@ -294,51 +221,51 @@ public class ApacheMailSender extends EmailSender {
             throws NotSupportedException, EmailException,
             com.irurueta.server.commons.email.EmailException {
 
-<span class="fc" id="L297">        ApacheEmailMessage apacheEmailMessage = null;</span>
-<span class="fc" id="L298">        ApacheMultipartEmailMessage apacheMultipartEmailMessage = null;</span>
-<span class="fc bfc" id="L299" title="All 2 branches covered.">        if (m instanceof ApacheEmailMessage) {</span>
-<span class="fc" id="L300">            apacheEmailMessage = (ApacheEmailMessage) m;</span>
+<span class="fc" id="L224">        ApacheEmailMessage apacheEmailMessage = null;</span>
+<span class="fc" id="L225">        ApacheMultipartEmailMessage apacheMultipartEmailMessage = null;</span>
+<span class="fc bfc" id="L226" title="All 2 branches covered.">        if (m instanceof ApacheEmailMessage) {</span>
+<span class="fc" id="L227">            apacheEmailMessage = (ApacheEmailMessage) m;</span>
         }
-<span class="fc bfc" id="L302" title="All 2 branches covered.">        if (m instanceof ApacheMultipartEmailMessage) {</span>
-<span class="fc" id="L303">            apacheMultipartEmailMessage = (ApacheMultipartEmailMessage) m;</span>
+<span class="fc bfc" id="L229" title="All 2 branches covered.">        if (m instanceof ApacheMultipartEmailMessage) {</span>
+<span class="fc" id="L230">            apacheMultipartEmailMessage = (ApacheMultipartEmailMessage) m;</span>
         }
-<span class="pc bpc" id="L305" title="1 of 4 branches missed.">        if (apacheEmailMessage == null &amp;&amp; apacheMultipartEmailMessage == null) {</span>
-<span class="nc" id="L306">            throw new MailNotSentException(&quot;Wrong provider&quot;);</span>
+<span class="pc bpc" id="L232" title="1 of 4 branches missed.">        if (apacheEmailMessage == null &amp;&amp; apacheMultipartEmailMessage == null) {</span>
+<span class="nc" id="L233">            throw new MailNotSentException(&quot;Wrong provider&quot;);</span>
         }
 
-<span class="fc" id="L309">        email.setHostName(mMailHost);</span>
-<span class="fc" id="L310">        email.setSmtpPort(mMailPort);</span>
-<span class="pc bpc" id="L311" title="3 of 6 branches missed.">        if (mMailId != null &amp;&amp; !mMailId.isEmpty() &amp;&amp; mMailPassword != null &amp;&amp;</span>
-<span class="pc bpc" id="L312" title="1 of 2 branches missed.">                !mMailPassword.isEmpty()) {</span>
-<span class="fc" id="L313">            email.setAuthenticator(new DefaultAuthenticator(mMailId,</span>
+<span class="fc" id="L236">        email.setHostName(mMailHost);</span>
+<span class="fc" id="L237">        email.setSmtpPort(mMailPort);</span>
+<span class="pc bpc" id="L238" title="3 of 6 branches missed.">        if (mMailId != null &amp;&amp; !mMailId.isEmpty() &amp;&amp; mMailPassword != null &amp;&amp;</span>
+<span class="pc bpc" id="L239" title="1 of 2 branches missed.">                !mMailPassword.isEmpty()) {</span>
+<span class="fc" id="L240">            email.setAuthenticator(new DefaultAuthenticator(mMailId,</span>
                     mMailPassword));
         }
-<span class="fc" id="L316">        email.setStartTLSEnabled(true);</span>
-<span class="fc" id="L317">        email.setFrom(mMailFromAddress);</span>
-<span class="pc bpc" id="L318" title="1 of 2 branches missed.">        if (m.getSubject() != null) {</span>
-<span class="fc" id="L319">            email.setSubject(m.getSubject());</span>
+<span class="fc" id="L243">        email.setStartTLSEnabled(true);</span>
+<span class="fc" id="L244">        email.setFrom(mMailFromAddress);</span>
+<span class="pc bpc" id="L245" title="1 of 2 branches missed.">        if (m.getSubject() != null) {</span>
+<span class="fc" id="L246">            email.setSubject(m.getSubject());</span>
         }
-<span class="fc bfc" id="L321" title="All 2 branches covered.">        if (apacheEmailMessage != null) {</span>
-<span class="fc" id="L322">            apacheEmailMessage.buildContent((HtmlEmail) email);</span>
+<span class="fc bfc" id="L248" title="All 2 branches covered.">        if (apacheEmailMessage != null) {</span>
+<span class="fc" id="L249">            apacheEmailMessage.buildContent((HtmlEmail) email);</span>
         }
-<span class="fc bfc" id="L324" title="All 2 branches covered.">        if (apacheMultipartEmailMessage != null) {</span>
-<span class="fc" id="L325">            apacheMultipartEmailMessage.buildContent((MultiPartEmail) email);</span>
+<span class="fc bfc" id="L251" title="All 2 branches covered.">        if (apacheMultipartEmailMessage != null) {</span>
+<span class="fc" id="L252">            apacheMultipartEmailMessage.buildContent((MultiPartEmail) email);</span>
         }
 
         // add destinations
-<span class="fc bfc" id="L329" title="All 2 branches covered.">        for (final String s : m.getTo()) {</span>
-<span class="fc" id="L330">            email.addTo(s);</span>
-<span class="fc" id="L331">        }</span>
+<span class="fc bfc" id="L256" title="All 2 branches covered.">        for (final String s : m.getTo()) {</span>
+<span class="fc" id="L257">            email.addTo(s);</span>
+<span class="fc" id="L258">        }</span>
 
-<span class="pc bpc" id="L333" title="1 of 2 branches missed.">        for (final String s : m.getCC()) {</span>
-<span class="nc" id="L334">            email.addCc(s);</span>
-<span class="nc" id="L335">        }</span>
+<span class="pc bpc" id="L260" title="1 of 2 branches missed.">        for (final String s : m.getCC()) {</span>
+<span class="nc" id="L261">            email.addCc(s);</span>
+<span class="nc" id="L262">        }</span>
 
-<span class="pc bpc" id="L337" title="1 of 2 branches missed.">        for (final String s : m.getBCC()) {</span>
-<span class="nc" id="L338">            email.addBcc(s);</span>
-<span class="nc" id="L339">        }</span>
+<span class="pc bpc" id="L264" title="1 of 2 branches missed.">        for (final String s : m.getBCC()) {</span>
+<span class="nc" id="L265">            email.addBcc(s);</span>
+<span class="nc" id="L266">        }</span>
 
-<span class="fc" id="L341">        email.send();</span>
-<span class="fc" id="L342">    }</span>
+<span class="fc" id="L268">        email.send();</span>
+<span class="fc" id="L269">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

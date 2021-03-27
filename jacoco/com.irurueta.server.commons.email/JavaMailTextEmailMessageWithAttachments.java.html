@@ -133,31 +133,44 @@ public class JavaMailTextEmailMessageWithAttachments extends
 
             // add attachments parts
 <span class="fc" id="L135">            final List&lt;EmailAttachment&gt; attachments = getAttachments();</span>
-<span class="pc bpc" id="L136" title="1 of 2 branches missed.">            if (attachments != null) {</span>
-<span class="fc bfc" id="L137" title="All 2 branches covered.">                for (final EmailAttachment attachment : attachments) {</span>
-                    // only add attachments with files
-<span class="pc bpc" id="L139" title="1 of 2 branches missed.">                    if (attachment.getAttachment() == null) {</span>
-<span class="nc" id="L140">                        continue;</span>
-                    }
-
-<span class="fc" id="L143">                    messageBodyPart = new MimeBodyPart();</span>
-<span class="pc bpc" id="L144" title="1 of 2 branches missed.">                    if (attachment.getName() != null) {</span>
-<span class="fc" id="L145">                        messageBodyPart.setFileName(attachment.getName());</span>
-                    }
-<span class="fc" id="L147">                    messageBodyPart.setDisposition(Part.ATTACHMENT);</span>
-<span class="pc bpc" id="L148" title="1 of 2 branches missed.">                    if (attachment.getContentType() != null) {</span>
-<span class="fc" id="L149">                        messageBodyPart.addHeader(&quot;Content-Type&quot;,</span>
-<span class="fc" id="L150">                                attachment.getContentType());</span>
-                    }
-<span class="fc" id="L152">                    messageBodyPart.setDataHandler(new DataHandler(</span>
-<span class="fc" id="L153">                            new FileDataSource(attachment.getAttachment())));</span>
-<span class="fc" id="L154">                    multipart.addBodyPart(messageBodyPart);</span>
-<span class="fc" id="L155">                }</span>
-            }
-<span class="fc" id="L157">            return multipart;</span>
-<span class="nc" id="L158">        } catch (final MessagingException e) {</span>
-<span class="nc" id="L159">            throw new EmailException(e);</span>
+<span class="fc" id="L136">            attach(multipart, attachments);</span>
+<span class="fc" id="L137">            return multipart;</span>
+<span class="nc" id="L138">        } catch (final MessagingException e) {</span>
+<span class="nc" id="L139">            throw new EmailException(e);</span>
         }
     }
+
+    /**
+     * Adds attachments to multipart email.
+     *
+     * @param multipart a multipart within an email.
+     * @param attachments attachments to be added.
+     * @throws MessagingException if an error occurs.
+     */
+    protected static void attach(
+            final Multipart multipart, final List&lt;EmailAttachment&gt; attachments)
+            throws MessagingException {
+<span class="pc bpc" id="L153" title="1 of 2 branches missed.">        if (attachments != null) {</span>
+<span class="fc bfc" id="L154" title="All 2 branches covered.">            for (final EmailAttachment attachment : attachments) {</span>
+                // only add attachments with files
+<span class="pc bpc" id="L156" title="1 of 2 branches missed.">                if (attachment.getAttachment() == null) {</span>
+<span class="nc" id="L157">                    continue;</span>
+                }
+
+<span class="fc" id="L160">                final BodyPart messageBodyPart = new MimeBodyPart();</span>
+<span class="pc bpc" id="L161" title="1 of 2 branches missed.">                if (attachment.getName() != null) {</span>
+<span class="fc" id="L162">                    messageBodyPart.setFileName(attachment.getName());</span>
+                }
+<span class="fc" id="L164">                messageBodyPart.setDisposition(Part.ATTACHMENT);</span>
+<span class="pc bpc" id="L165" title="1 of 2 branches missed.">                if (attachment.getContentType() != null) {</span>
+<span class="fc" id="L166">                    messageBodyPart.addHeader(&quot;Content-Type&quot;,</span>
+<span class="fc" id="L167">                            attachment.getContentType());</span>
+                }
+<span class="fc" id="L169">                messageBodyPart.setDataHandler(new DataHandler(</span>
+<span class="fc" id="L170">                        new FileDataSource(attachment.getAttachment())));</span>
+<span class="fc" id="L171">                multipart.addBodyPart(messageBodyPart);</span>
+<span class="fc" id="L172">            }</span>
+        }
+<span class="fc" id="L174">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
