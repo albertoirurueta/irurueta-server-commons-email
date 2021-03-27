@@ -116,7 +116,7 @@
 <a class="jxr_linenumber" name="L108" href="#L108">108</a>         <strong class="jxr_keyword">final</strong> String text = <span class="jxr_string">"This is some test mail using AWS SES"</span>;
 <a class="jxr_linenumber" name="L109" href="#L109">109</a>         <strong class="jxr_keyword">final</strong> String subject = <span class="jxr_string">"Test"</span>;
 <a class="jxr_linenumber" name="L110" href="#L110">110</a> 
-<a class="jxr_linenumber" name="L111" href="#L111">111</a>         TextEmailMessage&lt;?&gt; message = TextEmailMessage.create(subject, text,
+<a class="jxr_linenumber" name="L111" href="#L111">111</a>         TextEmailMessage message = TextEmailMessage.create(subject, text,
 <a class="jxr_linenumber" name="L112" href="#L112">112</a>                 mailSender);
 <a class="jxr_linenumber" name="L113" href="#L113">113</a>         message.getTo().add(<span class="jxr_string">"alberto@irurueta.com"</span>);
 <a class="jxr_linenumber" name="L114" href="#L114">114</a> 
@@ -134,7 +134,7 @@
 <a class="jxr_linenumber" name="L126" href="#L126">126</a>         <strong class="jxr_keyword">final</strong> String text = <span class="jxr_string">"This is a test mail using AWS SES for multiple recipients"</span>;
 <a class="jxr_linenumber" name="L127" href="#L127">127</a>         <strong class="jxr_keyword">final</strong> String subject = <span class="jxr_string">"Multiple recipients test"</span>;
 <a class="jxr_linenumber" name="L128" href="#L128">128</a> 
-<a class="jxr_linenumber" name="L129" href="#L129">129</a>         <strong class="jxr_keyword">final</strong> TextEmailMessage&lt;?&gt; message = TextEmailMessage.create(subject, text,
+<a class="jxr_linenumber" name="L129" href="#L129">129</a>         <strong class="jxr_keyword">final</strong> TextEmailMessage message = TextEmailMessage.create(subject, text,
 <a class="jxr_linenumber" name="L130" href="#L130">130</a>                 mailSender);
 <a class="jxr_linenumber" name="L131" href="#L131">131</a>         message.getTo().add(<span class="jxr_string">"alberto@irurueta.com"</span>);
 <a class="jxr_linenumber" name="L132" href="#L132">132</a>         message.getTo().add(<span class="jxr_string">"webmaster@irurueta.com"</span>);
@@ -154,7 +154,7 @@
 <a class="jxr_linenumber" name="L146" href="#L146">146</a>         <strong class="jxr_keyword">final</strong> String text = <span class="jxr_string">"Atención. Este mensaje contiene carácteres españoles. AWS SES"</span>;
 <a class="jxr_linenumber" name="L147" href="#L147">147</a>         <strong class="jxr_keyword">final</strong> String subject = <span class="jxr_string">"Prueba de carácteres"</span>;
 <a class="jxr_linenumber" name="L148" href="#L148">148</a> 
-<a class="jxr_linenumber" name="L149" href="#L149">149</a>         <strong class="jxr_keyword">final</strong> TextEmailMessage&lt;?&gt; message = TextEmailMessage.create(subject, text,
+<a class="jxr_linenumber" name="L149" href="#L149">149</a>         <strong class="jxr_keyword">final</strong> TextEmailMessage message = TextEmailMessage.create(subject, text,
 <a class="jxr_linenumber" name="L150" href="#L150">150</a>                 mailSender);
 <a class="jxr_linenumber" name="L151" href="#L151">151</a>         message.getTo().add(<span class="jxr_string">"alberto@irurueta.com"</span>);
 <a class="jxr_linenumber" name="L152" href="#L152">152</a> 
@@ -171,7 +171,7 @@
 <a class="jxr_linenumber" name="L163" href="#L163">163</a>         <strong class="jxr_keyword">final</strong> String text = <span class="jxr_string">"This is some test AWS mail with attachment"</span>;
 <a class="jxr_linenumber" name="L164" href="#L164">164</a>         <strong class="jxr_keyword">final</strong> String subject = <span class="jxr_string">"Test with attachment"</span>;
 <a class="jxr_linenumber" name="L165" href="#L165">165</a> 
-<a class="jxr_linenumber" name="L166" href="#L166">166</a>         <strong class="jxr_keyword">final</strong> TextEmailMessageWithAttachments&lt;?&gt; message = TextEmailMessageWithAttachments.create(subject, text,
+<a class="jxr_linenumber" name="L166" href="#L166">166</a>         <strong class="jxr_keyword">final</strong> TextEmailMessageWithAttachments message = TextEmailMessageWithAttachments.create(subject, text,
 <a class="jxr_linenumber" name="L167" href="#L167">167</a>                 mailSender);
 <a class="jxr_linenumber" name="L168" href="#L168">168</a>         message.getTo().add(<span class="jxr_string">"alberto@irurueta.com"</span>);
 <a class="jxr_linenumber" name="L169" href="#L169">169</a> 
@@ -196,7 +196,7 @@
 <a class="jxr_linenumber" name="L188" href="#L188">188</a>         <strong class="jxr_keyword">final</strong> String text = <span class="jxr_string">"This is a test mail for multiple recipients with attachment. AWS SES"</span>;
 <a class="jxr_linenumber" name="L189" href="#L189">189</a>         <strong class="jxr_keyword">final</strong> String subject = <span class="jxr_string">"Multiple recipients test with attachment"</span>;
 <a class="jxr_linenumber" name="L190" href="#L190">190</a> 
-<a class="jxr_linenumber" name="L191" href="#L191">191</a>         <strong class="jxr_keyword">final</strong> TextEmailMessageWithAttachments&lt;?&gt; message = TextEmailMessageWithAttachments.create(subject, text,
+<a class="jxr_linenumber" name="L191" href="#L191">191</a>         <strong class="jxr_keyword">final</strong> TextEmailMessageWithAttachments message = TextEmailMessageWithAttachments.create(subject, text,
 <a class="jxr_linenumber" name="L192" href="#L192">192</a>                 mailSender);
 <a class="jxr_linenumber" name="L193" href="#L193">193</a>         message.getTo().add(<span class="jxr_string">"alberto@irurueta.com"</span>);
 <a class="jxr_linenumber" name="L194" href="#L194">194</a>         message.getTo().add(<span class="jxr_string">"webmaster@irurueta.com"</span>);
@@ -222,7 +222,7 @@
 <a class="jxr_linenumber" name="L214" href="#L214">214</a>         <strong class="jxr_keyword">final</strong> String text = <span class="jxr_string">"Atención. Este mensaje contiene carácteres españoles y tiene un archivo adjunto. AWS SES"</span>;
 <a class="jxr_linenumber" name="L215" href="#L215">215</a>         <strong class="jxr_keyword">final</strong> String subject = <span class="jxr_string">"Prueba de carácteres con archivo adjunto"</span>;
 <a class="jxr_linenumber" name="L216" href="#L216">216</a> 
-<a class="jxr_linenumber" name="L217" href="#L217">217</a>         <strong class="jxr_keyword">final</strong> TextEmailMessageWithAttachments&lt;?&gt; message = TextEmailMessageWithAttachments.create(subject, text,
+<a class="jxr_linenumber" name="L217" href="#L217">217</a>         <strong class="jxr_keyword">final</strong> TextEmailMessageWithAttachments message = TextEmailMessageWithAttachments.create(subject, text,
 <a class="jxr_linenumber" name="L218" href="#L218">218</a>                 mailSender);
 <a class="jxr_linenumber" name="L219" href="#L219">219</a>         message.getTo().add(<span class="jxr_string">"alberto@irurueta.com"</span>);
 <a class="jxr_linenumber" name="L220" href="#L220">220</a> 
@@ -251,7 +251,7 @@
 <a class="jxr_linenumber" name="L243" href="#L243">243</a>         <strong class="jxr_keyword">final</strong> String alternativeText = <span class="jxr_string">"alternative text"</span>;
 <a class="jxr_linenumber" name="L244" href="#L244">244</a>         <strong class="jxr_keyword">final</strong> String subject = <span class="jxr_string">"HTML email"</span>;
 <a class="jxr_linenumber" name="L245" href="#L245">245</a> 
-<a class="jxr_linenumber" name="L246" href="#L246">246</a>         <strong class="jxr_keyword">final</strong> HtmlEmailMessage&lt;?&gt; message = HtmlEmailMessage.create(subject, html,
+<a class="jxr_linenumber" name="L246" href="#L246">246</a>         <strong class="jxr_keyword">final</strong> HtmlEmailMessage message = HtmlEmailMessage.create(subject, html,
 <a class="jxr_linenumber" name="L247" href="#L247">247</a>                 mailSender);
 <a class="jxr_linenumber" name="L248" href="#L248">248</a>         message.setAlternativeText(alternativeText);
 <a class="jxr_linenumber" name="L249" href="#L249">249</a>         message.getTo().add(<span class="jxr_string">"alberto@irurueta.com"</span>);
@@ -291,7 +291,7 @@
 <a class="jxr_linenumber" name="L283" href="#L283">283</a>         <strong class="jxr_keyword">final</strong> String text = <span class="jxr_string">"Disabled test"</span>;
 <a class="jxr_linenumber" name="L284" href="#L284">284</a>         <strong class="jxr_keyword">final</strong> String subject = <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L285" href="#L285">285</a> 
-<a class="jxr_linenumber" name="L286" href="#L286">286</a>         <strong class="jxr_keyword">final</strong> TextEmailMessage&lt;?&gt; message = TextEmailMessage.create(subject, text,
+<a class="jxr_linenumber" name="L286" href="#L286">286</a>         <strong class="jxr_keyword">final</strong> TextEmailMessage message = TextEmailMessage.create(subject, text,
 <a class="jxr_linenumber" name="L287" href="#L287">287</a>                 mailSender);
 <a class="jxr_linenumber" name="L288" href="#L288">288</a>         message.getTo().add(<span class="jxr_string">"alberto@irurueta.com"</span>);
 <a class="jxr_linenumber" name="L289" href="#L289">289</a>         message.getTo().add(<span class="jxr_string">"webmaster@irurueta.com"</span>);
@@ -318,7 +318,7 @@
 <a class="jxr_linenumber" name="L310" href="#L310">310</a>         <strong class="jxr_keyword">final</strong> String text = <span class="jxr_string">"No subject test"</span>;
 <a class="jxr_linenumber" name="L311" href="#L311">311</a>         <strong class="jxr_keyword">final</strong> String subject = <strong class="jxr_keyword">null</strong>;
 <a class="jxr_linenumber" name="L312" href="#L312">312</a> 
-<a class="jxr_linenumber" name="L313" href="#L313">313</a>         <strong class="jxr_keyword">final</strong> TextEmailMessage&lt;?&gt; message = TextEmailMessage.create(subject, text,
+<a class="jxr_linenumber" name="L313" href="#L313">313</a>         <strong class="jxr_keyword">final</strong> TextEmailMessage message = TextEmailMessage.create(subject, text,
 <a class="jxr_linenumber" name="L314" href="#L314">314</a>                 mailSender);
 <a class="jxr_linenumber" name="L315" href="#L315">315</a>         message.getTo().add(<span class="jxr_string">"alberto@irurueta.com"</span>);
 <a class="jxr_linenumber" name="L316" href="#L316">316</a>         message.getBCC().add(<span class="jxr_string">"webmaster@irurueta.com"</span>);

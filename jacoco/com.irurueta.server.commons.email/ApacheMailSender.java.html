@@ -216,7 +216,7 @@ public class ApacheMailSender extends EmailSender {
      * @throws MailNotSentException if mail couldn't be sent.
      */
     @Override
-    public String send(final EmailMessage&lt;?&gt; m) throws MailNotSentException {
+    public String send(final EmailMessage m) throws MailNotSentException {
 <span class="fc bfc" id="L220" title="All 2 branches covered.">        if (!mEnabled) {</span>
             //don't send message if not enabled
 <span class="fc" id="L222">            return null;</span>
@@ -224,11 +224,11 @@ public class ApacheMailSender extends EmailSender {
 
         //to avoid compilation errors regarding to casting
 <span class="fc bfc" id="L226" title="All 2 branches covered.">        if (m instanceof ApacheMailTextEmailMessage) {</span>
-<span class="fc" id="L227">            return sendMultiPartEmail((ApacheMailTextEmailMessage) m);</span>
+<span class="fc" id="L227">            return sendMultiPartEmail(m);</span>
 <span class="fc bfc" id="L228" title="All 2 branches covered.">        } else if (m instanceof ApacheMailTextEmailMessageWithAttachments) {</span>
-<span class="fc" id="L229">            return sendMultiPartEmail((ApacheMailTextEmailMessageWithAttachments) m);</span>
+<span class="fc" id="L229">            return sendMultiPartEmail(m);</span>
 <span class="pc bpc" id="L230" title="1 of 2 branches missed.">        } else if (m instanceof ApacheMailHtmlEmailMessage) {</span>
-<span class="fc" id="L231">            return sendHtmlEmail((ApacheMailHtmlEmailMessage) m);</span>
+<span class="fc" id="L231">            return sendHtmlEmail(m);</span>
         } else {
 <span class="nc" id="L233">            throw new MailNotSentException(&quot;Unsupported email type&quot;);</span>
         }
@@ -251,7 +251,7 @@ public class ApacheMailSender extends EmailSender {
      * @return id of message that has been sent.
      * @throws MailNotSentException if mail couldn't be sent.
      */
-    public String sendMultiPartEmail(final EmailMessage&lt;MultiPartEmail&gt; m)
+    public String sendMultiPartEmail(final EmailMessage m)
             throws MailNotSentException {
         try {
 <span class="fc" id="L257">            final MultiPartEmail email = new MultiPartEmail();</span>
@@ -269,7 +269,7 @@ public class ApacheMailSender extends EmailSender {
      * @return id of message that has been sent.
      * @throws MailNotSentException if mail couldn't be sent.
      */
-    public String sendHtmlEmail(final EmailMessage&lt;HtmlEmail&gt; m)
+    public String sendHtmlEmail(final EmailMessage m)
             throws MailNotSentException {
         try {
 <span class="fc" id="L275">            final HtmlEmail email = new HtmlEmail();</span>
@@ -290,38 +290,55 @@ public class ApacheMailSender extends EmailSender {
      * @throws com.irurueta.server.commons.email.EmailException if sending
      *                                                          email fails.
      */
-    private &lt;T extends Email&gt; void internalSendApacheEmail(final EmailMessage&lt;T&gt; m, T email)
+    private &lt;T extends Email&gt; void internalSendApacheEmail(final EmailMessage m, T email)
             throws NotSupportedException, EmailException,
             com.irurueta.server.commons.email.EmailException {
-<span class="fc" id="L296">        email.setHostName(mMailHost);</span>
-<span class="fc" id="L297">        email.setSmtpPort(mMailPort);</span>
-<span class="pc bpc" id="L298" title="3 of 6 branches missed.">        if (mMailId != null &amp;&amp; !mMailId.isEmpty() &amp;&amp; mMailPassword != null &amp;&amp;</span>
-<span class="pc bpc" id="L299" title="1 of 2 branches missed.">                !mMailPassword.isEmpty()) {</span>
-<span class="fc" id="L300">            email.setAuthenticator(new DefaultAuthenticator(mMailId,</span>
+
+<span class="fc" id="L297">        ApacheEmailMessage apacheEmailMessage = null;</span>
+<span class="fc" id="L298">        ApacheMultipartEmailMessage apacheMultipartEmailMessage = null;</span>
+<span class="fc bfc" id="L299" title="All 2 branches covered.">        if (m instanceof ApacheEmailMessage) {</span>
+<span class="fc" id="L300">            apacheEmailMessage = (ApacheEmailMessage) m;</span>
+        }
+<span class="fc bfc" id="L302" title="All 2 branches covered.">        if (m instanceof ApacheMultipartEmailMessage) {</span>
+<span class="fc" id="L303">            apacheMultipartEmailMessage = (ApacheMultipartEmailMessage) m;</span>
+        }
+<span class="pc bpc" id="L305" title="1 of 4 branches missed.">        if (apacheEmailMessage == null &amp;&amp; apacheMultipartEmailMessage == null) {</span>
+<span class="nc" id="L306">            throw new MailNotSentException(&quot;Wrong provider&quot;);</span>
+        }
+
+<span class="fc" id="L309">        email.setHostName(mMailHost);</span>
+<span class="fc" id="L310">        email.setSmtpPort(mMailPort);</span>
+<span class="pc bpc" id="L311" title="3 of 6 branches missed.">        if (mMailId != null &amp;&amp; !mMailId.isEmpty() &amp;&amp; mMailPassword != null &amp;&amp;</span>
+<span class="pc bpc" id="L312" title="1 of 2 branches missed.">                !mMailPassword.isEmpty()) {</span>
+<span class="fc" id="L313">            email.setAuthenticator(new DefaultAuthenticator(mMailId,</span>
                     mMailPassword));
         }
-<span class="fc" id="L303">        email.setStartTLSEnabled(true);</span>
-<span class="fc" id="L304">        email.setFrom(mMailFromAddress);</span>
-<span class="pc bpc" id="L305" title="1 of 2 branches missed.">        if (m.getSubject() != null) {</span>
-<span class="fc" id="L306">            email.setSubject(m.getSubject());</span>
+<span class="fc" id="L316">        email.setStartTLSEnabled(true);</span>
+<span class="fc" id="L317">        email.setFrom(mMailFromAddress);</span>
+<span class="pc bpc" id="L318" title="1 of 2 branches missed.">        if (m.getSubject() != null) {</span>
+<span class="fc" id="L319">            email.setSubject(m.getSubject());</span>
         }
-<span class="fc" id="L308">        m.buildContent(email);</span>
-
+<span class="fc bfc" id="L321" title="All 2 branches covered.">        if (apacheEmailMessage != null) {</span>
+<span class="fc" id="L322">            apacheEmailMessage.buildContent((HtmlEmail) email);</span>
+        }
+<span class="fc bfc" id="L324" title="All 2 branches covered.">        if (apacheMultipartEmailMessage != null) {</span>
+<span class="fc" id="L325">            apacheMultipartEmailMessage.buildContent((MultiPartEmail) email);</span>
+        }
 
         // add destinations
-<span class="fc bfc" id="L312" title="All 2 branches covered.">        for (final String s : m.getTo()) {</span>
-<span class="fc" id="L313">            email.addTo(s);</span>
-<span class="fc" id="L314">        }</span>
+<span class="fc bfc" id="L329" title="All 2 branches covered.">        for (final String s : m.getTo()) {</span>
+<span class="fc" id="L330">            email.addTo(s);</span>
+<span class="fc" id="L331">        }</span>
 
-<span class="pc bpc" id="L316" title="1 of 2 branches missed.">        for (final String s : m.getCC()) {</span>
-<span class="nc" id="L317">            email.addCc(s);</span>
-<span class="nc" id="L318">        }</span>
+<span class="pc bpc" id="L333" title="1 of 2 branches missed.">        for (final String s : m.getCC()) {</span>
+<span class="nc" id="L334">            email.addCc(s);</span>
+<span class="nc" id="L335">        }</span>
 
-<span class="pc bpc" id="L320" title="1 of 2 branches missed.">        for (final String s : m.getBCC()) {</span>
-<span class="nc" id="L321">            email.addBcc(s);</span>
-<span class="nc" id="L322">        }</span>
+<span class="pc bpc" id="L337" title="1 of 2 branches missed.">        for (final String s : m.getBCC()) {</span>
+<span class="nc" id="L338">            email.addBcc(s);</span>
+<span class="nc" id="L339">        }</span>
 
-<span class="fc" id="L324">        email.send();</span>
-<span class="fc" id="L325">    }</span>
+<span class="fc" id="L341">        email.send();</span>
+<span class="fc" id="L342">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

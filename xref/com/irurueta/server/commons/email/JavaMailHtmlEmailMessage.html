@@ -44,7 +44,7 @@
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>  <em class="jxr_javadoccomment"> * can be used within the html content (such as images or css resources to be</em>
 <a class="jxr_linenumber" name="L37" href="#L37">37</a>  <em class="jxr_javadoccomment"> * used within html email body).</em>
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>  <em class="jxr_javadoccomment"> */</em>
-<a class="jxr_linenumber" name="L39" href="#L39">39</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../com/irurueta/server/commons/email/JavaMailHtmlEmailMessage.html">JavaMailHtmlEmailMessage</a> <strong class="jxr_keyword">extends</strong> HtmlEmailMessage&lt;MimeMessage&gt; {
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../com/irurueta/server/commons/email/JavaMailHtmlEmailMessage.html">JavaMailHtmlEmailMessage</a> <strong class="jxr_keyword">extends</strong> <a href="../../../../../com/irurueta/server/commons/email/HtmlEmailMessage.html">HtmlEmailMessage</a> <strong class="jxr_keyword">implements</strong> <a href="../../../../../com/irurueta/server/commons/email/JavaMailEmailMessage.html">JavaMailEmailMessage</a> {
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>  
 <a class="jxr_linenumber" name="L41" href="#L41">41</a>      <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L42" href="#L42">42</a>  <em class="jxr_javadoccomment">     * Constructor.</em>
@@ -79,7 +79,7 @@
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>  <em class="jxr_javadoccomment">     * @throws EmailException if setting mail content fails.</em>
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>  <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>      @Override
-<a class="jxr_linenumber" name="L74" href="#L74">74</a>      <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">void</strong> buildContent(<strong class="jxr_keyword">final</strong> MimeMessage message) <strong class="jxr_keyword">throws</strong> EmailException {
+<a class="jxr_linenumber" name="L74" href="#L74">74</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> buildContent(<strong class="jxr_keyword">final</strong> MimeMessage message) <strong class="jxr_keyword">throws</strong> EmailException {
 <a class="jxr_linenumber" name="L75" href="#L75">75</a>          <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L76" href="#L76">76</a>              <em class="jxr_comment">// finally add multipart contents to mail message</em>
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>              message.setContent(buildMultipart());

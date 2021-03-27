@@ -20,11 +20,9 @@ import java.util.List;
 
 /**
  * Base class for text only email messages containing file attachments.
- *
- * @param &lt;E&gt; internal representation of email using by internal client.
  */
-public abstract class TextEmailMessageWithAttachments&lt;E&gt; extends
-        TextEmailMessage&lt;E&gt; {
+public abstract class TextEmailMessageWithAttachments extends
+        TextEmailMessage {
 
     /**
      * List of attachments to be included in email.
@@ -35,9 +33,9 @@ public abstract class TextEmailMessageWithAttachments&lt;E&gt; extends
      * Constructor.
      */
     protected TextEmailMessageWithAttachments() {
-<span class="fc" id="L38">        super();</span>
-<span class="fc" id="L39">        mAttachments = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L40">    }</span>
+<span class="fc" id="L36">        super();</span>
+<span class="fc" id="L37">        mAttachments = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L38">    }</span>
 
     /**
      * Constructor with email subject.
@@ -45,9 +43,9 @@ public abstract class TextEmailMessageWithAttachments&lt;E&gt; extends
      * @param subject subject to be set.
      */
     protected TextEmailMessageWithAttachments(final String subject) {
-<span class="fc" id="L48">        super(subject);</span>
-<span class="fc" id="L49">        mAttachments = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L50">    }</span>
+<span class="fc" id="L46">        super(subject);</span>
+<span class="fc" id="L47">        mAttachments = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L48">    }</span>
 
     /**
      * Constructor with email subject and textual content.
@@ -56,9 +54,9 @@ public abstract class TextEmailMessageWithAttachments&lt;E&gt; extends
      * @param text    textual content.
      */
     protected TextEmailMessageWithAttachments(final String subject, final String text) {
-<span class="fc" id="L59">        super(subject, text);</span>
-<span class="fc" id="L60">        mAttachments = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L61">    }</span>
+<span class="fc" id="L57">        super(subject, text);</span>
+<span class="fc" id="L58">        mAttachments = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L59">    }</span>
 
     /**
      * Constructor with list of files to be attached.
@@ -66,9 +64,9 @@ public abstract class TextEmailMessageWithAttachments&lt;E&gt; extends
      * @param attachments list of files to be attached.
      */
     protected TextEmailMessageWithAttachments(final List&lt;EmailAttachment&gt; attachments) {
-<span class="fc" id="L69">        super();</span>
-<span class="fc" id="L70">        mAttachments = attachments;</span>
-<span class="fc" id="L71">    }</span>
+<span class="fc" id="L67">        super();</span>
+<span class="fc" id="L68">        mAttachments = attachments;</span>
+<span class="fc" id="L69">    }</span>
 
     /**
      * Constructor with email subject and list of files to be attached.
@@ -78,9 +76,9 @@ public abstract class TextEmailMessageWithAttachments&lt;E&gt; extends
      */
     protected TextEmailMessageWithAttachments(final String subject,
                                               final List&lt;EmailAttachment&gt; attachments) {
-<span class="fc" id="L81">        super(subject);</span>
-<span class="fc" id="L82">        mAttachments = attachments;</span>
-<span class="fc" id="L83">    }</span>
+<span class="fc" id="L79">        super(subject);</span>
+<span class="fc" id="L80">        mAttachments = attachments;</span>
+<span class="fc" id="L81">    }</span>
 
     /**
      * Constructor with email subject, textual content and list of files to be
@@ -92,9 +90,9 @@ public abstract class TextEmailMessageWithAttachments&lt;E&gt; extends
      */
     protected TextEmailMessageWithAttachments(final String subject, final String text,
                                               final List&lt;EmailAttachment&gt; attachments) {
-<span class="fc" id="L95">        super(subject, text);</span>
-<span class="fc" id="L96">        mAttachments = attachments;</span>
-<span class="fc" id="L97">    }</span>
+<span class="fc" id="L93">        super(subject, text);</span>
+<span class="fc" id="L94">        mAttachments = attachments;</span>
+<span class="fc" id="L95">    }</span>
 
     /**
      * Get list of files to be attached.
@@ -102,7 +100,7 @@ public abstract class TextEmailMessageWithAttachments&lt;E&gt; extends
      * @return list of files to be attached.
      */
     public List&lt;EmailAttachment&gt; getAttachments() {
-<span class="fc" id="L105">        return mAttachments;</span>
+<span class="fc" id="L103">        return mAttachments;</span>
     }
 
     /**
@@ -111,8 +109,8 @@ public abstract class TextEmailMessageWithAttachments&lt;E&gt; extends
      * @param attachments list of files to be attached.
      */
     public void setAttachments(final List&lt;EmailAttachment&gt; attachments) {
-<span class="fc" id="L114">        mAttachments = attachments;</span>
-<span class="fc" id="L115">    }</span>
+<span class="fc" id="L112">        mAttachments = attachments;</span>
+<span class="fc" id="L113">    }</span>
 
     /**
      * Creates a textual email message with attachments using provided email
@@ -121,9 +119,9 @@ public abstract class TextEmailMessageWithAttachments&lt;E&gt; extends
      * @param sender class in charge of sending this email.
      * @return a textual email message with attachments.
      */
-    public static TextEmailMessageWithAttachments&lt;?&gt; create(
+    public static TextEmailMessageWithAttachments create(
             final EmailSender sender) {
-<span class="fc" id="L126">        return create(&quot;&quot;, sender);</span>
+<span class="fc" id="L124">        return create(&quot;&quot;, sender);</span>
     }
 
     /**
@@ -133,9 +131,9 @@ public abstract class TextEmailMessageWithAttachments&lt;E&gt; extends
      * @param provider email provider.
      * @return a textual email message with attachments.
      */
-    protected static TextEmailMessageWithAttachments&lt;?&gt; create(
+    protected static TextEmailMessageWithAttachments create(
             final EmailProvider provider) {
-<span class="fc" id="L138">        return create(&quot;&quot;, provider);</span>
+<span class="fc" id="L136">        return create(&quot;&quot;, provider);</span>
     }
 
     /**
@@ -146,9 +144,9 @@ public abstract class TextEmailMessageWithAttachments&lt;E&gt; extends
      * @param sender  class in charge of sending this email.
      * @return a textual email message with attachments.
      */
-    public static TextEmailMessageWithAttachments&lt;?&gt; create(
+    public static TextEmailMessageWithAttachments create(
             final String subject, final EmailSender sender) {
-<span class="fc" id="L151">        return create(subject, &quot;&quot;, sender);</span>
+<span class="fc" id="L149">        return create(subject, &quot;&quot;, sender);</span>
     }
 
     /**
@@ -159,9 +157,9 @@ public abstract class TextEmailMessageWithAttachments&lt;E&gt; extends
      * @param provider email provider.
      * @return a textual email message with attachments.
      */
-    protected static TextEmailMessageWithAttachments&lt;?&gt; create(
+    protected static TextEmailMessageWithAttachments create(
             final String subject, final EmailProvider provider) {
-<span class="fc" id="L164">        return create(subject, &quot;&quot;, provider);</span>
+<span class="fc" id="L162">        return create(subject, &quot;&quot;, provider);</span>
     }
 
     /**
@@ -173,9 +171,9 @@ public abstract class TextEmailMessageWithAttachments&lt;E&gt; extends
      * @param sender  class in charge of sending this email.
      * @return a textual email message with attachments.
      */
-    public static TextEmailMessageWithAttachments&lt;?&gt; create(
+    public static TextEmailMessageWithAttachments create(
             final String subject, final String text, final EmailSender sender) {
-<span class="fc" id="L178">        return create(subject, text, sender.getProvider());</span>
+<span class="fc" id="L176">        return create(subject, text, sender.getProvider());</span>
     }
 
     /**
@@ -187,9 +185,9 @@ public abstract class TextEmailMessageWithAttachments&lt;E&gt; extends
      * @param provider email provider.
      * @return a textual email message with attachments.
      */
-    protected static TextEmailMessageWithAttachments&lt;?&gt; create(
+    protected static TextEmailMessageWithAttachments create(
             final String subject, final String text, final EmailProvider provider) {
-<span class="fc" id="L192">        return create(subject, text, new ArrayList&lt;EmailAttachment&gt;(),</span>
+<span class="fc" id="L190">        return create(subject, text, new ArrayList&lt;EmailAttachment&gt;(),</span>
                 provider);
     }
 
@@ -201,9 +199,9 @@ public abstract class TextEmailMessageWithAttachments&lt;E&gt; extends
      * @param sender      class in charge of sending this email.
      * @return a textual email message with attachments.
      */
-    public static TextEmailMessageWithAttachments&lt;?&gt; create(
+    public static TextEmailMessageWithAttachments create(
             final List&lt;EmailAttachment&gt; attachments, final EmailSender sender) {
-<span class="fc" id="L206">        return create(&quot;&quot;, attachments, sender);</span>
+<span class="fc" id="L204">        return create(&quot;&quot;, attachments, sender);</span>
     }
 
     /**
@@ -214,9 +212,9 @@ public abstract class TextEmailMessageWithAttachments&lt;E&gt; extends
      * @param provider    email provider.
      * @return a textual email message with attachments.
      */
-    protected static TextEmailMessageWithAttachments&lt;?&gt; create(
+    protected static TextEmailMessageWithAttachments create(
             final List&lt;EmailAttachment&gt; attachments, final EmailProvider provider) {
-<span class="fc" id="L219">        return create(&quot;&quot;, attachments, provider);</span>
+<span class="fc" id="L217">        return create(&quot;&quot;, attachments, provider);</span>
     }
 
     /**
@@ -228,9 +226,9 @@ public abstract class TextEmailMessageWithAttachments&lt;E&gt; extends
      * @param sender      class in charge of sending this email.
      * @return a textual email message with attachments.
      */
-    public static TextEmailMessageWithAttachments&lt;?&gt; create(
+    public static TextEmailMessageWithAttachments create(
             final String subject, final List&lt;EmailAttachment&gt; attachments, final EmailSender sender) {
-<span class="fc" id="L233">        return create(subject, &quot;&quot;, attachments, sender);</span>
+<span class="fc" id="L231">        return create(subject, &quot;&quot;, attachments, sender);</span>
     }
 
     /**
@@ -242,9 +240,9 @@ public abstract class TextEmailMessageWithAttachments&lt;E&gt; extends
      * @param provider    email provider.
      * @return a textual email message with attachments.
      */
-    protected static TextEmailMessageWithAttachments&lt;?&gt; create(
+    protected static TextEmailMessageWithAttachments create(
             final String subject, final List&lt;EmailAttachment&gt; attachments, final EmailProvider provider) {
-<span class="fc" id="L247">        return create(subject, &quot;&quot;, attachments, provider);</span>
+<span class="fc" id="L245">        return create(subject, &quot;&quot;, attachments, provider);</span>
     }
 
     /**
@@ -257,10 +255,10 @@ public abstract class TextEmailMessageWithAttachments&lt;E&gt; extends
      * @param sender      class in charge of sending this email.
      * @return a textual email message with attachments.
      */
-    public static TextEmailMessageWithAttachments&lt;?&gt; create(
+    public static TextEmailMessageWithAttachments create(
             final String subject, final String text, final List&lt;EmailAttachment&gt; attachments,
             final EmailSender sender) {
-<span class="fc" id="L263">        return create(subject, text, attachments, sender.getProvider());</span>
+<span class="fc" id="L261">        return create(subject, text, attachments, sender.getProvider());</span>
     }
 
     /**
@@ -273,20 +271,20 @@ public abstract class TextEmailMessageWithAttachments&lt;E&gt; extends
      * @param provider    email provider.
      * @return a textual email message with attachments.
      */
-    protected static TextEmailMessageWithAttachments&lt;?&gt; create(
+    protected static TextEmailMessageWithAttachments create(
             final String subject, final String text, final List&lt;EmailAttachment&gt; attachments,
             final EmailProvider provider) {
 
-<span class="fc bfc" id="L280" title="All 3 branches covered.">        switch (provider) {</span>
+<span class="fc bfc" id="L278" title="All 3 branches covered.">        switch (provider) {</span>
             case AWS_MAIL:
-<span class="fc" id="L282">                return new AWSTextEmailMessageWithAttachments(subject, text,</span>
+<span class="fc" id="L280">                return new AWSTextEmailMessageWithAttachments(subject, text,</span>
                         attachments);
             case APACHE_MAIL:
-<span class="fc" id="L285">                return new ApacheMailTextEmailMessageWithAttachments(subject,</span>
+<span class="fc" id="L283">                return new ApacheMailTextEmailMessageWithAttachments(subject,</span>
                         text, attachments);
             case JAVA_MAIL:
             default:
-<span class="fc" id="L289">                return new JavaMailTextEmailMessageWithAttachments(subject,</span>
+<span class="fc" id="L287">                return new JavaMailTextEmailMessageWithAttachments(subject,</span>
                         text, attachments);
         }
     }

@@ -38,7 +38,7 @@
 <a class="jxr_linenumber" name="L30" href="#L30">30</a>  <em class="jxr_javadoccomment"> * can be used within the html content (such as images or css resources to be</em>
 <a class="jxr_linenumber" name="L31" href="#L31">31</a>  <em class="jxr_javadoccomment"> * used within html email body).</em>
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>  <em class="jxr_javadoccomment"> */</em>
-<a class="jxr_linenumber" name="L33" href="#L33">33</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../com/irurueta/server/commons/email/ApacheMailHtmlEmailMessage.html">ApacheMailHtmlEmailMessage</a> <strong class="jxr_keyword">extends</strong> HtmlEmailMessage&lt;HtmlEmail&gt; {
+<a class="jxr_linenumber" name="L33" href="#L33">33</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../com/irurueta/server/commons/email/ApacheMailHtmlEmailMessage.html">ApacheMailHtmlEmailMessage</a> <strong class="jxr_keyword">extends</strong> <a href="../../../../../com/irurueta/server/commons/email/HtmlEmailMessage.html">HtmlEmailMessage</a> <strong class="jxr_keyword">implements</strong> <a href="../../../../../com/irurueta/server/commons/email/ApacheEmailMessage.html">ApacheEmailMessage</a> {
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>  
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>      <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>  <em class="jxr_javadoccomment">     * Constructor.</em>
@@ -74,7 +74,7 @@
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>  <em class="jxr_javadoccomment">     *                                                          content fails.</em>
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>  <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>      @Override
-<a class="jxr_linenumber" name="L69" href="#L69">69</a>      <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">void</strong> buildContent(<strong class="jxr_keyword">final</strong> HtmlEmail content)
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> buildContent(<strong class="jxr_keyword">final</strong> HtmlEmail content)
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>              <strong class="jxr_keyword">throws</strong> com.irurueta.server.commons.email.EmailException {
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>          <strong class="jxr_keyword">try</strong> {
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>              <strong class="jxr_keyword">if</strong> (getAlternativeText() != <strong class="jxr_keyword">null</strong>) {

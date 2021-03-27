@@ -21,14 +21,13 @@ import org.apache.commons.mail.MultiPartEmail;
 /**
  * Class containing a text only email message to be sent using Apache Mail.
  */
-public class ApacheMailTextEmailMessage extends
-        TextEmailMessage&lt;MultiPartEmail&gt; {
+public class ApacheMailTextEmailMessage extends TextEmailMessage implements ApacheMultipartEmailMessage {
     /**
      * Constructor.
      */
     public ApacheMailTextEmailMessage() {
-<span class="fc" id="L30">        super();</span>
-<span class="fc" id="L31">    }</span>
+<span class="fc" id="L29">        super();</span>
+<span class="fc" id="L30">    }</span>
 
     /**
      * Constructor with email subject.
@@ -36,8 +35,8 @@ public class ApacheMailTextEmailMessage extends
      * @param subject subject to be set on email.
      */
     public ApacheMailTextEmailMessage(final String subject) {
-<span class="fc" id="L39">        super(subject);</span>
-<span class="fc" id="L40">    }</span>
+<span class="fc" id="L38">        super(subject);</span>
+<span class="fc" id="L39">    }</span>
 
     /**
      * Constructor with email subject and content text.
@@ -46,8 +45,8 @@ public class ApacheMailTextEmailMessage extends
      * @param text    textual email content.
      */
     public ApacheMailTextEmailMessage(final String subject, final String text) {
-<span class="fc" id="L49">        super(subject, text);</span>
-<span class="fc" id="L50">    }</span>
+<span class="fc" id="L48">        super(subject, text);</span>
+<span class="fc" id="L49">    }</span>
 
     /**
      * Builds email content to be sent using an email sender.
@@ -57,13 +56,13 @@ public class ApacheMailTextEmailMessage extends
      *                                                          content fails.
      */
     @Override
-    protected void buildContent(final MultiPartEmail content)
+    public void buildContent(final MultiPartEmail content)
             throws com.irurueta.server.commons.email.EmailException {
         try {
-<span class="fc" id="L63">            content.setMsg(getText());</span>
-<span class="nc" id="L64">        } catch (final EmailException e) {</span>
-<span class="nc" id="L65">            throw new com.irurueta.server.commons.email.EmailException(e);</span>
-<span class="fc" id="L66">        }</span>
-<span class="fc" id="L67">    }</span>
+<span class="fc" id="L62">            content.setMsg(getText());</span>
+<span class="nc" id="L63">        } catch (final EmailException e) {</span>
+<span class="nc" id="L64">            throw new com.irurueta.server.commons.email.EmailException(e);</span>
+<span class="fc" id="L65">        }</span>
+<span class="fc" id="L66">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

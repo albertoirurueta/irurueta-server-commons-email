@@ -53,7 +53,7 @@
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>          <strong class="jxr_keyword">final</strong> JavaMailSender mailSender = JavaMailSender.getInstance();
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>  
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>          <em class="jxr_comment">// test with mail sender</em>
-<a class="jxr_linenumber" name="L48" href="#L48">48</a>          TextEmailMessageWithAttachments&lt;?&gt; email =
+<a class="jxr_linenumber" name="L48" href="#L48">48</a>          TextEmailMessageWithAttachments email =
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>                  TextEmailMessageWithAttachments.create(mailSender);
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>          assertTrue(email instanceof JavaMailTextEmailMessageWithAttachments);
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>  
@@ -184,7 +184,7 @@
 <a class="jxr_linenumber" name="L176" href="#L176">176</a> 
 <a class="jxr_linenumber" name="L177" href="#L177">177</a>     @Test
 <a class="jxr_linenumber" name="L178" href="#L178">178</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testGetSetAttachments() {
-<a class="jxr_linenumber" name="L179" href="#L179">179</a>         <strong class="jxr_keyword">final</strong> TextEmailMessageWithAttachments&lt;?&gt; email =
+<a class="jxr_linenumber" name="L179" href="#L179">179</a>         <strong class="jxr_keyword">final</strong> TextEmailMessageWithAttachments email =
 <a class="jxr_linenumber" name="L180" href="#L180">180</a>                 TextEmailMessageWithAttachments.create(EmailProvider.AWS_MAIL);
 <a class="jxr_linenumber" name="L181" href="#L181">181</a> 
 <a class="jxr_linenumber" name="L182" href="#L182">182</a>         assertNotNull(email.getAttachments());

@@ -23,7 +23,7 @@ import com.amazonaws.services.simpleemail.model.Message;
 /**
  * Class containing a text only email message to be sent using Amazon SES.
  */
-public class AWSTextEmailMessage extends TextEmailMessage&lt;Message&gt; {
+public class AWSTextEmailMessage extends TextEmailMessage implements AWSEmailMessage {
     
     /**
      * Constructor.
@@ -55,7 +55,7 @@ public class AWSTextEmailMessage extends TextEmailMessage&lt;Message&gt; {
      * @throws EmailException if setting mail content fails.
      */
     @Override
-    protected void buildContent(final Message message) throws EmailException {
+    public void buildContent(final Message message) throws EmailException {
 <span class="fc" id="L59">        final Destination destination = new Destination(getTo());</span>
 <span class="pc bpc" id="L60" title="2 of 4 branches missed.">        if (getBCC() != null &amp;&amp; !getBCC().isEmpty()) {</span>
 <span class="nc" id="L61">            destination.setBccAddresses(getBCC());</span>

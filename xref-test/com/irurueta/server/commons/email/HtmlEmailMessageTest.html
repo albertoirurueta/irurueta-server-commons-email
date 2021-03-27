@@ -53,7 +53,7 @@
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>          <strong class="jxr_keyword">final</strong> JavaMailSender mailSender = JavaMailSender.getInstance();
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>  
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>          <em class="jxr_comment">// test with mail sender</em>
-<a class="jxr_linenumber" name="L48" href="#L48">48</a>          HtmlEmailMessage&lt;?&gt; email = HtmlEmailMessage.create(mailSender);
+<a class="jxr_linenumber" name="L48" href="#L48">48</a>          HtmlEmailMessage email = HtmlEmailMessage.create(mailSender);
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>          assertTrue(email instanceof JavaMailHtmlEmailMessage);
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>  
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>          <em class="jxr_comment">// test with provider</em>
@@ -108,7 +108,7 @@
 <a class="jxr_linenumber" name="L100" href="#L100">100</a> 
 <a class="jxr_linenumber" name="L101" href="#L101">101</a>     @Test
 <a class="jxr_linenumber" name="L102" href="#L102">102</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testGetSetEmailAttachments() {
-<a class="jxr_linenumber" name="L103" href="#L103">103</a>         <strong class="jxr_keyword">final</strong> HtmlEmailMessage&lt;?&gt; email = HtmlEmailMessage.create(
+<a class="jxr_linenumber" name="L103" href="#L103">103</a>         <strong class="jxr_keyword">final</strong> HtmlEmailMessage email = HtmlEmailMessage.create(
 <a class="jxr_linenumber" name="L104" href="#L104">104</a>                 EmailProvider.JAVA_MAIL);
 <a class="jxr_linenumber" name="L105" href="#L105">105</a> 
 <a class="jxr_linenumber" name="L106" href="#L106">106</a>         assertNotNull(email.getEmailAttachments());
@@ -123,7 +123,7 @@
 <a class="jxr_linenumber" name="L115" href="#L115">115</a> 
 <a class="jxr_linenumber" name="L116" href="#L116">116</a>     @Test
 <a class="jxr_linenumber" name="L117" href="#L117">117</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testGetSetInlineAttachments() {
-<a class="jxr_linenumber" name="L118" href="#L118">118</a>         <strong class="jxr_keyword">final</strong> HtmlEmailMessage&lt;?&gt; email = HtmlEmailMessage.create(
+<a class="jxr_linenumber" name="L118" href="#L118">118</a>         <strong class="jxr_keyword">final</strong> HtmlEmailMessage email = HtmlEmailMessage.create(
 <a class="jxr_linenumber" name="L119" href="#L119">119</a>                 EmailProvider.JAVA_MAIL);
 <a class="jxr_linenumber" name="L120" href="#L120">120</a> 
 <a class="jxr_linenumber" name="L121" href="#L121">121</a>         assertNotNull(email.getInlineAttachments());

@@ -214,7 +214,7 @@ public class JavaMailSender extends EmailSender {
      * @throws MailNotSentException if mail couldn't be sent.
      */
     @Override
-    public String send(final EmailMessage&lt;?&gt; m)
+    public String send(final EmailMessage m)
             throws MailNotSentException {
 
 <span class="fc bfc" id="L220" title="All 2 branches covered.">        if (mEnabled) {</span>
@@ -232,46 +232,50 @@ public class JavaMailSender extends EmailSender {
 <span class="fc" id="L232">                props.put(&quot;mail.smtp.socketFactory.port&quot;, mMailPort);</span>
             }
 
-<span class="fc" id="L235">            final Session session = Session.getInstance(props, null);</span>
+<span class="pc bpc" id="L235" title="1 of 2 branches missed.">            if (!(m instanceof JavaMailEmailMessage)) {</span>
+<span class="nc" id="L236">                throw new MailNotSentException(&quot;Wrong provider&quot;);</span>
+            }
+
+<span class="fc" id="L239">            final JavaMailEmailMessage javaEmailMessage = (JavaMailEmailMessage) m;</span>
+
+<span class="fc" id="L241">            final Session session = Session.getInstance(props, null);</span>
 
             try {
-<span class="fc" id="L238">                final MimeMessage message = new MimeMessage(session);</span>
-<span class="fc" id="L239">                message.setFrom(new InternetAddress(mMailFromAddress));</span>
+<span class="fc" id="L244">                final MimeMessage message = new MimeMessage(session);</span>
+<span class="fc" id="L245">                message.setFrom(new InternetAddress(mMailFromAddress));</span>
 
-<span class="fc bfc" id="L241" title="All 2 branches covered.">                for (final String s : m.getTo()) {</span>
-<span class="fc" id="L242">                    message.addRecipients(Message.RecipientType.TO, s);</span>
-<span class="fc" id="L243">                }</span>
+<span class="fc bfc" id="L247" title="All 2 branches covered.">                for (final String s : m.getTo()) {</span>
+<span class="fc" id="L248">                    message.addRecipients(Message.RecipientType.TO, s);</span>
+<span class="fc" id="L249">                }</span>
 
-<span class="pc bpc" id="L245" title="1 of 2 branches missed.">                for (final String s : m.getCC()) {</span>
-<span class="nc" id="L246">                    message.addRecipients(Message.RecipientType.CC, s);</span>
-<span class="nc" id="L247">                }</span>
+<span class="pc bpc" id="L251" title="1 of 2 branches missed.">                for (final String s : m.getCC()) {</span>
+<span class="nc" id="L252">                    message.addRecipients(Message.RecipientType.CC, s);</span>
+<span class="nc" id="L253">                }</span>
 
-<span class="pc bpc" id="L249" title="1 of 2 branches missed.">                for (final String s : m.getBCC()) {</span>
-<span class="nc" id="L250">                    message.addRecipients(Message.RecipientType.BCC, s);</span>
-<span class="nc" id="L251">                }</span>
+<span class="pc bpc" id="L255" title="1 of 2 branches missed.">                for (final String s : m.getBCC()) {</span>
+<span class="nc" id="L256">                    message.addRecipients(Message.RecipientType.BCC, s);</span>
+<span class="nc" id="L257">                }</span>
 
-<span class="pc bpc" id="L253" title="1 of 2 branches missed.">                if (m.getSubject() != null) {</span>
-<span class="fc" id="L254">                    message.setSubject(m.getSubject(), &quot;utf-8&quot;);</span>
+<span class="pc bpc" id="L259" title="1 of 2 branches missed.">                if (m.getSubject() != null) {</span>
+<span class="fc" id="L260">                    message.setSubject(m.getSubject(), &quot;utf-8&quot;);</span>
                 }
                 // sets content of message
-                //noinspection unchecked
-<span class="fc" id="L258">                final EmailMessage&lt;MimeMessage&gt; m2 = (EmailMessage&lt;MimeMessage&gt;) m;</span>
-<span class="fc" id="L259">                m2.buildContent(message);</span>
+<span class="fc" id="L263">                javaEmailMessage.buildContent(message);</span>
                 // set date when mail was sent
-<span class="fc" id="L261">                message.setSentDate(new Date());</span>
+<span class="fc" id="L265">                message.setSentDate(new Date());</span>
 
-<span class="fc" id="L263">                final Transport transport = session.getTransport(&quot;smtp&quot;);</span>
-<span class="fc" id="L264">                transport.connect(mMailHost, mMailPort, mMailId, mMailPassword);</span>
+<span class="fc" id="L267">                final Transport transport = session.getTransport(&quot;smtp&quot;);</span>
+<span class="fc" id="L268">                transport.connect(mMailHost, mMailPort, mMailId, mMailPassword);</span>
 
-<span class="fc" id="L266">                transport.sendMessage(message, message.getAllRecipients());</span>
+<span class="fc" id="L270">                transport.sendMessage(message, message.getAllRecipients());</span>
 
-<span class="fc" id="L268">                transport.close();</span>
+<span class="fc" id="L272">                transport.close();</span>
 
-<span class="nc" id="L270">            } catch (final Exception ex) {</span>
-<span class="nc" id="L271">                throw new MailNotSentException(ex);</span>
-<span class="fc" id="L272">            }</span>
+<span class="nc" id="L274">            } catch (final Exception ex) {</span>
+<span class="nc" id="L275">                throw new MailNotSentException(ex);</span>
+<span class="fc" id="L276">            }</span>
         }
-<span class="fc" id="L274">        return null;</span>
+<span class="fc" id="L278">        return null;</span>
     }
 
     /**
@@ -281,7 +285,7 @@ public class JavaMailSender extends EmailSender {
      */
     @Override
     public EmailProvider getProvider() {
-<span class="fc" id="L284">        return EmailProvider.JAVA_MAIL;</span>
+<span class="fc" id="L288">        return EmailProvider.JAVA_MAIL;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
