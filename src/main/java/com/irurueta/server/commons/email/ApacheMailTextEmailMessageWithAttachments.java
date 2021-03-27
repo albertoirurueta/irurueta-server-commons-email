@@ -104,28 +104,40 @@ public class ApacheMailTextEmailMessageWithAttachments extends TextEmailMessageW
 
             // add attachments
             final List<EmailAttachment> attachments = getAttachments();
-            org.apache.commons.mail.EmailAttachment apacheAttachment;
-            if (attachments != null) {
-                for (final EmailAttachment attachment : attachments) {
-                    // only add attachments with files
-                    if (attachment.getAttachment() == null) {
-                        continue;
-                    }
-
-                    apacheAttachment = new org.apache.commons.mail.
-                            EmailAttachment();
-                    apacheAttachment.setPath(attachment.getAttachment().getAbsolutePath());
-                    apacheAttachment.setDisposition(
-                            org.apache.commons.mail.EmailAttachment.ATTACHMENT);
-                    if (attachment.getName() != null) {
-                        apacheAttachment.setName(attachment.getName());
-                    }
-
-                    content.attach(apacheAttachment);
-                }
-            }
+            attach(content, attachments);
         } catch (final EmailException e) {
             throw new com.irurueta.server.commons.email.EmailException(e);
+        }
+    }
+
+    /**
+     * Adds attachments to email content.
+     *
+     * @param content a multipart email.
+     * @param attachments attachments to be added.
+     * @throws EmailException if an error occurs.
+     */
+    protected static void attach(final MultiPartEmail content, final List<EmailAttachment> attachments)
+            throws EmailException {
+        org.apache.commons.mail.EmailAttachment apacheAttachment;
+        if (attachments != null) {
+            for (final EmailAttachment attachment : attachments) {
+                // only add attachments with files
+                if (attachment.getAttachment() == null) {
+                    continue;
+                }
+
+                apacheAttachment = new org.apache.commons.mail.
+                        EmailAttachment();
+                apacheAttachment.setPath(attachment.getAttachment().getAbsolutePath());
+                apacheAttachment.setDisposition(
+                        org.apache.commons.mail.EmailAttachment.ATTACHMENT);
+                if (attachment.getName() != null) {
+                    apacheAttachment.setName(attachment.getName());
+                }
+
+                content.attach(apacheAttachment);
+            }
         }
     }
 }

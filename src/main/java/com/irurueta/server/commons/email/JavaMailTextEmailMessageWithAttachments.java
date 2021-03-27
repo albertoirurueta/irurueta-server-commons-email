@@ -133,30 +133,43 @@ public class JavaMailTextEmailMessageWithAttachments extends
 
             // add attachments parts
             final List<EmailAttachment> attachments = getAttachments();
-            if (attachments != null) {
-                for (final EmailAttachment attachment : attachments) {
-                    // only add attachments with files
-                    if (attachment.getAttachment() == null) {
-                        continue;
-                    }
-
-                    messageBodyPart = new MimeBodyPart();
-                    if (attachment.getName() != null) {
-                        messageBodyPart.setFileName(attachment.getName());
-                    }
-                    messageBodyPart.setDisposition(Part.ATTACHMENT);
-                    if (attachment.getContentType() != null) {
-                        messageBodyPart.addHeader("Content-Type",
-                                attachment.getContentType());
-                    }
-                    messageBodyPart.setDataHandler(new DataHandler(
-                            new FileDataSource(attachment.getAttachment())));
-                    multipart.addBodyPart(messageBodyPart);
-                }
-            }
+            attach(multipart, attachments);
             return multipart;
         } catch (final MessagingException e) {
             throw new EmailException(e);
+        }
+    }
+
+    /**
+     * Adds attachments to multipart email.
+     *
+     * @param multipart a multipart within an email.
+     * @param attachments attachments to be added.
+     * @throws MessagingException if an error occurs.
+     */
+    protected static void attach(
+            final Multipart multipart, final List<EmailAttachment> attachments)
+            throws MessagingException {
+        if (attachments != null) {
+            for (final EmailAttachment attachment : attachments) {
+                // only add attachments with files
+                if (attachment.getAttachment() == null) {
+                    continue;
+                }
+
+                final BodyPart messageBodyPart = new MimeBodyPart();
+                if (attachment.getName() != null) {
+                    messageBodyPart.setFileName(attachment.getName());
+                }
+                messageBodyPart.setDisposition(Part.ATTACHMENT);
+                if (attachment.getContentType() != null) {
+                    messageBodyPart.addHeader("Content-Type",
+                            attachment.getContentType());
+                }
+                messageBodyPart.setDataHandler(new DataHandler(
+                        new FileDataSource(attachment.getAttachment())));
+                multipart.addBodyPart(messageBodyPart);
+            }
         }
     }
 }

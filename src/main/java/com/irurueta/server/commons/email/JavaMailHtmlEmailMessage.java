@@ -152,27 +152,7 @@ public class JavaMailHtmlEmailMessage extends HtmlEmailMessage implements JavaMa
 
             // add other attachments parts
             final List<EmailAttachment> attachments = getEmailAttachments();
-            if (attachments != null) {
-                for (final EmailAttachment attachment : attachments) {
-                    // only add attachments with files
-                    if (attachment.getAttachment() == null) {
-                        continue;
-                    }
-
-                    messageBodyPart = new MimeBodyPart();
-                    if (attachment.getName() != null) {
-                        messageBodyPart.setFileName(attachment.getName());
-                    }
-                    messageBodyPart.setDisposition(Part.ATTACHMENT);
-                    if (attachment.getContentType() != null) {
-                        messageBodyPart.addHeader("Content-Type",
-                                attachment.getContentType());
-                    }
-                    messageBodyPart.setDataHandler(new DataHandler(
-                            new FileDataSource(attachment.getAttachment())));
-                    multipart.addBodyPart(messageBodyPart);
-                }
-            }
+            JavaMailTextEmailMessageWithAttachments.attach(multipart, attachments);
             return multipart;
         } catch (final MessagingException e) {
             throw new EmailException(e);

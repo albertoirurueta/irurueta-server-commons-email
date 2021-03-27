@@ -15,7 +15,6 @@
  */
 package com.irurueta.server.commons.email;
 
-import com.irurueta.server.commons.configuration.ConfigurationException;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
@@ -29,7 +28,7 @@ import java.util.logging.Logger;
 /**
  * Class to send emails using Apache mail.
  */
-public class ApacheMailSender extends EmailSender {
+public class ApacheMailSender extends CommonEmailSender {
 
     /**
      * Logger for this class.
@@ -38,51 +37,9 @@ public class ApacheMailSender extends EmailSender {
             ApacheMailSender.class.getName());
 
     /**
-     * Minimum allowed port value to connect to SMTP server.
-     */
-    private static final int MIN_PORT_VALUE = 0;
-
-    /**
-     * Maximum allowed port value to connect to SMTP server.
-     */
-    private static final int MAX_PORT_VALUE = 65535;
-
-    /**
      * Reference to singleton instance of this class.
      */
     private static SoftReference<ApacheMailSender> mReference;
-
-    /**
-     * SMTP server host to connect to.
-     */
-    private String mMailHost;
-
-    /**
-     * SMTP server port to connect to.
-     */
-    private int mMailPort;
-
-    /**
-     * User id to log into SMTP server. If none is provided no authentication
-     * will be used.
-     */
-    private String mMailId;
-
-    /**
-     * User password to log into SMTP server. If none is provided no
-     * authentication will be used.
-     */
-    private String mMailPassword;
-
-    /**
-     * Address to send emails from.
-     */
-    private String mMailFromAddress;
-
-    /**
-     * Indicates if mail sending is enabled.
-     */
-    private boolean mEnabled;
 
     /**
      * Constructor.
@@ -90,21 +47,7 @@ public class ApacheMailSender extends EmailSender {
      * becomes disabled.
      */
     private ApacheMailSender() {
-
-        try {
-            final MailConfiguration cfg = MailConfigurationFactory.getInstance().
-                    configure();
-            mMailHost = cfg.getMailHost();
-            mMailPort = cfg.getMailPort();
-            mMailId = cfg.getMailId();
-            mMailPassword = cfg.getMailPassword();
-            mMailFromAddress = cfg.getMailFromAddress();
-
-            mEnabled = isValidConfiguration(mMailHost, mMailPort,
-                    mMailFromAddress) && cfg.isMailSendingEnabled();
-        } catch (final ConfigurationException e) {
-            mEnabled = false;
-        }
+        super();
 
         if (mEnabled) {
             LOGGER.log(Level.INFO, "Apache Email Sender enabled.");
@@ -134,22 +77,6 @@ public class ApacheMailSender extends EmailSender {
      */
     public static synchronized void reset() {
         mReference = null;
-    }
-
-    /**
-     * Indicates if provided configuration is valid by checking that SMTP server
-     * and mail from address are not null, and server port is valid.
-     *
-     * @param mailHost        SMTP server host.
-     * @param mailPort        SMTP server port.
-     * @param mailFromAddress email address to send emails from.
-     * @return true if configuration is valid, false otherwise.
-     */
-    private boolean isValidConfiguration(final String mailHost, final int mailPort,
-                                         final String mailFromAddress) {
-        return mailHost != null && mailPort >= MIN_PORT_VALUE &&
-                mailPort <= MAX_PORT_VALUE && mailFromAddress != null &&
-                isValidEmailAddress(mailFromAddress);
     }
 
     /**

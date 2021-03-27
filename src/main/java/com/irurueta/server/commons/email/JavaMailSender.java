@@ -15,8 +15,6 @@
  */
 package com.irurueta.server.commons.email;
 
-import com.irurueta.server.commons.configuration.ConfigurationException;
-
 import javax.mail.Message;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -31,17 +29,7 @@ import java.util.logging.Logger;
 /**
  * Class to send emails using JavaMail.
  */
-public class JavaMailSender extends EmailSender {
-
-    /**
-     * Minimum allowed port value to connect to SMTP server.
-     */
-    private static final int MIN_PORT_VALUE = 0;
-
-    /**
-     * Maximum allowed port value to connect to SMTP server.
-     */
-    private static final int MAX_PORT_VALUE = 65535;
+public class JavaMailSender extends CommonEmailSender {
 
     /**
      * Reference to singleton instance of this class.
@@ -49,58 +37,12 @@ public class JavaMailSender extends EmailSender {
     private static SoftReference<JavaMailSender> mReference;
 
     /**
-     * SMTP server host to connect to.
-     */
-    private String mMailHost;
-
-    /**
-     * SMTP server port to connect to.
-     */
-    private int mMailPort;
-
-    /**
-     * User id to log into SMTP server. If none is provided no authentication
-     * will be used.
-     */
-    private String mMailId;
-
-    /**
-     * User password to log into SMTP server. If none is provided no
-     * authentication will be used.
-     */
-    private String mMailPassword;
-
-    /**
-     * Address to send emails from.
-     */
-    private String mMailFromAddress;
-
-    /**
-     * Indicates if mail sending is enabled.
-     */
-    private boolean mEnabled;
-
-    /**
      * Constructor.
      * Loads mail configuration, and if it fails for some reason, mail sending
      * becomes disabled.
      */
     private JavaMailSender() {
-
-        try {
-            final MailConfiguration cfg = MailConfigurationFactory.getInstance().
-                    configure();
-            mMailHost = cfg.getMailHost();
-            mMailPort = cfg.getMailPort();
-            mMailId = cfg.getMailId();
-            mMailPassword = cfg.getMailPassword();
-            mMailFromAddress = cfg.getMailFromAddress();
-
-            mEnabled = isValidConfiguration(mMailHost, mMailPort,
-                    mMailFromAddress) && cfg.isMailSendingEnabled();
-        } catch (final ConfigurationException e) {
-            mEnabled = false;
-        }
+        super();
 
         if (mEnabled) {
             Logger.getLogger(JavaMailSender.class.getName()).log(
@@ -132,22 +74,6 @@ public class JavaMailSender extends EmailSender {
      */
     public static synchronized void reset() {
         mReference = null;
-    }
-
-    /**
-     * Indicates if provided configuration is valid by checking that SMTP server
-     * and mail from address are not null, and server port is valid.
-     *
-     * @param mailHost        SMTP server host.
-     * @param mailPort        SMTP server port.
-     * @param mailFromAddress email address to send emails from.
-     * @return true if configuration is valid, false otherwise.
-     */
-    private boolean isValidConfiguration(final String mailHost, final int mailPort,
-                                         final String mailFromAddress) {
-        return mailHost != null && mailPort >= MIN_PORT_VALUE &&
-                mailPort <= MAX_PORT_VALUE && mailFromAddress != null &&
-                isValidEmailAddress(mailFromAddress);
     }
 
     /**

@@ -99,26 +99,7 @@ public class ApacheMailHtmlEmailMessage extends HtmlEmailMessage implements Apac
 
             // add other attachments parts
             final List<EmailAttachment> attachments = getEmailAttachments();
-            org.apache.commons.mail.EmailAttachment apacheAttachment;
-            if (attachments != null) {
-                for (final EmailAttachment attachment : attachments) {
-                    // only add attachments with files
-                    if (attachment.getAttachment() == null) {
-                        continue;
-                    }
-
-                    apacheAttachment = new org.apache.commons.mail.
-                            EmailAttachment();
-                    apacheAttachment.setPath(attachment.getAttachment().getAbsolutePath());
-                    apacheAttachment.setDisposition(
-                            org.apache.commons.mail.EmailAttachment.ATTACHMENT);
-                    if (attachment.getName() != null) {
-                        apacheAttachment.setName(attachment.getName());
-                    }
-
-                    content.attach(apacheAttachment);
-                }
-            }
+            ApacheMailTextEmailMessageWithAttachments.attach(content, attachments);
         } catch (final EmailException e) {
             throw new com.irurueta.server.commons.email.EmailException(e);
         }
