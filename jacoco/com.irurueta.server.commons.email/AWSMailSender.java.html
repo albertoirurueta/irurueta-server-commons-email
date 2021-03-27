@@ -354,7 +354,7 @@ public class AWSMailSender extends EmailSender {
      * @param currentTimestamp current timestamp before sending last email.
      * @throws InterruptedException if thread is interrupted.
      */
-    private void waitIfNeeded(final long currentTimestamp) throws InterruptedException {
+    private synchronized void waitIfNeeded(final long currentTimestamp) throws InterruptedException {
         // update timestamp of last sent email
 <span class="fc" id="L359">        mLastSentMailTimestamp = System.currentTimeMillis();</span>
 
