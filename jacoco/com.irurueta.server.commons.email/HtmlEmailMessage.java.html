@@ -15,6 +15,7 @@
  */
 package com.irurueta.server.commons.email;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,12 +61,12 @@ public abstract class HtmlEmailMessage extends EmailMessage {
      * Constructor.
      */
     protected HtmlEmailMessage() {
-<span class="fc" id="L63">        super();</span>
-<span class="fc" id="L64">        mHtmlContent = null;</span>
-<span class="fc" id="L65">        mAlternativeText = null;</span>
-<span class="fc" id="L66">        mEmailAttachments = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L67">        mInlineAttachments = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L68">    }</span>
+<span class="fc" id="L64">        super();</span>
+<span class="fc" id="L65">        mHtmlContent = null;</span>
+<span class="fc" id="L66">        mAlternativeText = null;</span>
+<span class="fc" id="L67">        mEmailAttachments = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L68">        mInlineAttachments = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L69">    }</span>
 
     /**
      * Constructor with email subject.
@@ -73,12 +74,12 @@ public abstract class HtmlEmailMessage extends EmailMessage {
      * @param subject subject to be set.
      */
     protected HtmlEmailMessage(final String subject) {
-<span class="fc" id="L76">        super(subject);</span>
-<span class="fc" id="L77">        mHtmlContent = null;</span>
-<span class="fc" id="L78">        mAlternativeText = null;</span>
-<span class="fc" id="L79">        mEmailAttachments = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L80">        mInlineAttachments = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L81">    }</span>
+<span class="fc" id="L77">        super(subject);</span>
+<span class="fc" id="L78">        mHtmlContent = null;</span>
+<span class="fc" id="L79">        mAlternativeText = null;</span>
+<span class="fc" id="L80">        mEmailAttachments = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L81">        mInlineAttachments = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L82">    }</span>
 
     /**
      * Constructor with email subject and textual content.
@@ -87,12 +88,12 @@ public abstract class HtmlEmailMessage extends EmailMessage {
      * @param htmlContent HTML content.
      */
     protected HtmlEmailMessage(final String subject, final String htmlContent) {
-<span class="fc" id="L90">        super(subject);</span>
-<span class="fc" id="L91">        mHtmlContent = htmlContent;</span>
-<span class="fc" id="L92">        mAlternativeText = null;</span>
-<span class="fc" id="L93">        mEmailAttachments = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L94">        mInlineAttachments = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L95">    }</span>
+<span class="fc" id="L91">        super(subject);</span>
+<span class="fc" id="L92">        mHtmlContent = htmlContent;</span>
+<span class="fc" id="L93">        mAlternativeText = null;</span>
+<span class="fc" id="L94">        mEmailAttachments = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L95">        mInlineAttachments = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L96">    }</span>
 
     /**
      * Returns HTML content to be rendered in this email as a webpage.
@@ -105,7 +106,7 @@ public abstract class HtmlEmailMessage extends EmailMessage {
      * @return HTML content to be rendered as a webpage.
      */
     public String getHtmlContent() {
-<span class="fc" id="L108">        return mHtmlContent;</span>
+<span class="fc" id="L109">        return mHtmlContent;</span>
     }
 
     /**
@@ -119,8 +120,8 @@ public abstract class HtmlEmailMessage extends EmailMessage {
      * @param htmlContent html content of email to be sent.
      */
     public void setHtmlContent(final String htmlContent) {
-<span class="fc" id="L122">        mHtmlContent = htmlContent;</span>
-<span class="fc" id="L123">    }</span>
+<span class="fc" id="L123">        mHtmlContent = htmlContent;</span>
+<span class="fc" id="L124">    }</span>
 
     /**
      * Returns alternative text to be shown on those clients not supporting HTML
@@ -129,7 +130,7 @@ public abstract class HtmlEmailMessage extends EmailMessage {
      * @return alternative text.
      */
     public String getAlternativeText() {
-<span class="fc" id="L132">        return mAlternativeText;</span>
+<span class="fc" id="L133">        return mAlternativeText;</span>
     }
 
     /**
@@ -139,8 +140,8 @@ public abstract class HtmlEmailMessage extends EmailMessage {
      * @param alternativeText alternative text.
      */
     public void setAlternativeText(final String alternativeText) {
-<span class="fc" id="L142">        this.mAlternativeText = alternativeText;</span>
-<span class="fc" id="L143">    }</span>
+<span class="fc" id="L143">        this.mAlternativeText = alternativeText;</span>
+<span class="fc" id="L144">    }</span>
 
     /**
      * Get list of files to be attached. Attachments are shown in mail clients
@@ -149,7 +150,7 @@ public abstract class HtmlEmailMessage extends EmailMessage {
      * @return list of files to be attached.
      */
     public List&lt;EmailAttachment&gt; getEmailAttachments() {
-<span class="fc" id="L152">        return mEmailAttachments;</span>
+<span class="fc" id="L153">        return mEmailAttachments;</span>
     }
 
     /**
@@ -159,8 +160,8 @@ public abstract class HtmlEmailMessage extends EmailMessage {
      * @param emailAttachments list of files to be attached.
      */
     public void setEmailAttachments(final List&lt;EmailAttachment&gt; emailAttachments) {
-<span class="fc" id="L162">        mEmailAttachments = emailAttachments;</span>
-<span class="fc" id="L163">    }</span>
+<span class="fc" id="L163">        mEmailAttachments = emailAttachments;</span>
+<span class="fc" id="L164">    }</span>
 
     /**
      * Returns list of files to be embedded inline within the email so they are
@@ -178,7 +179,7 @@ public abstract class HtmlEmailMessage extends EmailMessage {
      * @return list of files to be embedded inline.
      */
     public List&lt;InlineAttachment&gt; getInlineAttachments() {
-<span class="fc" id="L181">        return mInlineAttachments;</span>
+<span class="fc" id="L182">        return mInlineAttachments;</span>
     }
 
     /**
@@ -197,8 +198,8 @@ public abstract class HtmlEmailMessage extends EmailMessage {
      * @param inlineAttachments list of files to be embedded inline.
      */
     public void setInlineAttachments(final List&lt;InlineAttachment&gt; inlineAttachments) {
-<span class="fc" id="L200">        mInlineAttachments = inlineAttachments;</span>
-<span class="fc" id="L201">    }</span>
+<span class="fc" id="L201">        mInlineAttachments = inlineAttachments;</span>
+<span class="fc" id="L202">    }</span>
 
     /**
      * Creates an HTML email message using provided email sender.
@@ -207,7 +208,7 @@ public abstract class HtmlEmailMessage extends EmailMessage {
      * @return an HTML email message.
      */
     public static HtmlEmailMessage create(final EmailSender sender) {
-<span class="fc" id="L210">        return create(sender.getProvider());</span>
+<span class="fc" id="L211">        return create(sender.getProvider());</span>
     }
 
     /**
@@ -217,7 +218,7 @@ public abstract class HtmlEmailMessage extends EmailMessage {
      * @return an HTML email message.
      */
     protected static HtmlEmailMessage create(final EmailProvider provider) {
-<span class="fc" id="L220">        return create(&quot;&quot;, provider);</span>
+<span class="fc" id="L221">        return create(&quot;&quot;, provider);</span>
     }
 
     /**
@@ -230,7 +231,7 @@ public abstract class HtmlEmailMessage extends EmailMessage {
      */
     public static HtmlEmailMessage create(final String subject,
                                              final EmailSender sender) {
-<span class="fc" id="L233">        return create(subject, sender.getProvider());</span>
+<span class="fc" id="L234">        return create(subject, sender.getProvider());</span>
     }
 
     /**
@@ -243,7 +244,7 @@ public abstract class HtmlEmailMessage extends EmailMessage {
      */
     protected static HtmlEmailMessage create(final String subject,
                                                 final EmailProvider provider) {
-<span class="fc" id="L246">        return create(subject, &quot;&quot;, provider);</span>
+<span class="fc" id="L247">        return create(subject, &quot;&quot;, provider);</span>
     }
 
     /**
@@ -257,7 +258,7 @@ public abstract class HtmlEmailMessage extends EmailMessage {
      */
     public static HtmlEmailMessage create(final String subject, final String htmlContent,
                                              final EmailSender sender) {
-<span class="fc" id="L260">        return create(subject, htmlContent, sender.getProvider());</span>
+<span class="fc" id="L261">        return create(subject, htmlContent, sender.getProvider());</span>
     }
 
     /**
@@ -271,15 +272,76 @@ public abstract class HtmlEmailMessage extends EmailMessage {
      */
     protected static HtmlEmailMessage create(final String subject, final String htmlContent,
                                                 final EmailProvider provider) {
-<span class="fc bfc" id="L274" title="All 3 branches covered.">        switch (provider) {</span>
+<span class="fc bfc" id="L275" title="All 3 branches covered.">        switch (provider) {</span>
             case AWS_MAIL:
-<span class="fc" id="L276">                return new AWSHtmlEmailMessage(subject, htmlContent);</span>
+<span class="fc" id="L277">                return new AWSHtmlEmailMessage(subject, htmlContent);</span>
             case APACHE_MAIL:
-<span class="fc" id="L278">                return new ApacheMailHtmlEmailMessage(subject, htmlContent);</span>
+<span class="fc" id="L279">                return new ApacheMailHtmlEmailMessage(subject, htmlContent);</span>
             case JAVA_MAIL:
             default:
-<span class="fc" id="L281">                return new JavaMailHtmlEmailMessage(subject, htmlContent);</span>
+<span class="fc" id="L282">                return new JavaMailHtmlEmailMessage(subject, htmlContent);</span>
         }
+    }
+
+    /**
+     * Reads files to be attached inline in HTML content.
+     *
+     * @return array indicating for whith files content was inlined.
+     */
+    protected boolean[] processInlineAttachments() {
+<span class="fc" id="L292">        final List&lt;InlineAttachment&gt; attachments = getInlineAttachments();</span>
+<span class="pc bpc" id="L293" title="1 of 2 branches missed.">        if (attachments != null) {</span>
+<span class="fc" id="L294">            final boolean[] result = new boolean[attachments.size()];</span>
+<span class="fc" id="L295">            int counter = 0;</span>
+            boolean isGeneratedId;
+            String contentId;
+<span class="fc bfc" id="L298" title="All 2 branches covered.">            for (final InlineAttachment attachment : attachments) {</span>
+<span class="fc bfc" id="L299" title="All 2 branches covered.">                isGeneratedId = attachment.getContentId() == null;</span>
+<span class="fc" id="L300">                result[counter] = isGeneratedId;</span>
+<span class="fc bfc" id="L301" title="All 2 branches covered.">                if (isGeneratedId) {</span>
+                    //generate a content id for this attachment
+<span class="fc" id="L303">                    contentId = &quot;inline-attachment&quot; + counter;</span>
+<span class="fc" id="L304">                    attachment.setContentId(contentId);</span>
+                }
+<span class="fc" id="L306">                counter++;</span>
+<span class="fc" id="L307">            }</span>
+<span class="fc" id="L308">            return result;</span>
+        }
+<span class="nc" id="L310">        return null;</span>
+    }
+
+    /**
+     * Processes HTML content to substitute placeholders by their corresponding
+     * inline attachment ids.
+     *
+     * @param htmlContent HTML content to be sent.
+     * @param generated   array containing inlined files that where found as
+     *                    placeholders and correctly inlined into content.
+     * @return resulting content.
+     */
+    protected String process(final String htmlContent, final boolean[] generated) {
+        // if no information about generated inline ids is available, then simply
+        // return input html content
+<span class="pc bpc" id="L325" title="1 of 2 branches missed.">        if (generated == null) {</span>
+<span class="nc" id="L326">            return htmlContent;</span>
+        }
+
+        // process html content to substitute placeholders by their corresponding
+        // inline attachments ids
+<span class="fc" id="L331">        final List&lt;InlineAttachment&gt; attachments = getInlineAttachments();</span>
+<span class="fc" id="L332">        final List&lt;String&gt; contentIds = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L333">        int pos = 0;</span>
+<span class="pc bpc" id="L334" title="1 of 2 branches missed.">        if (attachments != null) {</span>
+<span class="fc bfc" id="L335" title="All 2 branches covered.">            for (final InlineAttachment attachment : attachments) {</span>
+<span class="fc bfc" id="L336" title="All 2 branches covered.">                if (generated[pos]) {</span>
+<span class="fc" id="L337">                    contentIds.add(attachment.getContentId());</span>
+                }
+<span class="fc" id="L339">                pos++;</span>
+<span class="fc" id="L340">            }</span>
+        }
+
+<span class="fc" id="L343">        final Object[] objects = contentIds.toArray();</span>
+<span class="fc" id="L344">        return MessageFormat.format(htmlContent, objects);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

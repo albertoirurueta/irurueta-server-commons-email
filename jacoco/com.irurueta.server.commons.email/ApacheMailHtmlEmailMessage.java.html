@@ -18,8 +18,6 @@ package com.irurueta.server.commons.email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 
-import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,8 +34,8 @@ public class ApacheMailHtmlEmailMessage extends HtmlEmailMessage implements Apac
      * Constructor.
      */
     public ApacheMailHtmlEmailMessage() {
-<span class="fc" id="L39">        super();</span>
-<span class="fc" id="L40">    }</span>
+<span class="fc" id="L37">        super();</span>
+<span class="fc" id="L38">    }</span>
 
     /**
      * Constructor with email subject.
@@ -45,8 +43,8 @@ public class ApacheMailHtmlEmailMessage extends HtmlEmailMessage implements Apac
      * @param subject subject to be set.
      */
     public ApacheMailHtmlEmailMessage(final String subject) {
-<span class="fc" id="L48">        super(subject);</span>
-<span class="fc" id="L49">    }</span>
+<span class="fc" id="L46">        super(subject);</span>
+<span class="fc" id="L47">    }</span>
 
     /**
      * Constructor with email subject and textual content.
@@ -55,8 +53,8 @@ public class ApacheMailHtmlEmailMessage extends HtmlEmailMessage implements Apac
      * @param htmlContent HTML content.
      */
     public ApacheMailHtmlEmailMessage(final String subject, final String htmlContent) {
-<span class="fc" id="L58">        super(subject, htmlContent);</span>
-<span class="fc" id="L59">    }</span>
+<span class="fc" id="L56">        super(subject, htmlContent);</span>
+<span class="fc" id="L57">    }</span>
 
     /**
      * Builds email content to be sent using an email sender.
@@ -69,101 +67,40 @@ public class ApacheMailHtmlEmailMessage extends HtmlEmailMessage implements Apac
     public void buildContent(final HtmlEmail content)
             throws com.irurueta.server.commons.email.EmailException {
         try {
-<span class="pc bpc" id="L72" title="1 of 2 branches missed.">            if (getAlternativeText() != null) {</span>
-<span class="fc" id="L73">                content.setTextMsg(getAlternativeText());</span>
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">            if (getAlternativeText() != null) {</span>
+<span class="fc" id="L71">                content.setTextMsg(getAlternativeText());</span>
             }
 
             // process inline attachments
-<span class="fc" id="L77">            final boolean[] generated = processInlineAttachments();</span>
+<span class="fc" id="L75">            final boolean[] generated = processInlineAttachments();</span>
 
-<span class="pc bpc" id="L79" title="1 of 2 branches missed.">            if (getHtmlContent() != null) {</span>
-<span class="fc" id="L80">                content.setHtmlMsg(process(getHtmlContent(), generated));</span>
+<span class="pc bpc" id="L77" title="1 of 2 branches missed.">            if (getHtmlContent() != null) {</span>
+<span class="fc" id="L78">                content.setHtmlMsg(process(getHtmlContent(), generated));</span>
             }
 
             // all attachments go into general message multipar
 
             // add inline attachments
-<span class="fc" id="L86">            final List&lt;InlineAttachment&gt; inlineAttachments = getInlineAttachments();</span>
-<span class="pc bpc" id="L87" title="1 of 2 branches missed.">            if (inlineAttachments != null) {</span>
-<span class="fc bfc" id="L88" title="All 2 branches covered.">                for (final InlineAttachment attachment : inlineAttachments) {</span>
+<span class="fc" id="L84">            final List&lt;InlineAttachment&gt; inlineAttachments = getInlineAttachments();</span>
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">            if (inlineAttachments != null) {</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">                for (final InlineAttachment attachment : inlineAttachments) {</span>
                     // only add attachments with files and content ids
-<span class="pc bpc" id="L90" title="1 of 2 branches missed.">                    if (attachment.getContentId() == null ||</span>
-<span class="pc bpc" id="L91" title="1 of 2 branches missed.">                            attachment.getAttachment() == null) {</span>
-<span class="nc" id="L92">                        continue;</span>
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">                    if (attachment.getContentId() == null ||</span>
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">                            attachment.getAttachment() == null) {</span>
+<span class="nc" id="L90">                        continue;</span>
                     }
 
-<span class="fc" id="L95">                    content.embed(attachment.getAttachment(),</span>
-<span class="fc" id="L96">                            attachment.getContentId());</span>
-<span class="fc" id="L97">                }</span>
+<span class="fc" id="L93">                    content.embed(attachment.getAttachment(),</span>
+<span class="fc" id="L94">                            attachment.getContentId());</span>
+<span class="fc" id="L95">                }</span>
             }
 
             // add other attachments parts
-<span class="fc" id="L101">            final List&lt;EmailAttachment&gt; attachments = getEmailAttachments();</span>
-<span class="fc" id="L102">            ApacheMailTextEmailMessageWithAttachments.attach(content, attachments);</span>
-<span class="nc" id="L103">        } catch (final EmailException e) {</span>
-<span class="nc" id="L104">            throw new com.irurueta.server.commons.email.EmailException(e);</span>
-<span class="fc" id="L105">        }</span>
-<span class="fc" id="L106">    }</span>
-
-    /**
-     * Reads files to be attached inline in HTML content.
-     *
-     * @return array indicating for whith files content was inlined.
-     */
-    private boolean[] processInlineAttachments() {
-<span class="fc" id="L114">        final List&lt;InlineAttachment&gt; attachments = getInlineAttachments();</span>
-<span class="pc bpc" id="L115" title="1 of 2 branches missed.">        if (attachments != null) {</span>
-<span class="fc" id="L116">            final boolean[] result = new boolean[attachments.size()];</span>
-<span class="fc" id="L117">            int counter = 0;</span>
-            boolean isGeneratedId;
-            String contentId;
-<span class="fc bfc" id="L120" title="All 2 branches covered.">            for (final InlineAttachment attachment : attachments) {</span>
-<span class="fc bfc" id="L121" title="All 2 branches covered.">                isGeneratedId = attachment.getContentId() == null;</span>
-<span class="fc" id="L122">                result[counter] = isGeneratedId;</span>
-<span class="fc bfc" id="L123" title="All 2 branches covered.">                if (isGeneratedId) {</span>
-                    // generate a content id for this attachment
-<span class="fc" id="L125">                    contentId = &quot;inline-attachment&quot; + counter;</span>
-<span class="fc" id="L126">                    attachment.setContentId(contentId);</span>
-                }
-<span class="fc" id="L128">                counter++;</span>
-<span class="fc" id="L129">            }</span>
-<span class="fc" id="L130">            return result;</span>
-        }
-<span class="nc" id="L132">        return null;</span>
-    }
-
-    /**
-     * Processes HTML content to substitute placeholders by their corresponding
-     * //inline attachment ids.
-     *
-     * @param htmlContent HTML content to be sent.
-     * @param generated   array containing inlined files that where found as
-     *                    placeholders and correctly inlined into content.
-     * @return resulting content.
-     */
-    private String process(final String htmlContent, final boolean[] generated) {
-        // if no information about generated inline ids is available, then simply
-        // return input html content
-<span class="pc bpc" id="L147" title="1 of 2 branches missed.">        if (generated == null) {</span>
-<span class="nc" id="L148">            return htmlContent;</span>
-        }
-
-        // process html content to substitute placeholders by their corresponding
-        // inline attachments ids
-<span class="fc" id="L153">        final List&lt;InlineAttachment&gt; attachments = getInlineAttachments();</span>
-<span class="fc" id="L154">        final List&lt;String&gt; contentIds = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L155">        int pos = 0;</span>
-<span class="pc bpc" id="L156" title="1 of 2 branches missed.">        if (attachments != null) {</span>
-<span class="fc bfc" id="L157" title="All 2 branches covered.">            for (final InlineAttachment attachment : attachments) {</span>
-<span class="fc bfc" id="L158" title="All 2 branches covered.">                if (generated[pos]) {</span>
-<span class="fc" id="L159">                    contentIds.add(attachment.getContentId());</span>
-                }
-<span class="fc" id="L161">                pos++;</span>
-<span class="fc" id="L162">            }</span>
-        }
-
-<span class="fc" id="L165">        final Object[] objects = contentIds.toArray();</span>
-<span class="fc" id="L166">        return MessageFormat.format(htmlContent, objects);</span>
-    }
+<span class="fc" id="L99">            final List&lt;EmailAttachment&gt; attachments = getEmailAttachments();</span>
+<span class="fc" id="L100">            ApacheMailTextEmailMessageWithAttachments.attach(content, attachments);</span>
+<span class="nc" id="L101">        } catch (final EmailException e) {</span>
+<span class="nc" id="L102">            throw new com.irurueta.server.commons.email.EmailException(e);</span>
+<span class="fc" id="L103">        }</span>
+<span class="fc" id="L104">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

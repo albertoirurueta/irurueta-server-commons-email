@@ -86,6 +86,62 @@ public abstract class CommonEmailSender extends EmailSender {
 <span class="fc" id="L86">    }</span>
 
     /**
+     * Returns SMTP server host.
+     *
+     * @return SMTP server host.
+     */
+    public String getMailHost() {
+<span class="fc" id="L94">        return mMailHost;</span>
+    }
+
+    /**
+     * Returns SMTP server port.
+     *
+     * @return SMTP server port.
+     */
+    public int getMailPort() {
+<span class="fc" id="L103">        return mMailPort;</span>
+    }
+
+    /**
+     * Returns user id to log into SMTP server. If this value is null server
+     * authentication will be disabled.
+     *
+     * @return user id to log into SMTP server.
+     */
+    public String getMailId() {
+<span class="fc" id="L113">        return mMailId;</span>
+    }
+
+    /**
+     * Returns user password to log into SMTP server. If this value is null
+     * server authentication will be disabled.
+     *
+     * @return user password to log into SMTP server.
+     */
+    public String getMailPassword() {
+<span class="fc" id="L123">        return mMailPassword;</span>
+    }
+
+    /**
+     * Email address to send emails from.
+     *
+     * @return email address to send emails from.
+     */
+    public String getMailFromAddress() {
+<span class="fc" id="L132">        return mMailFromAddress;</span>
+    }
+
+    /**
+     * Indicates if this mail sender controller is enabled.
+     *
+     * @return true if enabled, false otherwise.
+     */
+    public boolean isEnabled() {
+<span class="fc" id="L141">        return mEnabled;</span>
+    }
+
+    /**
      * Indicates if provided configuration is valid by checking that SMTP server
      * and mail from address are not null, and server port is valid.
      *
@@ -96,9 +152,9 @@ public abstract class CommonEmailSender extends EmailSender {
      */
     private boolean isValidConfiguration(final String mailHost, final int mailPort,
                                          final String mailFromAddress) {
-<span class="pc bpc" id="L99" title="3 of 8 branches missed.">        return mailHost != null &amp;&amp; mailPort &gt;= MIN_PORT_VALUE &amp;&amp;</span>
+<span class="pc bpc" id="L155" title="3 of 8 branches missed.">        return mailHost != null &amp;&amp; mailPort &gt;= MIN_PORT_VALUE &amp;&amp;</span>
                 mailPort &lt;= MAX_PORT_VALUE &amp;&amp; mailFromAddress != null &amp;&amp;
-<span class="pc bpc" id="L101" title="1 of 2 branches missed.">                isValidEmailAddress(mailFromAddress);</span>
+<span class="pc bpc" id="L157" title="1 of 2 branches missed.">                isValidEmailAddress(mailFromAddress);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

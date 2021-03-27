@@ -267,22 +267,15 @@ public class AWSMailSender extends EmailSender {
 <span class="fc" id="L267">                final SendEmailResult result = mClient.sendEmail(new SendEmailRequest(mMailFromAddress, destination,</span>
                         message));
 <span class="fc" id="L269">                messageId = result.getMessageId();</span>
-                // update timestamp of last sent email
-<span class="fc" id="L271">                mLastSentMailTimestamp = System.currentTimeMillis();</span>
 
-                // wait to avoid throttling exceptions to avoid making any
-                // further requests
-<span class="fc" id="L275">                final long endTimestamp = currentTimestamp + mWaitIntervalMillis;</span>
-<span class="pc bpc" id="L276" title="1 of 2 branches missed.">                while (System.currentTimeMillis() &lt; endTimestamp) {</span>
-<span class="nc" id="L277">                    wait(mWaitIntervalMillis);</span>
-                }
-<span class="fc" id="L279">            }</span>
-<span class="nc" id="L280">        } catch (final InterruptedException e) {</span>
-<span class="nc" id="L281">            throw e;</span>
-<span class="nc" id="L282">        } catch (final Exception e) {</span>
-<span class="nc" id="L283">            throw new MailNotSentException(e);</span>
-<span class="fc" id="L284">        }</span>
-<span class="fc" id="L285">        return messageId;</span>
+<span class="fc" id="L271">                waitIfNeeded(currentTimestamp);</span>
+<span class="fc" id="L272">            }</span>
+<span class="nc" id="L273">        } catch (final InterruptedException e) {</span>
+<span class="nc" id="L274">            throw e;</span>
+<span class="nc" id="L275">        } catch (final Exception e) {</span>
+<span class="nc" id="L276">            throw new MailNotSentException(e);</span>
+<span class="fc" id="L277">        }</span>
+<span class="fc" id="L278">        return messageId;</span>
     }
 
     /**
@@ -298,70 +291,80 @@ public class AWSMailSender extends EmailSender {
             throws MailNotSentException, InterruptedException {
 
         final String messageId;
-<span class="fc" id="L301">        final long currentTimestamp = System.currentTimeMillis();</span>
-<span class="fc" id="L302">        prepareClient();</span>
-<span class="pc bpc" id="L303" title="1 of 2 branches missed.">        if (!mEnabled) {</span>
+<span class="fc" id="L294">        final long currentTimestamp = System.currentTimeMillis();</span>
+<span class="fc" id="L295">        prepareClient();</span>
+<span class="pc bpc" id="L296" title="1 of 2 branches missed.">        if (!mEnabled) {</span>
             // don't send message if not enabled
-<span class="nc" id="L305">            return null;</span>
+<span class="nc" id="L298">            return null;</span>
         }
 
-<span class="pc bpc" id="L308" title="1 of 2 branches missed.">        if (!(m instanceof JavaMailEmailMessage)) {</span>
-<span class="nc" id="L309">            throw new MailNotSentException(&quot;Wrong provider&quot;);</span>
+<span class="pc bpc" id="L301" title="1 of 2 branches missed.">        if (!(m instanceof JavaMailEmailMessage)) {</span>
+<span class="nc" id="L302">            throw new MailNotSentException(&quot;Wrong provider&quot;);</span>
         }
 
-<span class="fc" id="L312">        final JavaMailEmailMessage javaEmailMessage = (JavaMailEmailMessage) m;</span>
+<span class="fc" id="L305">        final JavaMailEmailMessage javaEmailMessage = (JavaMailEmailMessage) m;</span>
 
         try {
-<span class="fc" id="L315">            synchronized (this) {</span>
+<span class="fc" id="L308">            synchronized (this) {</span>
                 // prevents throttling and excessive memory usage
-<span class="fc" id="L317">                checkQuota(currentTimestamp);</span>
+<span class="fc" id="L310">                checkQuota(currentTimestamp);</span>
 
                 // if no subject, set to empty string to avoid errors
-<span class="pc bpc" id="L320" title="1 of 2 branches missed.">                if (m.getSubject() == null) {</span>
-<span class="nc" id="L321">                    m.setSubject(&quot;&quot;);</span>
+<span class="pc bpc" id="L313" title="1 of 2 branches missed.">                if (m.getSubject() == null) {</span>
+<span class="nc" id="L314">                    m.setSubject(&quot;&quot;);</span>
                 }
 
-<span class="fc" id="L324">                final ByteArrayOutputStream outputStream =</span>
+<span class="fc" id="L317">                final ByteArrayOutputStream outputStream =</span>
                         new ByteArrayOutputStream();
 
                 // convert message into mime multi part and write it to output
                 // stream into memory
-<span class="fc" id="L329">                final Session session = Session.getInstance(new Properties());</span>
-<span class="fc" id="L330">                final MimeMessage mimeMessage = new MimeMessage(session);</span>
-<span class="pc bpc" id="L331" title="1 of 2 branches missed.">                if (m.getSubject() != null) {</span>
-<span class="fc" id="L332">                    mimeMessage.setSubject(m.getSubject(), &quot;utf-8&quot;);</span>
+<span class="fc" id="L322">                final Session session = Session.getInstance(new Properties());</span>
+<span class="fc" id="L323">                final MimeMessage mimeMessage = new MimeMessage(session);</span>
+<span class="pc bpc" id="L324" title="1 of 2 branches missed.">                if (m.getSubject() != null) {</span>
+<span class="fc" id="L325">                    mimeMessage.setSubject(m.getSubject(), &quot;utf-8&quot;);</span>
                 }
-<span class="fc" id="L334">                javaEmailMessage.buildContent(mimeMessage);</span>
-<span class="fc" id="L335">                mimeMessage.writeTo(outputStream);</span>
+<span class="fc" id="L327">                javaEmailMessage.buildContent(mimeMessage);</span>
+<span class="fc" id="L328">                mimeMessage.writeTo(outputStream);</span>
 
-<span class="fc" id="L337">                final RawMessage rawMessage = new RawMessage(ByteBuffer.wrap(</span>
-<span class="fc" id="L338">                        outputStream.toByteArray()));</span>
+<span class="fc" id="L330">                final RawMessage rawMessage = new RawMessage(ByteBuffer.wrap(</span>
+<span class="fc" id="L331">                        outputStream.toByteArray()));</span>
 
-<span class="fc" id="L340">                final SendRawEmailRequest rawRequest = new SendRawEmailRequest(</span>
+<span class="fc" id="L333">                final SendRawEmailRequest rawRequest = new SendRawEmailRequest(</span>
                         rawMessage);
-<span class="fc" id="L342">                rawRequest.setDestinations(m.getTo());</span>
-<span class="fc" id="L343">                rawRequest.setSource(mMailFromAddress);</span>
-<span class="fc" id="L344">                SendRawEmailResult result = mClient.sendRawEmail(rawRequest);</span>
-<span class="fc" id="L345">                messageId = result.getMessageId();</span>
+<span class="fc" id="L335">                rawRequest.setDestinations(m.getTo());</span>
+<span class="fc" id="L336">                rawRequest.setSource(mMailFromAddress);</span>
+<span class="fc" id="L337">                SendRawEmailResult result = mClient.sendRawEmail(rawRequest);</span>
+<span class="fc" id="L338">                messageId = result.getMessageId();</span>
 
-                // update timestamp of last sent email
-<span class="fc" id="L348">                mLastSentMailTimestamp = System.currentTimeMillis();</span>
+<span class="fc" id="L340">                waitIfNeeded(currentTimestamp);</span>
+<span class="fc" id="L341">            }</span>
+<span class="nc" id="L342">        } catch (final InterruptedException e) {</span>
+<span class="nc" id="L343">            throw e;</span>
+<span class="nc" id="L344">        } catch (final Exception e) {</span>
+<span class="nc" id="L345">            throw new MailNotSentException(e);</span>
+<span class="fc" id="L346">        }</span>
 
-                // wait to avoid throttling exceptions to avoid making any
-                // further requests
-<span class="fc" id="L352">                final long endTimestamp = currentTimestamp + mWaitIntervalMillis;</span>
-<span class="pc bpc" id="L353" title="1 of 2 branches missed.">                while (System.currentTimeMillis() &lt; endTimestamp) {</span>
-<span class="nc" id="L354">                    wait(mWaitIntervalMillis);</span>
-                }
-<span class="fc" id="L356">            }</span>
-<span class="nc" id="L357">        } catch (final InterruptedException e) {</span>
-<span class="nc" id="L358">            throw e;</span>
-<span class="nc" id="L359">        } catch (final Exception e) {</span>
-<span class="nc" id="L360">            throw new MailNotSentException(e);</span>
-<span class="fc" id="L361">        }</span>
-
-<span class="fc" id="L363">        return messageId;</span>
+<span class="fc" id="L348">        return messageId;</span>
     }
+
+    /**
+     * Waits for next message to be sent depending on available AWS quota.
+     *
+     * @param currentTimestamp current timestamp before sending last email.
+     * @throws InterruptedException if thread is interrupted.
+     */
+    private void waitIfNeeded(final long currentTimestamp) throws InterruptedException {
+        // update timestamp of last sent email
+<span class="fc" id="L359">        mLastSentMailTimestamp = System.currentTimeMillis();</span>
+
+        // wait to avoid throttling exceptions to avoid making any
+        // further requests
+<span class="fc" id="L363">        final long endTimestamp = currentTimestamp + mWaitIntervalMillis;</span>
+<span class="pc bpc" id="L364" title="1 of 2 branches missed.">        while (System.currentTimeMillis() &lt; endTimestamp) {</span>
+<span class="nc" id="L365">            wait(mWaitIntervalMillis);</span>
+        }
+<span class="fc" id="L367">    }</span>
 
     /**
      * Checks quota of sent emails to prevent AWS SES throttling.
@@ -369,36 +372,36 @@ public class AWSMailSender extends EmailSender {
      * @param currentTimestamp current timestamp.
      */
     private synchronized void checkQuota(final long currentTimestamp) {
-<span class="fc bfc" id="L372" title="All 2 branches covered.">        if ((currentTimestamp - mLastSentMailTimestamp) &gt;</span>
+<span class="fc bfc" id="L375" title="All 2 branches covered.">        if ((currentTimestamp - mLastSentMailTimestamp) &gt;</span>
                 mCheckQuotaAfterMillis) {
             // check quota to determine the number of messages per second to
             // avoid throttling exceptions
-<span class="fc" id="L376">            final GetSendQuotaResult quota = mClient.getSendQuota();</span>
+<span class="fc" id="L379">            final GetSendQuotaResult quota = mClient.getSendQuota();</span>
             // update interval that we must wait between send requests
-<span class="fc" id="L378">            mWaitIntervalMillis = (long) Math.ceil(</span>
-<span class="fc" id="L379">                    MILLISECONDS_PER_SECOND / quota.getMaxSendRate());</span>
+<span class="fc" id="L381">            mWaitIntervalMillis = (long) Math.ceil(</span>
+<span class="fc" id="L382">                    MILLISECONDS_PER_SECOND / quota.getMaxSendRate());</span>
         }
-<span class="fc" id="L381">    }</span>
+<span class="fc" id="L384">    }</span>
 
     /**
      * Prepares client by setting proper credentials.
      */
     private synchronized void prepareClient() {
-<span class="fc bfc" id="L387" title="All 2 branches covered.">        if (mClient == null) {</span>
+<span class="fc bfc" id="L390" title="All 2 branches covered.">        if (mClient == null) {</span>
             // instantiate new client if needed
-<span class="fc bfc" id="L389" title="All 2 branches covered.">            if (areValidCredentials()) {</span>
-<span class="fc" id="L390">                mClient = new AmazonSimpleEmailServiceClient(</span>
-<span class="fc" id="L391">                        new BasicAWSCredentials(mCredentials.getAccessKey(),</span>
-<span class="fc" id="L392">                                mCredentials.getSecretKey()));</span>
+<span class="fc bfc" id="L392" title="All 2 branches covered.">            if (areValidCredentials()) {</span>
+<span class="fc" id="L393">                mClient = new AmazonSimpleEmailServiceClient(</span>
+<span class="fc" id="L394">                        new BasicAWSCredentials(mCredentials.getAccessKey(),</span>
+<span class="fc" id="L395">                                mCredentials.getSecretKey()));</span>
             } else {
                 // disabling mail sending
-<span class="fc" id="L395">                mEnabled = false;</span>
-<span class="fc" id="L396">                Logger.getLogger(AWSMailSender.class.getName()).log(</span>
+<span class="fc" id="L398">                mEnabled = false;</span>
+<span class="fc" id="L399">                Logger.getLogger(AWSMailSender.class.getName()).log(</span>
                         Level.INFO, &quot;AWS Email Sender disabled. &quot; +
                                 &quot;Invalid credentials&quot;);
             }
         }
-<span class="fc" id="L401">    }</span>
+<span class="fc" id="L404">    }</span>
 
     /**
      * Indicates whether provided credentials are valid.
@@ -406,10 +409,10 @@ public class AWSMailSender extends EmailSender {
      * @return true if credentials are valid, false otherwise.
      */
     private boolean areValidCredentials() {
-<span class="pc bpc" id="L409" title="1 of 2 branches missed.">        if (mCredentials != null) {</span>
-<span class="fc" id="L410">            return mCredentials.isReady();</span>
+<span class="pc bpc" id="L412" title="1 of 2 branches missed.">        if (mCredentials != null) {</span>
+<span class="fc" id="L413">            return mCredentials.isReady();</span>
         } else {
-<span class="nc" id="L412">            return false;</span>
+<span class="nc" id="L415">            return false;</span>
         }
     }
 }
