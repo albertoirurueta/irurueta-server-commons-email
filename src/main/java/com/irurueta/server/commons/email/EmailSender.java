@@ -29,7 +29,7 @@ public abstract class EmailSender {
     /**
      * Regular expression to validate emails.
      */
-    private static final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
+    private static final String EMAIL_REGEX = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
 
     /**
      * Factory method to obtain singleton instance using current mail
