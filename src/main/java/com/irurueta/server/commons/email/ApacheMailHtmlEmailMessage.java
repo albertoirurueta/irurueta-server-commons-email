@@ -18,8 +18,6 @@ package com.irurueta.server.commons.email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 
-import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -103,66 +101,5 @@ public class ApacheMailHtmlEmailMessage extends HtmlEmailMessage implements Apac
         } catch (final EmailException e) {
             throw new com.irurueta.server.commons.email.EmailException(e);
         }
-    }
-
-    /**
-     * Reads files to be attached inline in HTML content.
-     *
-     * @return array indicating for whith files content was inlined.
-     */
-    private boolean[] processInlineAttachments() {
-        final List<InlineAttachment> attachments = getInlineAttachments();
-        if (attachments != null) {
-            final boolean[] result = new boolean[attachments.size()];
-            int counter = 0;
-            boolean isGeneratedId;
-            String contentId;
-            for (final InlineAttachment attachment : attachments) {
-                isGeneratedId = attachment.getContentId() == null;
-                result[counter] = isGeneratedId;
-                if (isGeneratedId) {
-                    // generate a content id for this attachment
-                    contentId = "inline-attachment" + counter;
-                    attachment.setContentId(contentId);
-                }
-                counter++;
-            }
-            return result;
-        }
-        return null;
-    }
-
-    /**
-     * Processes HTML content to substitute placeholders by their corresponding
-     * //inline attachment ids.
-     *
-     * @param htmlContent HTML content to be sent.
-     * @param generated   array containing inlined files that where found as
-     *                    placeholders and correctly inlined into content.
-     * @return resulting content.
-     */
-    private String process(final String htmlContent, final boolean[] generated) {
-        // if no information about generated inline ids is available, then simply
-        // return input html content
-        if (generated == null) {
-            return htmlContent;
-        }
-
-        // process html content to substitute placeholders by their corresponding
-        // inline attachments ids
-        final List<InlineAttachment> attachments = getInlineAttachments();
-        final List<String> contentIds = new ArrayList<>();
-        int pos = 0;
-        if (attachments != null) {
-            for (final InlineAttachment attachment : attachments) {
-                if (generated[pos]) {
-                    contentIds.add(attachment.getContentId());
-                }
-                pos++;
-            }
-        }
-
-        final Object[] objects = contentIds.toArray();
-        return MessageFormat.format(htmlContent, objects);
     }
 }

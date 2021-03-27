@@ -267,15 +267,8 @@ public class AWSMailSender extends EmailSender {
                 final SendEmailResult result = mClient.sendEmail(new SendEmailRequest(mMailFromAddress, destination,
                         message));
                 messageId = result.getMessageId();
-                // update timestamp of last sent email
-                mLastSentMailTimestamp = System.currentTimeMillis();
 
-                // wait to avoid throttling exceptions to avoid making any
-                // further requests
-                final long endTimestamp = currentTimestamp + mWaitIntervalMillis;
-                while (System.currentTimeMillis() < endTimestamp) {
-                    wait(mWaitIntervalMillis);
-                }
+                waitIfNeeded(currentTimestamp);
             }
         } catch (final InterruptedException e) {
             throw e;
@@ -344,15 +337,7 @@ public class AWSMailSender extends EmailSender {
                 SendRawEmailResult result = mClient.sendRawEmail(rawRequest);
                 messageId = result.getMessageId();
 
-                // update timestamp of last sent email
-                mLastSentMailTimestamp = System.currentTimeMillis();
-
-                // wait to avoid throttling exceptions to avoid making any
-                // further requests
-                final long endTimestamp = currentTimestamp + mWaitIntervalMillis;
-                while (System.currentTimeMillis() < endTimestamp) {
-                    wait(mWaitIntervalMillis);
-                }
+                waitIfNeeded(currentTimestamp);
             }
         } catch (final InterruptedException e) {
             throw e;
@@ -361,6 +346,24 @@ public class AWSMailSender extends EmailSender {
         }
 
         return messageId;
+    }
+
+    /**
+     * Waits for next message to be sent depending on available AWS quota.
+     *
+     * @param currentTimestamp current timestamp before sending last email.
+     * @throws InterruptedException if thread is interrupted.
+     */
+    private void waitIfNeeded(final long currentTimestamp) throws InterruptedException {
+        // update timestamp of last sent email
+        mLastSentMailTimestamp = System.currentTimeMillis();
+
+        // wait to avoid throttling exceptions to avoid making any
+        // further requests
+        final long endTimestamp = currentTimestamp + mWaitIntervalMillis;
+        while (System.currentTimeMillis() < endTimestamp) {
+            wait(mWaitIntervalMillis);
+        }
     }
 
     /**

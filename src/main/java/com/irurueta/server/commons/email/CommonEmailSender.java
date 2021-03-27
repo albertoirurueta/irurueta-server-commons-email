@@ -86,6 +86,62 @@ public abstract class CommonEmailSender extends EmailSender {
     }
 
     /**
+     * Returns SMTP server host.
+     *
+     * @return SMTP server host.
+     */
+    public String getMailHost() {
+        return mMailHost;
+    }
+
+    /**
+     * Returns SMTP server port.
+     *
+     * @return SMTP server port.
+     */
+    public int getMailPort() {
+        return mMailPort;
+    }
+
+    /**
+     * Returns user id to log into SMTP server. If this value is null server
+     * authentication will be disabled.
+     *
+     * @return user id to log into SMTP server.
+     */
+    public String getMailId() {
+        return mMailId;
+    }
+
+    /**
+     * Returns user password to log into SMTP server. If this value is null
+     * server authentication will be disabled.
+     *
+     * @return user password to log into SMTP server.
+     */
+    public String getMailPassword() {
+        return mMailPassword;
+    }
+
+    /**
+     * Email address to send emails from.
+     *
+     * @return email address to send emails from.
+     */
+    public String getMailFromAddress() {
+        return mMailFromAddress;
+    }
+
+    /**
+     * Indicates if this mail sender controller is enabled.
+     *
+     * @return true if enabled, false otherwise.
+     */
+    public boolean isEnabled() {
+        return mEnabled;
+    }
+
+    /**
      * Indicates if provided configuration is valid by checking that SMTP server
      * and mail from address are not null, and server port is valid.
      *
