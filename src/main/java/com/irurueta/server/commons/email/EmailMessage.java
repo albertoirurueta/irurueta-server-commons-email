@@ -27,24 +27,24 @@ public abstract class EmailMessage {
      * List of addresses to send an email to.
      */
     private final List<String> mTo;
-    
+
     /**
      * List of Carbon Copy addresses to send a copy of an email.
      */
     private final List<String> mCc;
-    
+
     /**
      * List of Blind Carbon Copy addresses to send a copy of an email.
-     * Other recipients of the email won't be able to see addresses in this 
+     * Other recipients of the email won't be able to see addresses in this
      * list.
      */
     private final List<String> mBcc;
-    
+
     /**
      * Subject of an email.
      */
     private String mSubject;
-    
+
     /**
      * Constructor.
      * Creates an email with no content, subject and no recipients.
@@ -55,26 +55,28 @@ public abstract class EmailMessage {
         mBcc = new LinkedList<>();
         mSubject = "";
     }
-    
+
     /**
      * Constructor.
      * Creates an email with subject, no content and no recipients.
+     *
      * @param subject subject to be set on the email.
      */
     protected EmailMessage(final String subject) {
         mTo = new LinkedList<>();
         mCc = new LinkedList<>();
         mBcc = new LinkedList<>();
-        
+
         if (subject != null) {
             mSubject = subject;
         } else {
             mSubject = "";
-        }        
+        }
     }
-    
+
     /**
      * Returns list of addresses to send email to.
+     *
      * @return list of addresses to send email to.
      * @throws NotSupportedException if this feature is not supported.
      */
@@ -84,17 +86,19 @@ public abstract class EmailMessage {
         }
         return mTo;
     }
-    
+
     /**
      * Indicates if To is supported to send an email to multiple recipients.
+     *
      * @return true if To feature is supported, false otherwise.
      */
     public boolean isToSupported() {
         return true;
     }
-    
+
     /**
      * Returns list of Carbon Copy addresses to send a copy of this email.
+     *
      * @return list of Carbon Copy addresses to send a copy of this email.
      * @throws NotSupportedException if this feature is not supported.
      */
@@ -104,20 +108,22 @@ public abstract class EmailMessage {
         }
         return mCc;
     }
-    
+
     /**
      * Indicates if CC is supported for this kind of email to send Carbon Copies
      * of this email. Some email types do not support this feature.
+     *
      * @return true if CC feature is supported, false otherwise.
      */
     public boolean isCCSupported() {
         return true;
     }
-    
+
     /**
      * Returns list of Blind Carbon Copy addresses to send a copy of this email.
-     * Other recipients of this email won't be able to see addresses in this 
+     * Other recipients of this email won't be able to see addresses in this
      * list.
+     *
      * @return list of Blind Carbon Copy addresses to send a copy of this email.
      * @throws NotSupportedException if this feature is not supported.
      */
@@ -127,27 +133,30 @@ public abstract class EmailMessage {
         }
         return mBcc;
     }
-    
+
     /**
-     * Indicates if BCC is supported for this kind of email to send Blind 
-     * Carbon.Copies of this email. Some email types do not support this 
+     * Indicates if BCC is supported for this kind of email to send Blind
+     * Carbon.Copies of this email. Some email types do not support this
      * feature.
+     *
      * @return true if BCC feature is supported, false otherwise.
      */
     public boolean isBCCSupported() {
         return true;
     }
-    
+
     /**
      * Returns subject of this email.
+     *
      * @return subject of this email.
      */
     public String getSubject() {
         return mSubject;
     }
-    
+
     /**
      * Sets subject of this email.
+     *
      * @param subject subject of this email.
      */
     public void setSubject(final String subject) {

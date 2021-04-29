@@ -230,7 +230,7 @@ public abstract class HtmlEmailMessage extends EmailMessage {
      * @return an HTML email message.
      */
     public static HtmlEmailMessage create(final String subject,
-                                             final EmailSender sender) {
+                                          final EmailSender sender) {
         return create(subject, sender.getProvider());
     }
 
@@ -243,7 +243,7 @@ public abstract class HtmlEmailMessage extends EmailMessage {
      * @return an HTML email message.
      */
     protected static HtmlEmailMessage create(final String subject,
-                                                final EmailProvider provider) {
+                                             final EmailProvider provider) {
         return create(subject, "", provider);
     }
 
@@ -257,7 +257,7 @@ public abstract class HtmlEmailMessage extends EmailMessage {
      * @return an HTML email message.
      */
     public static HtmlEmailMessage create(final String subject, final String htmlContent,
-                                             final EmailSender sender) {
+                                          final EmailSender sender) {
         return create(subject, htmlContent, sender.getProvider());
     }
 
@@ -271,7 +271,7 @@ public abstract class HtmlEmailMessage extends EmailMessage {
      * @return an HTML email message.
      */
     protected static HtmlEmailMessage create(final String subject, final String htmlContent,
-                                                final EmailProvider provider) {
+                                             final EmailProvider provider) {
         switch (provider) {
             case AWS_MAIL:
                 return new AWSHtmlEmailMessage(subject, htmlContent);

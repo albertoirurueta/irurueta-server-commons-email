@@ -29,6 +29,7 @@ public class EmailException extends Exception {
 
     /**
      * Constructor with message.
+     *
      * @param message message describing the cause of the exception.
      */
     public EmailException(final String message) {
@@ -37,9 +38,10 @@ public class EmailException extends Exception {
 
     /**
      * Constructor with message and cause.
+     *
      * @param message message describing the cause of the exception.
-     * @param cause originating exception that caused this exception. This can
-     * be used to obtain stack traces.
+     * @param cause   originating exception that caused this exception. This can
+     *                be used to obtain stack traces.
      */
     public EmailException(final String message, final Throwable cause) {
         super(message, cause);
@@ -47,10 +49,11 @@ public class EmailException extends Exception {
 
     /**
      * Constructor with cause.
+     *
      * @param cause originating exception that caused this exception. This can
-     * be used to obtain stack traces.
+     *              be used to obtain stack traces.
      */
     public EmailException(final Throwable cause) {
         super(cause);
-    }    
+    }
 }

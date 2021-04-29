@@ -27,11 +27,11 @@ public class AWSTextEmailMessageWithAttachmentsTest {
 
     @Test
     public void testConstructor() throws NotSupportedException {
-        //test empty constructor
+        // test empty constructor
         AWSTextEmailMessageWithAttachments message =
                 new AWSTextEmailMessageWithAttachments();
 
-        //check correctness
+        // check correctness
         assertTrue(message.getText().isEmpty());
         assertTrue(message.getTo().isEmpty());
         assertTrue(message.isToSupported());

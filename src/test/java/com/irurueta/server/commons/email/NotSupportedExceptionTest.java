@@ -22,7 +22,7 @@ import static org.junit.Assert.assertNotNull;
 public class NotSupportedExceptionTest {
 
     @Test
-    public void testConstructor(){
+    public void testConstructor() {
         NotSupportedException ex = new NotSupportedException();
         assertNotNull(ex);
 

@@ -265,9 +265,8 @@ public class ApacheMailSenderTest {
 
 
         final String text = "Disabled test";
-        final String subject = null;
 
-        final TextEmailMessage message = TextEmailMessage.create(subject, text,
+        final TextEmailMessage message = TextEmailMessage.create(null, text,
                 mailSender);
         message.getTo().add("alberto@irurueta.com");
         message.getTo().add("webmaster@irurueta.com");
@@ -289,9 +288,8 @@ public class ApacheMailSenderTest {
         final ApacheMailSender mailSender = ApacheMailSender.getInstance();
 
         final String text = "No subject test";
-        final String subject = null;
 
-        TextEmailMessage message = TextEmailMessage.create(subject, text,
+        TextEmailMessage message = TextEmailMessage.create(null, text,
                 mailSender);
         message.getTo().add("alberto@irurueta.com");
         message.getBCC().add("webmaster@irurueta.com");

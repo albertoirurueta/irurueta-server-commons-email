@@ -16,6 +16,7 @@
 package com.irurueta.server.commons.email;
 
 import com.irurueta.server.commons.configuration.ConfigurationException;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,18 +35,20 @@ public abstract class EmailSender {
     /**
      * Factory method to obtain singleton instance using current mail
      * configuration.
+     *
      * @return singleton instance.
      * @throws ConfigurationException if mail configuration fails.
      */
     public static EmailSender getInstance()
             throws ConfigurationException {
-        
+
         return getInstance(MailConfigurationFactory.getInstance().
                 configure().getProvider());
     }
-    
+
     /**
      * Factory method to obtain appropriate subclass for a given email provider.
+     *
      * @param provider provider to use.
      * @return an email sender controller singleton.
      */
@@ -63,12 +66,13 @@ public abstract class EmailSender {
 
     /**
      * Determines if provided string corresponds to an email address.
-     * This method checks proper format of provided string to match the 
+     * This method checks proper format of provided string to match the
      * structure of an email address (i.e. user@host).
+     *
      * @param email string containing an email address to be checked.
-     * @return true if provided string is a valid email address, false 
+     * @return true if provided string is a valid email address, false
      * otherwise.
-     */    
+     */
     public static boolean isValidEmailAddress(final String email) {
         /*
         Email format: A valid email address will have following format:
@@ -88,20 +92,22 @@ public abstract class EmailSender {
         // Make the comparison case-insensitive.
         final Pattern pattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
         final Matcher matcher = pattern.matcher(email);
-        return matcher.matches();        
+        return matcher.matches();
     }
-    
+
     /**
      * Abstract method to send an email.
+     *
      * @param m email message to be sent.
      * @return id of message that has been sent.
      * @throws MailNotSentException if mail couldn't be sent.
      * @throws InterruptedException if thread is interrupted.
      */
     public abstract String send(final EmailMessage m) throws MailNotSentException, InterruptedException;
-    
+
     /**
      * Returns provider used by this email sender.
+     *
      * @return email provider.
      */
     public abstract EmailProvider getProvider();

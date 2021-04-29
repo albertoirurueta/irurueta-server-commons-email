@@ -24,43 +24,46 @@ public enum EmailProvider {
      * SMTP email server is available.
      */
     JAVA_MAIL("java_mail"),
-    
+
     /**
      * Apache Mail. Alternative implementation to JavaMail. Provides similar
      * features and also requires a supported SMTP email server.
      */
     APACHE_MAIL("apache_mail"),
-    
+
     /**
      * Uses Amazon SES to send emails. Requires an Amazon AWS account and SES
      * to be setup, but no SMTP email server is required.
      */
     AWS_MAIL("aws_mail");
-        
+
     /**
      * String representation of this enumerator.
      */
     private final String mValue;
-    
+
     /**
      * Constructor.
+     *
      * @param value string representation.
      */
     EmailProvider(final String value) {
         mValue = value;
     }
-    
+
     /**
      * Returns string representation.
+     *
      * @return string representation.
      */
     public String getValue() {
         return mValue;
     }
-    
+
     /**
-     * Factory method to create an enumerator value from its string 
+     * Factory method to create an enumerator value from its string
      * representation.
+     *
      * @param value string representation.
      * @return enumerator value.
      */

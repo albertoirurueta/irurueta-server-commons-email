@@ -95,11 +95,14 @@ public class ApacheMailSender extends CommonEmailSender {
 
         //to avoid compilation errors regarding to casting
         if (m instanceof ApacheMailTextEmailMessage) {
-            return sendMultiPartEmail(m);
+            sendMultiPartEmail(m);
+            return null;
         } else if (m instanceof ApacheMailTextEmailMessageWithAttachments) {
-            return sendMultiPartEmail(m);
+            sendMultiPartEmail(m);
+            return null;
         } else if (m instanceof ApacheMailHtmlEmailMessage) {
-            return sendHtmlEmail(m);
+            sendHtmlEmail(m);
+            return null;
         } else {
             throw new MailNotSentException("Unsupported email type");
         }
@@ -119,10 +122,9 @@ public class ApacheMailSender extends CommonEmailSender {
      * Method to send a multipart email.
      *
      * @param m email message to be sent.
-     * @return id of message that has been sent.
      * @throws MailNotSentException if mail couldn't be sent.
      */
-    public String sendMultiPartEmail(final EmailMessage m)
+    public void sendMultiPartEmail(final EmailMessage m)
             throws MailNotSentException {
         try {
             final MultiPartEmail email = new MultiPartEmail();
@@ -130,17 +132,15 @@ public class ApacheMailSender extends CommonEmailSender {
         } catch (final Exception e) {
             throw new MailNotSentException(e);
         }
-        return null;
     }
 
     /**
      * Method to send html email.
      *
      * @param m email message to be sent.
-     * @return id of message that has been sent.
      * @throws MailNotSentException if mail couldn't be sent.
      */
-    public String sendHtmlEmail(final EmailMessage m)
+    public void sendHtmlEmail(final EmailMessage m)
             throws MailNotSentException {
         try {
             final HtmlEmail email = new HtmlEmail();
@@ -148,7 +148,6 @@ public class ApacheMailSender extends CommonEmailSender {
         } catch (final Exception e) {
             throw new MailNotSentException(e);
         }
-        return null;
     }
 
     /**

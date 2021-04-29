@@ -33,52 +33,58 @@ public abstract class BaseAttachment {
 
     /**
      * Constructor with file attachment.
+     *
      * @param attachment file being attached.
      */
     protected BaseAttachment(final File attachment) {
         mAttachment = attachment;
         mContentType = null;
     }
-    
+
     /**
      * Constructor with file attachment and content type.
-     * @param attachment file being attached.
+     *
+     * @param attachment  file being attached.
      * @param contentType MIME type of the file being attached.
      */
     protected BaseAttachment(final File attachment, final String contentType) {
         mAttachment = attachment;
         mContentType = contentType;
     }
-    
+
     /**
      * Returns file being attached.
+     *
      * @return file being attached.
      */
     public File getAttachment() {
         return mAttachment;
     }
-    
+
     /**
      * Sets file being attached.
+     *
      * @param attachment file being attached.
      */
     public void setAttachment(final File attachment) {
         mAttachment = attachment;
     }
-    
+
     /**
      * Returns MIME type of the file being attached.
+     *
      * @return MIME type of the file being attached.
      */
     public String getContentType() {
         return mContentType;
     }
-    
+
     /**
      * Sets MIME type of the file being attached.
+     *
      * @param contentType MIME type of the file being attached.
      */
     public void setContentType(final String contentType) {
         mContentType = contentType;
-    }    
+    }
 }

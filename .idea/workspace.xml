@@ -5,9 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a33ec8e-798e-4ad8-8c84-a2679c42f1ed" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/email/EmailSenderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_irurueta_irurueta_server_commons_1_0_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_irurueta_irurueta_server_commons_1_0_SNAPSHOT.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/AWSMailSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/AWSMailSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/AWSTextEmailMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/AWSTextEmailMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/AWSTextEmailMessageWithAttachments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/AWSTextEmailMessageWithAttachments.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/ApacheMailSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/ApacheMailSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/ApacheMailTextEmailMessageWithAttachments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/ApacheMailTextEmailMessageWithAttachments.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/BaseAttachment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/BaseAttachment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/BuildInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/BuildInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/EmailAttachment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/EmailAttachment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/EmailException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/EmailException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/EmailMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/EmailMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/EmailProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/EmailProvider.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/EmailSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/EmailSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/HtmlEmailMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/HtmlEmailMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/JavaMailTextEmailMessageWithAttachments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/JavaMailTextEmailMessageWithAttachments.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/TextEmailMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irurueta/server/commons/email/TextEmailMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/email/AWSMailSenderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/email/AWSMailSenderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/email/AWSTextEmailMessageWithAttachmentsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/email/AWSTextEmailMessageWithAttachmentsTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/email/ApacheMailSenderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/email/ApacheMailSenderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/email/JavaMailSenderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/irurueta/server/commons/email/JavaMailSenderTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +54,9 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="2" />
+  </component>
   <component name="ProjectId" id="1ivp6BFsenzKFPNXHRK1z6eZlcY" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -62,6 +83,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
   </component>
   <component name="RecentsManager">
@@ -70,7 +92,7 @@
       <recent name="$PROJECT_DIR$/cd" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ApacheMailHtmlEmailMessageTest">
+  <component name="RunManager" selected="JUnit.EmailSenderTest">
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
       <option name="DEPLOY" value="true" />
@@ -171,11 +193,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in irurueta-server-commons-email (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="irurueta-server-commons-email" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -224,6 +248,22 @@
       <option name="MAIN_CLASS_NAME" value="com.irurueta.server.commons.email.ApacheMailSenderTest" />
       <option name="METHOD_NAME" value="testSendMessage" />
       <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EmailSenderTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="irurueta-server-commons-email" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.irurueta.server.commons.email.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.irurueta.server.commons.email" />
+      <option name="MAIN_CLASS_NAME" value="com.irurueta.server.commons.email.EmailSenderTest" />
+      <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -305,19 +345,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.All in irurueta-server-commons-email (1)" />
       <item itemvalue="JUnit.ApacheMailSenderTest" />
       <item itemvalue="JUnit.ApacheMailSenderTest.testSendMessage" />
       <item itemvalue="JUnit.JavaMailSenderTest" />
       <item itemvalue="JUnit.ApacheMailHtmlEmailMessageTest" />
+      <item itemvalue="JUnit.EmailSenderTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.EmailSenderTest" />
         <item itemvalue="JUnit.ApacheMailHtmlEmailMessageTest" />
         <item itemvalue="JUnit.ApacheMailSenderTest" />
         <item itemvalue="JUnit.JavaMailSenderTest" />
         <item itemvalue="JUnit.ApacheMailSenderTest.testSendMessage" />
-        <item itemvalue="JUnit.All in irurueta-server-commons-email (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -336,6 +376,7 @@
       <workItem from="1616788319304" duration="11474000" />
       <workItem from="1616802257675" duration="6931000" />
       <workItem from="1616847498811" duration="146000" />
+      <workItem from="1619733377673" duration="1312000" />
     </task>
     <servers />
   </component>

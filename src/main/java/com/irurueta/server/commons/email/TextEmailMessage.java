@@ -101,7 +101,7 @@ public abstract class TextEmailMessage extends EmailMessage {
      * @return a textual email message.
      */
     public static TextEmailMessage create(final String subject,
-                                             final EmailSender sender) {
+                                          final EmailSender sender) {
         return create(subject, sender.getProvider());
     }
 
@@ -114,7 +114,7 @@ public abstract class TextEmailMessage extends EmailMessage {
      * @return a textual email message.
      */
     protected static TextEmailMessage create(final String subject,
-                                                final EmailProvider provider) {
+                                             final EmailProvider provider) {
         return create(subject, "", provider);
     }
 
@@ -128,7 +128,7 @@ public abstract class TextEmailMessage extends EmailMessage {
      * @return a textual email message.
      */
     public static TextEmailMessage create(final String subject, final String text,
-                                             final EmailSender sender) {
+                                          final EmailSender sender) {
         return create(subject, text, sender.getProvider());
     }
 
@@ -142,7 +142,7 @@ public abstract class TextEmailMessage extends EmailMessage {
      * @return a textual email message.
      */
     protected static TextEmailMessage create(final String subject, final String text,
-                                                final EmailProvider provider) {
+                                             final EmailProvider provider) {
 
         switch (provider) {
             case AWS_MAIL:

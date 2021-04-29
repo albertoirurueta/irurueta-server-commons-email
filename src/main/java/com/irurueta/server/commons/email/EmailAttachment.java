@@ -26,53 +26,58 @@ public class EmailAttachment extends BaseAttachment {
      * be the real attachment file name on the server.
      */
     private String mName;
-    
+
     /**
      * Constructor with file attachment.
+     *
      * @param attachment file being attached.
      */
     public EmailAttachment(final File attachment) {
         super(attachment);
         mName = attachment.getName();
     }
-    
+
     /**
      * Constructor with file attachment and content type.
-     * @param attachment file being attached.
+     *
+     * @param attachment  file being attached.
      * @param contentType MIME type of the file being attached.
      */
     public EmailAttachment(final File attachment, final String contentType) {
         super(attachment, contentType);
         mName = attachment.getName();
     }
-    
+
     /**
      * Constructor with file attachment, file name shown to the receiver and
      * content type.
-     * @param attachment file being attached.
-     * @param name file name shown to the receiver.
+     *
+     * @param attachment  file being attached.
+     * @param name        file name shown to the receiver.
      * @param contentType MIME type of the file being attached.
      */
     public EmailAttachment(final File attachment, final String name, final String contentType) {
         super(attachment, contentType);
         mName = name;
     }
-    
+
     /**
-     * Returns file name shown to the receiver on their clients, this doesn't 
+     * Returns file name shown to the receiver on their clients, this doesn't
      * have to be the real attachment file name on the server.
+     *
      * @return file name shown to the receiver.
      */
     public String getName() {
         return mName;
     }
-    
+
     /**
      * Sets file name shown to the receiver on their clients. This doesn't have
      * to be the real attachment file name on the server.
+     *
      * @param name file name shown to the receiver.
      */
     public void setName(final String name) {
         this.mName = name;
-    }    
+    }
 }
