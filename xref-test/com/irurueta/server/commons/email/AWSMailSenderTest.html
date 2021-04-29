@@ -289,42 +289,40 @@
 <a class="jxr_linenumber" name="L281" href="#L281">281</a>         <strong class="jxr_keyword">final</strong> AWSMailSender mailSender = AWSMailSender.getInstance();
 <a class="jxr_linenumber" name="L282" href="#L282">282</a> 
 <a class="jxr_linenumber" name="L283" href="#L283">283</a>         <strong class="jxr_keyword">final</strong> String text = <span class="jxr_string">"Disabled test"</span>;
-<a class="jxr_linenumber" name="L284" href="#L284">284</a>         <strong class="jxr_keyword">final</strong> String subject = <strong class="jxr_keyword">null</strong>;
-<a class="jxr_linenumber" name="L285" href="#L285">285</a> 
-<a class="jxr_linenumber" name="L286" href="#L286">286</a>         <strong class="jxr_keyword">final</strong> TextEmailMessage message = TextEmailMessage.create(subject, text,
-<a class="jxr_linenumber" name="L287" href="#L287">287</a>                 mailSender);
-<a class="jxr_linenumber" name="L288" href="#L288">288</a>         message.getTo().add(<span class="jxr_string">"alberto@irurueta.com"</span>);
-<a class="jxr_linenumber" name="L289" href="#L289">289</a>         message.getTo().add(<span class="jxr_string">"webmaster@irurueta.com"</span>);
-<a class="jxr_linenumber" name="L290" href="#L290">290</a> 
-<a class="jxr_linenumber" name="L291" href="#L291">291</a>         assertNull(mailSender.send(message));
+<a class="jxr_linenumber" name="L284" href="#L284">284</a> 
+<a class="jxr_linenumber" name="L285" href="#L285">285</a>         <strong class="jxr_keyword">final</strong> TextEmailMessage message = TextEmailMessage.create(<strong class="jxr_keyword">null</strong>, text,
+<a class="jxr_linenumber" name="L286" href="#L286">286</a>                 mailSender);
+<a class="jxr_linenumber" name="L287" href="#L287">287</a>         message.getTo().add(<span class="jxr_string">"alberto@irurueta.com"</span>);
+<a class="jxr_linenumber" name="L288" href="#L288">288</a>         message.getTo().add(<span class="jxr_string">"webmaster@irurueta.com"</span>);
+<a class="jxr_linenumber" name="L289" href="#L289">289</a> 
+<a class="jxr_linenumber" name="L290" href="#L290">290</a>         assertNull(mailSender.send(message));
+<a class="jxr_linenumber" name="L291" href="#L291">291</a> 
 <a class="jxr_linenumber" name="L292" href="#L292">292</a> 
-<a class="jxr_linenumber" name="L293" href="#L293">293</a> 
-<a class="jxr_linenumber" name="L294" href="#L294">294</a>         <em class="jxr_comment">// reset configuration</em>
-<a class="jxr_linenumber" name="L295" href="#L295">295</a>         props = <strong class="jxr_keyword">new</strong> Properties();
-<a class="jxr_linenumber" name="L296" href="#L296">296</a>         props.load(<strong class="jxr_keyword">new</strong> FileInputStream(PROPS_FILE));
-<a class="jxr_linenumber" name="L297" href="#L297">297</a>         props.setProperty(MailConfigurationFactory.
-<a class="jxr_linenumber" name="L298" href="#L298">298</a>                         AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS_PROPERTY,
-<a class="jxr_linenumber" name="L299" href="#L299">299</a>                 String.valueOf(AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS));
-<a class="jxr_linenumber" name="L300" href="#L300">300</a>         props.setProperty(MailConfigurationFactory.MAIL_PROVIDER_PROPERTY,
-<a class="jxr_linenumber" name="L301" href="#L301">301</a>                 EmailProvider.AWS_MAIL.toString());
-<a class="jxr_linenumber" name="L302" href="#L302">302</a>         MailConfigurationFactory.getInstance().reconfigure(props);
-<a class="jxr_linenumber" name="L303" href="#L303">303</a>         AWSMailSender.reset();
-<a class="jxr_linenumber" name="L304" href="#L304">304</a>     }
-<a class="jxr_linenumber" name="L305" href="#L305">305</a> 
-<a class="jxr_linenumber" name="L306" href="#L306">306</a>     @Test
-<a class="jxr_linenumber" name="L307" href="#L307">307</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testSendWithCcBccAndNoSubject() <strong class="jxr_keyword">throws</strong> NotSupportedException {
-<a class="jxr_linenumber" name="L308" href="#L308">308</a>         <strong class="jxr_keyword">final</strong> AWSMailSender mailSender = AWSMailSender.getInstance();
-<a class="jxr_linenumber" name="L309" href="#L309">309</a> 
-<a class="jxr_linenumber" name="L310" href="#L310">310</a>         <strong class="jxr_keyword">final</strong> String text = <span class="jxr_string">"No subject test"</span>;
-<a class="jxr_linenumber" name="L311" href="#L311">311</a>         <strong class="jxr_keyword">final</strong> String subject = <strong class="jxr_keyword">null</strong>;
-<a class="jxr_linenumber" name="L312" href="#L312">312</a> 
-<a class="jxr_linenumber" name="L313" href="#L313">313</a>         <strong class="jxr_keyword">final</strong> TextEmailMessage message = TextEmailMessage.create(subject, text,
-<a class="jxr_linenumber" name="L314" href="#L314">314</a>                 mailSender);
-<a class="jxr_linenumber" name="L315" href="#L315">315</a>         message.getTo().add(<span class="jxr_string">"alberto@irurueta.com"</span>);
-<a class="jxr_linenumber" name="L316" href="#L316">316</a>         message.getBCC().add(<span class="jxr_string">"webmaster@irurueta.com"</span>);
-<a class="jxr_linenumber" name="L317" href="#L317">317</a>         message.getCC().add(<span class="jxr_string">"alberto@irurueta.com"</span>);
-<a class="jxr_linenumber" name="L318" href="#L318">318</a>     }
-<a class="jxr_linenumber" name="L319" href="#L319">319</a> }
+<a class="jxr_linenumber" name="L293" href="#L293">293</a>         <em class="jxr_comment">// reset configuration</em>
+<a class="jxr_linenumber" name="L294" href="#L294">294</a>         props = <strong class="jxr_keyword">new</strong> Properties();
+<a class="jxr_linenumber" name="L295" href="#L295">295</a>         props.load(<strong class="jxr_keyword">new</strong> FileInputStream(PROPS_FILE));
+<a class="jxr_linenumber" name="L296" href="#L296">296</a>         props.setProperty(MailConfigurationFactory.
+<a class="jxr_linenumber" name="L297" href="#L297">297</a>                         AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS_PROPERTY,
+<a class="jxr_linenumber" name="L298" href="#L298">298</a>                 String.valueOf(AWS_MAIL_CHECK_QUOTA_AFTER_MILLIS));
+<a class="jxr_linenumber" name="L299" href="#L299">299</a>         props.setProperty(MailConfigurationFactory.MAIL_PROVIDER_PROPERTY,
+<a class="jxr_linenumber" name="L300" href="#L300">300</a>                 EmailProvider.AWS_MAIL.toString());
+<a class="jxr_linenumber" name="L301" href="#L301">301</a>         MailConfigurationFactory.getInstance().reconfigure(props);
+<a class="jxr_linenumber" name="L302" href="#L302">302</a>         AWSMailSender.reset();
+<a class="jxr_linenumber" name="L303" href="#L303">303</a>     }
+<a class="jxr_linenumber" name="L304" href="#L304">304</a> 
+<a class="jxr_linenumber" name="L305" href="#L305">305</a>     @Test
+<a class="jxr_linenumber" name="L306" href="#L306">306</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testSendWithCcBccAndNoSubject() <strong class="jxr_keyword">throws</strong> NotSupportedException {
+<a class="jxr_linenumber" name="L307" href="#L307">307</a>         <strong class="jxr_keyword">final</strong> AWSMailSender mailSender = AWSMailSender.getInstance();
+<a class="jxr_linenumber" name="L308" href="#L308">308</a> 
+<a class="jxr_linenumber" name="L309" href="#L309">309</a>         <strong class="jxr_keyword">final</strong> String text = <span class="jxr_string">"No subject test"</span>;
+<a class="jxr_linenumber" name="L310" href="#L310">310</a> 
+<a class="jxr_linenumber" name="L311" href="#L311">311</a>         <strong class="jxr_keyword">final</strong> TextEmailMessage message = TextEmailMessage.create(<strong class="jxr_keyword">null</strong>, text,
+<a class="jxr_linenumber" name="L312" href="#L312">312</a>                 mailSender);
+<a class="jxr_linenumber" name="L313" href="#L313">313</a>         message.getTo().add(<span class="jxr_string">"alberto@irurueta.com"</span>);
+<a class="jxr_linenumber" name="L314" href="#L314">314</a>         message.getBCC().add(<span class="jxr_string">"webmaster@irurueta.com"</span>);
+<a class="jxr_linenumber" name="L315" href="#L315">315</a>         message.getCC().add(<span class="jxr_string">"alberto@irurueta.com"</span>);
+<a class="jxr_linenumber" name="L316" href="#L316">316</a>     }
+<a class="jxr_linenumber" name="L317" href="#L317">317</a> }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2016&#x2013;2021. All rights reserved.</div>

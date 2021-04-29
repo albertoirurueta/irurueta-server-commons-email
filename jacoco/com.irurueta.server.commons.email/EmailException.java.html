@@ -29,29 +29,32 @@ public class EmailException extends Exception {
 
     /**
      * Constructor with message.
+     *
      * @param message message describing the cause of the exception.
      */
     public EmailException(final String message) {
-<span class="fc" id="L35">        super(message);</span>
-<span class="fc" id="L36">    }</span>
+<span class="fc" id="L36">        super(message);</span>
+<span class="fc" id="L37">    }</span>
 
     /**
      * Constructor with message and cause.
+     *
      * @param message message describing the cause of the exception.
-     * @param cause originating exception that caused this exception. This can
-     * be used to obtain stack traces.
+     * @param cause   originating exception that caused this exception. This can
+     *                be used to obtain stack traces.
      */
     public EmailException(final String message, final Throwable cause) {
-<span class="fc" id="L45">        super(message, cause);</span>
-<span class="fc" id="L46">    }</span>
+<span class="fc" id="L47">        super(message, cause);</span>
+<span class="fc" id="L48">    }</span>
 
     /**
      * Constructor with cause.
+     *
      * @param cause originating exception that caused this exception. This can
-     * be used to obtain stack traces.
+     *              be used to obtain stack traces.
      */
     public EmailException(final Throwable cause) {
-<span class="fc" id="L54">        super(cause);</span>
-<span class="fc" id="L55">    }    </span>
+<span class="fc" id="L57">        super(cause);</span>
+<span class="fc" id="L58">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

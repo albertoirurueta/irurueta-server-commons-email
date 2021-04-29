@@ -113,7 +113,7 @@ public class ApacheMailTextEmailMessageWithAttachments extends TextEmailMessageW
     /**
      * Adds attachments to email content.
      *
-     * @param content a multipart email.
+     * @param content     a multipart email.
      * @param attachments attachments to be added.
      * @throws EmailException if an error occurs.
      */

@@ -21,81 +21,88 @@ import java.util.List;
  * Class containing a text only email message that can contain file attachments
  * and is meant to be sent using Amazon SES.
  */
-public class AWSTextEmailMessageWithAttachments extends 
+public class AWSTextEmailMessageWithAttachments extends
         JavaMailTextEmailMessageWithAttachments {
-    
+
     /**
      * Constructor.
      */
     public AWSTextEmailMessageWithAttachments() {
 <span class="fc" id="L31">        super();</span>
 <span class="fc" id="L32">    }</span>
-    
+
     /**
      * Constructor with email subject.
+     *
      * @param subject subject to be set on email.
      */
     public AWSTextEmailMessageWithAttachments(final String subject) {
-<span class="fc" id="L39">        super(subject);</span>
-<span class="fc" id="L40">    }</span>
-    
+<span class="fc" id="L40">        super(subject);</span>
+<span class="fc" id="L41">    }</span>
+
     /**
      * Constructor with email subject and content text.
+     *
      * @param subject subject to be set on email.
-     * @param text textual email content.
+     * @param text    textual email content.
      */
     public AWSTextEmailMessageWithAttachments(final String subject, final String text) {
-<span class="fc" id="L48">        super(subject, text);</span>
-<span class="fc" id="L49">    }</span>
-    
+<span class="fc" id="L50">        super(subject, text);</span>
+<span class="fc" id="L51">    }</span>
+
     /**
      * Constructor with file attachments.
+     *
      * @param attachments list of file attachments to be included in email.
      */
     public AWSTextEmailMessageWithAttachments(
             final List&lt;EmailAttachment&gt; attachments) {
-<span class="fc" id="L57">        super(attachments);</span>
-<span class="fc" id="L58">    }</span>
-    
+<span class="fc" id="L60">        super(attachments);</span>
+<span class="fc" id="L61">    }</span>
+
     /**
      * Constructor with subject and file attachments.
-     * @param subject subject to be set on email.
+     *
+     * @param subject     subject to be set on email.
      * @param attachments list of file attachments to be included in email.
      */
     public AWSTextEmailMessageWithAttachments(final String subject,
-            final List&lt;EmailAttachment&gt; attachments) {
-<span class="fc" id="L67">        super(subject, attachments);</span>
-<span class="fc" id="L68">    }</span>
-    
+                                              final List&lt;EmailAttachment&gt; attachments) {
+<span class="fc" id="L71">        super(subject, attachments);</span>
+<span class="fc" id="L72">    }</span>
+
     /**
      * Constructor with subject, content text and file attachments.
-     * @param subject subject to be set on email.
-     * @param text textual email content.
+     *
+     * @param subject     subject to be set on email.
+     * @param text        textual email content.
      * @param attachments list of file attachments to be included in email.
      */
     public AWSTextEmailMessageWithAttachments(final String subject, final String text,
-            final List&lt;EmailAttachment&gt; attachments) {
-<span class="fc" id="L78">        super(subject, text, attachments);</span>
-<span class="fc" id="L79">    }    </span>
-    
+                                              final List&lt;EmailAttachment&gt; attachments) {
+<span class="fc" id="L83">        super(subject, text, attachments);</span>
+<span class="fc" id="L84">    }</span>
+
     /**
-     * Indicates if CC is supported for this kind of email to send Carbon 
+     * Indicates if CC is supported for this kind of email to send Carbon
      * Copies of this email. Some email types do not support this feature.
+     *
      * @return true if CC feature is supported, false otherwise.
      */
     @Override
     public boolean isCCSupported() {
-<span class="fc" id="L88">        return false;</span>
+<span class="fc" id="L94">        return false;</span>
     }
-    
+
     /**
      * Indicates if BCC is supported for this kind of email to send Blind Carbon
      * Copies of this email. Some email types do not support this feature
+     *
      * @return true if BCC feature is supported, false otherwise.
      */
     @Override
     public boolean isBCCSupported() {
-<span class="fc" id="L98">        return false;</span>
+<span class="fc" id="L105">        return false;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

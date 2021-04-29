@@ -36,7 +36,7 @@ public class BuildInfo {
 
     /**
      * Location of properties file that contains build data.
-     * Build data is stored in this file, which is modified each time that 
+     * Build data is stored in this file, which is modified each time that
      * compilation is run in the CI server.
      */
     private static final String BUILD_INFO_PROPERTIES = &quot;build-info.properties&quot;;
@@ -150,72 +150,80 @@ public class BuildInfo {
 
     /**
      * Obtains singleton instance.
+     *
      * @return singleton instance.
      */
     public static synchronized BuildInfo getInstance() {
         BuildInfo info;
-<span class="pc bpc" id="L157" title="1 of 4 branches missed.">        if (mReference == null || (info = mReference.get()) == null) {</span>
-<span class="fc" id="L158">            info = new BuildInfo();</span>
-<span class="fc" id="L159">            mReference = new SoftReference&lt;&gt;(info);</span>
+<span class="pc bpc" id="L158" title="1 of 4 branches missed.">        if (mReference == null || (info = mReference.get()) == null) {</span>
+<span class="fc" id="L159">            info = new BuildInfo();</span>
+<span class="fc" id="L160">            mReference = new SoftReference&lt;&gt;(info);</span>
         }
 
-<span class="fc" id="L162">        return info;</span>
+<span class="fc" id="L163">        return info;</span>
     }
 
     /**
      * Obtains build timestamp.
+     *
      * @return build timestamp.
      */
     public Date getBuildTimestamp() {
-<span class="fc" id="L170">        return (Date)mBuildTimestamp.clone();</span>
+<span class="fc" id="L172">        return (Date) mBuildTimestamp.clone();</span>
     }
 
     /**
      * Obtains groupId of this library.
+     *
      * @return groupId of this library.
      */
     public String getGroupId() {
-<span class="fc" id="L178">        return mGroupId;</span>
+<span class="fc" id="L181">        return mGroupId;</span>
     }
 
     /**
      * Obtains artifactId of this library.
+     *
      * @return artifactId of this library.
      */
     public String getArtifactId() {
-<span class="fc" id="L186">        return mArtifactId;</span>
+<span class="fc" id="L190">        return mArtifactId;</span>
     }
 
     /**
      * Obtains version of this library.
+     *
      * @return version of this library.
      */
     public String getVersion() {
-<span class="fc" id="L194">        return mVersion;</span>
+<span class="fc" id="L199">        return mVersion;</span>
     }
 
     /**
      * Obtains build number.
+     *
      * @return build number.
      */
     public String getBuildNumber() {
-<span class="fc" id="L202">        return mBuildNumber;</span>
+<span class="fc" id="L208">        return mBuildNumber;</span>
     }
 
     /**
      * Obtains build commit.
+     *
      * @return build commit.
      */
     public String getCommit() {
-<span class="fc" id="L210">        return mCommit;</span>
+<span class="fc" id="L217">        return mCommit;</span>
     }
 
     /**
      * Obtains build branch.
+     *
      * @return build branch.
      */
     public String getBranch() {
-<span class="fc" id="L218">        return mBranch;</span>
-    }    
+<span class="fc" id="L226">        return mBranch;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

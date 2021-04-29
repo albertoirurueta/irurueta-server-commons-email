@@ -27,24 +27,24 @@ public abstract class EmailMessage {
      * List of addresses to send an email to.
      */
     private final List&lt;String&gt; mTo;
-    
+
     /**
      * List of Carbon Copy addresses to send a copy of an email.
      */
     private final List&lt;String&gt; mCc;
-    
+
     /**
      * List of Blind Carbon Copy addresses to send a copy of an email.
-     * Other recipients of the email won't be able to see addresses in this 
+     * Other recipients of the email won't be able to see addresses in this
      * list.
      */
     private final List&lt;String&gt; mBcc;
-    
+
     /**
      * Subject of an email.
      */
     private String mSubject;
-    
+
     /**
      * Constructor.
      * Creates an email with no content, subject and no recipients.
@@ -55,103 +55,112 @@ public abstract class EmailMessage {
 <span class="fc" id="L55">        mBcc = new LinkedList&lt;&gt;();</span>
 <span class="fc" id="L56">        mSubject = &quot;&quot;;</span>
 <span class="fc" id="L57">    }</span>
-    
+
     /**
      * Constructor.
      * Creates an email with subject, no content and no recipients.
+     *
      * @param subject subject to be set on the email.
      */
-<span class="fc" id="L64">    protected EmailMessage(final String subject) {</span>
-<span class="fc" id="L65">        mTo = new LinkedList&lt;&gt;();</span>
-<span class="fc" id="L66">        mCc = new LinkedList&lt;&gt;();</span>
-<span class="fc" id="L67">        mBcc = new LinkedList&lt;&gt;();</span>
-        
-<span class="fc bfc" id="L69" title="All 2 branches covered.">        if (subject != null) {</span>
-<span class="fc" id="L70">            mSubject = subject;</span>
+<span class="fc" id="L65">    protected EmailMessage(final String subject) {</span>
+<span class="fc" id="L66">        mTo = new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L67">        mCc = new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L68">        mBcc = new LinkedList&lt;&gt;();</span>
+
+<span class="fc bfc" id="L70" title="All 2 branches covered.">        if (subject != null) {</span>
+<span class="fc" id="L71">            mSubject = subject;</span>
         } else {
-<span class="fc" id="L72">            mSubject = &quot;&quot;;</span>
-        }        
-<span class="fc" id="L74">    }</span>
-    
+<span class="fc" id="L73">            mSubject = &quot;&quot;;</span>
+        }
+<span class="fc" id="L75">    }</span>
+
     /**
      * Returns list of addresses to send email to.
+     *
      * @return list of addresses to send email to.
      * @throws NotSupportedException if this feature is not supported.
      */
     public List&lt;String&gt; getTo() throws NotSupportedException {
-<span class="pc bpc" id="L82" title="1 of 2 branches missed.">        if (!isToSupported()) {</span>
-<span class="nc" id="L83">            throw new NotSupportedException();</span>
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">        if (!isToSupported()) {</span>
+<span class="nc" id="L85">            throw new NotSupportedException();</span>
         }
-<span class="fc" id="L85">        return mTo;</span>
+<span class="fc" id="L87">        return mTo;</span>
     }
-    
+
     /**
      * Indicates if To is supported to send an email to multiple recipients.
+     *
      * @return true if To feature is supported, false otherwise.
      */
     public boolean isToSupported() {
-<span class="fc" id="L93">        return true;</span>
+<span class="fc" id="L96">        return true;</span>
     }
-    
+
     /**
      * Returns list of Carbon Copy addresses to send a copy of this email.
+     *
      * @return list of Carbon Copy addresses to send a copy of this email.
      * @throws NotSupportedException if this feature is not supported.
      */
     public List&lt;String&gt; getCC() throws NotSupportedException {
-<span class="fc bfc" id="L102" title="All 2 branches covered.">        if (!isCCSupported()) {</span>
-<span class="fc" id="L103">            throw new NotSupportedException();</span>
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        if (!isCCSupported()) {</span>
+<span class="fc" id="L107">            throw new NotSupportedException();</span>
         }
-<span class="fc" id="L105">        return mCc;</span>
+<span class="fc" id="L109">        return mCc;</span>
     }
-    
+
     /**
      * Indicates if CC is supported for this kind of email to send Carbon Copies
      * of this email. Some email types do not support this feature.
+     *
      * @return true if CC feature is supported, false otherwise.
      */
     public boolean isCCSupported() {
-<span class="fc" id="L114">        return true;</span>
+<span class="fc" id="L119">        return true;</span>
     }
-    
+
     /**
      * Returns list of Blind Carbon Copy addresses to send a copy of this email.
-     * Other recipients of this email won't be able to see addresses in this 
+     * Other recipients of this email won't be able to see addresses in this
      * list.
+     *
      * @return list of Blind Carbon Copy addresses to send a copy of this email.
      * @throws NotSupportedException if this feature is not supported.
      */
     public List&lt;String&gt; getBCC() throws NotSupportedException {
-<span class="fc bfc" id="L125" title="All 2 branches covered.">        if (!isBCCSupported()) {</span>
-<span class="fc" id="L126">            throw new NotSupportedException();</span>
+<span class="fc bfc" id="L131" title="All 2 branches covered.">        if (!isBCCSupported()) {</span>
+<span class="fc" id="L132">            throw new NotSupportedException();</span>
         }
-<span class="fc" id="L128">        return mBcc;</span>
+<span class="fc" id="L134">        return mBcc;</span>
     }
-    
+
     /**
-     * Indicates if BCC is supported for this kind of email to send Blind 
-     * Carbon.Copies of this email. Some email types do not support this 
+     * Indicates if BCC is supported for this kind of email to send Blind
+     * Carbon.Copies of this email. Some email types do not support this
      * feature.
+     *
      * @return true if BCC feature is supported, false otherwise.
      */
     public boolean isBCCSupported() {
-<span class="fc" id="L138">        return true;</span>
+<span class="fc" id="L145">        return true;</span>
     }
-    
+
     /**
      * Returns subject of this email.
+     *
      * @return subject of this email.
      */
     public String getSubject() {
-<span class="fc" id="L146">        return mSubject;</span>
+<span class="fc" id="L154">        return mSubject;</span>
     }
-    
+
     /**
      * Sets subject of this email.
+     *
      * @param subject subject of this email.
      */
     public void setSubject(final String subject) {
-<span class="fc" id="L154">        mSubject = subject;</span>
-<span class="fc" id="L155">    }</span>
+<span class="fc" id="L163">        mSubject = subject;</span>
+<span class="fc" id="L164">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -24,62 +24,65 @@ import com.amazonaws.services.simpleemail.model.Message;
  * Class containing a text only email message to be sent using Amazon SES.
  */
 public class AWSTextEmailMessage extends TextEmailMessage implements AWSEmailMessage {
-    
+
     /**
      * Constructor.
      */
     public AWSTextEmailMessage() {
 <span class="fc" id="L32">        super();</span>
 <span class="fc" id="L33">    }</span>
-    
+
     /**
      * Constructor with email subject.
+     *
      * @param subject subject to be set on email.
      */
     public AWSTextEmailMessage(final String subject) {
-<span class="fc" id="L40">        super(subject);</span>
-<span class="fc" id="L41">    }</span>
-    
+<span class="fc" id="L41">        super(subject);</span>
+<span class="fc" id="L42">    }</span>
+
     /**
      * Constructor with email subject and content text.
+     *
      * @param subject subject to be set on email.
-     * @param text textual email content.
+     * @param text    textual email content.
      */
     public AWSTextEmailMessage(final String subject, final String text) {
-<span class="fc" id="L49">        super(subject, text);</span>
-<span class="fc" id="L50">    }</span>
-    
+<span class="fc" id="L51">        super(subject, text);</span>
+<span class="fc" id="L52">    }</span>
+
     /**
      * Builds email content to be sent using an email sender.
+     *
      * @param message instance where content must be set.
      * @throws EmailException if setting mail content fails.
      */
     @Override
     public void buildContent(final Message message) throws EmailException {
-<span class="fc" id="L59">        final Destination destination = new Destination(getTo());</span>
-<span class="pc bpc" id="L60" title="2 of 4 branches missed.">        if (getBCC() != null &amp;&amp; !getBCC().isEmpty()) {</span>
-<span class="nc" id="L61">            destination.setBccAddresses(getBCC());</span>
+<span class="fc" id="L62">        final Destination destination = new Destination(getTo());</span>
+<span class="pc bpc" id="L63" title="2 of 4 branches missed.">        if (getBCC() != null &amp;&amp; !getBCC().isEmpty()) {</span>
+<span class="nc" id="L64">            destination.setBccAddresses(getBCC());</span>
         }
-<span class="pc bpc" id="L63" title="2 of 4 branches missed.">        if (getCC() != null &amp;&amp; !getCC().isEmpty()) {</span>
-<span class="nc" id="L64">            destination.setCcAddresses(getCC());</span>
+<span class="pc bpc" id="L66" title="2 of 4 branches missed.">        if (getCC() != null &amp;&amp; !getCC().isEmpty()) {</span>
+<span class="nc" id="L67">            destination.setCcAddresses(getCC());</span>
         }
-                
-<span class="pc bpc" id="L67" title="1 of 2 branches missed.">        if (getSubject() != null) {</span>
-<span class="fc" id="L68">            final Content subject = new Content(getSubject());</span>
+
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">        if (getSubject() != null) {</span>
+<span class="fc" id="L71">            final Content subject = new Content(getSubject());</span>
             // set utf-8 encoding to support all languages
-<span class="fc" id="L70">            subject.setCharset(&quot;UTF-8&quot;); </span>
-<span class="fc" id="L71">            message.setSubject(subject);</span>
+<span class="fc" id="L73">            subject.setCharset(&quot;UTF-8&quot;);</span>
+<span class="fc" id="L74">            message.setSubject(subject);</span>
         }
-                
-<span class="pc bpc" id="L74" title="1 of 2 branches missed.">        if (getText() != null) {</span>
-<span class="fc" id="L75">            final Body body = new Body();</span>
-<span class="fc" id="L76">            final Content content = new Content(getText());</span>
+
+<span class="pc bpc" id="L77" title="1 of 2 branches missed.">        if (getText() != null) {</span>
+<span class="fc" id="L78">            final Body body = new Body();</span>
+<span class="fc" id="L79">            final Content content = new Content(getText());</span>
             //set utf-8 encoding to support all languages
-<span class="fc" id="L78">            content.setCharset(&quot;UTF-8&quot;); </span>
-        
-<span class="fc" id="L80">            body.setText(content);</span>
-<span class="fc" id="L81">            message.setBody(body);</span>
+<span class="fc" id="L81">            content.setCharset(&quot;UTF-8&quot;);</span>
+
+<span class="fc" id="L83">            body.setText(content);</span>
+<span class="fc" id="L84">            message.setBody(body);</span>
         }
-<span class="fc" id="L83">    }    </span>
+<span class="fc" id="L86">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

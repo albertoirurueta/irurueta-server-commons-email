@@ -230,7 +230,7 @@ public abstract class HtmlEmailMessage extends EmailMessage {
      * @return an HTML email message.
      */
     public static HtmlEmailMessage create(final String subject,
-                                             final EmailSender sender) {
+                                          final EmailSender sender) {
 <span class="fc" id="L234">        return create(subject, sender.getProvider());</span>
     }
 
@@ -243,7 +243,7 @@ public abstract class HtmlEmailMessage extends EmailMessage {
      * @return an HTML email message.
      */
     protected static HtmlEmailMessage create(final String subject,
-                                                final EmailProvider provider) {
+                                             final EmailProvider provider) {
 <span class="fc" id="L247">        return create(subject, &quot;&quot;, provider);</span>
     }
 
@@ -257,7 +257,7 @@ public abstract class HtmlEmailMessage extends EmailMessage {
      * @return an HTML email message.
      */
     public static HtmlEmailMessage create(final String subject, final String htmlContent,
-                                             final EmailSender sender) {
+                                          final EmailSender sender) {
 <span class="fc" id="L261">        return create(subject, htmlContent, sender.getProvider());</span>
     }
 
@@ -271,7 +271,7 @@ public abstract class HtmlEmailMessage extends EmailMessage {
      * @return an HTML email message.
      */
     protected static HtmlEmailMessage create(final String subject, final String htmlContent,
-                                                final EmailProvider provider) {
+                                             final EmailProvider provider) {
 <span class="fc bfc" id="L275" title="All 3 branches covered.">        switch (provider) {</span>
             case AWS_MAIL:
 <span class="fc" id="L277">                return new AWSHtmlEmailMessage(subject, htmlContent);</span>

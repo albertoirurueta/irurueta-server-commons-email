@@ -16,6 +16,7 @@
 package com.irurueta.server.commons.email;
 
 import com.irurueta.server.commons.configuration.ConfigurationException;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,7 +25,7 @@ import java.util.regex.Pattern;
  * This class is a singleton and an instance must be obtained using getInstance
  * and using current mail configuration.
  */
-<span class="fc" id="L27">public abstract class EmailSender {</span>
+<span class="fc" id="L28">public abstract class EmailSender {</span>
 
     /**
      * Regular expression to validate emails.
@@ -34,41 +35,44 @@ import java.util.regex.Pattern;
     /**
      * Factory method to obtain singleton instance using current mail
      * configuration.
+     *
      * @return singleton instance.
      * @throws ConfigurationException if mail configuration fails.
      */
     public static EmailSender getInstance()
             throws ConfigurationException {
-        
-<span class="fc" id="L43">        return getInstance(MailConfigurationFactory.getInstance().</span>
-<span class="fc" id="L44">                configure().getProvider());</span>
+
+<span class="fc" id="L45">        return getInstance(MailConfigurationFactory.getInstance().</span>
+<span class="fc" id="L46">                configure().getProvider());</span>
     }
-    
+
     /**
      * Factory method to obtain appropriate subclass for a given email provider.
+     *
      * @param provider provider to use.
      * @return an email sender controller singleton.
      */
     protected static EmailSender getInstance(final EmailProvider provider) {
-<span class="fc bfc" id="L53" title="All 3 branches covered.">        switch (provider) {</span>
+<span class="fc bfc" id="L56" title="All 3 branches covered.">        switch (provider) {</span>
             case AWS_MAIL:
-<span class="fc" id="L55">                return AWSMailSender.getInstance();</span>
+<span class="fc" id="L58">                return AWSMailSender.getInstance();</span>
             case APACHE_MAIL:
-<span class="fc" id="L57">                return ApacheMailSender.getInstance();</span>
+<span class="fc" id="L60">                return ApacheMailSender.getInstance();</span>
             case JAVA_MAIL:
             default:
-<span class="fc" id="L60">                return JavaMailSender.getInstance();</span>
+<span class="fc" id="L63">                return JavaMailSender.getInstance();</span>
         }
     }
 
     /**
      * Determines if provided string corresponds to an email address.
-     * This method checks proper format of provided string to match the 
+     * This method checks proper format of provided string to match the
      * structure of an email address (i.e. user@host).
+     *
      * @param email string containing an email address to be checked.
-     * @return true if provided string is a valid email address, false 
+     * @return true if provided string is a valid email address, false
      * otherwise.
-     */    
+     */
     public static boolean isValidEmailAddress(final String email) {
         /*
         Email format: A valid email address will have following format:
@@ -86,22 +90,24 @@ import java.util.regex.Pattern;
 
         // Initialize reg ex for email.
         // Make the comparison case-insensitive.
-<span class="fc" id="L89">        final Pattern pattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);</span>
-<span class="fc" id="L90">        final Matcher matcher = pattern.matcher(email);</span>
-<span class="fc" id="L91">        return matcher.matches();        </span>
+<span class="fc" id="L93">        final Pattern pattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);</span>
+<span class="fc" id="L94">        final Matcher matcher = pattern.matcher(email);</span>
+<span class="fc" id="L95">        return matcher.matches();</span>
     }
-    
+
     /**
      * Abstract method to send an email.
+     *
      * @param m email message to be sent.
      * @return id of message that has been sent.
      * @throws MailNotSentException if mail couldn't be sent.
      * @throws InterruptedException if thread is interrupted.
      */
     public abstract String send(final EmailMessage m) throws MailNotSentException, InterruptedException;
-    
+
     /**
      * Returns provider used by this email sender.
+     *
      * @return email provider.
      */
     public abstract EmailProvider getProvider();

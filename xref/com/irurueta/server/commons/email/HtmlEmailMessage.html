@@ -238,7 +238,7 @@
 <a class="jxr_linenumber" name="L230" href="#L230">230</a> <em class="jxr_javadoccomment">     * @return an HTML email message.</em>
 <a class="jxr_linenumber" name="L231" href="#L231">231</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L232" href="#L232">232</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../com/irurueta/server/commons/email/HtmlEmailMessage.html">HtmlEmailMessage</a> create(<strong class="jxr_keyword">final</strong> String subject,
-<a class="jxr_linenumber" name="L233" href="#L233">233</a>                                              <strong class="jxr_keyword">final</strong> <a href="../../../../../com/irurueta/server/commons/email/EmailSender.html">EmailSender</a> sender) {
+<a class="jxr_linenumber" name="L233" href="#L233">233</a>                                           <strong class="jxr_keyword">final</strong> <a href="../../../../../com/irurueta/server/commons/email/EmailSender.html">EmailSender</a> sender) {
 <a class="jxr_linenumber" name="L234" href="#L234">234</a>         <strong class="jxr_keyword">return</strong> create(subject, sender.getProvider());
 <a class="jxr_linenumber" name="L235" href="#L235">235</a>     }
 <a class="jxr_linenumber" name="L236" href="#L236">236</a> 
@@ -251,7 +251,7 @@
 <a class="jxr_linenumber" name="L243" href="#L243">243</a> <em class="jxr_javadoccomment">     * @return an HTML email message.</em>
 <a class="jxr_linenumber" name="L244" href="#L244">244</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L245" href="#L245">245</a>     <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../com/irurueta/server/commons/email/HtmlEmailMessage.html">HtmlEmailMessage</a> create(<strong class="jxr_keyword">final</strong> String subject,
-<a class="jxr_linenumber" name="L246" href="#L246">246</a>                                                 <strong class="jxr_keyword">final</strong> <a href="../../../../../com/irurueta/server/commons/email/EmailProvider.html">EmailProvider</a> provider) {
+<a class="jxr_linenumber" name="L246" href="#L246">246</a>                                              <strong class="jxr_keyword">final</strong> <a href="../../../../../com/irurueta/server/commons/email/EmailProvider.html">EmailProvider</a> provider) {
 <a class="jxr_linenumber" name="L247" href="#L247">247</a>         <strong class="jxr_keyword">return</strong> create(subject, <span class="jxr_string">""</span>, provider);
 <a class="jxr_linenumber" name="L248" href="#L248">248</a>     }
 <a class="jxr_linenumber" name="L249" href="#L249">249</a> 
@@ -265,7 +265,7 @@
 <a class="jxr_linenumber" name="L257" href="#L257">257</a> <em class="jxr_javadoccomment">     * @return an HTML email message.</em>
 <a class="jxr_linenumber" name="L258" href="#L258">258</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L259" href="#L259">259</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../com/irurueta/server/commons/email/HtmlEmailMessage.html">HtmlEmailMessage</a> create(<strong class="jxr_keyword">final</strong> String subject, <strong class="jxr_keyword">final</strong> String htmlContent,
-<a class="jxr_linenumber" name="L260" href="#L260">260</a>                                              <strong class="jxr_keyword">final</strong> <a href="../../../../../com/irurueta/server/commons/email/EmailSender.html">EmailSender</a> sender) {
+<a class="jxr_linenumber" name="L260" href="#L260">260</a>                                           <strong class="jxr_keyword">final</strong> <a href="../../../../../com/irurueta/server/commons/email/EmailSender.html">EmailSender</a> sender) {
 <a class="jxr_linenumber" name="L261" href="#L261">261</a>         <strong class="jxr_keyword">return</strong> create(subject, htmlContent, sender.getProvider());
 <a class="jxr_linenumber" name="L262" href="#L262">262</a>     }
 <a class="jxr_linenumber" name="L263" href="#L263">263</a> 
@@ -279,7 +279,7 @@
 <a class="jxr_linenumber" name="L271" href="#L271">271</a> <em class="jxr_javadoccomment">     * @return an HTML email message.</em>
 <a class="jxr_linenumber" name="L272" href="#L272">272</a> <em class="jxr_javadoccomment">     */</em>
 <a class="jxr_linenumber" name="L273" href="#L273">273</a>     <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../com/irurueta/server/commons/email/HtmlEmailMessage.html">HtmlEmailMessage</a> create(<strong class="jxr_keyword">final</strong> String subject, <strong class="jxr_keyword">final</strong> String htmlContent,
-<a class="jxr_linenumber" name="L274" href="#L274">274</a>                                                 <strong class="jxr_keyword">final</strong> <a href="../../../../../com/irurueta/server/commons/email/EmailProvider.html">EmailProvider</a> provider) {
+<a class="jxr_linenumber" name="L274" href="#L274">274</a>                                              <strong class="jxr_keyword">final</strong> <a href="../../../../../com/irurueta/server/commons/email/EmailProvider.html">EmailProvider</a> provider) {
 <a class="jxr_linenumber" name="L275" href="#L275">275</a>         <strong class="jxr_keyword">switch</strong> (provider) {
 <a class="jxr_linenumber" name="L276" href="#L276">276</a>             <strong class="jxr_keyword">case</strong> AWS_MAIL:
 <a class="jxr_linenumber" name="L277" href="#L277">277</a>                 <strong class="jxr_keyword">return</strong> <strong class="jxr_keyword">new</strong> <a href="../../../../../com/irurueta/server/commons/email/AWSHtmlEmailMessage.html">AWSHtmlEmailMessage</a>(subject, htmlContent);

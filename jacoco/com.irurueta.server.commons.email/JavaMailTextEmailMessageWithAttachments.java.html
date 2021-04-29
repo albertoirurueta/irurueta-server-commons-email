@@ -143,7 +143,7 @@ public class JavaMailTextEmailMessageWithAttachments extends
     /**
      * Adds attachments to multipart email.
      *
-     * @param multipart a multipart within an email.
+     * @param multipart   a multipart within an email.
      * @param attachments attachments to be added.
      * @throws MessagingException if an error occurs.
      */
