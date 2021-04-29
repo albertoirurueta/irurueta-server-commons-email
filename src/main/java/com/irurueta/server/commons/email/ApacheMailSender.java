@@ -94,10 +94,7 @@ public class ApacheMailSender extends CommonEmailSender {
         }
 
         //to avoid compilation errors regarding to casting
-        if (m instanceof ApacheMailTextEmailMessage) {
-            sendMultiPartEmail(m);
-            return null;
-        } else if (m instanceof ApacheMailTextEmailMessageWithAttachments) {
+        if (m instanceof ApacheMailTextEmailMessage || m instanceof ApacheMailTextEmailMessageWithAttachments) {
             sendMultiPartEmail(m);
             return null;
         } else if (m instanceof ApacheMailHtmlEmailMessage) {
