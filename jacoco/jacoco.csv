@@ -26,5 +26,5 @@ com.irurueta:irurueta-server-commons-email,com.irurueta.server.commons.email,Apa
 com.irurueta:irurueta-server-commons-email,com.irurueta.server.commons.email,AWSHtmlEmailMessage,0,16,0,0,0,8,0,5,0,5
 com.irurueta:irurueta-server-commons-email,com.irurueta.server.commons.email,HtmlEmailMessage,4,225,3,16,2,64,3,26,0,19
 com.irurueta:irurueta-server-commons-email,com.irurueta.server.commons.email,AWSTextEmailMessageWithAttachments,0,31,0,0,0,14,0,8,0,8
-com.irurueta:irurueta-server-commons-email,com.irurueta.server.commons.email,ApacheMailSender,40,207,10,32,10,60,10,20,0,9
+com.irurueta:irurueta-server-commons-email,com.irurueta.server.commons.email,ApacheMailSender,40,202,10,32,10,57,10,20,0,9
 com.irurueta:irurueta-server-commons-email,com.irurueta.server.commons.email,JavaMailTextEmailMessage,6,19,0,0,2,9,0,4,0,4
