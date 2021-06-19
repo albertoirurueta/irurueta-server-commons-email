@@ -1,7 +1,7 @@
 # irurueta-server-commons-email
 Utility classes for email sending. Supporting both JavaMail and AWS SES
 
-[![Build Status](https://travis-ci.org/albertoirurueta/irurueta-server-commons-email.svg?branch=master)](https://travis-ci.org/albertoirurueta/irurueta-server-commons-email)
+[![Build Status](https://travis-ci.com/albertoirurueta/irurueta-server-commons-email.svg?branch=master)](https://travis-ci.com/albertoirurueta/irurueta-server-commons-email)
 
 
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=albertoirurueta_irurueta-server-commons-email&metric=bugs)](https://sonarcloud.io/dashboard?id=albertoirurueta_irurueta-server-commons-email)
